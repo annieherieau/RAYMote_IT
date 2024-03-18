@@ -64,23 +64,14 @@ class WorkshopsController < ApplicationController
   def like
     workshop = Workshop.find(params[:id])
     like = workshop.likes.where(user: current_user).first_or_create
-
-    if like.persisted?
-      flash[:notice] = "Vous avez aimé cet atelier."
-    else
-      flash[:alert] = "Impossible d'aimer cet atelier."
-    end
-
-    redirect_to request.referer || root_path
+    redirect_to request.referer
   end
 
   def dislike
     workshop = Workshop.find(params[:id])
     like = workshop.likes.where(user: current_user).destroy_all
   
-    flash[:notice] = "Vous n'aimez plus cet atelier."
-  
-    redirect_to request.referer || root_path
+    redirect_to request.referer
   end
   
   def register
