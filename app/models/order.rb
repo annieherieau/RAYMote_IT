@@ -17,6 +17,14 @@ class Order < ApplicationRecord
 
 
   # Methods
+  def send_order_emails
+    admins = User.where(admin: true)
+    admins.each do |admin|
+      UserMailer.order_to_admin(admin, self).deliver_now
+    end
+    UserMailer.order_to_user(self).deliver_now
+  end
+
   def amount
     amount = 0
     workshops.each do |workshop|
