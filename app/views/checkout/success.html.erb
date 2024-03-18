@@ -1,5 +1,6 @@
 <h1>Confirmation de Commande</h1>
   <p>Merci pour votre commande !</p>
-  <p>Votre numéro de commande est : <%= @order.id %></p>
-  <p>Date de la commande : <%= @order.created_at.strftime("%d/%m/%Y à %H:%M") %></p>
+<p>Votre numéro de commande est : @order.id </p>
+  <p>Date de la commande : @order.created_at.strftime("%d/%m/%Y à %H:%M") </p>
+
   <%= link_to "Retour à l'accueil", root_path %>

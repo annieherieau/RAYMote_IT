@@ -23,7 +23,7 @@ class CheckoutController < ApplicationController
       },
       mode: 'payment',
       success_url: checkout_success_url + '?session_id={CHECKOUT_SESSION_ID}',
-      cancel_url: checkout_cancel_url
+      cancel_url: checkout_cancel_url(workshop_id: @workshop.id )
     )
     redirect_to @session.url, allow_other_host: true
   end
@@ -38,10 +38,10 @@ class CheckoutController < ApplicationController
   
     if @workshop
       ActiveRecord::Base.transaction do
-        AttendancesController.new.create(user_id: current_user.id, workshop_id: @workshop.id)
+        Attendance.create(user_id: current_user.id, workshop_id: @workshop.id)
         # TODO order: lien workshop + amount
         # @order = Order.create!(user: current_user, amount: )
-        @order.send_order_emails
+        # @order.send_order_emails
       end
     else
       Rails.logger.error "Workshop not found with ID: #{workshop_id}"
@@ -49,5 +49,6 @@ class CheckoutController < ApplicationController
   end
   
   def cancel
+    @workshop = Workshop.find(params[:workshop_id])
   end
 end
