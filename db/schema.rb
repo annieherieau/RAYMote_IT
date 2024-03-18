@@ -66,6 +66,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_18_224307) do
     t.string "firstname"
     t.string "lastname"
     t.string "email"
+    t.boolean "creator", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "encrypted_password", default: "", null: false
@@ -80,8 +81,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_18_224307) do
     t.string "name"
     t.text "description"
     t.integer "price"
-    t.time "start_date"
+    t.datetime "start_date"
     t.integer "duration"
+    t.boolean "event", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
