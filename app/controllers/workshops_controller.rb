@@ -1,6 +1,6 @@
 class WorkshopsController < ApplicationController
   before_action :set_workshop, only: %i[ show edit update destroy ]
-
+  
   # GET /workshops or /workshops.json
   def index
     @workshops = Workshop.all
@@ -84,6 +84,7 @@ class WorkshopsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def workshop_params
-      params.require(:workshop).permit(:name, :description, :start_date, :duration, :price)
+      params.require(:workshop).permit(:name, :description, :start_date, :duration, :price, :tags_names)
     end
+
 end
