@@ -21,9 +21,7 @@ class Order < ApplicationRecord
     # admins = User.where(admin: true)
     # admins.each do |admin|
     #   UserMailer.order_to_admin(admin, self).deliver_now
-    # end
-
-    
+    # end 
   end
 
   # calcult du total de la commande (pour feature Panier)

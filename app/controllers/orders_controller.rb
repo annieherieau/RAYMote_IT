@@ -3,11 +3,12 @@ class OrdersController < ApplicationController
 
   # GET /orders or /orders.json
   def index
-    @orders = Order.all
+    @orders = current_user.orders 
   end
 
   # GET /orders/1 or /orders/1.json
   def show
+    @order = current_user.orders.find(params[:id])
   end
 
   # GET /orders/new
@@ -21,19 +22,21 @@ class OrdersController < ApplicationController
 
   # POST /orders or /orders.json
   def create
-    @order = Order.new(order_params)
+    @order = Order.new(user_id: current_user.id)
 
-    respond_to do |format|
-      if @order.save
-        format.html { redirect_to order_url(@order), notice: "Order was successfully created." }
-        format.json { render :show, status: :created, location: @order }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
-      end
+    if @order.save
+      @cart = Cart.find(params[:cart_id])
+      @order.add_workshop(@cart.workshop_ids)
+      @cart.drop
+      redirect_to checkout_create_path(order_id: @order.id), notice: "Commande Validée !"
+
+    else
+      redirect_to request.referrer, alert: "Erreur lors de la validation de la commande"
     end
   end
 
+      
+      
   # PATCH/PUT /orders/1 or /orders/1.json
   def update
     respond_to do |format|
