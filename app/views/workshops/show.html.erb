@@ -26,6 +26,10 @@
                                         <strong>Price:</strong>
                                         <%= @workshop.price %>
                                       </p>
+                                    <!-- Nombre d'inscrits à l'atelier -->
+                                      <p>Nombre d'inscrits : <%= @workshop.users.count %></p>
+
+                                      <%= button_to "S'inscrire à l'Atelier", class: "btn btn-primary", method: :post, remote: true %>
 
 <div>
   <%= link_to "Edit this workshop", edit_workshop_path(@workshop) %> |
