@@ -1,6 +1,5 @@
 class WorkshopsController < ApplicationController
   before_action :set_workshop, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!, only: [:like]
 
   # GET /workshops or /workshops.json
   def index
@@ -59,19 +58,6 @@ class WorkshopsController < ApplicationController
       format.html { redirect_to workshops_url, notice: "Workshop was successfully destroyed." }
       format.json { head :no_content }
     end
-  end
-
-  def like
-    workshop = Workshop.find(params[:id])
-    like = workshop.likes.where(user: current_user).first_or_create
-    redirect_to request.referer
-  end
-
-  def dislike
-    workshop = Workshop.find(params[:id])
-    like = workshop.likes.where(user: current_user).destroy_all
-  
-    redirect_to request.referer
   end
   
   def register
