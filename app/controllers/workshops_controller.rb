@@ -22,7 +22,9 @@ class WorkshopsController < ApplicationController
 
   # POST /workshops or /workshops.json
   def create
-    @workshop = Workshop.new(workshop_params)
+    workshop_params_mod = workshop_params
+  workshop_params_mod[:start_date] = Date.strptime(workshop_params[:start_date], '%Y-%m-%d') rescue nil
+  @workshop = Workshop.new(workshop_params_mod)
 
     respond_to do |format|
       if @workshop.save
