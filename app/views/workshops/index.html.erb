@@ -15,11 +15,6 @@
     <div class="row mb-4 justify-content-around">
       <% workshop_row.each do |workshop| %>
           <%= render workshop %>
-          <% if workshop.likes.exists?(user: current_user) %>
-          <%= button_to 'Déliker', dislike_workshop_path(workshop), method: :delete, class: "btn btn-warning" %>
-        <% else %>
-          <%= button_to 'Liker', like_workshop_path(workshop), method: :post, class: "btn btn-primary" %>
-        <% end %>
       <% end %>
     </div>
   <% end %>

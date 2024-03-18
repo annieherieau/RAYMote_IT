@@ -3,10 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :workshops do
-    member do
-      post 'like'
-      delete 'dislike'
-    end
+    resource :like, only: [:create, :destroy], controller: 'likes'
   end
 
   resources :users, only: [:index, :show], path: 'profile'
