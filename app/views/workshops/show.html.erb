@@ -1,0 +1,35 @@
+<p style="color: green"><%= notice %></p>
+
+
+                                    <!-- Product name-->
+                                      <p>
+                                        <strong>Name:</strong>
+                                        <%= @workshop.name %>
+                                      </p>
+                                    <!-- description-->
+                                      <p>
+                                        <strong>Description:</strong>
+                                        <%= @workshop.description %>
+                                      </p>
+                                    <!--Start date-->
+                                      <p>
+                                        <strong>Start_date:</strong>
+                                        <%= @workshop.start_date %>
+                                      </p>
+                                    <!--Duration-->
+                                      <p>
+                                        <strong>Duration:</strong>
+                                        <%= @workshop.duration %>
+                                      </p>
+                                    <!-- Product price-->
+                                      <p>
+                                        <strong>Price:</strong>
+                                        <%= @workshop.price %>
+                                      </p>
+
+<div>
+  <%= link_to "Edit this workshop", edit_workshop_path(@workshop) %> |
+  <%= link_to "Back to workshops", workshops_path %>
+
+  <%= button_to "Destroy this workshop", @workshop, method: :delete %>
+</div>

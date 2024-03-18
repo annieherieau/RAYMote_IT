@@ -1,0 +1,13 @@
+class CreateWorkshops < ActiveRecord::Migration[7.1]
+  def change
+    create_table :workshops do |t|
+      t.string :name
+      t.text :description
+      t.integer :price
+      t.time :start_date
+      t.integer :duration
+
+      t.timestamps
+    end
+  end
+end
