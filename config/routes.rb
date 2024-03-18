@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :orders
+  resources :orders 
   devise_for :users
 
   resources :workshops do
