@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :workshops
+  resources :workshops do
+    member do
+      post 'like'
+      delete 'dislike'
+    end
+  end
 
   resources :users, only: [:index, :show], path: 'profile'
 

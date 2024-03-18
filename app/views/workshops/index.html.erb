@@ -15,6 +15,7 @@
     <div class="row mb-4 justify-content-around">
       <% workshop_row.each do |workshop| %>
           <%= render workshop %>
+          <%= link_to 'Like', like_workshop_path(workshop), method: :post %>
       <% end %>
     </div>
   <% end %>

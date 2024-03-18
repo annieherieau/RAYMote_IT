@@ -1,5 +1,6 @@
 class WorkshopsController < ApplicationController
   before_action :set_workshop, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, only: [:like]
 
   # GET /workshops or /workshops.json
   def index
@@ -60,6 +61,28 @@ class WorkshopsController < ApplicationController
     end
   end
 
+  def like
+    workshop = Workshop.find(params[:id])
+    like = workshop.likes.where(user: current_user).first_or_create
+
+    if like.persisted?
+      flash[:notice] = "Vous avez aimé cet atelier."
+    else
+      flash[:alert] = "Impossible d'aimer cet atelier."
+    end
+
+    redirect_to request.referer || root_path
+  end
+
+  def dislike
+    workshop = Workshop.find(params[:id])
+    like = workshop.likes.where(user: current_user).destroy_all
+  
+    flash[:notice] = "Vous n'aimez plus cet atelier."
+  
+    redirect_to request.referer || root_path
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_workshop
