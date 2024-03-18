@@ -32,14 +32,13 @@ class CheckoutController < ApplicationController
   def success
     session_id = params[:session_id]
     stripe_session = Stripe::Checkout::Session.retrieve(session_id)
-    cart_id = stripe_session.metadata["workshop_id"]
-    @user = current_user
+    workshop_id = stripe_session.metadata["workshop_id"]
 
     @workshop = Workshop.find(workshop_id)
   
     if @workshop
       ActiveRecord::Base.transaction do
-        @order = Order.create!(user: @user)
+        @order = Order.create!(user: current_user)
         # TODO order: lien workshop + amount
         @order.send_order_emails
       end
