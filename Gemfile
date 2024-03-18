@@ -75,3 +75,5 @@ gem "dotenv", "~> 3.1"
 gem "devise", "~> 4.9"
 
 gem "stripe", "~> 10.12"
+
+gem "dockerfile-rails", ">= 1.6", :group => :development
