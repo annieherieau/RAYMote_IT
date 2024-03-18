@@ -2,16 +2,18 @@ class Workshop < ApplicationRecord
   attr_accessor :tags_names
   after_save :assign_tags
 
-    has_many :attendances
-    has_many :users, through: :attendances
-    has_many :likes, dependent: :destroy
-    has_and_belongs_to_many :tags
+  # Associations
+  has_many :attendances
+  has_many :users, through: :attendances
+  has_many :likes, dependent: :destroy
+  has_and_belongs_to_many :tags
 
-    validates :name, presence: true, length: { in: 3..15 }
-    validates :description, presence: true, length: { in: 20..500 }
-    validates :price,  presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 1000 }
+  # validations
+  validates :name, presence: true, length: { in: 3..15 }
+  validates :description, presence: true, length: { in: 20..500 }
+  validates :price,  presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 1000 }
 
-    private
+  private
 
   def assign_tags
     return if tags_names.blank?
@@ -22,4 +24,4 @@ class Workshop < ApplicationRecord
     end
   end
 
-  end
+end

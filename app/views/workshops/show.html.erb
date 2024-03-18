@@ -50,4 +50,6 @@
   <%= link_to "Edit this workshop", edit_workshop_path(@workshop) %> |
   <%= link_to "Back to workshops", workshops_path %>
   <%= button_to "Destroy this workshop", @workshop, method: :delete %>
+  <%= button_to "Payer", new_checkout_create_path(workshop_id: @workshop.id), method: :post, data: { turbo: false } %>
+           
 </div>
