@@ -10,7 +10,5 @@ class User < ApplicationRecord
 
     has_many :attendances
     has_many :workshops, through: :attendances
-
-
-  
+    has_many :likes, dependent: :destroy
 end

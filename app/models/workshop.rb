@@ -1,6 +1,7 @@
 class Workshop < ApplicationRecord
     has_many :attendances
     has_many :users, through: :attendances
+    has_many :likes, dependent: :destroy
 
     validates :name, presence: true, length: { in: 3..15 }
     validates :description, presence: true, length: { in: 20..500 }
