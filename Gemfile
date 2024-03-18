@@ -73,3 +73,5 @@ gem "faker", "~> 3.2"
 gem "dotenv", "~> 3.1"
 
 gem "devise", "~> 4.9"
+
+gem "stripe", "~> 10.12"
