@@ -30,21 +30,24 @@ class CheckoutController < ApplicationController
 
 
   def success
+    # récupération des infos de session
     session_id = params[:session_id]
     stripe_session = Stripe::Checkout::Session.retrieve(session_id)
     workshop_id = stripe_session.metadata["workshop_id"]
-
-    @workshop = Workshop.find(workshop_id)
+    @user = current_user
   
-    if @workshop
+    if Workshop.find(workshop_id)
       ActiveRecord::Base.transaction do
-        Attendance.create(user_id: current_user.id, workshop_id: @workshop.id)
-        # TODO order: lien workshop + amount
-        # @order = Order.create!(user: current_user, amount: )
-        # @order.send_order_emails
+        # inscription du User
+        Attendance.create(user_id: @user.id, workshop_id: workshop_id)
+
+        # création de l'Order: version sans panier
+        @order = Order.create!(user_id: @user.id, date: Date.today)
+        @order.add_workshops([workshop_id])
+        @order.send_order_emails
       end
     else
-      Rails.logger.error "Workshop not found with ID: #{workshop_id}"
+      Rails.logger.error "L'évènement ID: #{workshop_id} n'a pas été trouvé!"
     end
   end
   
