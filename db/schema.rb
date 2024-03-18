@@ -41,7 +41,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_15_144519) do
     t.string "name"
     t.text "description"
     t.integer "price"
-    t.time "start_date"
+    t.datetime "start_date"
     t.integer "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
