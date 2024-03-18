@@ -32,10 +32,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_18_224307) do
     t.index ["workshop_id"], name: "index_likes_on_workshop_id"
   end
 
+  create_table "order_workshops", force: :cascade do |t|
+    t.bigint "order_id"
+    t.bigint "workshop_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_workshops_on_order_id"
+    t.index ["workshop_id"], name: "index_order_workshops_on_workshop_id"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.datetime "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -55,7 +66,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_18_224307) do
     t.string "firstname"
     t.string "lastname"
     t.string "email"
-    t.boolean "creator", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "encrypted_password", default: "", null: false
@@ -70,13 +80,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_18_224307) do
     t.string "name"
     t.text "description"
     t.integer "price"
-    t.datetime "start_date"
+    t.time "start_date"
     t.integer "duration"
-    t.boolean "event", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   add_foreign_key "likes", "users"
   add_foreign_key "likes", "workshops"
+  add_foreign_key "orders", "users"
 end
