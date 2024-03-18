@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :tags
   resources :orders
+
   devise_for :users
 
   resources :workshops do
