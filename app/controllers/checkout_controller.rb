@@ -2,7 +2,7 @@ class CheckoutController < ApplicationController
 
   # creation du checkout à partir du Workshop
   def create
-    @workshop = Workshop.find(params[:id])
+    @workshop = Workshop.find(params[:workshop_id])
     @amount = @workshop.price.to_d
     @session = Stripe::Checkout::Session.create(
       payment_method_types: ['card'],
@@ -38,8 +38,9 @@ class CheckoutController < ApplicationController
   
     if @workshop
       ActiveRecord::Base.transaction do
-        @order = Order.create!(user: current_user)
+        AttendancesController.new.create(user_id: current_user.id, workshop_id: @workshop.id)
         # TODO order: lien workshop + amount
+        # @order = Order.create!(user: current_user, amount: )
         @order.send_order_emails
       end
     else
