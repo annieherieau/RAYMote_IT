@@ -8,6 +8,9 @@ class TagsController < ApplicationController
 
   # GET /tags/1 or /tags/1.json
   def show
+    @tag = Tag.find(params[:id])
+    # Récupère tous les workshops associés à ce tag
+    @workshops = @tag.workshops
   end
 
   # GET /tags/new

@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     resource :like, only: [:create, :destroy], controller: 'likes'
   end
 
+  resources :tags, only: [:show]
+  
   resources :users, only: [:index, :show], path: 'profile'
 
   #resource :profile, controller: 'users', only: [:show], path: 'profile'

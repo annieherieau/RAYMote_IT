@@ -30,15 +30,16 @@
                                       <p>Nombre d'inscrits : <%= @workshop.users.count %></p>
 
                                       <%= button_to "S'inscrire à l'Atelier", class: "btn btn-primary", method: :post, remote: true %>
-                                      <% if @workshop.tags.any? %>
-                                      <ul>
-                                        <% @workshop.tags.each do |tag| %>
-                                          <li><%= tag.name %></li>
-                                        <% end %>
-                                      </ul>
-                                    <% else %>
-                                      <p>Cet atelier n'a pas de tags associés.</p>
-                                    <% end %>
+                                      <h3>Tags:</h3>
+<% if @workshop.tags.any? %>
+  <ul>
+    <% @workshop.tags.each do |tag| %>
+      <li><%= link_to tag.name, tag_path(tag) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Cet atelier n'a pas de tags associés.</p>
+<% end %>
 <div>
 <p>Nombre de likes : <%= @workshop.likes.count %></p>
 <% if @workshop.likes.exists?(user: current_user) %>

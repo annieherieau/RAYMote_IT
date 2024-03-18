@@ -1,10 +1,14 @@
-<p style="color: green"><%= notice %></p>
+<h1>Tag: <%= @tag.name %></h1>
 
-<%= render @tag %>
+<h3>Ateliers associés :</h3>
+<% if @workshops.any? %>
+  <ul>
+    <% @workshops.each do |workshop| %>
+      <li><%= link_to workshop.name, workshop_path(workshop) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Aucun atelier n'est associé à ce tag pour le moment.</p>
+<% end %>
 
-<div>
-  <%= link_to "Edit this tag", edit_tag_path(@tag) %> |
-  <%= link_to "Back to tags", tags_path %>
-
-  <%= button_to "Destroy this tag", @tag, method: :delete %>
-</div>
+<%= link_to 'Retour aux ateliers', workshops_path %>
