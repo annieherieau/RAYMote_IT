@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
-
+  resources :orders
   devise_for :users
 
-  resources :workshops
+  resources :workshops do
+    resource :like, only: [:create, :destroy], controller: 'likes'
+  end
 
   resources :users, only: [:index, :show], path: 'profile'
 

@@ -26,8 +26,18 @@
                                         <strong>Price:</strong>
                                         <%= @workshop.price %>
                                       </p>
+                                    <!-- Nombre d'inscrits à l'atelier -->
+                                      <p>Nombre d'inscrits : <%= @workshop.users.count %></p>
+
+                                      <%= button_to "S'inscrire à l'Atelier", class: "btn btn-primary", method: :post, remote: true %>
 
 <div>
+<p>Nombre de likes : <%= @workshop.likes.count %></p>
+<% if @workshop.likes.exists?(user: current_user) %>
+<%= button_to 'Déliker', workshop_like_path(@workshop), method: :delete, class: "btn btn-warning" %>
+<% else %>
+<%= button_to 'Liker', workshop_like_path(@workshop), method: :post, class: "btn btn-primary" %>
+<% end %>
   <%= link_to "Edit this workshop", edit_workshop_path(@workshop) %> |
   <%= link_to "Back to workshops", workshops_path %>
   <%= button_to "Destroy this workshop", @workshop, method: :delete %>

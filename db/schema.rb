@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_15_144519) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_18_192819) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,10 +23,26 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_15_144519) do
     t.index ["workshop_id"], name: "index_attendances_on_workshop_id"
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "workshop_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_likes_on_user_id"
+    t.index ["workshop_id"], name: "index_likes_on_workshop_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.datetime "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "firstname"
     t.string "lastname"
     t.string "email"
+    t.boolean "creator", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "encrypted_password", default: "", null: false
@@ -43,8 +59,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_15_144519) do
     t.integer "price"
     t.datetime "start_date"
     t.integer "duration"
+    t.boolean "event", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "likes", "users"
+  add_foreign_key "likes", "workshops"
 end

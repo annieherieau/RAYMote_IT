@@ -59,6 +59,22 @@ class WorkshopsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def register
+    @workshop = Workshop.find(params[:id])
+    @attendance = Attendance.new(user_id: current_user.id, workshop_id: @workshop.id)
+
+    if @attendance.save
+      redirect_to @workshop, notice: 'You have successfully registered for the workshop.'
+    else
+      redirect_to @workshop, alert: 'Failed to register for the workshop.'
+    end
+  end
+
+  def manage
+    @workshop = Workshop.find(params[:id])
+    @attendances = @workshop.attendances
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
