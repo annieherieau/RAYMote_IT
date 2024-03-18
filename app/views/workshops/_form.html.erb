@@ -37,6 +37,11 @@
   </div>
 
   <div>
+  <%= form.label :tags, "Tags (séparés par des virgules)", style: "display: block" %>
+  <%= form.text_field :tags_names %>
+</div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

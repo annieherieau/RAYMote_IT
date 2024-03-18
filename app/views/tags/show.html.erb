@@ -1,0 +1,14 @@
+<h1>Tag: <%= @tag.name %></h1>
+
+<h3>Ateliers associés :</h3>
+<% if @workshops.any? %>
+  <ul>
+    <% @workshops.each do |workshop| %>
+      <li><%= link_to workshop.name, workshop_path(workshop) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Aucun atelier n'est associé à ce tag pour le moment.</p>
+<% end %>
+
+<%= link_to 'Retour aux ateliers', workshops_path %>

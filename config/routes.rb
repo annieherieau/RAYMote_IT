@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
-  resources :orders 
+  resources :tags
+  resources :orders
+
   devise_for :users
 
   resources :workshops do
     resource :like, only: [:create, :destroy], controller: 'likes'
   end
 
+  resources :tags, only: [:show]
+  
   resources :users, only: [:index, :show], path: 'profile'
 
   #resource :profile, controller: 'users', only: [:show], path: 'profile'
