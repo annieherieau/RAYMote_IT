@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
 
   # GET /orders or /orders.json
   def index
-    @orders = current_user.orders 
+    @orders = current_user.orders if current_user.orders.any?
   end
 
   # GET /orders/1 or /orders/1.json
