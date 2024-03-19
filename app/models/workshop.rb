@@ -14,6 +14,10 @@ class Workshop < ApplicationRecord
   validates :description, presence: true, length: { in: 20..500 }
   validates :price,  presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 1000 }
 
+def tags_destroy
+  self.tags.clear
+end
+
   private
 
   def assign_tags

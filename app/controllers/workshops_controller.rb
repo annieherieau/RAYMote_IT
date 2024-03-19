@@ -42,6 +42,7 @@ class WorkshopsController < ApplicationController
 
   # PATCH/PUT /workshops/1 or /workshops/1.json
   def update
+    @workshop.tags_destroy
     respond_to do |format|
       if @workshop.update(workshop_params)
         format.html { redirect_to workshop_url(@workshop), notice: "Workshop was successfully updated." }
