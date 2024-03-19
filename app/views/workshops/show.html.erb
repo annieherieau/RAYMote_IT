@@ -69,9 +69,7 @@
       <% end %>
     </div>
   </div>
-</div>
 
-<div class="container">
   <!-- Inscription/Désinscription -->
   <div class="mt-4">
     <% if user_signed_in? %>
@@ -111,6 +109,57 @@
   <% end %>
   
 
+   
+<!-- Bouton review -->
+<div class="container justify-content-center">
+  <% if user_signed_in? %>
+    <% purchased_workshop = @workshop.attendances.exists?(user: current_user) %>
+    <% already_reviewed = @workshop.reviews.exists?(user: current_user) %>
+    <% if purchased_workshop && !already_reviewed %>
+        <%= link_to "Noter cet atelier", new_workshop_review_path(@workshop), class: "btn btn-primary" %>
+    <% elsif current_user == @workshop.creator %>
+        <p> Vous ne pouvez pas commenter votre propre atelier </p>
+    <% elsif already_reviewed %>
+        <p>Vous avez déjà noté cet atelier</p>
+    <% else %>
+        <p> Vous devez acheter l'atelier pour pouvoir le noter </p>
+    <% end %>
+  <% end %>
+</div>
+
+  
+
+  <!-- affichage des reviews -->
+  <div class="row justify-content-center mt-4">
+    <div class="col-md-8">
+      <h3 class="text-center">Avis</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Utilisateur</th>
+            <th>Évaluation</th>
+            <th>Contenu</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @workshop.reviews.exists? %>
+            <% @workshop.reviews.each do |review| %>
+              <tr>
+                <td><%= review.user.firstname %> <%= review.user.lastname %></td>
+                <td><%= review.rating %></td>
+                <td><%= review.content %></td>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr>
+              <td colspan="3">Aucun avis pour le moment.</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
   <!-- Boutons -->
   <div class="text-center mt-4">
     <% if current_user == @workshop.creator %>
@@ -119,4 +168,8 @@
     <%= link_to "Back to workshops", workshops_path, class: "btn btn-secondary mr-2" %>
   </div>
 </div>
+
+
+
+
 

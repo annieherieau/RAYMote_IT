@@ -8,7 +8,7 @@
   <h2>Articles commandés :</h2>
   <ul class="list-unstyled">
     <% @order.workshops.each do |workshop| %>
-      <li><%= workshop.name %> - <%= number_to_currency(workshop.price) %></li>
+      <li><%= link_to workshop.name, workshop_path(workshop) %> - <%= number_to_currency(workshop.price) %></li>
     <% end %>
   </ul>
 
