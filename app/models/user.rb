@@ -4,11 +4,17 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  # associations
+  has_many :attendances
+  has_many :workshops, through: :attendances
+  has_many :likes, dependent: :destroy
+  has_many :orders
+  
+
+  # validations
   validates :firstname, presence: true
   validates :lastname, presence: true
   validates :email, presence: true, uniqueness: true 
 
-    has_many :attendances
-    has_many :workshops, through: :attendances
-    has_many :likes, dependent: :destroy
+  
 end

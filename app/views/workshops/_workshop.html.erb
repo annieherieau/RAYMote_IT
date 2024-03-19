@@ -31,6 +31,17 @@
                                          <strong>Price:</strong>
                                           <%= workshop.price %>
                                       </p>
+
+                                      <% if workshop.tags.any? %>
+                                        <ul>
+                                          <% workshop.tags.each do |tag| %>
+                                            <li><%= tag.name %></li>
+                                          <% end %>
+                                        </ul>
+                                      <% else %>
+                                        <p>Cet atelier n'a pas de tags associés.</p>
+                                      <% end %>
+
                                       <% if workshop.likes.exists?(user: current_user) %>
                                       <%= button_to 'Déliker', workshop_like_path(workshop), method: :delete, class: "btn btn-warning" %>
                                     <% else %>

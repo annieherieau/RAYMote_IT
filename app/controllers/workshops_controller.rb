@@ -1,6 +1,6 @@
 class WorkshopsController < ApplicationController
   before_action :set_workshop, only: %i[ show edit update destroy ]
-
+  
   # GET /workshops or /workshops.json
   def index
     @workshops = Workshop.all
@@ -9,6 +9,7 @@ class WorkshopsController < ApplicationController
   # GET /workshops/1 or /workshops/1.json
   def show
     @workshop = Workshop.find(params[:id])
+    @attendances = @workshop.attendances || []
   end
 
   # GET /workshops/new
@@ -60,16 +61,7 @@ class WorkshopsController < ApplicationController
     end
   end
   
-  def register
-    @workshop = Workshop.find(params[:id])
-    @attendance = Attendance.new(user_id: current_user.id, workshop_id: @workshop.id)
-
-    if @attendance.save
-      redirect_to @workshop, notice: 'You have successfully registered for the workshop.'
-    else
-      redirect_to @workshop, alert: 'Failed to register for the workshop.'
-    end
-  end
+  
 
   def manage
     @workshop = Workshop.find(params[:id])
@@ -84,6 +76,7 @@ class WorkshopsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def workshop_params
-      params.require(:workshop).permit(:name, :description, :start_date, :duration, :price)
+      params.require(:workshop).permit(:name, :description, :start_date, :duration, :price, :tags_names)
     end
+
 end
