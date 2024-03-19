@@ -11,7 +11,7 @@
 <h1>Workshops</h1>
 <div class="container">
 <div id="workshops">
-  <% @workshops.each_slice(3) do |workshop_row| %>
+  <% @workshops.reverse.each_slice(3) do |workshop_row| %>
     <div class="row mb-4 justify-content-around">
       <% workshop_row.each do |workshop| %>
           <%= render workshop %>
