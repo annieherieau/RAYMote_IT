@@ -48,11 +48,11 @@
 <!-- Categories -->
 <h3>Catégories:</h3>
 <% if @category.present? %>
-<div class="categories-container">
-    <%= @category.name %>
-</div>
+  <div class="categories-container">
+  <%= link_to @category.name, category_path(@category)%>
+  </div>
 <% else %>
-<p>Cet atelier n'est associé à aucune catégorie.</p>
+  <p>Cet atelier n'est associé à aucune catégorie.</p>
 <% end %>
 <br>
 <br>

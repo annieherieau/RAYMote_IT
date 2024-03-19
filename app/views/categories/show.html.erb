@@ -1,10 +1,11 @@
-<p style="color: green"><%= notice %></p>
+<h1><%= @category.name %></h1>
 
-<%= render @category %>
-
-<div>
-  <%= link_to "Edit this category", edit_category_path(@category) %> |
-  <%= link_to "Back to categories", categories_path %>
-
-  <%= button_to "Destroy this category", @category, method: :delete %>
-</div>
+<h2>Ateliers associés :</h2>
+<ul>
+  <% @workshops.each do |workshop| %>
+    <li>
+      <%= link_to workshop.name, workshop_path(workshop) %>
+      <!-- Plus de détails sur l'atelier si nécessaire -->
+    </li>
+  <% end %>
+</ul>
