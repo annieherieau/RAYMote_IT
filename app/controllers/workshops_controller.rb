@@ -14,10 +14,12 @@ class WorkshopsController < ApplicationController
   # GET /workshops/new
   def new
     @workshop = Workshop.new
+    @categories = Category.all
   end
 
   # GET /workshops/1/edit
   def edit
+    @categories = Category.all
   end
 
   # POST /workshops or /workshops.json

@@ -1,6 +1,7 @@
 class Workshop < ApplicationRecord
   attr_accessor :tags_names
   after_save :assign_tags
+  belongs_to :category, optional: true
 
   # Associations
   has_many :attendances
