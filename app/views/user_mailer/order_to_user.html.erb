@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  
+  <body>
+    <h1>Miaou, félicitations pour votre achat  !</h1>
+
+    <p>
+      Bonjour,
+    </p>
+
+    <p>
+      Voici le contenu de votre commande n° <%= @order.id %>. <br>
+      La totalité de votre commande est disponible au télechargement <a href="<%= @order_url%>">en cliquant sur ce lien</a>
+    </p>
+    </p>
+        <table style="width: 100%">
+     <thead>
+        <tr>
+          <th colspan="2" >Articles</th>
+          <th>Prix</th>
+        </tr>
+       </thead>
+       <tbody>
+    <% @order.workshops.each do |workshop| %>
+      <% workshop_url = @workshop_url + workshop.id.to_s %>
+      <tr>
+          <td>
+           <a href="<%= workshop_url %>">
+            <%= image_tag(workshop.photo, style: "width: 80px;") %>
+            </a>
+            </td><td>
+            <a href="<%= workshop_url %>">
+            <%= workshop.title %>
+             </a>
+          </td><td>
+            <%= number_to_currency(workshop.price , unit: "€", separator: ",", format: "%n %u")%>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+     <tfoot>
+      <tr>
+        <th colspan="2">Total</th>
+        <th ><%= @order.amount %></th>
+      </tr>
+      </tfoot>
+  </table>
+    <p> 
+      Cordialement,
+    </p>
+
+    <p> 
+      Votre équipe Gestion des achats
+    </p>
+  </body>
+</html> 
