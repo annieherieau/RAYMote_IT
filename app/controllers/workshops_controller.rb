@@ -19,6 +19,8 @@ class WorkshopsController < ApplicationController
   def new
     @workshop = Workshop.new
     @categories = Category.all
+    @tags = Tag.all
+    
   end
 
   # GET /workshops/1/edit
