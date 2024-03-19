@@ -44,6 +44,15 @@ class UserMailer < ApplicationMailer
     mail(to: @user.email, subject: 'Merci pour votre commande !')
   end
 
+  def order_to_creator(creator, order)
+    @creator = creator
+    @order = order
+    @user = @order.user
+    @order_url = application_url + 'orders/' + @order.id.to_s
+    @workshop_url = application_url + 'workshops/' +@workshop.id.to_s
+    mail(to: @creator.email, subject: 'Nouvelle commande de ' + @user.name)
+  end
+
 end
 
 

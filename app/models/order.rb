@@ -13,9 +13,9 @@ class Order < ApplicationRecord
     # envoi email au User
     UserMailer.order_to_user(self).deliver_now
 
-    # TODO : envoi email au Creator
-    # faire une boucle pour chaque Workshop > envoyer au creator
-    # UserMailer.order_to_creator(???).deliver_now
+    self.workshops.each do |workshop|
+      UserMailer.order_to_creator(workshop.creator, self).deliver_now
+    end
 
     # TODO: envoi email à Admin
     # admins = User.where(admin: true)

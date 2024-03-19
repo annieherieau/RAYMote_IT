@@ -5,7 +5,7 @@
   </head>
   
   <body>
-    <h1>Miaou, félicitations pour votre achat  !</h1>
+    <h1>Félicitations pour votre achat  !</h1>
 
     <p>
       Bonjour,
@@ -13,13 +13,13 @@
 
     <p>
       Voici le contenu de votre commande n° <%= @order.id %>. <br>
-      La totalité de votre commande est disponible au télechargement <a href="<%= @order_url%>">en cliquant sur ce lien</a>
+      La totalité de votre commande est disponible dans votre Dashboard <a href="<%= @order_url%>">en cliquant sur ce lien</a>
     </p>
     </p>
         <table style="width: 100%">
      <thead>
         <tr>
-          <th colspan="2" >Articles</th>
+          <th>Articles</th>
           <th>Prix</th>
         </tr>
        </thead>
@@ -28,10 +28,6 @@
       <% workshop_url = @workshop_url + workshop.id.to_s %>
       <tr>
           <td>
-           <a href="<%= workshop_url %>">
-            <%= image_tag(workshop.photo, style: "width: 80px;") %>
-            </a>
-            </td><td>
             <a href="<%= workshop_url %>">
             <%= workshop.title %>
              </a>
@@ -43,7 +39,6 @@
     </tbody>
      <tfoot>
       <tr>
-        <th colspan="2">Total</th>
         <th ><%= @order.amount %></th>
       </tr>
       </tfoot>
