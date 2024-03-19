@@ -94,10 +94,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_19_094027) do
     t.datetime "updated_at", null: false
     t.bigint "category_id"
     t.index ["category_id"], name: "index_workshops_on_category_id"
+    t.index ["creator_id"], name: "index_workshops_on_creator_id"
   end
 
   add_foreign_key "likes", "users"
   add_foreign_key "likes", "workshops"
   add_foreign_key "orders", "users"
   add_foreign_key "workshops", "categories"
+  add_foreign_key "workshops", "users", column: "creator_id"
 end
