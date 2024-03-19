@@ -5,7 +5,7 @@ class Workshop < ApplicationRecord
 
   # Associations
   belongs_to :creator, class_name: 'User'
-  has_many :attendances
+  has_many :attendances, dependent: :destroy
   has_many :users, through: :attendances
   has_many :likes, dependent: :destroy
   has_and_belongs_to_many :tags

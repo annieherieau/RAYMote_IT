@@ -1,29 +1,4 @@
 <div class="container text-center">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>ID commande</th>
-        <th>Date</th>
-        <th>Montant</th>
-        <th>Détails</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% if @orders.nil? %>
-        <tr>
-          <td colspan="4">Aucune commande trouvée.</td>
-        </tr>
-      <% else %>
-        <% @orders.each do |order| %>
-          <tr>
-            <td><%= order.id %></td>
-            <td><%= order.created_at.strftime('%d/%m/%Y %H:%M:%S') %></td>
-            <td><%= display_order_amount(order) %></td>
-            <td><%= link_to 'Details', order_path(order.id), class: 'btn btn-info' %></td>
-          </tr>
-        <% end %>
-      <% end %>
-    </tbody>
-  </table>
+  <%= render partial: "orders/user_orders", locals: {orders: @orders} %>
 </div>
 
