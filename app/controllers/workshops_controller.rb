@@ -32,6 +32,7 @@ class WorkshopsController < ApplicationController
     workshop_params_mod[:start_date] = Date.strptime(workshop_params[:start_date], '%Y-%m-%d') rescue nil
     @workshop = Workshop.new(workshop_params_mod)
     @workshop.creator = current_user
+    @categories = Category.all
   
     respond_to do |format|
       if @workshop.save

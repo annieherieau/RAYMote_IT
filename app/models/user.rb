@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   # associations
+  has_many :created_workshops, class_name: 'Workshop', foreign_key: :creator_id
   has_many :attendances
   has_many :workshops, through: :attendances
   has_many :likes, dependent: :destroy
