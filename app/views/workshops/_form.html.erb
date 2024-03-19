@@ -42,6 +42,11 @@
 </div>
 
   <div>
+    <%= form.label :category_id %><br>
+    <%= form.collection_select :category_id, @categories, :id, :name, include_blank: "Please select" %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

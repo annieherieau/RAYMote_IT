@@ -9,23 +9,28 @@ class WorkshopsController < ApplicationController
   # GET /workshops/1 or /workshops/1.json
   def show
     @workshop = Workshop.find(params[:id])
+    @attendances = @workshop.attendances || []
+    @category = @workshop.category
   end
 
   # GET /workshops/new
   def new
     @workshop = Workshop.new
+    @categories = Category.all
   end
 
   # GET /workshops/1/edit
   def edit
+    @categories = Category.all
   end
 
   # POST /workshops or /workshops.json
   def create
     workshop_params_mod = workshop_params
-  workshop_params_mod[:start_date] = Date.strptime(workshop_params[:start_date], '%Y-%m-%d') rescue nil
-  @workshop = Workshop.new(workshop_params_mod)
-
+    workshop_params_mod[:start_date] = Date.strptime(workshop_params[:start_date], '%Y-%m-%d') rescue nil
+    @workshop = Workshop.new(workshop_params_mod)
+    @workshop.creator = current_user
+  
     respond_to do |format|
       if @workshop.save
         format.html { redirect_to workshop_url(@workshop), notice: "Workshop was successfully created." }
@@ -36,9 +41,12 @@ class WorkshopsController < ApplicationController
       end
     end
   end
+  
+  
 
   # PATCH/PUT /workshops/1 or /workshops/1.json
   def update
+    @workshop.tags_destroy
     respond_to do |format|
       if @workshop.update(workshop_params)
         format.html { redirect_to workshop_url(@workshop), notice: "Workshop was successfully updated." }
@@ -60,21 +68,7 @@ class WorkshopsController < ApplicationController
     end
   end
   
-  def register
-    @workshop = Workshop.find(params[:id])
-    @attendance = Attendance.new(user_id: current_user.id, workshop_id: @workshop.id)
-
-    if @attendance.save
-      redirect_to @workshop, notice: 'You have successfully registered for the workshop.'
-    else
-      redirect_to @workshop, alert: 'Failed to register for the workshop.'
-    end
-  end
-
-  def manage
-    @workshop = Workshop.find(params[:id])
-    @attendances = @workshop.attendances
-  end
+  # Other methods...
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -84,7 +78,7 @@ class WorkshopsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def workshop_params
-      params.require(:workshop).permit(:name, :description, :start_date, :duration, :price, :tags_names)
+      params.require(:workshop).permit(:name, :description, :start_date, :duration, :price, :tags_names, :category_id)
     end
 
 end

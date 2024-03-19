@@ -1,36 +1,44 @@
-<p style="color: green"><%= notice %></p>
+<table class="table">
+  <tr>
+    <th>Name:</th>
+    <td><%= @workshop.name %></td>
+  </tr>
+  <tr>
+    <th>Description:</th>
+    <td><%= @workshop.description %></td>
+  </tr>
+<tr>
+  <th>Créateur:</th>
+  <td><%= @workshop.creator.firstname %> <%= @workshop.creator.lastname %></td>
+</tr>
+  <tr>
+    <th>Start Date:</th>
+    <td><%= @workshop.start_date %></td>
+  </tr>
+  <tr>
+    <th>Duration:</th>
+    <td><%= @workshop.duration %></td>
+  </tr>
+  <tr>
+    <th>Price:</th>
+    <td><%= @workshop.price %></td>
+  </tr>
+</table>
 
+<!-- Participants à l'atelier -->
+<h3>Participants :</h3>
+<% if @attendances.exists? %>
+  <ul>
+    <% @attendances.each do |attendance| %>
+      <li><%= attendance.user.email %></li> <!-- Supposons que vous souhaitez afficher l'e-mail de l'utilisateur -->
+    <% end %>
+  </ul>
+<% else %>
+  <p>Aucun participant pour le moment.</p>
+<% end %>
 
-                                    <!-- Product name-->
-                                      <p>
-                                        <strong>Name:</strong>
-                                        <%= @workshop.name %>
-                                      </p>
-                                    <!-- description-->
-                                      <p>
-                                        <strong>Description:</strong>
-                                        <%= @workshop.description %>
-                                      </p>
-                                    <!--Start date-->
-                                      <p>
-                                        <strong>Start_date:</strong>
-                                        <%= @workshop.start_date %>
-                                      </p>
-                                    <!--Duration-->
-                                      <p>
-                                        <strong>Duration:</strong>
-                                        <%= @workshop.duration %>
-                                      </p>
-                                    <!-- Product price-->
-                                      <p>
-                                        <strong>Price:</strong>
-                                        <%= @workshop.price %>
-                                      </p>
-                                    <!-- Nombre d'inscrits à l'atelier -->
-                                      <p>Nombre d'inscrits : <%= @workshop.users.count %></p>
-
-                                      <%= button_to "S'inscrire à l'Atelier", class: "btn btn-primary", method: :post, remote: true %>
-                                      <h3>Tags:</h3>
+<!-- Tags -->
+<h3>Tags:</h3>
 <% if @workshop.tags.any? %>
   <ul>
     <% @workshop.tags.each do |tag| %>
@@ -40,16 +48,46 @@
 <% else %>
   <p>Cet atelier n'a pas de tags associés.</p>
 <% end %>
-<div>
-<p>Nombre de likes : <%= @workshop.likes.count %></p>
-<% if @workshop.likes.exists?(user: current_user) %>
-<%= button_to 'Déliker', workshop_like_path(@workshop), method: :delete, class: "btn btn-warning" %>
+
+<!-- Categories -->
+<h3>Catégories:</h3>
+<% if @category.present? %>
+  <div class="categories-container">
+  <%= link_to @category.name, category_path(@category)%>
+  </div>
 <% else %>
-<%= button_to 'Liker', workshop_like_path(@workshop), method: :post, class: "btn btn-primary" %>
+  <p>Cet atelier n'est associé à aucune catégorie.</p>
 <% end %>
-  <%= link_to "Edit this workshop", edit_workshop_path(@workshop) %> |
-  <%= link_to "Back to workshops", workshops_path %>
-  <%= button_to "Destroy this workshop", @workshop, method: :delete %>
-  <%= button_to "Payer", new_checkout_create_path(workshop_id: @workshop.id), method: :post, data: { turbo: false } %>
-           
+<br>
+<br>
+
+<!-- Inscription/Désinscription -->
+<% if @workshop.attendances.exists?(user: current_user) %>
+  <% attendance = @workshop.attendances.find_by(user: current_user) %>
+  <%= button_to 'Se désinscrire', workshop_attendance_path(@workshop, attendance), method: :delete, class: "btn btn-warning" %>
+<% else %>
+  <%= button_to "S'inscrire à l'Atelier", workshop_attendances_path(@workshop), method: :post, class: "btn btn-primary" %>
+<% end %>
+
+<!-- Likes -->
+<div>
+  <p>Nombre de likes : <%= @workshop.likes.count %></p>
+  <% if @workshop.likes.exists?(user: current_user) %>
+    <%= button_to 'Déliker', workshop_like_path(@workshop), method: :delete, class: "btn btn-warning" %>
+  <% else %>
+    <%= button_to 'Liker', workshop_like_path(@workshop), method: :post, class: "btn btn-primary" %>
+  <% end %>
 </div>
+
+<div class="text-center">
+  <% if current_user == @workshop.creator %>
+    <%= link_to "Edit this workshop", edit_workshop_path(@workshop), class: "btn btn-secondary mt-2" %> 
+    <%= button_to "Destroy this workshop", @workshop, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger mr-2" %>
+  <% end %>
+
+  <%= link_to "Back to workshops", workshops_path, class: "btn btn-secondary mr-2" %>
+  <%= button_to "Payer", new_checkout_create_path(workshop_id: @workshop.id), method: :post, data: { turbo: false }, class: "btn btn-success" %>
+</div>
+
+
+

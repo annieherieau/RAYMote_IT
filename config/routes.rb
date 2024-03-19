@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
+<<<<<<< HEAD
   
   # Page Contact
   get 'contact', to: 'static_pages#contact'
   post 'contact',  to: 'static_pages#send_contact'
   
+=======
+  resources :categories
+>>>>>>> dev
   resources :tags
   resources :orders
 
@@ -11,9 +15,11 @@ Rails.application.routes.draw do
 
   resources :workshops do
     resource :like, only: [:create, :destroy], controller: 'likes'
+    resources :attendances, only: [:create, :destroy]  # Ajouter cette ligne
   end
 
   resources :tags, only: [:show]
+  resources :categories, only: [:show]
   
   resources :users, only: [:index, :show], path: 'profile'
 

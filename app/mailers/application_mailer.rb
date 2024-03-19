@@ -5,9 +5,10 @@ class ApplicationMailer < ActionMailer::Base
 
   def application_url
     if Rails.env.production?
-      ENV['PROD_HOST']
+      ENV["PROD_HOST"]
     else
-      ENV['DEV_HOST']
+      ENV["DEV_HOST"]
     end
   end
 end
+
