@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Félicitations vous avez fait une nouvelle vente !</h1>
+    <p>
+      Bonjour,
+    </p>
+    <p>
+      <%= @user.email %> vient d'effectuer un achat - commande n° : <%= @order.id %> !
+    </p>
+    <p>
+      Pour plus de détails, veuillez consulter votre dashboard.
+    </p>
+    <p> Cordialement,
+    </p>
+    <p> Votre équipe Gestion des achats
+    </p>
+  </body>
+</html>

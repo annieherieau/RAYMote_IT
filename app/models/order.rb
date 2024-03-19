@@ -10,8 +10,8 @@ class Order < ApplicationRecord
 
   # Methods
   def send_order_emails
-    # TODO : envoi email au User
-    # UserMailer.order_to_user(self).deliver_now
+    # envoi email au User
+    UserMailer.order_to_user(self).deliver_now
 
     # TODO : envoi email au Creator
     # faire une boucle pour chaque Workshop > envoyer au creator
