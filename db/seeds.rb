@@ -9,14 +9,18 @@ User.destroy_all
 
 # Création des utilisateurs avec Faker
 10.times do
-  User.create!(
-    firstname: Faker::Name.first_name,
-    lastname: Faker::Name.last_name,
+    firstname = Faker::Name.first_name
+    lastname = Faker::Name.last_name
     email = "#{firstname.downcase}.#{lastname.downcase}@gmail.com"
-    password: "password",
-    creator: Faker::Boolean.boolean(true_ratio: 0.5) # 50% chance of being a creator
-  )
-end
+  
+    User.create!(
+      firstname: firstname,
+      lastname: lastname,
+      email: email,
+      password: "password",
+      creator: [true, false].sample
+    )
+  end
 
 # Création des catégories
 categories = ["JavaScript", "Python", "Ruby", "Java", "C++", "C#", "Swift", "Go", "PHP", "TypeScript"]
