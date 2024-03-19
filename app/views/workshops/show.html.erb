@@ -120,15 +120,20 @@
 
 
   <!-- Bouton review -->
-  <% if current_user.present? && !@workshop.reviews.exists?(user: current_user) %>
+  <div class="container">
+  <% if user_signed_in? %>
+  <% purchased_workshop = @workshop.attendances.exists?(user: current_user) %>
+  <% already_reviewed = @workshop.reviews.exists?(user: current_user) %>
+
+  <% if purchased_workshop && !already_reviewed %>
     <%= link_to "Noter cet atelier", new_workshop_review_path(@workshop), class: "btn btn-primary" %>
   <% else %>
     <p>Vous avez déjà noté cet atelier</p>
   <% end %>
+  <%end%>
 
 
   <!-- affichage des reviews -->
-  <div class="container">
     <h2>Reviews</h2>
     <% if @workshop.reviews.exists? %>
       <ul>
