@@ -106,14 +106,25 @@
     <% end %>
   </div>
 
-    <!-- Bouton review -->
-<div class="text-center">
-  <% if current_user.present? && !@workshop.reviews.exists?(user: current_user) %>
-    <%= link_to "Noter cet atelier", new_workshop_review_path(@workshop), class: "btn btn-primary mt-4" %>
-  <% else %>
-    <p>Vous avez déjà noté cet atelier</p>
+   
+<!-- Bouton review -->
+<div class="container justify-content-center">
+  <% if user_signed_in? %>
+    <% purchased_workshop = @workshop.attendances.exists?(user: current_user) %>
+    <% already_reviewed = @workshop.reviews.exists?(user: current_user) %>
+    <% if purchased_workshop && !already_reviewed %>
+        <%= link_to "Noter cet atelier", new_workshop_review_path(@workshop), class: "btn btn-primary" %>
+    <% elsif current_user == @workshop.creator %>
+        <p> Vous ne pouvez pas commenter votre propre atelier </p>
+    <% elsif already_reviewed %>
+        <p>Vous avez déjà noté cet atelier</p>
+    <% else %>
+        <p> Vous devez acheter l'atelier pour pouvoir le noter </p>
+    <% end %>
   <% end %>
 </div>
+
+  
 
   <!-- affichage des reviews -->
   <div class="row justify-content-center mt-4">
@@ -157,38 +168,5 @@
 
 
 
-  <!-- Bouton review -->
-  <div class="container">
-  <% if user_signed_in? %>
-  <% purchased_workshop = @workshop.attendances.exists?(user: current_user) %>
-  <% already_reviewed = @workshop.reviews.exists?(user: current_user) %>
-  <% if purchased_workshop && !already_reviewed %>
-    <%= link_to "Noter cet atelier", new_workshop_review_path(@workshop), class: "btn btn-primary" %>
-  <% elsif current_user == @workshop.creator %>
-    <p> Vous ne pouvez pas commenter votre propre atelier </p>
-  <% elsif already_reviewed %>
-    <p>Vous avez déjà noté cet atelier</p>
-  <% else %>
-    <p> Vous devez acheter l'atelier pour pouvoir le noter </p>
-  <% end %>
-<% end %>
 
-
-  <!-- affichage des reviews -->
-    <h2>Reviews</h2>
-    <% if @workshop.reviews.exists? %>
-      <ul>
-        <% @workshop.reviews.each do |review| %>
-          <li>
-            <p><%= review.content %></p>
-            <p><%= review.rating %></p>
-            <p><%= review.user.firstname %> <%= review.user.lastname %></p> 
-          </li>
-        <% end %>
-      </ul>
-    <% else %>
-      <p>Aucun avis pour le moment.</p>
-    <% end %>
-
-    
 
