@@ -1,16 +1,16 @@
+<div class="container text-center">
+  <h1>Détails de la commande</h1>
 
-<h1>Détails de la commande</h1>
+  <p><strong>Numéro de commande :</strong> <%= @order.id %></p>
+  <p><strong>Montant total :</strong> <%= display_order_amount(@order) %></p>
+  <p><strong>Date de création :</strong> <%= @order.created_at %></p>
 
-<p><strong>Numéro de commande :</strong> <%= @order.id %></p>
-<p><strong>Montant total :</strong> <%= display_order_amount(@order) %></p>
-<p><strong>Date de création :</strong> <%= @order.created_at %></p>
+  <h2>Articles commandés :</h2>
+  <ul class="list-unstyled">
+    <% @order.workshops.each do |workshop| %>
+      <li><%= workshop.name %> - <%= number_to_currency(workshop.price) %></li>
+    <% end %>
+  </ul>
 
-<h2>Articles commandés :</h2>
-<ul>
-  <% @order.workshops.each do |workshop| %>
-    <li><%= workshop.name %> - <%= number_to_currency(workshop.price) %></li>
-  <% end %>
-</ul>
-
-
-<%= link_to 'Retour historique des commandes', orders_path, class: 'btn btn-secondary' %>
+  <%= link_to 'Retour historique des commandes', orders_path, class: 'btn btn-secondary' %>
+</div>

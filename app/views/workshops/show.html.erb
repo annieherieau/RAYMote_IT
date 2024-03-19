@@ -79,9 +79,10 @@
       <% elsif @workshop.attendances.exists?(user: current_user) %>
         <% attendance = @workshop.attendances.find_by(user: current_user) %>
         <% if @workshop.price == 0 %>
-          <%= button_to 'Se désinscrire', workshop_attendance_path(@workshop, attendance), method: :delete, class: "btn btn-warning" %>
+          <%= button_to 'Se désinscrire', workshop_attendance_path(@workshop, attendance), method: :delete, class: "btn btn-warning", data: { confirm: 'Êtes-vous sûr de vouloir vous désinscrire ?' } %>
         <% else %>
           <p>Cet événement est payant. Veuillez contacter l'administrateur pour vous désinscrire.</p>
+          <%= link_to "Formulaire de contacte", contact_path, class: "btn btn-primary" %>
         <% end %>
       <% else %>
         <% if @workshop.price == 0 %>
