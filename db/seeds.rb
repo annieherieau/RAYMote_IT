@@ -12,7 +12,7 @@ User.destroy_all
   User.create!(
     firstname: Faker::Name.first_name,
     lastname: Faker::Name.last_name,
-    email: Faker::Internet.email,
+    email = "#{firstname.downcase}.#{lastname.downcase}@gmail.com"
     password: "password",
     creator: Faker::Boolean.boolean(true_ratio: 0.5) # 50% chance of being a creator
   )
