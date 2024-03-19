@@ -1,5 +1,7 @@
 class WorkshopsController < ApplicationController
+  before_action :authenticate_user!, only: %i[ new create edit update destroy ]
   before_action :set_workshop, only: %i[ show edit update destroy ]
+  before_action :authorize_creator!, only: %i[ edit update destroy ]
   
   # GET /workshops or /workshops.json
   def index
@@ -74,6 +76,13 @@ class WorkshopsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_workshop
       @workshop = Workshop.find(params[:id])
+    end
+
+    def authorize_creator!
+      unless @workshop.creator == current_user
+        flash[:alert] = "You are not authorized to perform this action."
+        redirect_to root_path
+      end
     end
 
     # Only allow a list of trusted parameters through.
