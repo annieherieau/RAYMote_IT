@@ -84,11 +84,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_18_224307) do
     t.datetime "start_date"
     t.integer "duration"
     t.boolean "event", default: false, null: false
+    t.bigint "creator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_workshops_on_creator_id"
   end
 
   add_foreign_key "likes", "users"
   add_foreign_key "likes", "workshops"
   add_foreign_key "orders", "users"
+  add_foreign_key "workshops", "users", column: "creator_id"
 end
