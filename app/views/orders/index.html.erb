@@ -1,14 +1,31 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Orders</h1>
-
-<div id="orders">
-  <% @orders.each do |order| %>
-    <%= render order %>
-    <p>
-      <%= link_to "Show this order", order %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New order", new_order_path %>
+<table>
+  <thead>
+    <tr>
+      <th>ID commande</th>
+      <th>Date</th>
+      <th>Montant</th>
+      <th>Détails</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @orders.nil? %>
+      <tr>
+        <td colspan="5">Aucune commande trouvée.</td>
+      </tr>
+    <% else %>
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%= order.id %></td>
+          <td><%= order.created_at.strftime('%d/%m/%Y %H:%M:%S') %></td>
+          <td><%= display_order_amount(order) %></td>
+          <td><%= link_to 'Details', order_path(order.id), class: 'btn btn-info' %></td>
+        </tr>
+        <tr>
+          <td colspan="5">
+            <%= order_details_list(order) %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
