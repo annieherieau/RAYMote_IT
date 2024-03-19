@@ -4,11 +4,10 @@ Rails.application.routes.draw do
 
   resources :workshops do
     resource :like, only: [:create, :destroy], controller: 'likes'
+    resources :attendances, only: [:create, :destroy]  # Ajouter cette ligne
   end
 
   resources :users, only: [:index, :show], path: 'profile'
-
-  #resource :profile, controller: 'users', only: [:show], path: 'profile'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

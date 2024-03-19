@@ -1,43 +1,57 @@
-<p style="color: green"><%= notice %></p>
+<!-- Product name-->
+<p>
+  <strong>Name:</strong>
+  <%= @workshop.name %>
+</p>
+<!-- description-->
+<p>
+  <strong>Description:</strong>
+  <%= @workshop.description %>
+</p>
+<!--Start date-->
+<p>
+  <strong>Start_date:</strong>
+  <%= @workshop.start_date %>
+</p>
+<!--Duration-->
+<p>
+  <strong>Duration:</strong>
+  <%= @workshop.duration %>
+</p>
+<!-- Product price-->
+<p>
+  <strong>Price:</strong>
+  <%= @workshop.price %>
+</p>
+
+<!-- Participants à l'atelier -->
+<p><strong>Participants :</strong></p>
+<% if @attendances.exists? %>
+  <ul>
+    <% @attendances.each do |attendance| %>
+      <li><%= attendance.user.email %></li> <!-- Supposons que vous souhaitez afficher l'e-mail de l'utilisateur -->
+    <% end %>
+  </ul>
+<% else %>
+  <p>Aucun participant pour le moment.</p>
+<% end %>
 
 
-                                    <!-- Product name-->
-                                      <p>
-                                        <strong>Name:</strong>
-                                        <%= @workshop.name %>
-                                      </p>
-                                    <!-- description-->
-                                      <p>
-                                        <strong>Description:</strong>
-                                        <%= @workshop.description %>
-                                      </p>
-                                    <!--Start date-->
-                                      <p>
-                                        <strong>Start_date:</strong>
-                                        <%= @workshop.start_date %>
-                                      </p>
-                                    <!--Duration-->
-                                      <p>
-                                        <strong>Duration:</strong>
-                                        <%= @workshop.duration %>
-                                      </p>
-                                    <!-- Product price-->
-                                      <p>
-                                        <strong>Price:</strong>
-                                        <%= @workshop.price %>
-                                      </p>
-                                    <!-- Nombre d'inscrits à l'atelier -->
-                                      <p>Nombre d'inscrits : <%= @workshop.users.count %></p>
 
-                                      <%= button_to "S'inscrire à l'Atelier", class: "btn btn-primary", method: :post, remote: true %>
+<% if @workshop.attendances.exists?(user: current_user) %>
+  <% attendance = @workshop.attendances.find_by(user: current_user) %>
+  <%= button_to 'Se désinscrire', workshop_attendance_path(@workshop, attendance), method: :delete, class: "btn btn-warning" %>
+<% else %>
+  <%= button_to "S'inscrire à l'Atelier", workshop_attendances_path(@workshop), method: :post, class: "btn btn-primary" %>
+<% end %>
 
 <div>
-<p>Nombre de likes : <%= @workshop.likes.count %></p>
-<% if @workshop.likes.exists?(user: current_user) %>
-<%= button_to 'Déliker', workshop_like_path(@workshop), method: :delete, class: "btn btn-warning" %>
-<% else %>
-<%= button_to 'Liker', workshop_like_path(@workshop), method: :post, class: "btn btn-primary" %>
-<% end %>
+  <p>Nombre de likes : <%= @workshop.likes.count %></p>
+  <% if @workshop.likes.exists?(user: current_user) %>
+    <%= button_to 'Déliker', workshop_like_path(@workshop), method: :delete, class: "btn btn-warning" %>
+  <% else %>
+    <%= button_to 'Liker', workshop_like_path(@workshop), method: :post, class: "btn btn-primary" %>
+  <% end %>
   <%= link_to "Edit this workshop", edit_workshop_path(@workshop) %> |
   <%= link_to "Back to workshops", workshops_path %>
   <%= button_to "Destroy this workshop", @workshop, method: :delete %>
