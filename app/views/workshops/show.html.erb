@@ -120,12 +120,29 @@
 
 
   <!-- Bouton review -->
-  <div class="text-center mt-4">
-    <% if @workshop.attendances.any? %>
-    <% link_to "Laisser un avis", new_review_path(@workshop), class: "btn btn-primary" %>
-    <% end %>
-  </div>
+  <% if current_user.present? && !@workshop.reviews.exists?(user: current_user) %>
+    <%= link_to "Noter cet atelier", new_workshop_review_path(@workshop), class: "btn btn-primary" %>
+  <% else %>
+    <p>Vous avez déjà noté cet atelier</p>
+  <% end %>
 
+
+  <!-- affichage des reviews -->
+  <div class="container">
+    <h2>Reviews</h2>
+    <% if @workshop.reviews.exists? %>
+      <ul>
+        <% @workshop.reviews.each do |review| %>
+          <li>
+            <p><%= review.content %></p>
+            <p><%= review.rating %></p>
+            <p><%= review.user.firstname %> <%= review.user.lastname %></p> 
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>Aucun avis pour le moment.</p>
+    <% end %>
 
     
 

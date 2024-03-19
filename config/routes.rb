@@ -8,13 +8,14 @@ Rails.application.routes.draw do
   resources :categories
   resources :tags
   resources :orders
-  resources :reviews
+  
 
   devise_for :users
 
   resources :workshops do
     resource :like, only: [:create, :destroy], controller: 'likes'
     resources :attendances, only: [:create, :destroy]  # Ajouter cette ligne
+    resources :reviews, only: [:new, :create]
   end
 
   resources :tags, only: [:show]

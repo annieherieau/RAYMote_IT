@@ -1,5 +1,8 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: %i[ show edit update destroy ]
+  before_action :set_workshop, only: [:new, :create]
+
+
 
   # GET /reviews or /reviews.json
   def index
@@ -13,6 +16,7 @@ class ReviewsController < ApplicationController
   # GET /reviews/new
   def new
     @review = Review.new
+    @user = current_user
   end
 
   # GET /reviews/1/edit
@@ -21,11 +25,12 @@ class ReviewsController < ApplicationController
 
   # POST /reviews or /reviews.json
   def create
-    @review = Review.new(review_params)
+    @review = @workshop.reviews.build(review_params)
+    @review.user = current_user
 
     respond_to do |format|
       if @review.save
-        format.html { redirect_to review_url(@review), notice: "Review was successfully created." }
+        format.html { redirect_to @workshop, notice: "Review was successfully created." }
         format.json { render :show, status: :created, location: @review }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -67,4 +72,9 @@ class ReviewsController < ApplicationController
     def review_params
       params.require(:review).permit(:content, :rating)
     end
+
+    def set_workshop
+      @workshop = Workshop.find(params[:workshop_id])
+    end
+
 end
