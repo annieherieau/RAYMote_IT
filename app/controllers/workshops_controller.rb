@@ -27,9 +27,10 @@ class WorkshopsController < ApplicationController
   # POST /workshops or /workshops.json
   def create
     workshop_params_mod = workshop_params
-  workshop_params_mod[:start_date] = Date.strptime(workshop_params[:start_date], '%Y-%m-%d') rescue nil
-  @workshop = Workshop.new(workshop_params_mod)
-
+    workshop_params_mod[:start_date] = Date.strptime(workshop_params[:start_date], '%Y-%m-%d') rescue nil
+    @workshop = Workshop.new(workshop_params_mod)
+    @workshop.creator = current_user
+  
     respond_to do |format|
       if @workshop.save
         format.html { redirect_to workshop_url(@workshop), notice: "Workshop was successfully created." }
@@ -40,6 +41,8 @@ class WorkshopsController < ApplicationController
       end
     end
   end
+  
+  
 
   # PATCH/PUT /workshops/1 or /workshops/1.json
   def update
@@ -65,12 +68,7 @@ class WorkshopsController < ApplicationController
     end
   end
   
-  
-
-  def manage
-    @workshop = Workshop.find(params[:id])
-    @attendances = @workshop.attendances
-  end
+  # Other methods...
 
   private
     # Use callbacks to share common setup or constraints between actions.
