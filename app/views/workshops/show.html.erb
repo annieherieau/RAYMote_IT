@@ -69,9 +69,7 @@
       <% end %>
     </div>
   </div>
-</div>
 
-<div class="container">
   <!-- Inscription/Désinscription -->
   <div class="mt-4">
     <% if user_signed_in? %>
@@ -108,6 +106,46 @@
     <% end %>
   </div>
 
+    <!-- Bouton review -->
+<div class="text-center">
+  <% if current_user.present? && !@workshop.reviews.exists?(user: current_user) %>
+    <%= link_to "Noter cet atelier", new_workshop_review_path(@workshop), class: "btn btn-primary mt-4" %>
+  <% else %>
+    <p>Vous avez déjà noté cet atelier</p>
+  <% end %>
+</div>
+
+  <!-- affichage des reviews -->
+  <div class="row justify-content-center mt-4">
+    <div class="col-md-8">
+      <h3 class="text-center">Avis</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Utilisateur</th>
+            <th>Évaluation</th>
+            <th>Contenu</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @workshop.reviews.exists? %>
+            <% @workshop.reviews.each do |review| %>
+              <tr>
+                <td><%= review.user.firstname %> <%= review.user.lastname %></td>
+                <td><%= review.rating %></td>
+                <td><%= review.content %></td>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr>
+              <td colspan="3">Aucun avis pour le moment.</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
   <!-- Boutons -->
   <div class="text-center mt-4">
     <% if current_user == @workshop.creator %>
@@ -115,34 +153,14 @@
     <% end %>
     <%= link_to "Back to workshops", workshops_path, class: "btn btn-secondary mr-2" %>
   </div>
-</div>
 
 
 
-  <!-- Bouton review -->
-  <% if current_user.present? && !@workshop.reviews.exists?(user: current_user) %>
-    <%= link_to "Noter cet atelier", new_workshop_review_path(@workshop), class: "btn btn-primary" %>
-  <% else %>
-    <p>Vous avez déjà noté cet atelier</p>
-  <% end %>
 
 
-  <!-- affichage des reviews -->
-  <div class="container">
-    <h2>Reviews</h2>
-    <% if @workshop.reviews.exists? %>
-      <ul>
-        <% @workshop.reviews.each do |review| %>
-          <li>
-            <p><%= review.content %></p>
-            <p><%= review.rating %></p>
-            <p><%= review.user.firstname %> <%= review.user.lastname %></p> 
-          </li>
-        <% end %>
-      </ul>
-    <% else %>
-      <p>Aucun avis pour le moment.</p>
-    <% end %>
+
+
+
 
     
 
