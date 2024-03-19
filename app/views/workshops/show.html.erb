@@ -14,7 +14,7 @@
           </tr>
           <tr>
             <th scope="row">Créateur:</th>
-            <td><%= @workshop.creator.firstname %> <%= @workshop.creator.lastname %></td>
+            <td><%= link_to "#{@workshop.creator.firstname} #{@workshop.creator.lastname}", user_path(@workshop.creator) %></td>
           </tr>
           <tr>
             <th scope="row">Start Date:</th>
