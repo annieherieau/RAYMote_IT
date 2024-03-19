@@ -1,5 +1,5 @@
  <h2>Vos Inscriptions aux Workshops</h2>
-  <% if @user.workshops.any? %>
+  <% if workshops.any? %>
     <table class="table">
       <thead>
         <tr>
@@ -10,7 +10,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @user.workshops.each do |workshop| %>
+        <% workshops.each do |workshop| %>
           <tr>
             <td><%= workshop.name %></td>
             <td><%= workshop.description %></td>

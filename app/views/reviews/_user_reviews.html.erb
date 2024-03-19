@@ -1,5 +1,5 @@
- <h2>Reviews by <%= @user.firstname %></h2>
-  <% if @user.reviews.any? %>
+ <h2>Vos Avis</h2>
+  <% if user.reviews.any? %>
     <table class="table">
       <thead>
         <tr>
@@ -10,7 +10,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @user.reviews.each do |review| %>
+        <% user.reviews.each do |review| %>
           <tr>
             <td><%= review.workshop.name %></td>
             <td><%= review.content[0...50]%><%= review.content.length > 50 ? "..." : "" %></td>
@@ -21,7 +21,7 @@
                 <%= link_to "Lire", review, class: "btn btn-primary" %>
               <% end %>
               
-              <% if user_signed_in? && current_user == @user %>
+              <% if user_signed_in? && current_user == user %>
                 <%= link_to "Edit", edit_review_path(review), class: "btn btn-secondary" %>
                 <%= button_to "Destroy", review, method: :delete, class: "btn btn-danger" %>
               <% end %>

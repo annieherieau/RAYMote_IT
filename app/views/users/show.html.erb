@@ -1,10 +1,10 @@
 <div class="container">
   <%= render "users/user_details" %>
-  <%= render "users/created_workshops" %>
+  <%= render partial: "workshops/user_created_workshops", locals: {user: @user} %>
   
   <% if current_user == @user %>
-     <%= render "users/workshops" %>
-     <%= render "users/reviews" %>
+     <%= render partial: "workshops/user_workshops", locals: {workshops: @user.workshops} %>
+     <%= render partial: "reviews/user_reviews", locals: {user: @user} %>
      <%= render partial: "orders/user_orders", locals: {orders: @user.orders} %>
   <% end %>
   <%= link_to "Retour à l'accueil", workshops_path, class: "btn btn-dark" %>
