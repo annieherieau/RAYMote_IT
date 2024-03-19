@@ -38,7 +38,7 @@
 
   <div>
   <%= form.label :tags, "Tags (séparés par des virgules)", style: "display: block" %>
-  <%= form.text_field :tags_names %>
+  <%= form.collection_select :tag_id, @tags, :id, :name, include_blank: "Please select" %>
 </div>
 
   <div>
