@@ -10,15 +10,18 @@ class WorkshopsController < ApplicationController
   def show
     @workshop = Workshop.find(params[:id])
     @attendances = @workshop.attendances || []
+    @category = @workshop.category
   end
 
   # GET /workshops/new
   def new
     @workshop = Workshop.new
+    @categories = Category.all
   end
 
   # GET /workshops/1/edit
   def edit
+    @categories = Category.all
   end
 
   # POST /workshops or /workshops.json
@@ -43,6 +46,7 @@ class WorkshopsController < ApplicationController
 
   # PATCH/PUT /workshops/1 or /workshops/1.json
   def update
+    @workshop.tags_destroy
     respond_to do |format|
       if @workshop.update(workshop_params)
         format.html { redirect_to workshop_url(@workshop), notice: "Workshop was successfully updated." }
@@ -74,7 +78,7 @@ class WorkshopsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def workshop_params
-      params.require(:workshop).permit(:name, :description, :start_date, :duration, :price, :tags_names)
+      params.require(:workshop).permit(:name, :description, :start_date, :duration, :price, :tags_names, :category_id)
     end
 
 end

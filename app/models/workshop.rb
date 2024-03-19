@@ -1,6 +1,7 @@
 class Workshop < ApplicationRecord
   attr_accessor :tags_names
   after_save :assign_tags
+  belongs_to :category, optional: true
 
   # Associations
   belongs_to :creator, class_name: 'User'
@@ -13,6 +14,10 @@ class Workshop < ApplicationRecord
   validates :name, presence: true, length: { in: 3..15 }
   validates :description, presence: true, length: { in: 20..500 }
   validates :price,  presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 1000 }
+
+def tags_destroy
+  self.tags.clear
+end
 
   private
 

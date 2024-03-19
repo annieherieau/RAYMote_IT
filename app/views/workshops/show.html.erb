@@ -49,6 +49,18 @@
   <p>Cet atelier n'a pas de tags associés.</p>
 <% end %>
 
+<!-- Categories -->
+<h3>Catégories:</h3>
+<% if @category.present? %>
+  <div class="categories-container">
+  <%= link_to @category.name, category_path(@category)%>
+  </div>
+<% else %>
+  <p>Cet atelier n'est associé à aucune catégorie.</p>
+<% end %>
+<br>
+<br>
+
 <!-- Inscription/Désinscription -->
 <% if @workshop.attendances.exists?(user: current_user) %>
   <% attendance = @workshop.attendances.find_by(user: current_user) %>
