@@ -3,7 +3,6 @@
     <tr>
       <th>ID commande</th>
       <th>Date</th>
-      <th>Status</th>
       <th>Montant</th>
       <th>Détails</th>
     </tr>
@@ -18,7 +17,6 @@
         <tr>
           <td><%= order.id %></td>
           <td><%= order.created_at.strftime('%d/%m/%Y %H:%M:%S') %></td>
-          <td><%= display_order_status(order) %></td>
           <td><%= display_order_amount(order) %></td>
           <td><%= link_to 'Details', order_path(order.id), class: 'btn btn-info' %></td>
         </tr>

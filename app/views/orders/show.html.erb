@@ -2,8 +2,6 @@
 <h1>Détails de la commande</h1>
 
 <p><strong>Numéro de commande :</strong> <%= @order.id %></p>
-<p><strong>Utilisateur associé :</strong> <%= @order.user.name %></p>
-<p><strong>Statut de la commande :</strong> <%= display_order_status(@order) %></p>
 <p><strong>Montant total :</strong> <%= display_order_amount(@order) %></p>
 <p><strong>Date de création :</strong> <%= @order.created_at %></p>
 
