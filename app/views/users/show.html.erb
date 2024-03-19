@@ -36,8 +36,10 @@
             <td><%= workshop.start_date %></td>
             <td>
               <%= link_to "Show", workshop, class: "btn btn-primary" %>
-              <%= link_to "Edit", edit_workshop_path(workshop), class: "btn btn-secondary" %>
-              <%= link_to "Destroy", workshop, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+              <% if user_signed_in? && current_user == @user %>
+                <%= link_to "Edit", edit_workshop_path(workshop), class: "btn btn-secondary" %>
+                <%= link_to "Destroy", workshop, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+              <% end %>
             </td>
           </tr>
         <% end %>
@@ -49,4 +51,3 @@
 
   <%= link_to "Retour à l'accueil", workshops_path, class: "btn btn-dark" %>
 </div>
-
