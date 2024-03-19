@@ -19,7 +19,7 @@
                                       <!--Start date-->
                                       <p>
                                         <strong>Start_date:</strong>
-                                        <%= workshop.start_date %>
+                                        <%= workshop.start_date.strftime("%d/%m/%Y %H:%M") %>
                                       </p>
                                       <!--Duration-->
                                       <p>
@@ -29,7 +29,7 @@
                                     <!-- Product price-->
                                       <p>
                                          <strong>Price:</strong>
-                                          <%= workshop.price %>
+                                          <%= workshop.price %> €
                                       </p>
 
                                       <% if workshop.tags.any? %>
