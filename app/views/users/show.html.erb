@@ -1,18 +1,52 @@
-<h1>User Details</h1>
-<p><strong>Firstname:</strong> <%= @user.firstname %></p>
-<p><strong>Lastname:</strong> <%= @user.lastname %></p>
-<p><strong>Email:</strong> <%= @user.email %></p>
+<div class="container">
+  <h1>User Details</h1>
+  <table class="table">
+    <tbody>
+      <tr>
+        <th scope="row">Firstname:</th>
+        <td><%= @user.firstname %></td>
+      </tr>
+      <tr>
+        <th scope="row">Lastname:</th>
+        <td><%= @user.lastname %></td>
+      </tr>
+      <tr>
+        <th scope="row">Email:</th>
+        <td><%= @user.email %></td>
+      </tr>
+    </tbody>
+  </table>
 
-<h2>Workshops Created by <%= @user.firstname %></h2>
-<% if @user.workshops.present? %>
-  <ul>
-    <% @user.workshops.each do |workshop| %>
-      <li><%= link_to workshop.name, workshop %></li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>Aucun atelier créé pour le moment.</p>
-<% end %>
+  <h2>Workshops Created by <%= @user.firstname %></h2>
+  <% if @user.created_workshops.present? %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Start Date</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @user.created_workshops.each do |workshop| %>
+          <tr>
+            <td><%= workshop.name %></td>
+            <td><%= workshop.description %></td>
+            <td><%= workshop.start_date %></td>
+            <td>
+              <%= link_to "Show", workshop, class: "btn btn-primary" %>
+              <%= link_to "Edit", edit_workshop_path(workshop), class: "btn btn-secondary" %>
+              <%= link_to "Destroy", workshop, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>Aucun atelier créé pour le moment.</p>
+  <% end %>
 
-<%= link_to "Retour à l'accueil", workshops_path, class: "btn btn-dark" %>
+  <%= link_to "Retour à l'accueil", workshops_path, class: "btn btn-dark" %>
+</div>
 
