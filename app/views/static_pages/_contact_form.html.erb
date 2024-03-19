@@ -1,0 +1,24 @@
+<div class="rbt-contact-form contact-form-style-1 max-width-auto">
+    <!-- Sous-titre dans une bulle -->
+    <div class="section-title text-start">
+        <span class="subtitle bg-primary-opacity">IT FOR EVERYONE</span>
+    </div>
+    <!-- Titre du formulaire --> 
+    <h3 class="title">Get a Free Course You Can Contact With Me</h3>
+
+    <!-- FORMULAIRE --> 
+    <%= form_with scope: :static_pages, url: contact_path, methode: "post" do |f| %>
+      <div class="form-group">
+        <%= f.text_field :name, required: true, class: 'form-control', placeholder: "Votre Nom", value: contact_values[:name] %>
+      </div>
+      <div class="form-group">
+        <%= f.email_field :email, required: true, class: 'form-control', placeholder: "Votre Email", value: contact_values[:email]%>
+      </div>
+      <div class="form-group">
+        <%= f.text_area :message, required: true, class: 'form-control', placeholder: "Écrivez votre message ici" %>
+      </div>
+      <div class="form-submit-group">
+        <%= f.submit value: "Envoyer", class: "rbt-btn btn-md btn-gradient hover-icon-reverse w-100" %>
+      </div>
+    <% end %>
+</div>

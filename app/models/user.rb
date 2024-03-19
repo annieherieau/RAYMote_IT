@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :workshops, through: :attendances
   has_many :likes, dependent: :destroy
   has_many :orders
+  has_many :created_workshops, class_name: 'Workshop'
   
 
   # validations
