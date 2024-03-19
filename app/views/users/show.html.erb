@@ -4,6 +4,7 @@
   
   <% if current_user == @user %>
      <%= render "users/workshops" %>
+     <%= render "users/reviews" %>
   <% end %>
   <%= link_to "Retour à l'accueil", workshops_path, class: "btn btn-dark" %>
 </div>
