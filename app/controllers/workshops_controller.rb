@@ -10,6 +10,7 @@ class WorkshopsController < ApplicationController
   def show
     @workshop = Workshop.find(params[:id])
     @attendances = @workshop.attendances || []
+    @category = @workshop.category
   end
 
   # GET /workshops/new
@@ -79,7 +80,7 @@ class WorkshopsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def workshop_params
-      params.require(:workshop).permit(:name, :description, :start_date, :duration, :price, :tags_names)
+      params.require(:workshop).permit(:name, :description, :start_date, :duration, :price, :tags_names, :category_id)
     end
 
 end
