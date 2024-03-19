@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :categories
   resources :tags
   resources :orders
 
@@ -10,6 +11,7 @@ Rails.application.routes.draw do
   end
 
   resources :tags, only: [:show]
+  resources :categories, only: [:show]
   
   resources :users, only: [:index, :show], path: 'profile'
 
