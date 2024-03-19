@@ -10,12 +10,12 @@
       </tr>
     </thead>
     <tbody>
-      <% if @orders.nil? %>
+      <% if orders.nil? %>
         <tr>
           <td colspan="4">Aucune commande trouvée.</td>
         </tr>
       <% else %>
-        <% @orders.each do |order| %>
+        <% orders.each do |order| %>
           <tr>
             <td><%= order.id %></td>
             <td><%= order.created_at.strftime('%d/%m/%Y %H:%M:%S') %></td>
