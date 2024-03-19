@@ -9,17 +9,13 @@ class StaticPagesController < ApplicationController
     
     # envoi du message à l'admin
     # admin_email = UserMailer.admin_contact_email(params[:static_pages]).deliver_now
-    
-    # TODO : a supprimer lorsque le branchement sera fait
-    admin_email = true
-    user_email= true
 
-    # flash
-    if user_email && admin_email
-      flash[:success] = "Votre message a bien été envoyé."
-    else
-      flash[:alert] = "Erreur lors de l'envoi. Veuillez recommencer."
-    end
-  redirect_to :contact
+    # redirection + messages
+    # if user_email && admin_email
+    #   redirect_to :contact, success: "Votre message a bien été envoyé." 
+    # else
+    #   redirect_to :contact, alert: "Erreur lors de l'envoi. Veuillez recommencer."
+    # end
+
   end
 end
