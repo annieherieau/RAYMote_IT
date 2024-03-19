@@ -14,7 +14,7 @@ class Order < ApplicationRecord
     UserMailer.order_to_user(self).deliver_now
 
     self.workshops.each do |workshop|
-      UserMailer.order_to_creator(workshop.creator, self).deliver_now
+      UserMailer.order_to_creator(workshop, self).deliver_now
     end
 
     # TODO: envoi email à Admin
