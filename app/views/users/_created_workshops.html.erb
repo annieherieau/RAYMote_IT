@@ -1,0 +1,31 @@
+ <h2>Workshops Created by <%= @user.firstname %></h2>
+  <% if @user.created_workshops.present? %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Start Date</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @user.created_workshops.each do |workshop| %>
+          <tr>
+            <td><%= workshop.name %></td>
+            <td><%= workshop.description %></td>
+            <td><%= workshop.start_date %></td>
+            <td>
+              <%= link_to "Show", workshop, class: "btn btn-primary" %>
+              <% if user_signed_in? && current_user == @user %>
+                <%= link_to "Edit", edit_workshop_path(workshop), class: "btn btn-secondary" %>
+                <%= link_to "Destroy", workshop, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% else %>
+      <p>Aucun atelier créé pour le moment.</p>
+    <% end %>

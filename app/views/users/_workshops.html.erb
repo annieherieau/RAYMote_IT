@@ -1,0 +1,27 @@
+ <h2>Vos Inscriptions aux Workshops</h2>
+  <% if @user.workshops.any? %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Start Date</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @user.workshops.each do |workshop| %>
+          <tr>
+            <td><%= workshop.name %></td>
+            <td><%= workshop.description %></td>
+            <td><%= workshop.start_date %></td>
+            <td>
+              <%= link_to "Show", workshop, class: "btn btn-primary" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% else %>
+      <p>Vous n'êtes inscrit(e) à aucun atelier pour le moment.</p>
+    <% end %>

@@ -1,0 +1,18 @@
+ <h1>User Details</h1>
+ 
+  <table class="table">
+    <tbody>
+      <tr>
+        <th scope="row">Firstname:</th>
+        <td><%= @user.firstname %></td>
+      </tr>
+      <tr>
+        <th scope="row">Lastname:</th>
+        <td><%= @user.lastname %></td>
+      </tr>
+      <tr>
+        <th scope="row">Email:</th>
+        <td><%= current_user == @user ? @user.email : "*"* 10 %></td>
+      </tr>
+    </tbody>
+  </table>
