@@ -124,13 +124,16 @@
   <% if user_signed_in? %>
   <% purchased_workshop = @workshop.attendances.exists?(user: current_user) %>
   <% already_reviewed = @workshop.reviews.exists?(user: current_user) %>
-
   <% if purchased_workshop && !already_reviewed %>
     <%= link_to "Noter cet atelier", new_workshop_review_path(@workshop), class: "btn btn-primary" %>
-  <% else %>
+  <% elsif current_user == @workshop.creator %>
+    <p> Vous ne pouvez pas commenter votre propre atelier </p>
+  <% elsif already_reviewed %>
     <p>Vous avez déjà noté cet atelier</p>
+  <% else %>
+    <p> Vous devez acheter l'atelier pour pouvoir le noter </p>
   <% end %>
-  <%end%>
+<% end %>
 
 
   <!-- affichage des reviews -->
