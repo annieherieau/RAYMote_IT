@@ -26,16 +26,19 @@
 </table>
 
 <!-- Participants à l'atelier -->
-<h3>Participants :</h3>
-<% if @attendances.exists? %>
-  <ul>
-    <% @attendances.each do |attendance| %>
-      <li><%= attendance.user.email %></li> <!-- Supposons que vous souhaitez afficher l'e-mail de l'utilisateur -->
-    <% end %>
-  </ul>
-<% else %>
-  <p>Aucun participant pour le moment.</p>
+<% if current_user == @workshop.creator %>
+  <h3>Participants :</h3>
+  <% if @attendances.exists? %>
+    <ul>
+      <% @attendances.each do |attendance| %>
+        <li><%= attendance.user.email %></li> <!-- Supposons que vous souhaitez afficher l'e-mail de l'utilisateur -->
+      <% end %>
+    </ul>
+  <% else %>
+    <p>Aucun participant pour le moment.</p>
+  <% end %>
 <% end %>
+
 
 <!-- Tags -->
 <h3>Tags:</h3>
@@ -62,12 +65,18 @@
 <br>
 
 <!-- Inscription/Désinscription -->
-<% if @workshop.attendances.exists?(user: current_user) %>
-  <% attendance = @workshop.attendances.find_by(user: current_user) %>
-  <%= button_to 'Se désinscrire', workshop_attendance_path(@workshop, attendance), method: :delete, class: "btn btn-warning" %>
+<% if user_signed_in? %>
+  <% if @workshop.attendances.exists?(user: current_user) %>
+    <% attendance = @workshop.attendances.find_by(user: current_user) %>
+    <p>Vous participez déjà à l'atelier.</p>
+    <%= button_to 'Se désinscrire', workshop_attendance_path(@workshop, attendance), method: :delete, class: "btn btn-warning" %>
+  <% else %>
+    <%= button_to "S'inscrire à l'Atelier", workshop_attendances_path(@workshop), method: :post, class: "btn btn-primary" %>
+  <% end %>
 <% else %>
-  <%= button_to "S'inscrire à l'Atelier", workshop_attendances_path(@workshop), method: :post, class: "btn btn-primary" %>
+  <%= link_to "S'inscrire à l'Atelier", new_user_session_path, class: "btn btn-primary" %>
 <% end %>
+
 
 <!-- Likes -->
 <div>

@@ -3,4 +3,16 @@
 <p><strong>Lastname:</strong> <%= @user.lastname %></p>
 <p><strong>Email:</strong> <%= @user.email %></p>
 
+<h2>Workshops Created by <%= @user.firstname %></h2>
+<% if @user.workshops.present? %>
+  <ul>
+    <% @user.workshops.each do |workshop| %>
+      <li><%= link_to workshop.name, workshop %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Aucun atelier créé pour le moment.</p>
+<% end %>
+
 <%= link_to "Retour à l'accueil", workshops_path, class: "btn btn-dark" %>
+
