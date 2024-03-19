@@ -1,10 +1,18 @@
-<p style="color: green"><%= notice %></p>
 
-<%= render @order %>
+<h1>Détails de la commande</h1>
 
-<div>
-  <%= link_to "Edit this order", edit_order_path(@order) %> |
-  <%= link_to "Back to orders", orders_path %>
+<p><strong>Numéro de commande :</strong> <%= @order.id %></p>
+<p><strong>Utilisateur associé :</strong> <%= @order.user.name %></p>
+<p><strong>Statut de la commande :</strong> <%= display_order_status(@order) %></p>
+<p><strong>Montant total :</strong> <%= display_order_amount(@order) %></p>
+<p><strong>Date de création :</strong> <%= @order.created_at %></p>
 
-  <%= button_to "Destroy this order", @order, method: :delete %>
-</div>
+<h2>Articles commandés :</h2>
+<ul>
+  <% @order.workshops.each do |workshop| %>
+    <li><%= workshop.name %> - <%= number_to_currency(workshop.price) %></li>
+  <% end %>
+</ul>
+
+
+<%= link_to 'Retour historique des commandes', orders_path, class: 'btn btn-secondary' %>
