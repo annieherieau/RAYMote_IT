@@ -18,20 +18,19 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.firstname %></a>
           <div class="dropdown-menu">
-            <%= link_to "Voir mon profil", user_path(current_user), class: "dropdown-item" %>
-            <%= link_to "Éditer mon profil", edit_user_registration_path, class: "dropdown-item" %>
-            <div class="dropdown-divider">- User -</div>
             <%= link_to "Mes commandes", orders_path, class: "dropdown-item" %>
             <%# TODO liens à changer %>
             <%= link_to "Mes Workshops (achetés) - todo", workshops_path, class: "dropdown-item" %>
             <%= link_to "Mes Reviews - todo", root_path, class: "dropdown-item" %>
             
             <% if current_user.creator %>
-              <div class="dropdown-divider">- Creator -</div>
+              <div class="dropdown-divider">---</div>
               <%= link_to "Créer Workshop", new_workshop_path, class: "dropdown-item"  %>
               <%= link_to "Mes Workshops (créés)  - todo", workshops_path, class: "dropdown-item"  %>
             <% end %>
-            
+            <div class="dropdown-divider">---</div>
+            <%= link_to "Voir mon profil", user_path(current_user), class: "dropdown-item" %>
+            <%= link_to "Éditer mon profil", edit_user_registration_path, class: "dropdown-item" %>
             <%= button_to "Se déconnecter", destroy_user_session_path, method: :delete, data: {turbo_method: :delete}, class: "dropdown-item"%>
           </div>
         </li>
