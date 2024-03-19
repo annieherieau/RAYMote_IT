@@ -7,20 +7,28 @@ Tag.destroy_all
 Category.destroy_all
 User.destroy_all
 
+# reset ID 
+ActiveRecord::Base.connection.tables.each do |t|
+    ActiveRecord::Base.connection.reset_pk_sequence!(t)
+  end 
+
 # Création des utilisateurs avec Faker
-10.times do
-    firstname = Faker::Name.first_name
-    lastname = Faker::Name.last_name
-    email = "#{firstname.downcase}.#{lastname.downcase}@gmail.com"
-  
-    User.create!(
-      firstname: firstname,
-      lastname: lastname,
-      email: email,
-      password: "password",
-      creator: [true, false].sample
-    )
-  end
+emails_with_names = {
+  'annie.herieau@gmail.com' => ['Annie', 'Herieau'],
+  'r.robena@gmail.com' => ['R', 'Robena'],
+  'malo.bastianelli@gmail.com' => ['Malo', 'Bastianelli'],
+  'yann.rezigui@gmail.com' => ['Yann', 'Rezigui']
+}
+
+emails_with_names.each do |email, names|
+  user = User.create!(
+    email: email,
+    firstname: names[0],
+    lastname: names[1],
+    password: "1&Azert",
+    creator: [true, false].sample
+  )
+end
 
 # Création des catégories
 categories = ["JavaScript", "Python", "Ruby", "Java", "C++", "C#", "Swift", "Go", "PHP", "TypeScript"]
@@ -29,7 +37,7 @@ categories.each do |name|
 end
 
 # Création des ateliers avec Faker
-20.times do
+10.times do
   Workshop.create!(
     name: Faker::Lorem.words(number: 3).join(' ')[0, 15], # Générer un nom de 3 mots et limiter à 15 caractères
     description: Faker::Lorem.paragraph(sentence_count: 2),
