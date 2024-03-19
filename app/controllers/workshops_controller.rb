@@ -25,7 +25,9 @@ class WorkshopsController < ApplicationController
 
   # GET /workshops/1/edit
   def edit
+    @workshop = Workshop.find(params[:id])
     @categories = Category.all
+    @tags = Tag.all
   end
 
   # POST /workshops or /workshops.json
@@ -90,7 +92,8 @@ class WorkshopsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def workshop_params
-      params.require(:workshop).permit(:name, :description, :start_date, :duration, :price, :tags_names, :category_id)
+      params.require(:workshop).permit(:name, :description, :start_date, :duration, :price, :category_id, tag_ids: [])
     end
-
+    
+    
 end
