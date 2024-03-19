@@ -1,13 +1,10 @@
 Rails.application.routes.draw do
-<<<<<<< HEAD
   
   # Page Contact
   get 'contact', to: 'static_pages#contact'
   post 'contact',  to: 'static_pages#send_contact'
   
-=======
   resources :categories
->>>>>>> dev
   resources :tags
   resources :orders
 
