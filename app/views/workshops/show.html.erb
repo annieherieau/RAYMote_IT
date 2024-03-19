@@ -114,3 +114,15 @@
     <%= link_to "Back to workshops", workshops_path, class: "btn btn-secondary mr-2" %>
   </div>
 </div>
+
+
+
+  <!-- Bouton review -->
+  <div class="text-center mt-4">
+    <% if @workshop.attendances.any? %>
+    <% link_to "Laisser un avis", new_review_path(@workshop), class: "btn btn-primary" %>
+    <% end %>
+  </div>
+
+
+    
