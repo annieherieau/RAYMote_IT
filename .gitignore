@@ -33,5 +33,5 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-config/credentials.yml copy.enc
+config/credentials.yml_copy.enc
 
