@@ -1,12 +1,13 @@
 class WorkshopsController < ApplicationController
-  before_action :authenticate_admin!
   before_action :authenticate_user!, only: %i[ new create edit update destroy ]
   before_action :set_workshop, only: %i[ show edit update destroy ]
   before_action :authorize_creator!, only: %i[ edit update destroy ]
   
   # GET /workshops or /workshops.json
   def index
-    @workshops = Workshop.all
+    @workshops = Workshop.where(validated: true).to_a.select do |workshop|
+      workshop.status == 'en cours' || workshop.status == 'à venir'
+    end
   end
 
   # GET /workshops/1 or /workshops/1.json

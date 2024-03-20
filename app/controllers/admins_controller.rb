@@ -15,4 +15,11 @@ class AdminsController < ApplicationController
     flash[:notice] = "L'utilisateur a été supprimé avec succès."
     redirect_to admin_dashboard_path
   end
+
+  def validate
+    workshop = Workshop.find(params[:id])
+    workshop.update(validated: true)
+    redirect_to workshop, notice: 'Workshop a été validé.'
+  end
+  
 end

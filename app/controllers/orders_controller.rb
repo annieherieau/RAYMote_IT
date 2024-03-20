@@ -1,5 +1,4 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_admin!
   before_action :authenticate_user!
   before_action :set_order, only: %i[ show edit update destroy ]
 
