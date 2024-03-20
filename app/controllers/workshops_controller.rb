@@ -2,7 +2,7 @@ class WorkshopsController < ApplicationController
   before_action :authenticate_user!, only: %i[ new create edit update destroy ]
   before_action :set_workshop, only: %i[ show edit update destroy ]
   before_action :authorize_creator!, only: %i[ edit update destroy ]
-  before_action  :authenticate_admin!, only: [:validate]
+  before_action  :check_admin, only: [:validate]
   
   # GET /workshops or /workshops.json
   def index
@@ -107,9 +107,4 @@ class WorkshopsController < ApplicationController
       params.require(:workshop).permit(:name, :description, :start_date, :duration, :price, :category_id, tag_ids: [])
     end
 
-    def admin_only
-      redirect_back(fallback_location: root_path, alert: "Vous n'êtes pas autorisé à effectuer cette action.") unless current_user.admin?
-    end
-    
-    
 end
