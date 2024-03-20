@@ -1,4 +1,5 @@
 class WorkshopsController < ApplicationController
+  before_action :authenticate_admin!
   before_action :authenticate_user!, only: %i[ new create edit update destroy ]
   before_action :set_workshop, only: %i[ show edit update destroy ]
   before_action :authorize_creator!, only: %i[ edit update destroy ]

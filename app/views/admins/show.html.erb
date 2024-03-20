@@ -1,0 +1,120 @@
+<div class="container">
+  <h1>Tableau de bord administrateur</h1>
+  
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button" role="tab" aria-controls="users" aria-selected="true">Utilisateurs</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="workshops-tab" data-bs-toggle="tab" data-bs-target="#workshops" type="button" role="tab" aria-controls="workshops" aria-selected="false">Ateliers</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pending-workshops-tab" data-bs-toggle="tab" data-bs-target="#pending-workshops" type="button" role="tab" aria-controls="pending-workshops" aria-selected="false">Ateliers en attente de validation</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="tags-tab" data-bs-toggle="tab" data-bs-target="#tags" type="button" role="tab" aria-controls="tags" aria-selected="false">Tags</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="categories-tab" data-bs-toggle="tab" data-bs-target="#categories" type="button" role="tab" aria-controls="categories" aria-selected="false">Catégories</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab" aria-controls="reviews" aria-selected="false">Avis</button>
+    </li>
+
+  </ul>
+  
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="users" role="tabpanel" aria-labelledby="users-tab">
+      <h2>Utilisateurs</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Rôle</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= user.firstname %> <%= user.lastname %></td>
+              <td><%= user.email %></td>
+              <td><%= user.creator? ? 'Créateur' : 'Utilisateur' %></td>
+              <td>
+                <% if !user.creator? %>
+                  <%= link_to "Supprimer", user_path(user), method: :delete, data: { confirm: "Êtes-vous sûr de vouloir supprimer cet utilisateur ?" }, class: "btn btn-danger btn-sm" %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="tab-pane fade" id="workshops" role="tabpanel" aria-labelledby="workshops-tab">
+      <h2>Ateliers</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Titre</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Créateur</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @workshops.each do |workshop| %>
+            <tr>
+              <td><%= workshop.name %></td>
+              <td><%= workshop.description %></td>
+              <td><%= workshop.start_date.strftime("%d/%m/%Y %H:%M") %></td>
+              <td><%= workshop.creator.firstname %> <%= workshop.creator.lastname %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="tab-pane fade" id="pending-workshops" role="tabpanel" aria-labelledby="pending-workshops-tab">
+      <h2>Ateliers en attente de validation</h2>
+      <!-- Contenu pour les ateliers en attente de validation -->
+    </div>
+    <div class="tab-pane fade" id="tags" role="tabpanel" aria-labelledby="tags-tab">
+      <h2>Tags</h2>
+      <ul>
+        <% @tags.each do |tag| %>
+          <li><%= tag.name %></li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="tab-pane fade" id="categories" role="tabpanel" aria-labelledby="categories-tab">
+      <h2>Catégories</h2>
+      <ul>
+        <% @categories.each do |category| %>
+          <li><%= category.name %></li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+      <h2>Avis</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Utilisateur</th>
+            <th>Atelier</th>
+            <th>Contenu</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @reviews.each do |review| %>
+            <tr>
+              <td><%= review.user.firstname %> <%= review.user.lastname %></td>
+              <td><%= review.workshop.name %></td>
+              <td><%= review.content %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
