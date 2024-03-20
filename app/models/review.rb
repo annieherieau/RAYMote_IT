@@ -1,4 +1,4 @@
 class Review < ApplicationRecord
-belongs_to :user
-belongs_to :workshop  
+  belongs_to :user
+  belongs_to :workshop  
 end
