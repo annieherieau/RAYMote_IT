@@ -9,7 +9,7 @@ class Workshop < ApplicationRecord
   has_many :users, through: :attendances
   has_many :likes, dependent: :destroy
   has_and_belongs_to_many :tags
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
 
   # validations
   validates :name, presence: true, length: { in: 3..15 }
@@ -18,6 +18,17 @@ class Workshop < ApplicationRecord
 
 def tags_destroy
   self.tags.clear
+end
+
+def status
+end_date = start_date + duration.minutes
+  if start_date > Time.current
+    'à venir'
+  elsif end_date < Time.current
+    'passé'
+  else
+    'en cours'
+  end
 end
 
   private

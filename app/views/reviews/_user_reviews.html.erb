@@ -1,7 +1,7 @@
- <h2>Vos Avis</h2>
-  <% if user.reviews.any? %>
-    <table class="table">
-      <thead>
+ <% if user.reviews.any? %>
+  <div class="rbt-my-account-table table-responsive text-center">
+    <table class="table table-bordered">
+      <thead class="thead-light">
         <tr>
           <th scope="col">Workshops</th>
           <th scope="col">Avis</th>
@@ -13,23 +13,20 @@
         <% user.reviews.each do |review| %>
           <tr>
             <td><%= review.workshop.name %></td>
-            <td><%= review.content[0...50]%><%= review.content.length > 50 ? "..." : "" %></td>
+            <td><%= review.content[0...30] + "..." %><%= review.content.length > 50 ? "..." : "" %></td>
             <td><%= review.rating %></td>
             <td>
-              
-              <% if review.content.length > 50 %>
-                <%= link_to "Lire", review, class: "btn btn-primary" %>
-              <% end %>
-              
+              <%= link_to "Voir", review, class: "rbt-btn btn-sm" %>
               <% if user_signed_in? && current_user == user %>
-                <%= link_to "Edit", edit_review_path(review), class: "btn btn-secondary" %>
-                <%= button_to "Destroy", review, method: :delete, class: "btn btn-danger" %>
+                <%= link_to "Modifier", edit_review_path(review), class: "rbt-btn btn-sm btn-secondary" %>
+                <%= button_to "Supprimer", review, method: :delete, class: "rbt-btn btn-sm btn-violet mt-2" %>
               <% end %>
             </td>
           </tr>
         <% end %>
       </tbody>
     </table>
-    <% else %>
-      <p>Vous n'avez donné aucun avis pour le moment.</p>
-    <% end %>
+  </div>
+<% else %>
+  <p>Vous n'avez donné aucun avis pour le moment.</p>
+<% end %>

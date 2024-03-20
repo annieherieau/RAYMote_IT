@@ -1,17 +1,16 @@
- <h1>User Details</h1>
- 
-  <table class="table">
+<%# TODO Ajouter une photo de profil %>
+<table>
     <tbody>
       <tr>
-        <th scope="row">Firstname:</th>
+        <td class="w-25"><strong>Prénom :</strong></td>
         <td><%= @user.firstname %></td>
       </tr>
       <tr>
-        <th scope="row">Lastname:</th>
+        <td class="w-25"><strong>Nom :</strong></td>
         <td><%= @user.lastname %></td>
       </tr>
       <tr>
-        <th scope="row">Email:</th>
+        <td class="w-25"><strong>Email :</strong></td>
         <td><%= current_user == @user ? @user.email : "*"* 10 %></td>
       </tr>
     </tbody>

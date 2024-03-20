@@ -14,6 +14,7 @@ class WorkshopsController < ApplicationController
     @workshop = Workshop.find(params[:id])
     @attendances = @workshop.attendances || []
     @category = @workshop.category
+    @status = @workshop.status
   end
 
   # GET /workshops/new
@@ -37,6 +38,7 @@ class WorkshopsController < ApplicationController
     workshop_params_mod[:start_date] = Date.strptime(workshop_params[:start_date], '%Y-%m-%d') rescue nil
     @workshop = Workshop.new(workshop_params_mod)
     @workshop.creator = current_user
+    @tags = Tag.all
     @categories = Category.all
   
     respond_to do |format|
@@ -54,6 +56,7 @@ class WorkshopsController < ApplicationController
 
   # PATCH/PUT /workshops/1 or /workshops/1.json
   def update
+    @tags = Tag.all
     @workshop.tags_destroy
     respond_to do |format|
       if @workshop.update(workshop_params)
