@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+ 
   resources :reviews
   
   # Page Contact
@@ -9,21 +10,21 @@ Rails.application.routes.draw do
   resources :tags
   resources :orders
   
+  devise_for :admins
 
   devise_for :users
 
   resources :workshops do
     resource :like, only: [:create, :destroy], controller: 'likes'
-    resources :attendances, only: [:create, :destroy]  # Ajouter cette ligne
+    resources :attendances, only: [:create, :destroy]
     resources :reviews, only: [:new, :create]
   end
 
   resources :tags, only: [:show]
   resources :categories, only: [:show]
   
-  resources :users, only: [:index, :show], path: 'profile'
-
-  #resource :profile, controller: 'users', only: [:show], path: 'profile'
+  resources :users, only: [:index, :show, :destroy], path: 'profile'
+  resources :admins, only: [:show]
 
   # Stripe
   scope '/checkout' do
@@ -32,8 +33,6 @@ Rails.application.routes.draw do
     get 'cancel', to: 'checkout#cancel', as: 'checkout_cancel'
   end
   
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check

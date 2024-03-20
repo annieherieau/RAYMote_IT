@@ -1,11 +1,39 @@
 <div class="container">
-  <%= render "users/user_details" %>
-  <%= render partial: "workshops/user_created_workshops", locals: {user: @user} %>
+  <div class="row">
+    <div class="col-md-4">
+      <%= render "users/user_details" %>
+    </div>
+    <div class="col-md-8">
+      <%= render partial: "workshops/user_created_workshops", locals: {user: @user} %>
+    </div>
+  </div>
   
   <% if current_user == @user %>
-     <%= render partial: "workshops/user_workshops", locals: {workshops: @user.workshops} %>
-     <%= render partial: "reviews/user_reviews", locals: {user: @user} %>
-     <%= render partial: "orders/user_orders", locals: {orders: @user.orders} %>
+    <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="user-workshops-tab" data-bs-toggle="tab" data-bs-target="#user-workshops" type="button" role="tab" aria-controls="user-workshops" aria-selected="true">Ateliers achetés</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="user-reviews-tab" data-bs-toggle="tab" data-bs-target="#user-reviews" type="button" role="tab" aria-controls="user-reviews" aria-selected="false">Avis</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="user-orders-tab" data-bs-toggle="tab" data-bs-target="#user-orders" type="button" role="tab" aria-controls="user-orders" aria-selected="false">Commandes</button>
+      </li>
+    </ul>
+  
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="user-workshops" role="tabpanel" aria-labelledby="user-workshops-tab">
+        <%= render partial: "workshops/user_workshops", locals: {workshops: @user.workshops} %>
+      </div>
+      <div class="tab-pane fade" id="user-reviews" role="tabpanel" aria-labelledby="user-reviews-tab">
+        <%= render partial: "reviews/user_reviews", locals: {user: @user} %>
+      </div>
+      <div class="tab-pane fade" id="user-orders" role="tabpanel" aria-labelledby="user-orders-tab">
+        <%= render partial: "orders/user_orders", locals: {orders: @user.orders} %>
+      </div>
+    </div>
   <% end %>
-  <%= link_to "Retour à l'accueil", workshops_path, class: "btn btn-dark" %>
+  <div class="mt-4">
+    <%= link_to "Retour à l'accueil", workshops_path, class: "btn btn-dark" %>
+  </div>
 </div>
