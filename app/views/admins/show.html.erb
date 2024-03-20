@@ -82,7 +82,7 @@
               <h5 class="card-title"><%= workshop.name %></h5>
               <p class="card-text"><%= workshop.description %></p>
               <a href="<%= workshop_path(workshop) %>" class="btn btn-primary">Voir</a>
-              <%= button_to 'Valider', validate_admin_workshop_path(workshop), method: :patch, data: { confirm: 'Êtes-vous sûr de vouloir valider cet atelier ?' }, class: 'btn btn-primary' %>
+              <%= button_to 'Valider cet atelier', validate_workshop_path(workshop), method: :patch, data: { confirm: 'Êtes-vous sûr ?' }, class: 'btn btn-primary' %>
             </div>
           </div>
         <% end %>

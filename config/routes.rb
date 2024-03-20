@@ -18,6 +18,9 @@ Rails.application.routes.draw do
     resource :like, only: [:create, :destroy], controller: 'likes'
     resources :attendances, only: [:create, :destroy]
     resources :reviews, only: [:new, :create]
+    member do
+      patch :validate
+    end
   end
 
   resources :tags, only: [:show]
@@ -25,14 +28,6 @@ Rails.application.routes.draw do
   
   resources :users, only: [:index, :show, :destroy], path: 'profile'
   resources :admins, only: [:show]
-
-  namespace :admin do
-    resources :workshops, only: [] do
-      member do
-        patch :validate
-      end
-    end
-  end
 
   # Stripe
   scope '/checkout' do
