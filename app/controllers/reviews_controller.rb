@@ -2,6 +2,7 @@ class ReviewsController < ApplicationController
   before_action :set_review, only: %i[ show edit update destroy ]
   before_action :set_workshop, only: [:new, :create]
   before_action :authenticate_user!
+  before_action :check_user, only: [:edit, :update, :destroy]
 
 
 
@@ -80,6 +81,12 @@ class ReviewsController < ApplicationController
 
     def set_workshop
       @workshop = Workshop.find(params[:workshop_id])
+    end
+
+    def check_user
+      if current_user != @review.user
+        redirect_to root_url, alert: "Désolé, vous n'êtes pas autorisé à effectuer cette action"
+      end
     end
 
 end
