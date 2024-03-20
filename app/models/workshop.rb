@@ -20,6 +20,17 @@ def tags_destroy
   self.tags.clear
 end
 
+def status
+end_date = start_date + duration.minutes
+  if start_date > Time.current
+    'à venir'
+  elsif end_date < Time.current
+    'passé'
+  else
+    'en cours'
+  end
+end
+
   private
 
   def assign_tags
