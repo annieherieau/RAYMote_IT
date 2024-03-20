@@ -1,12 +1,14 @@
 class WorkshopsController < ApplicationController
-  before_action :authenticate_admin!
   before_action :authenticate_user!, only: %i[ new create edit update destroy ]
   before_action :set_workshop, only: %i[ show edit update destroy ]
   before_action :authorize_creator!, only: %i[ edit update destroy ]
+  before_action  :authenticate_admin!, only: [:validate]
   
   # GET /workshops or /workshops.json
   def index
-    @workshops = Workshop.all
+    @workshops = Workshop.where(validated: true).to_a.select do |workshop|
+      workshop.status == 'en cours' || workshop.status == 'à venir'
+    end
   end
 
   # GET /workshops/1 or /workshops/1.json
@@ -30,6 +32,12 @@ class WorkshopsController < ApplicationController
     @workshop = Workshop.find(params[:id])
     @categories = Category.all
     @tags = Tag.all
+  end
+
+  def validate
+    workshop = Workshop.find(params[:id])
+    workshop.update(validated: true)
+    redirect_back(fallback_location: root_path, notice: 'Workshop validé avec succès.')
   end
 
   # POST /workshops or /workshops.json
@@ -97,6 +105,10 @@ class WorkshopsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def workshop_params
       params.require(:workshop).permit(:name, :description, :start_date, :duration, :price, :category_id, tag_ids: [])
+    end
+
+    def admin_only
+      redirect_back(fallback_location: root_path, alert: "Vous n'êtes pas autorisé à effectuer cette action.") unless current_user.admin?
     end
     
     
