@@ -149,6 +149,10 @@
                 <td><%= review.user.firstname %> <%= review.user.lastname %></td>
                 <td><%= review.rating %></td>
                 <td><%= review.content %></td>
+                <% if current_user == review.user %>
+                  <td><%= link_to "Modifier", edit_review_path(review) %></td>
+                  <td><%= button_to "Supprimer", review, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <% end %>
               </tr>
             <% end %>
           <% else %>

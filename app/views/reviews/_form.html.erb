@@ -17,9 +17,9 @@
   </div>
 
   <div>
-    <%= form.label :rating, style: "display: block" %>
-    <%= form.number_field :rating %>
-  </div>
+  <%= form.label :rating, style: "display: block" %>
+  <%= form.number_field :rating, min: 1, max: 5 %>
+</div>
 
   <div>
     <%= form.submit %>
