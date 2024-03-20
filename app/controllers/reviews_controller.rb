@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+  before_action :authenticate_admin!
   before_action :set_review, only: %i[ show edit update destroy ]
   before_action :set_workshop, only: [:new, :create]
   before_action :authenticate_user!

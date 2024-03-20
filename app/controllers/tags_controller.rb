@@ -1,4 +1,5 @@
 class TagsController < ApplicationController
+  before_action :authenticate_admin!
   before_action :set_tag, only: %i[ show edit update destroy ]
 
   # GET /tags or /tags.json

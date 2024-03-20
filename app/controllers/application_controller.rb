@@ -6,10 +6,5 @@ class ApplicationController < ActionController::Base
       devise_parameter_sanitizer.permit(:account_update, keys: [:firstname, :lastname])
     end
 
-    protected
-
-    def admin?
-      user_signed_in? && current_user.admin
-    end
   end
   
