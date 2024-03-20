@@ -76,7 +76,16 @@
     </div>
     <div class="tab-pane fade" id="pending-workshops" role="tabpanel" aria-labelledby="pending-workshops-tab">
       <h2>Ateliers en attente de validation</h2>
-      <!-- Contenu pour les ateliers en attente de validation -->
+      <% @workshops.each do |workshop| %>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><%= workshop.name %></h5>
+              <p class="card-text"><%= workshop.description %></p>
+              <a href="<%= workshop_path(workshop) %>" class="btn btn-primary">Voir</a>
+              <%= button_to 'Valider cet atelier', validate_workshop_path(workshop), method: :patch, data: { confirm: 'Êtes-vous sûr ?' }, class: 'btn btn-primary' %>
+            </div>
+          </div>
+        <% end %>
     </div>
     <div class="tab-pane fade" id="tags" role="tabpanel" aria-labelledby="tags-tab">
       <h2>Tags</h2>

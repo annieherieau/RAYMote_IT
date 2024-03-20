@@ -15,4 +15,5 @@ class AdminsController < ApplicationController
     flash[:notice] = "L'utilisateur a été supprimé avec succès."
     redirect_to admin_dashboard_path
   end
+
 end
