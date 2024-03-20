@@ -54,7 +54,7 @@
                       <div class="tab-pane fade" id="workshops" role="tabpanel">
                           <div class="rbt-my-account-inner">
                               <h3>Workshops (inscriptions)</h3>
-                              <%= render partial: "orders/user_orders", locals: {orders: @user.orders} %>
+                             <%= render partial: "workshops/user_workshops", locals: {workshops: @user.workshops} %>
                           </div>
                       </div>
                       <!-- fin WORSHOPS inscriptions -->
@@ -72,7 +72,7 @@
                       <div class="tab-pane fade" id="reviews" role="tabpanel">
                           <div class="rbt-my-account-inner">
                               <h3>Avis</h3>
-                              <%= render partial: "orders/user_orders", locals: {orders: @user.orders} %>
+                              <%= render partial: "reviews/user_reviews", locals: {user: @user} %>
                           </div>
                       </div>
                       <!-- fin AVIS -->
