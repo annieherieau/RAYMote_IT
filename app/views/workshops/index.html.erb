@@ -14,7 +14,9 @@
   <% @workshops.reverse.each_slice(3) do |workshop_row| %>
     <div class="row mb-4 justify-content-around">
       <% workshop_row.each do |workshop| %>
+        <% if workshop.status != "passé" %>
           <%= render workshop %>
+          <% end %>
       <% end %>
     </div>
   <% end %>
