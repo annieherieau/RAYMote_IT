@@ -6,5 +6,12 @@ class ApplicationController < ActionController::Base
       devise_parameter_sanitizer.permit(:account_update, keys: [:firstname, :lastname])
     end
 
+    def check_admin
+      unless current_admin
+        flash[:alert] = "Vous n'avez pas les droits d'accès nécessaires."
+        redirect_back(fallback_location: root_path)
+      end
+    end
+
   end
   
