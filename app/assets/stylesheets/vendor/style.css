@@ -13926,8 +13926,8 @@ fieldset:disabled {
 .rbt-btn.btn-sm {
   padding: 0 22px;
   font-size: var(--font-size-b3);
-  height: 45px;
-  line-height: 43px;
+  height: 35px;
+  line-height: 35px;
 }
 @media only screen and (max-width: 767px) {
   .rbt-btn.btn-sm {

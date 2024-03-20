@@ -9,8 +9,13 @@
                 <div class="rbt-my-account-tab-button nav" role="tablist">
                     
                     <a href="#profil" class="active" data-bs-toggle="tab">Profil</a>
-                    <a href="#created_workshops" data-bs-toggle="tab">Workshops Créés</a>
                     
+                    <% if @user.creator %>
+                        <a href="#created_workshops" data-bs-toggle="tab">Workshops Créés</a>
+                    <% elsif current_user == @user %>
+                         <a href="#become_creator" data-bs-toggle="tab">Devenir Créateur</a>
+                    <% end %>
+           
                     <% if current_user == @user %>
                       <a href="#workshops" data-bs-toggle="tab">Workshops (inscriptions)</a>
                       <a href="#reviews" data-bs-toggle="tab">Avis</a>
@@ -40,15 +45,26 @@
                     </div>
                     <!--  fin PROFIL -->
 
-                    <!-- CREATED WORKSHOPS -->
-                    <div class="tab-pane fade" id="created_workshops" role="tabpanel">
-                        <div class="rbt-my-account-inner">
-                            <h3>Workshops Créés</h3>
-                            <%= render partial: "workshops/user_created_workshops", locals: {user: @user} %>
+                    <% if @user.creator %>
+                        <!-- CREATED WORKSHOPS -->
+                        <div class="tab-pane fade" id="created_workshops" role="tabpanel">
+                            <div class="rbt-my-account-inner">
+                                <h3>Workshops Créés</h3>
+                                <%= render partial: "workshops/user_created_workshops", locals: {user: @user} %>
+                            </div>
                         </div>
-                    </div>
-                    <!--  fin CREATED WORKSHOPS  -->
-
+                        <!--  fin CREATED WORKSHOPS  -->
+                    <% elsif current_user == @user %>
+                        <!-- BECOME CREATOR -->
+                        <div class="tab-pane fade" id="become_creator" role="tabpanel">
+                            <div class="rbt-my-account-inner">
+                                <h3>Devenir Créateur</h3>
+                                <%= render partial: "users/become_creator", locals: {user: @user} %>
+                            </div>
+                        </div>
+                        <!--  fin BECOME CREATOR  -->
+                    <% end %>
+                    
                     <% if current_user == @user %>
                       <!-- WORSHOPS inscriptions -->
                       <div class="tab-pane fade" id="workshops" role="tabpanel">

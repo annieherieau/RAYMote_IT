@@ -1,26 +1,26 @@
-<table class="table">
-    <thead>
-      <tr>
-        <th>ID commande</th>
-        <th>Date</th>
-        <th>Montant</th>
-        <th>Détails</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% if orders.nil? %>
+<% if orders.any? %>
+  <div class="rbt-my-account-table table-responsive text-center">
+    <table class="table table-bordered">
+      <thead class="thead-light">
         <tr>
-          <td colspan="4">Aucune commande trouvée.</td>
+          <th>No</th>
+          <th>Date</th>
+          <th>Montant</th>
+          <th>Détails</th>
         </tr>
-      <% else %>
+      </thead>
+      <tbody>
         <% orders.each do |order| %>
           <tr>
             <td><%= order.id %></td>
             <td><%= order.created_at.strftime('%d/%m/%Y %H:%M:%S') %></td>
-            <td><%= display_order_amount(order) %></td>
-            <td><%= link_to 'Details', order_path(order.id), class: 'btn btn-info' %></td>
+            <td><%= number_to_euros(order.amount) %></td>
+            <td><%= link_to 'Voir', order_path(order.id), class: "rbt-btn btn-sm" %></td>
           </tr>
         <% end %>
-      <% end %>
-    </tbody>
-  </table>
+      </tbody>
+    </table>
+  </div>
+  <% else %>
+    <p>Aucune commande effectuée.</p>
+  <% end %>
