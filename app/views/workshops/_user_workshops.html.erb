@@ -1,7 +1,7 @@
- <h2>Vos Inscriptions aux Workshops</h2>
-  <% if workshops.any? %>
-    <table class="table">
-      <thead>
+<% if workshops.any? %>
+  <div class="rbt-my-account-table table-responsive text-center">
+    <table class="table table-bordered">
+      <thead class="thead-light">
         <tr>
           <th scope="col">Name</th>
           <th scope="col">Description</th>
@@ -14,14 +14,16 @@
           <tr>
             <td><%= workshop.name %></td>
             <td><%= workshop.description %></td>
+            <%# TODO: formater la date %>
             <td><%= workshop.start_date %></td>
             <td>
-              <%= link_to "Show", workshop, class: "btn btn-primary" %>
+              <%= link_to "Voir", workshop, class: "rbt-btn btn-sm" %>
             </td>
           </tr>
         <% end %>
       </tbody>
     </table>
-    <% else %>
-      <p>Vous n'êtes inscrit(e) à aucun atelier pour le moment.</p>
-    <% end %>
+  </div>
+<% else %>
+  <p>Aucune inscription pour le moment.</p>
+<% end %>

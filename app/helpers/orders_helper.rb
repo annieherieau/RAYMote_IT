@@ -1,9 +1,8 @@
 module OrdersHelper
 
-
   # Méthode affichage montant total d'une commande
   def display_order_amount(order)
-    number_to_currency(order.amount)
+    number_to_euros(order.amount)
   end
 
   # Méthode affichage détails d'une commande dans une liste
