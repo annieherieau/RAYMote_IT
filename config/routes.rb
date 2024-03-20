@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'workshops/:id/validate', to: 'workshops#index'
   resources :tags, only: [:show]
   resources :categories, only: [:show]
   

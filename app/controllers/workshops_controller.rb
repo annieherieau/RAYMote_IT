@@ -107,9 +107,4 @@ class WorkshopsController < ApplicationController
       params.require(:workshop).permit(:name, :description, :start_date, :duration, :price, :category_id, tag_ids: [])
     end
 
-    def admin_only
-      redirect_back(fallback_location: root_path, alert: "Vous n'êtes pas autorisé à effectuer cette action.") unless current_user.admin?
-    end
-    
-    
 end
