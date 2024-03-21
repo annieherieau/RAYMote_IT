@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   resources :categories, only: [:show]
   
   get 'users/:id/validate', to: 'workshops#index'
-  resources :users, only: [:index, :show, :destroy], path: 'profile' do
+  resources :users, except: [:new, :create], path: 'profile' do
     member do
       patch :validate
     end
