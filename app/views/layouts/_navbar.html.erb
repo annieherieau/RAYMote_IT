@@ -1,49 +1,65 @@
 
 
+<header class="rbt-header rbt-header-1">
+    <div class="rbt-sticky-placeholder"></div>
+    <div class="rbt-header-wrapper header-space-betwween header-sticky">
+        <div class="container-fluid">
+            <div class="mainbar-row rbt-navigation-center align-items-center">
+                <div class="header-left rbt-header-content">
+                    <div class="header-info">
+                        <div class="logo">
 
-<nav class="navbar navbar-expand-lg bg-light" >
-  <div class="container-fluid my-2">
-                             <%= link_to(root_path) do %>
-                            <%= image_tag("RAYM_logo.png", alt: "RAYM_logo_white", style: "height: 40px; width: 200px; display: block; margin: 0 auto;") %>
-                        <% end %>
-    
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarColor01">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <%= link_to 'Workshops', root_path, class: "nav-link"%>
-        </li>
-        <li class="nav-item">
-          <%= link_to 'Contact', contact_path, class: "nav-link"%>
-        </li>
-       <% if user_signed_in? %>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.firstname %></a>
-          <div class="dropdown-menu">
-             
-            <% if current_user.creator %>
-              <%= link_to "Créer Workshop", new_workshop_path, class: "dropdown-item"  %>
-              <div class="dropdown-divider">---</div>
-            <% end %>
-            
-            <%= link_to "Voir mon profil", user_path(current_user), class: "dropdown-item" %>
-            <%= link_to "Éditer mon profil", edit_user_registration_path, class: "dropdown-item" %>
-            <%= button_to "Se déconnecter", destroy_user_session_path, method: :delete, data: {turbo_method: :delete}, class: "dropdown-item"%>
-          </div>
-        </li>
-        <% else %>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">UTILISATEUR</a>
-          <div class="dropdown-menu">
-            <%= link_to "Se connecter", new_user_session_path, class: "dropdown-item" %>
-            <%= link_to "S'inscrire", new_user_registration_path, class: "dropdown-item" %>
-          </div>
-        </li>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid my-2">
+        <%= link_to(root_path) do %>
+        <%= image_tag("RAYM_logo.png", alt: "RAYM_logo_white", style: "height: 30px; display: block; margin: 0 auto;") %>
         <% end %>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
+      </div>  
+                            
+    
+    
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <%= link_to 'Workshops', root_path, class: "nav-link"%>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Contact', contact_path, class: "nav-link"%>
+            </li>
+              <% if user_signed_in? %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.firstname %></a>
+              <div class="dropdown-menu">
+                <% if current_user.creator %>
+                  <%= link_to "Créer Workshop", new_workshop_path, class: "dropdown-item"  %>
+                  <div class="dropdown-divider">---</div>
+                <% end %>
+                
+                <%= link_to "Voir mon profil", user_path(current_user), class: "dropdown-item" %>
+                <%= link_to "Éditer mon profil", edit_user_registration_path, class: "dropdown-item" %>
+                <%= button_to "Se déconnecter", destroy_user_session_path, method: :delete, data: {turbo_method: :delete}, class: "dropdown-item"%>
+              </div>
+            </li>
+            <% else %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mon Profil</a>
+              <div class="dropdown-menu">
+                <%= link_to "Se connecter", new_user_session_path, class: "dropdown-item" %>
+                <%= link_to "S'inscrire", new_user_registration_path, class: "dropdown-item" %>
+              </div>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </nav> 
+
+
+
+
+
+
+

@@ -7,7 +7,7 @@
                 <div class="footer-widget">
                     <div>
                         <%= link_to(root_path) do %>
-                            <%= image_tag("RAYM_logo.png", alt: "RAYM_logo", style: "height: 120px; display: block; margin: 0 auto;") %>
+                            <%= image_tag("RAYM_logo.png", alt: "RAYM_logo", style: "height: 30px; display: block; margin: 0 auto;") %>
                         <% end %>
                     </div>
                     <p class="description mt--20">Revolutionize All Your Masterize
@@ -94,7 +94,7 @@
                     <li><a href="#">Terms of service</a></li>
                     <li><a href="privacy-policy.html">Privacy policy</a></li>
                     <li><a href="subscription.html">Subscription</a></li>
-                    <li><a href="login.html">Login &amp; Register</a></li>
+                    <li><a href="<%=new_admin_session_path%>">Login &amp; Register</a></li>
                 </ul>
             </div>
         </div>
