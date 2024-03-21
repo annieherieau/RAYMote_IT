@@ -1,3 +1,22 @@
+<style>
+.star-rating {
+  direction: rtl;
+  font-size: 24px;
+  unicode-bidi: bidi-override;
+}
+
+.star-rating .star {
+  cursor: pointer;
+  color: #ccc;
+}
+
+.star-rating .star.rated,
+.star-rating .star:hover,
+.star-rating .star:hover ~ .star {
+  color: #f5a623;
+}
+</style>
+
 <div class="container">
   <h1 class="mt-4 mb-3">Détails de l'atelier</h1>
   <div class="row">
@@ -112,6 +131,11 @@
 
    
 <!-- Bouton review -->
+<div class="star-rating">
+  <% (1..5).each do |rating| %>
+    <span class="star" data-rating="<%= rating %>" data-form-url="<%= new_workshop_review_path(@workshop, rating: rating) %>">&#9733;</span>
+  <% end %>
+</div>
 <div class="container justify-content-center">
   <% if user_signed_in? %>
     <% purchased_workshop = @workshop.attendances.exists?(user: current_user) %>
@@ -174,7 +198,18 @@
   </div>
 </div>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var stars = document.querySelectorAll('.star');
 
+  stars.forEach(function(star) {
+    star.addEventListener('click', function() {
+      var formUrl = this.getAttribute('data-form-url');
+      window.location.href = formUrl;
+    });
+  });
+});
+</script>
 
 
 

@@ -17,7 +17,8 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/new
   def new
-    @review = Review.new
+    inverted_rating = 6 - params[:rating].to_i
+    @review = Review.new(rating: inverted_rating)
     @user = current_user
   end
 
