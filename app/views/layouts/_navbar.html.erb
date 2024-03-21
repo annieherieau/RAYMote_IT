@@ -1,5 +1,5 @@
 
-
+<!-- Start Header Area 
 <header class="rbt-header rbt-header-1">
     <div class="rbt-sticky-placeholder"></div>
     <div class="rbt-header-wrapper header-space-betwween header-sticky">
@@ -55,11 +55,118 @@
           </ul>
         </div>
       </div>
-    </nav> 
+    </nav> -->
 
 
 
 
 
 
+
+
+    <!-- Start Header Area -->
+    
+    <header class="rbt-header rbt-header-10">
+        <div class="rbt-sticky-placeholder">
+  
+
+        <div class="rbt-header-wrapper header-space-betwween header-sticky">
+            <div class="container-fluid">
+                <div class="mainbar-row rbt-navigation-center align-items-center">
+                    <div class="header-left rbt-header-content">
+                        <div class="header-info">
+                            <div class="logo">
+                                <a href="index.html">
+                                    <img src="assets/RAYM_logo.png" style="height: 30px">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rbt-main-navigation d-none d-xl-block">
+                        <nav class="mainmenu-nav">
+                            <ul class="mainmenu">
+                                <li class="">
+                                    <%= link_to 'Accueil', root_path, class: "nav-link"%>
+                                </li>
+                                
+                                <li class="">
+                                    <a href="#">Cours
+                                        <i class=""></i>
+                                    </a>
+                                    <!-- Start Cours -->
+                                </li>
+
+                                <li class="">
+                                    <%= link_to 'Ateliers', workshops_path, class: "nav-link"%>
+                                </li>
+
+                                <li class="">
+                                  <%= link_to 'Contact', contact_path, class: "nav-link"%>
+                                </li>
+
+                            
+                    <div class="header-right">
+
+                        <!-- Navbar Icons -->
+                        <ul class="quick-access">
+                            <li class="access-icon">
+                                <a class="search-trigger-active rbt-round-btn" href="#">
+                                    <i class="feather-search"></i>
+                                </a>
+                            </li>
+                            
+
+                        
+                        <li class="account-access rbt-user-wrapper d-none d-xl-block">
+                          <!-- Name of tab displayed in navbar according to the profil User or Admin (Navbar Tab)-->
+                          <% if user_signed_in? %>
+                              <% if admin_signed_in? %>
+                                  <a href="#"><i class="feather-user"></i>Mon Compte Administrateur</a>
+                              <% else %>
+                                  <a href="#"><i class="feather-user"></i>Mon Compte</a>
+                              <% end %>
+                          <% else %>
+                              <a href="#"><i class="feather-user"></i>Connexion</a>
+                          <% end %>
+                          
+                          <div class="rbt-user-menu-list-wrapper">
+                              <div class="inner">
+                                  <div class="rbt-admin-profile">
+                                      <!-- User full name display (Dropdown) -->
+                                      <% if user_signed_in? %>
+                                          <div class="admin-info">
+                                              <span class="name"><%= current_user.firstname %> <%= current_user.lastname %></span>
+                                          </div>
+                                      <% end %>
+                                  </div>
+                                  <ul class="user-list-wrapper">
+                                      <!-- Dashboard according to the profile User or Admin (Dropdown) -->
+                                      <% if user_signed_in? %>
+                                          <li>
+                                              <% if admin_signed_in? %>
+                                                 <%= link_to "Mon dashboard", admin_path(current_user), class: "dropdown-item" %>
+                                              <% else %>
+                                                <%= link_to "Mon dashboard", user_path(current_user), class: "dropdown-item" %>
+                                              <% end %>
+                                              <i class="feather-home"></i>
+                                          </li>
+                                      <!-- Route for the logout (Dropdown) -->
+                                          <li>
+                                              <%= button_to "Se déconnecter", destroy_user_session_path, method: :delete, data: {turbo_method: :delete}, class: "dropdown-item"%>
+                                          </li>
+                                      <!-- Route for login and register (Dropdown) -->
+                                      <% else %>
+                                          <li>
+                                              <%= link_to "Se connecter", new_user_session_path %>
+                                          </li>
+                                          <li>
+                                              <%= link_to "S'enregistrer", new_user_registration_path %>
+                                          </li>
+                                      <% end %>
+                                  </ul>
+                              </div>
+                          </div>
+                      </li>
+ </header>
 
