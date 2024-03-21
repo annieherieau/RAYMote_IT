@@ -1,26 +1,31 @@
-<% if orders.any? %>
-  <div class="rbt-my-account-table table-responsive text-center">
-    <table class="table table-bordered">
-      <thead class="thead-light">
-        <tr>
-          <th>No</th>
-          <th>Date</th>
-          <th>Montant</th>
-          <th>Détails</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% orders.each do |order| %>
+<div class="tab-pane fade" id="orders" role="tabpanel">
+  <div class="rbt-my-account-inner">
+    <h3>Commandes</h3>
+    <% if orders.any? %>
+    <div class="rbt-my-account-table table-responsive text-center">
+      <table class="table table-bordered">
+        <thead class="thead-light">
           <tr>
-            <td><%= order.id %></td>
-            <td><%= order.created_at.strftime('%d/%m/%Y %H:%M:%S') %></td>
-            <td><%= number_to_euros(order.amount) %></td>
-            <td><%= link_to 'Voir', order_path(order.id), class: "rbt-btn btn-sm" %></td>
+            <th>No</th>
+            <th>Date</th>
+            <th>Montant</th>
+            <th>Détails</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% orders.each do |order| %>
+            <tr>
+              <td><%= order.id %></td>
+              <td><%= order.created_at.strftime('%d/%m/%Y %H:%M:%S') %></td>
+              <td><%= number_to_euros(order.amount) %></td>
+              <td><%= link_to 'Voir', order_path(order.id), class: "rbt-btn btn-sm" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <% else %>
+      <p>Aucune commande effectuée.</p>
+    <% end %>
   </div>
-  <% else %>
-    <p>Aucune commande effectuée.</p>
-  <% end %>
+</div>

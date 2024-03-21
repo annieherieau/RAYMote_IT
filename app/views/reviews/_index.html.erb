@@ -20,7 +20,7 @@
                 <td><%= review.rating %></td>
                 <td>
                   <%= link_to "Voir", review, class: "rbt-btn btn-sm" %>
-                  <% if user_signed_in? && current_user == user %>
+                  <% if user_signed_in? && current_user == review.user %>
                     <%= link_to "Modifier", edit_review_path(review), class: "rbt-btn btn-sm btn-secondary" %>
                     <%= button_to "Supprimer", review, method: :delete, class: "rbt-btn btn-sm btn-violet mt-2" %>
                   <% end %>

@@ -14,7 +14,8 @@
       <a href="#reviews" data-bs-toggle="tab">Avis</a>
       <a href="#orders" data-bs-toggle="tab">Commandes</a>
       <a href="#edit" data-bs-toggle="tab">Modifier mes infos</a>
-      <a href="login.html">Déconnexion</a>
+      
     <% end %>
   </div>
+  <%= button_to "Se déconnecter", destroy_user_session_path, method: :delete, data: {turbo_method: :delete}, class: "rbt-btn btn-gradient btn-gradient-2 w-100 my-5"%>
 </div>
