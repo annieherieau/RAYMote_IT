@@ -21,7 +21,7 @@
 
       <div class="col-lg-6 col-12">
         <%= form.label :lastname %>
-        <%= form.text_field :lastname, class: "form-control", placeholder: "Prénom", value: user.lastname %>
+        <%= form.text_field :lastname, class: "form-control", placeholder: "Nom", value: user.lastname %>
       </div>
     
       <% if !user.creator || !user.created_workshops.any? %>
