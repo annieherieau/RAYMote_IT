@@ -16,13 +16,14 @@
 
  @import url(vendor/bootstrap.min.css);
  @import url(vendor/style.css);
- 
- 
+
+
+
+
 
  
 :root {
   --font-primary: "Euclid Circular", sans-serif;
-  --font-secondary: "Comics Sans", sans-serif;
   --h5: 20px;
 }
 
@@ -31,3 +32,5 @@ h5.ft-title {
   font-size: var(--h5);
   font-weight: bold;
 }
+
+
