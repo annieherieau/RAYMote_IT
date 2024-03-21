@@ -2,7 +2,7 @@ class Order < ApplicationRecord
 
   # Associations
   belongs_to :user
-  has_many :order_workshops
+  has_many :order_workshops, dependent: :destroy
   has_many :workshops, through: :order_workshops
 
   # Validations

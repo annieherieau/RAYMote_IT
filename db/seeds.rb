@@ -1,11 +1,13 @@
 require 'faker'
 
 # Supprimer toutes les données existantes
-Attendance.destroy_all
 Workshop.destroy_all
-Tag.destroy_all
-Category.destroy_all
+Admin.destroy_all
 User.destroy_all
+Category.destroy_all
+Tag.destroy_all
+Order.destroy_all
+Review.destroy_all
 
 # reset ID 
 ActiveRecord::Base.connection.tables.each do |t|
@@ -20,6 +22,7 @@ emails_with_names = {
   'yann.rezigui@gmail.com' => ['Yann', 'Rezigui']
 }
 
+puts ('---- START SEEDING ----')
 emails_with_names.each do |email, names|
   user = User.create!(
     email: email,
@@ -29,12 +32,14 @@ emails_with_names.each do |email, names|
     creator: [true, false].sample
   )
 end
+puts('4 Users créés - creator aleatoires')
 
 # Création des catégories
 categories = ["JavaScript", "Python", "Ruby", "Java", "C++", "C#", "Swift", "Go", "PHP", "TypeScript"]
 categories.each do |name|
   Category.create!(name: name)
 end
+puts("Categories créés - creator aleatoires")
 
 # Création des ateliers avec Faker
 10.times do
@@ -42,31 +47,39 @@ end
     name: Faker::Lorem.words(number: 3).join(' ')[0, 15], # Générer un nom de 3 mots et limiter à 15 caractères
     description: Faker::Lorem.paragraph(sentence_count: 2),
     price: rand(10..100),
-    start_date: Faker::Time.between(from: DateTime.now + 1, to: DateTime.now + 30),
+    start_date: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now + 30),
     duration: rand(1..3) * 60,
-    event: Faker::Boolean.boolean(true_ratio: 0.7), # 70% chance of being an event
+    event: true,
     creator: User.where(creator: true).sample,
-    category: Category.all.sample
+    category: Category.all.sample,
+    validated: [true, false].sample
   )
 end
+puts('10 Workshops créés')
 
 # Création des tags
 tags = ["Débutant", "Intermédiaire", "Avancé", "DIY", "Loisir", "Professionnel"]
 tags.each do |name|
   Tag.create!(name: name)
 end
+puts('6 tags créés')
 
 # Associer des tags aux ateliers
 Workshop.all.each do |workshop|
   rand(1..3).times do
-    workshop.tags << Tag.all.sample
+    tag = Tag.all.sample
+    unless workshop.tags.include?(tag)
+      workshop.tags << Tag.all.sample
+    end  
   end
 end
 
 # Création des participations
 User.all.each do |user|
   rand(1..5).times do
-    attendance = Attendance.new(user: user, workshop: Workshop.all.sample)
-    attendance.save if attendance.valid?
+    workshop = Workshop.all.sample
+    unless Attendance.find_by(user: user, workshop: workshop)
+      attendance = Attendance.create!(user: user, workshop: Workshop.all.sample)
+    end
   end
 end
