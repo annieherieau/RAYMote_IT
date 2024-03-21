@@ -21,11 +21,35 @@
 
 
 
+/* ########### ROOT #################*/
  
 :root {
   --font-primary: "Euclid Circular", sans-serif;
   --h5: 20px;
 }
+
+/* ############# END ROOT ##################*/
+
+
+
+
+
+/* ########### Navbar #################*/
+
+.mainmenu li {
+  margin-right: 2rem; 
+}
+
+
+.user-list-wrapper li {
+  display: flex;
+  align-items: center;
+}
+
+
+
+
+/* ########### Footer #################*/
 
 h5.ft-title {
   font-family: var(--font-primary);
