@@ -66,7 +66,9 @@ end
 # Création des participations
 User.all.each do |user|
   rand(1..5).times do
-    attendance = Attendance.new(user: user, workshop: Workshop.all.sample)
-    attendance.save if attendance.valid?
+    workshop = Workshop.all.sample
+    unless Attendance.find_by(user: user, workshop: workshop)
+      attendance = Attendance.create!(user: user, workshop: Workshop.all.sample)
+    end
   end
 end
