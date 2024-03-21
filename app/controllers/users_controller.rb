@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
+        format.html { redirect_to user_url(@user), notice: "Vos informations ont été enregistrées." }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -54,6 +54,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:firstname, :lastname, :email)
+      params.require(:user).permit(:firstname, :lastname, :email, :creator)
     end
 end
