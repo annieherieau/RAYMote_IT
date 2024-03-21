@@ -51,29 +51,10 @@
         </tbody>
       </table>
     </div>
-    <div class="tab-pane fade" id="workshops" role="tabpanel" aria-labelledby="workshops-tab">
-      <h2>Ateliers</h2>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Titre</th>
-            <th>Description</th>
-            <th>Date</th>
-            <th>Créateur</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @workshops.each do |workshop| %>
-            <tr>
-              <td><%= workshop.name %></td>
-              <td><%= workshop.description %></td>
-              <td><%= workshop.start_date.strftime("%d/%m/%Y %H:%M") %></td>
-              <td><%= workshop.creator.firstname %> <%= workshop.creator.lastname %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+    <!-- WORSHOPS inscriptions -->
+    <%= render partial: "workshops/index", locals: {workshops: @workshops} %>
+    <!-- fin WORSHOPS inscriptions -->
+    
     <div class="tab-pane fade" id="pending-workshops" role="tabpanel" aria-labelledby="pending-workshops-tab">
       <h2>Ateliers en attente de validation</h2>
       <% @workshops.where(validated: false).each do |workshop| %>

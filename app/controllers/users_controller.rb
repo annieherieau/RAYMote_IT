@@ -1,55 +1,32 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
+  before_action  :check_admin, only: [:validate]
+  before_action :authenticate_user!, except: [:validate]
+  before_action :authenticate_admin!, only: [:validate]
 
-  # GET /users or /users.json
-  def index
-    @users = User.all
-  end
 
-  # GET /users/1 or /users/1.json
+  # GET /profile/1
   def show
     @user = User.find(params[:id])
     @created_workshops = @user.created_workshops
   end
 
-  # GET /users/new
-  def new
-    @user = User.new
-  end
-
-  # GET /users/1/edit
+  # GET /profile/1/edit
   def edit
   end
 
-  # POST /users or /users.json
-  def create
-    @user = User.new(user_params)
-
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to user_url(@user), notice: "User was successfully created." }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /users/1 or /users/1.json
+  # PATCH/PUT /profile/1
   def update
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
-        format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /users/1 or /users/1.json
+  # DELETE /profile/1
   def destroy
     @user.destroy!
 
@@ -59,6 +36,17 @@ class UsersController < ApplicationController
       
     end
     redirect_to root_path
+  end
+
+  # validation de la demande de compte creator
+  def validate
+    @user = User.find(params[:id])
+    if @user.update(creator: true)
+      notice = "Utilisateur validé comme Creator."
+    else
+      alert = "Une erreur s'est produite: Utilisateur non validé."
+    end
+    redirect_back(fallback_location: root_path, notice: notice)
   end
 
   private

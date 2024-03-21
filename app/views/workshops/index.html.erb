@@ -15,7 +15,7 @@
     <div class="row mb-4 justify-content-around">
       <% workshop_row.each do |workshop| %>
         <% if workshop.status != "passé" %>
-          <%= render workshop %>
+          <%= render partial: "workshops/workshop_card", locals: {workshop: workshop} %>
           <% end %>
       <% end %>
     </div>
