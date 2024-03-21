@@ -1,0 +1,39 @@
+<h3>Modifier vos informations personnelles</h3>
+<div class="account-details-form">
+  <%= form_with(model: user, class: "form") do |form| %>
+    <% if user.errors.any? %>
+      <div class="alert alert-danger">
+        <h2><%= pluralize(user.errors.count, "error") %>Les modifications n'ont pas pu etre sauvegardées:</h2>
+
+        <ul>
+          <% user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="row">
+      <div class="col-lg-6 col-12">
+        <%= form.label :firstname %>
+        <%= form.text_field :firstname, class: "form-control", placeholder: "Prénom", value: user.firstname %>
+      </div>
+
+      <div class="col-lg-6 col-12">
+        <%= form.label :lastname %>
+        <%= form.text_field :lastname, class: "form-control", placeholder: "Prénom", value: user.lastname %>
+      </div>
+    
+      <% if !user.creator || !user.created_workshops.any? %>
+        <div class="col-lg-6 col-12">
+          <%= form.check_box :creator %>
+          <%= form.label :creator, "Devenir Créateur" %>
+        </div>
+      <% end %>
+    
+    <div>
+      <%= form.submit "Enregistrer", class: "rbt-btn btn-md btn-gradient border-0 w-100" %>
+    </div>
+  </div>  
+  <% end %>
+</div>

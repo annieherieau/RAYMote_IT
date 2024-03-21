@@ -11,10 +11,6 @@ class UsersController < ApplicationController
     @created_workshops = @user.created_workshops
   end
 
-  # GET /profile/1/edit
-  def edit
-  end
-
   # PATCH/PUT /profile/1
   def update
     respond_to do |format|

@@ -20,10 +20,6 @@
                         <!-- CREATED WORKSHOPS -->
                         <%= render partial: "workshops/user_created_workshops", locals: {user: @user} %>
                         <!--  fin CREATED WORKSHOPS  -->
-                    <% elsif current_user == @user %>
-                        <!-- BECOME CREATOR -->
-                        <%= render partial: "users/become_creator", locals: {user: @user} %>
-                        <!--  fin BECOME CREATOR  -->
                     <% end %>
                     
                     <% if user_signed_in? && current_user == @user %>
@@ -51,5 +47,5 @@
 
     </div>
   </div>
-</div>
+</section>
 
