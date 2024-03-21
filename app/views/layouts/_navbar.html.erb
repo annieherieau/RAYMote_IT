@@ -1,65 +1,105 @@
-
-
-<header class="rbt-header rbt-header-1">
+<header class="rbt-header rbt-header-10">
     <div class="rbt-sticky-placeholder"></div>
+
     <div class="rbt-header-wrapper header-space-betwween header-sticky">
         <div class="container-fluid">
             <div class="mainbar-row rbt-navigation-center align-items-center">
                 <div class="header-left rbt-header-content">
                     <div class="header-info">
                         <div class="logo">
+                            <a href="index.html">
+                                <%= link_to(root_path) do %>
+                                    <%= image_tag("RAYM_logo.png", alt: "RAYM_logo_white", style: "height: 30px") %>
+                                <% end %>
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-    <nav class="navbar navbar-expand-lg">
-      <div class="container-fluid my-2">
-        <%= link_to(root_path) do %>
-        <%= image_tag("RAYM_logo.png", alt: "RAYM_logo_white", style: "height: 30px; display: block; margin: 0 auto;") %>
-        <% end %>
-      </div>  
-                            
-    
-    
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarColor01">
-          <ul class="navbar-nav me-auto">
-            <li class="nav-item">
-              <%= link_to 'Workshops', root_path, class: "nav-link"%>
-            </li>
-            <li class="nav-item">
-              <%= link_to 'Contact', contact_path, class: "nav-link"%>
-            </li>
-              <% if user_signed_in? %>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.firstname %></a>
-              <div class="dropdown-menu">
-                <% if current_user.creator %>
-                  <%= link_to "Créer Workshop", new_workshop_path, class: "dropdown-item"  %>
-                  <div class="dropdown-divider">---</div>
-                <% end %>
-                
-                <%= link_to "Voir mon profil", user_path(current_user), class: "dropdown-item" %>
-                <%= link_to "Éditer mon profil", edit_user_registration_path, class: "dropdown-item" %>
-                <%= button_to "Se déconnecter", destroy_user_session_path, method: :delete, data: {turbo_method: :delete}, class: "dropdown-item"%>
-              </div>
-            </li>
-            <% else %>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mon Profil</a>
-              <div class="dropdown-menu">
-                <%= link_to "Se connecter", new_user_session_path, class: "dropdown-item" %>
-                <%= link_to "S'inscrire", new_user_registration_path, class: "dropdown-item" %>
-              </div>
-            </li>
-            <% end %>
-          </ul>
+                <nav class="mainmenu-nav">
+                    <ul class="mainmenu centered-menu"> <!-- class for center the tabs -->
+                        <li class="">
+                            <%= link_to 'Accueil', root_path, class: "nav-link"%>
+                        </li>
+                        <li class="">
+                            <a href="#">Cours
+                                <i class=""></i>
+                            </a>
+                            <!-- Start Cours -->
+                        </li>
+                        <li class="">
+                            <%= link_to 'Ateliers', workshops_path, class: "nav-link"%>
+                        </li>
+                        <li class="">
+                            <%= link_to 'Contact', contact_path, class: "nav-link"%>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div class="header-right">
+                    <ul class="quick-access">
+                        <li class="access-icon">
+                            <i class="feather-search"></i>
+                        </li>
+                        <li class="account-access rbt-user-wrapper ">
+                            <!-- Name of tab displayed in navbar according to the profil User or Admin (Navbar Tab)-->
+                            <% if user_signed_in? %>
+                                <% if admin_signed_in? %>
+                                    <img src="/assets/user.svg" class="icon">
+                                    <a href="#"><i class="feather-user"></i>Mon Compte Administrateur</a>
+                                <% else %>
+                                    <img src="/assets/user.svg" class="icon">
+                                    <a href="#"><i class="feather-user"></i>Mon Compte</a>
+                                <% end %>
+                            <% else %>
+                                <img src="/assets/log-in.svg" class="icon">
+                                <a href="#"><i class="feather-user"></i>Connexion</a>
+                            <% end %>
+
+                            <div class="rbt-user-menu-list-wrapper">
+                                <div class="inner">
+                                    <div class="rbt-admin-profile">
+                                        <!-- User name display (Dropdown) -->
+                                        <% if user_signed_in? %>
+                                            <div class="admin-info">
+                                                <span class="name" style="font-weight: bold"><%= current_user.firstname %></span>
+                                            </div>
+                                        <% end %>
+                                    </div>
+                                    <ul class="user-list-wrapper">
+                                        <!-- Dashboard according to the profile User or Admin (Dropdown) -->
+                                        <% if user_signed_in? %>
+                                            <li>
+                                                <% if admin_signed_in? %>
+                                                    <img src="/assets/dashboard.svg" class="icon">
+                                                    <%= link_to "Mon dashboard", admin_path(current_user), class: "dropdown-item small" %>
+                                                <% else %>
+                                                    <img src="/assets/dashboard.svg" class="icon">
+                                                    <%= link_to "Mon dashboard", user_path(current_user), class: "dropdown-item small" %>
+                                                <% end %>
+                                                <i class="feather-home"></i>
+                                            </li>
+                                            <!-- Route for the logout (Dropdown) -->
+                                            <li>
+                                                <img src="/assets/logout.svg" class="icon">
+                                                <%= button_to "Se déconnecter", destroy_user_session_path, method: :delete, data: {turbo_method: :delete}, class: "dropdown-item small"%>
+                                            </li>
+                                            <!-- Route for login and register (Dropdown) -->
+                                        <% else %>
+                                            <li>
+                                                <%= link_to "Se connecter", new_user_session_path %>
+                                            </li>
+                                            <li>
+                                                <%= link_to "S'enregistrer", new_user_registration_path %>
+                                            </li>
+                                        <% end %>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div>
-    </nav> 
-
-
-
-
-
-
-
+    </div>
+</header>
