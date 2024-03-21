@@ -1,17 +1,22 @@
 <%# TODO Ajouter une photo de profil %>
-<table>
-    <tbody>
-      <tr>
-        <td class="w-25"><strong>Prénom :</strong></td>
-        <td><%= @user.firstname %></td>
-      </tr>
-      <tr>
-        <td class="w-25"><strong>Nom :</strong></td>
-        <td><%= @user.lastname %></td>
-      </tr>
-      <tr>
-        <td class="w-25"><strong>Email :</strong></td>
-        <td><%= current_user == @user ? @user.email : "*"* 10 %></td>
-      </tr>
-    </tbody>
-  </table>
+ <div class="tab-pane fade active show" id="profil" role="tabpanel">
+  <div class="rbt-my-account-inner">
+    <h3>Profil <%= @user.creator ? "Créateur" : "Utilisateur" %></h3>
+    <table>
+      <tbody>
+        <tr>
+          <td class="w-25"><strong>Prénom :</strong></td>
+          <td><%= @user.firstname %></td>
+        </tr>
+        <tr>
+          <td class="w-25"><strong>Nom :</strong></td>
+          <td><%= @user.lastname %></td>
+        </tr>
+        <tr>
+          <td class="w-25"><strong>Email :</strong></td>
+          <td><%= current_user == @user ? @user.email : "*"* 10 %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

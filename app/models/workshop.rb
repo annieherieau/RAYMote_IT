@@ -21,7 +21,7 @@ def tags_destroy
 end
 
 def status
-end_date = start_date + duration.minutes
+  end_date = start_date + duration.minutes
   if start_date > Time.current
     'à venir'
   elsif end_date < Time.current
