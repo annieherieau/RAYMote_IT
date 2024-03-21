@@ -1,5 +1,6 @@
 class StaticPagesController < ApplicationController
   def contact
+    @users = Admin.all
   end
 
   # TODO à brancher lorsque UserMailer sera créé

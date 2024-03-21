@@ -1,1 +1,33 @@
-<p>Coordonnées ici</p>
+<div class="row">
+  <% @users.each_slice(2) do |user_slice| %>
+    <% user_slice.each do |user| %>
+      <div class="col-lg-6 col-md-6 col-12 mt--30">
+        <div class="rbt-team team-style-default rbt-hover-02">
+          <div class="inner">
+            <div class="thumbnail">
+                <%= link_to(root_path) do %>
+                      <%= image_tag("linkedin.png", alt: "linkedin", style: "height: 30px; display: block; margin: 0 auto;") %>
+                <% end %>
+            </div>
+            <div class="content">
+              <h2 class="title"><%= user.email%></h2>
+              <h6 class="subtitle theme-gradient">diplome</h6>
+              <span class="team-form">
+                <i class="feather-map-pin"></i>
+                <span class="location">une ville</span>
+              </span>
+              <p class="description">quelques mots</p>
+              <ul class="social-icon social-default icon-naked mt--20">
+                <li><a href=""><i class="fa-brands fa-facebook"></i></a></li>
+                <li><a href=""><i class="fa-brands fa-twitter"></i></a></li>
+                <li><a href=""><i class="fa-brands fa-instagram"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+

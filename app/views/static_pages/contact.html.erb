@@ -1,18 +1,36 @@
-<h1>CONTACT</h1>
-<p>Nous sommes impatients de discuter avec vous !</p>
+
+
+<div class="rbt-breadcrumb-default ptb--100 ptb_md--50 ptb_sm--30 bg-gradient-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-inner text-center">
+                        <h2 class="title">Contact with us</h2>
+                        <p>Nous sommes impatients de discuter avec vous !</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <!-- SECTION CONTACT: 2 colonnes -->
-<section class="rbt-contact-address">
+<section class="rbt-contact-address mt-5 mb-5 mx-3">
   <div class="container">
     <div class="row g-5">
       <!-- Colonne 1: coordonnées -->
       <div class="col-lg-6">
+        <h1>RAYMote Team</h1>
+        <div class="contact-info-wrapper">
           <%= render "static_pages/contact_infos" %>
-      </div>
-      <!-- Colonne 2: Zonne Contact form -->
-        <div class="col-lg-6">
-            <%= render "static_pages/contact_form" %>
         </div>
+      </div>
+      <!-- Colonne 2: Zone Contact form -->
+      <div class="col-lg-6">
+        <div class="contact-form-wrapper">
+          <%= render "static_pages/contact_form" %>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</section>
+
