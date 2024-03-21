@@ -8,4 +8,9 @@ module ApplicationHelper
   def devise_fr
     resource_name.to_s.humanize == 'User' ? 'Utilisateur' : 'Admin'
   end
+
+  # formate les dates
+  def date_format(date)
+    date.strftime("%d/%m/%Y %H:%M")
+  end
 end

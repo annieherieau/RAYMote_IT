@@ -10,6 +10,7 @@
               <th scope="col">Name</th>
               <th scope="col">Description</th>
               <th scope="col">Start Date</th>
+              <th scope="col">Validé</th>
               <th scope="col">Actions</th>
             </tr>
           </thead>
@@ -18,7 +19,8 @@
               <tr>
                 <td><%= workshop.name %></td>
                 <td><%= workshop.description %></td>
-                <td><%= workshop.start_date %></td>
+                <td><%= date_format(workshop.start_date) %></td>
+                 <td><%= workshop.validated ? 'oui' : 'non' %></td>
                 <td>
                   <%= link_to "Voir", workshop, class: "rbt-btn btn-sm" %>
                   <% if user_signed_in? && current_user == @user %>

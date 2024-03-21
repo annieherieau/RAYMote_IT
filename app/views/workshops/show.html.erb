@@ -18,7 +18,7 @@
           </tr>
           <tr>
             <th scope="row">Date de début :</th>
-            <td><%= @workshop.start_date.strftime("%d/%m/%Y %H:%M") %></td>
+            <td><%=date_format(@workshop.start_date) %></td>
           </tr>
           <tr>
             <th scope="row">Duration:</th>
