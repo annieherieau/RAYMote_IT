@@ -95,6 +95,7 @@
                     <li><a href="privacy-policy.html">Privacy policy</a></li>
                     <li><a href="subscription.html">Subscription</a></li>
                     <li><a href="<%=new_admin_session_path%>">Login &amp; Register</a></li>
+                    <%= button_to "Se déconnecter", destroy_admin_session_path, method: :delete, data: {turbo_method: :delete}%>
                 </ul>
             </div>
         </div>
