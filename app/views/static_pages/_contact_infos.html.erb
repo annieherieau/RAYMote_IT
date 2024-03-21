@@ -1,33 +1,187 @@
 <div class="row">
-  <% @users.each_slice(2) do |user_slice| %>
-    <% user_slice.each do |user| %>
-      <div class="col-lg-6 col-md-6 col-12 mt--30">
-        <div class="rbt-team team-style-default rbt-hover-02">
-          <div class="inner">
-            <div class="thumbnail">
-                <%= link_to(root_path) do %>
-                      <%= image_tag("linkedin.png", alt: "linkedin", style: "height: 30px; display: block; margin: 0 auto;") %>
-                <% end %>
+    <div class="container">
+        <div class="row mb--60">
+            <div class="col-lg-12">
+                <div class="section-title text-center">
+                    <h3 class="title">RAYMote Team</h3>
+                </div>
             </div>
-            <div class="content">
-              <h2 class="title"><%= user.email%></h2>
-              <h6 class="subtitle theme-gradient">diplome</h6>
-              <span class="team-form">
-                <i class="feather-map-pin"></i>
-                <span class="location">une ville</span>
-              </span>
-              <p class="description">quelques mots</p>
-              <ul class="social-icon social-default icon-naked mt--20">
-                <li><a href=""><i class="fa-brands fa-facebook"></i></a></li>
-                <li><a href=""><i class="fa-brands fa-twitter"></i></a></li>
-                <li><a href=""><i class="fa-brands fa-instagram"></i></a></li>
-              </ul>
-            </div>
-          </div>
         </div>
-      </div>
-    <% end %>
-  <% end %>
-</div>
+        <div class="row g-5">
+            <div class="col-lg-7">
+                <!-- Start Tab Content  -->
+                <div class="rbt-team-tab-content tab-content" id="myTabContent">
+                    <div class="tab-pane fade active show" id="team-tab1" role="tabpanel" aria-labelledby="team-tab1-tab">
+                        <div class="inner">
+                            <div class="rbt-team-thumbnail">
+                                <div class="thumb">
+                                    <%= image_tag("RAYM_office.png", alt: "RAYM_office", style: "height: 300px; width: 200px; display: block; margin: 0 auto;") %>
+                                </div>
+                            </div>
+                            <div class="rbt-team-details">
+                                <div class="author-info">
+                                    <h4 class="title">Robena Troplong</h4>
+                                    <span class="designation theme-gradient">Lotus teacher</span>
+                                    <span class="team-form">
+                                        <i class="feather-map-pin"></i>
+                                        <span class="location">Lyon</span>
+                                    </span>
+                                </div>
+                                <p>All about Lotus suicide</p>
+                                <ul class="social-icon social-default mt--20 justify-content-start">
+                                    <li><a href="https://www.facebook.com/"><i class="fa-brands fa-facebook"></i></a></li>
+                                    <li><a href="https://www.twitter.com"><i class="fa-brands fa-twitter"></i></a></li>
+                                    <li><a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a></li>
+                                </ul>
+                                <ul class="rbt-information-list mt--25">
+                                    <li><a href="#"><i class="feather-phone"></i>+1-202-555-0174</a></li>
+                                    <li><a href="mailto:hello@example.com"><i class="feather-mail"></i>example@gmail.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="tab-pane fade" id="team-tab2" role="tabpanel" aria-labelledby="team-tab2-tab">
+                        <div class="inner">
+                            <div class="rbt-team-thumbnail">
+                                <div class="thumb">
+                                    <%= image_tag("RAYM_office.png", alt: "RAYM_office", style: "height: 300px; width: 200px; display: block; margin: 0 auto;") %>
+                                </div>
+                            </div>
+                            <div class="rbt-team-details">
+                                <div class="author-info">
+                                    <h4 class="title">Annie Hérieau</h4>
+                                    <span class="designation theme-gradient">C.E.O</span>
+                                    <span class="team-form">
+                                        <i class="feather-map-pin"></i>
+                                        <span class="location">Montauban</span>
+                                    </span>
+                                </div>
+                                <p>All about teaching of nous tous</p>
+                                <ul class="social-icon social-default mt--20 justify-content-start">
+                                    <li><a href="https://www.facebook.com/"><i class="fa-brands fa-facebook"></i></a></li>
+                                    <li><a href="https://www.twitter.com"><i class="fa-brands fa-twitter"></i></a></li>
+                                    <li><a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a></li>
+                                </ul>
+                                <ul class="rbt-information-list mt--25">
+                                    <li><a href="#"><i class="feather-phone"></i>+1-202-555-0174</a></li>
+                                    <li><a href="mailto:hello@example.com"><i class="feather-mail"></i>example@gmail.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="team-tab3" role="tabpanel" aria-labelledby="team-tab3-tab">
+                        <div class="inner">
+                            <div class="rbt-team-thumbnail">
+                                <div class="thumb">
+                                    <%= image_tag("RAYM_office.png", alt: "RAYM_office", style: "height: 300px; width: 200px; display: block; margin: 0 auto;") %>
+                                </div>
+                            </div>
+                            <div class="rbt-team-details">
+                                <div class="author-info">
+                                    <h4 class="title">Yann Rezigui</h4>
+                                    <span class="designation theme-gradient">Head of migraine</span>
+                                    <span class="team-form">
+                                        <i class="feather-map-pin"></i>
+                                        <span class="location">Cannes</span>
+                                    </span>
+                                </div>
+                                <p>All about using Doliprane</p>
+                                <ul class="social-icon social-default mt--20 justify-content-start">
+                                    <li><a href="https://www.facebook.com/"><i class="fa-brands fa-facebook"></i></a></li>
+                                    <li><a href="https://www.twitter.com"><i class="fa-brands fa-twitter"></i></a></li>
+                                    <li><a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a></li>
+                                </ul>
+                                <ul class="rbt-information-list mt--25">
+                                    <li><a href="#"><i class="feather-phone"></i>+1-202-555-0174</a></li>
+                                    <li><a href="mailto:hello@example.com"><i class="feather-mail"></i>example@gmail.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="team-tab4" role="tabpanel" aria-labelledby="team-tab4-tab">
+                        <div class="inner">
+                            <div class="rbt-team-thumbnail">
+                                <div class="thumb">
+                                    <%= image_tag("RAYM_office.png", alt: "RAYM_office", style: "height: 300px; width: 200px; display: block; margin: 0 auto;") %>
+                                </div>
+                            </div>
+                            <div class="rbt-team-details">
+                                <div class="author-info">
+                                    <h4 class="title">Malo Bastianelli</h4>
+                                    <span class="designation theme-gradient">Head of Pizza</span>
+                                    <span class="team-form">
+                                        <i class="feather-map-pin"></i>
+                                        <span class="location">Somewhere in Cambrousse</span>
+                                    </span>
+                                </div>
+                                <p>All about pizza en tout genre</p>
+                                <ul class="social-icon social-default mt--20 justify-content-start">
+                                    <li><a href="https://www.facebook.com/"><i class="fa-brands fa-facebook"></i></a></li>
+                                    <li><a href="https://www.twitter.com"><i class="fa-brands fa-twitter"></i></a></li>
+                                    <li><a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a></li>
+                                </ul>
+                                <ul class="rbt-information-list mt--25">
+                                    <li><a href="#"><i class="feather-phone"></i>+1-202-555-0174</a></li>
+                                    <li><a href="mailto:hello@example.com"><i class="feather-mail"></i>example@gmail.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="top-circle-shape"></div>
+                </div>
+                <!-- End Tab Content  -->
+            </div>
+
+            <div class="col-lg-5">
+                <!-- Start Tab Nav  -->
+                <div class="d-flex justify-content-between">
+                    <div class="rbt-team-tab-thumb nav nav-tabs" id="myTab" role="tablist">
+                        <li>
+                            <a class="active" id="team-tab1-tab" data-bs-toggle="tab" data-bs-target="#team-tab1" role="tab" aria-controls="team-tab1" aria-selected="true">
+                                <div class="rbt-team-thumbnail">
+                                    <div class="thumb">
+                                        <%= image_tag("image.jpeg", alt: "RAYM_logo_white", style: "height: 60px; width: 60px; display: block; margin: 0 auto;") %>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a id="team-tab2-tab" data-bs-toggle="tab" data-bs-target="#team-tab2" role="tab" aria-controls="team-tab2" aria-selected="false">
+                                <div class="rbt-team-thumbnail">
+                                    <div class="thumb">
+                                        <%= image_tag("image.jpeg", alt: "RAYM_logo_white", style: "height: 60px; width: 60px; display: block; margin: 0 auto;") %>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a id="team-tab3-tab" data-bs-toggle="tab" data-bs-target="#team-tab3" role="tab" aria-controls="team-tab3" aria-selected="false">
+                                <div class="rbt-team-thumbnail">
+                                    <div class="thumb">
+                                        <%= image_tag("image.jpeg", alt: "RAYM_logo_white", style: "height: 60px; width: 60px; display: block; margin: 0 auto;") %>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a id="team-tab4-tab" data-bs-toggle="tab" data-bs-target="#team-tab4" role="tab" aria-controls="team-tab4" aria-selected="false">
+                                <div class="rbt-team-thumbnail">
+                                    <div class="thumb">
+                                        <%= image_tag("image.jpeg", alt: "RAYM_logo_white", style: "height: 60px; width: 60px; display: block; margin: 0 auto;") %>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </div>
+                </div>
+                <!-- End Tab Content  -->
+            </div>
+        </div>
+    </div>
+</div>
 

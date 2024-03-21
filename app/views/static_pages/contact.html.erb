@@ -14,23 +14,25 @@
     </div>
 
 <!-- SECTION CONTACT: 2 colonnes -->
-<section class="rbt-contact-address mt-5 mb-5 mx-3">
-  <div class="container">
-    <div class="row g-5">
+<section class="rbt-contact-address mt-5 mb-5 d-flex">
+  
+
       <!-- Colonne 1: coordonnées -->
-      <div class="col-lg-6">
-        <h1>RAYMote Team</h1>
-        <div class="contact-info-wrapper">
+      <div class="container d-flex justify-content-center">
+      <div class="col-lg-6 w-100">
+        <div class="contact-info-wrapper w-100">
           <%= render "static_pages/contact_infos" %>
         </div>
       </div>
+      </div>
       <!-- Colonne 2: Zone Contact form -->
-      <div class="col-lg-6">
+      <div class="container d-flex justify-content-center">
+      <div class="col-lg-6 w-75">
         <div class="contact-form-wrapper">
           <%= render "static_pages/contact_form" %>
         </div>
       </div>
-    </div>
-  </div>
+      </div>
+
 </section>
 
