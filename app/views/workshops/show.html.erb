@@ -204,57 +204,7 @@
   </div>
 </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  var stars = document.querySelectorAll('.star_to_rate');
-  var ratingField = document.getElementById('rating_field');
-  // Utilisez la valeur de ratingField si elle existe, sinon définissez la note à 0
-  var currentRating = ratingField ? parseInt(ratingField.value, 10) : 0;
 
-  function updateStars(rating) {
-    stars.forEach(function(star, index) {
-      if (index < rating) {
-        star.classList.add('rated');
-      } else {
-        star.classList.remove('rated');
-      }
-    });
-  }
-
-  stars.forEach(function(star, index) {
-    star.addEventListener('click', function() {
-      var rating = index + 1;
-      // Si ratingField existe, mettez à jour sa valeur
-      if (ratingField) {
-        ratingField.value = rating;
-      }
-      // Mettez à jour les étoiles en fonction de la sélection
-      updateStars(rating);
-      // Si l'étoile a un attribut data-form-url, redirigez vers cette URL
-      var formUrl = this.getAttribute('data-form-url');
-      if (formUrl) {
-        window.location.href = formUrl;
-      }
-    });
-
-    star.addEventListener('mouseover', function() {
-      updateStars(index + 1);
-    });
-
-    // Ajoutez un gestionnaire pour réinitialiser les étoiles à la note actuelle lorsque la souris quitte la zone des étoiles
-    if (document.querySelector('.star-rating')) {
-      document.querySelector('.star-rating').addEventListener('mouseleave', function() {
-        updateStars(currentRating);
-      });
-    }
-  });
-
-  // Pré-sélectionnez les étoiles en fonction de la note actuelle s'il y a un champ de note
-  if (!isNaN(currentRating) && currentRating > 0) {
-    updateStars(currentRating);
-  }
-});
-</script>
 
 
 
