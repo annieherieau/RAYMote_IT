@@ -1,3 +1,21 @@
+<style>
+.star-rating {
+  font-size: 24px;
+}
+
+.star-rating .star_to_rate {
+  cursor: pointer;
+  color: #ccc; 
+}
+
+.star-rating .star.rated {
+  color: #f5a623; 
+}
+.already_stared{
+  color: #f5a623; 
+}
+</style>
+
 <div class="container">
   <h1 class="mt-4 mb-3">Détails de l'atelier</h1>
   <div class="row">
@@ -117,7 +135,11 @@
     <% purchased_workshop = @workshop.attendances.exists?(user: current_user) %>
     <% already_reviewed = @workshop.reviews.exists?(user: current_user) %>
     <% if purchased_workshop && !already_reviewed %>
-        <%= link_to "Noter cet atelier", new_workshop_review_path(@workshop), class: "btn btn-primary" %>
+    <div class="star-rating">
+    <% (1..5).each do |rating| %>
+      <span class="star star_to_rate" data-rating="<%= rating %>" data-form-url="<%= new_workshop_review_path(@workshop, rating: rating) %>">&#9733;</span>
+    <% end %>
+  </div>
     <% elsif current_user == @workshop.creator %>
         <p> Vous ne pouvez pas commenter votre propre atelier </p>
     <% elsif already_reviewed %>
@@ -147,7 +169,15 @@
             <% @workshop.reviews.each do |review| %>
               <tr>
                 <td><%= review.user.firstname %> <%= review.user.lastname %></td>
-                <td><%= review.rating %></td>
+                <td><div class="star-rating">
+                <% (1..5).each do |star| %>
+                  <% if star <= review.rating %>
+                    <span class="star already_stared">&#9733;</span>
+                  <% else %>
+                    <span class="star empty already_stared">&#9734;</span> 
+                  <% end %>
+                <% end %>
+              </div></td>
                 <td><%= review.content %></td>
                 <% if current_user == review.user %>
                   <td><%= link_to "Modifier", edit_review_path(review) %></td>
@@ -174,7 +204,57 @@
   </div>
 </div>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var stars = document.querySelectorAll('.star_to_rate');
+  var ratingField = document.getElementById('rating_field');
+  // Utilisez la valeur de ratingField si elle existe, sinon définissez la note à 0
+  var currentRating = ratingField ? parseInt(ratingField.value, 10) : 0;
 
+  function updateStars(rating) {
+    stars.forEach(function(star, index) {
+      if (index < rating) {
+        star.classList.add('rated');
+      } else {
+        star.classList.remove('rated');
+      }
+    });
+  }
+
+  stars.forEach(function(star, index) {
+    star.addEventListener('click', function() {
+      var rating = index + 1;
+      // Si ratingField existe, mettez à jour sa valeur
+      if (ratingField) {
+        ratingField.value = rating;
+      }
+      // Mettez à jour les étoiles en fonction de la sélection
+      updateStars(rating);
+      // Si l'étoile a un attribut data-form-url, redirigez vers cette URL
+      var formUrl = this.getAttribute('data-form-url');
+      if (formUrl) {
+        window.location.href = formUrl;
+      }
+    });
+
+    star.addEventListener('mouseover', function() {
+      updateStars(index + 1);
+    });
+
+    // Ajoutez un gestionnaire pour réinitialiser les étoiles à la note actuelle lorsque la souris quitte la zone des étoiles
+    if (document.querySelector('.star-rating')) {
+      document.querySelector('.star-rating').addEventListener('mouseleave', function() {
+        updateStars(currentRating);
+      });
+    }
+  });
+
+  // Pré-sélectionnez les étoiles en fonction de la note actuelle s'il y a un champ de note
+  if (!isNaN(currentRating) && currentRating > 0) {
+    updateStars(currentRating);
+  }
+});
+</script>
 
 
 
