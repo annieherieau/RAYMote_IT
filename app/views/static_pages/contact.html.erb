@@ -1,18 +1,38 @@
-<h1>CONTACT</h1>
-<p>Nous sommes impatients de discuter avec vous !</p>
 
-<!-- SECTION CONTACT: 2 colonnes -->
-<section class="rbt-contact-address">
-  <div class="container">
-    <div class="row g-5">
-      <!-- Colonne 1: coordonnées -->
-      <div class="col-lg-6">
-          <%= render "static_pages/contact_infos" %>
-      </div>
-      <!-- Colonne 2: Zonne Contact form -->
-        <div class="col-lg-6">
-            <%= render "static_pages/contact_form" %>
+
+<div class="rbt-breadcrumb-default ptb--100 ptb_md--50 ptb_sm--30 bg-gradient-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-inner text-center">
+                        <h2 class="title">Contact with us</h2>
+                        <p>Nous sommes impatients de discuter avec vous !</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-  </div>
-</div>
+
+<!-- SECTION CONTACT: 2 colonnes -->
+<section class="rbt-contact-address mt-5 mb-5 d-flex">
+  
+
+      <!-- Colonne 1: coordonnées -->
+      <div class="container d-flex justify-content-center">
+      <div class="col-lg-6 w-100">
+        <div class="contact-info-wrapper w-100">
+          <%= render "static_pages/contact_infos" %>
+        </div>
+      </div>
+      </div>
+      <!-- Colonne 2: Zone Contact form -->
+      <div class="container d-flex justify-content-center">
+      <div class="col-lg-6 w-75">
+        <div class="contact-form-wrapper">
+          <%= render "static_pages/contact_form" %>
+        </div>
+      </div>
+      </div>
+
+</section>
+
