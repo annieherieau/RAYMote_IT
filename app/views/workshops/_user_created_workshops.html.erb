@@ -1,6 +1,6 @@
 <div class="tab-pane fade" id="created_workshops" role="tabpanel">
   <div class="rbt-my-account-inner">
-    <h3>Workshops Créés</h3>
+    <h3>Ateliers Créés</h3>
                                 
     <% if @user.created_workshops.present? %>
       <div class="rbt-my-account-table table-responsive text-center">
@@ -10,6 +10,7 @@
               <th scope="col">Name</th>
               <th scope="col">Description</th>
               <th scope="col">Start Date</th>
+              <th scope="col">Validé</th>
               <th scope="col">Actions</th>
             </tr>
           </thead>
@@ -18,7 +19,8 @@
               <tr>
                 <td><%= workshop.name %></td>
                 <td><%= workshop.description %></td>
-                <td><%= workshop.start_date %></td>
+                <td><%= date_format(workshop.start_date) %></td>
+                 <td><%= workshop.validated ? 'oui' : 'non' %></td>
                 <td>
                   <%= link_to "Voir", workshop, class: "rbt-btn btn-sm" %>
                   <% if user_signed_in? && current_user == @user %>

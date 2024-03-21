@@ -15,8 +15,6 @@ class User < ApplicationRecord
   
 
   # validations
-  validates :firstname, presence: true
-  validates :lastname, presence: true
   validates :email, presence: true, uniqueness: true 
 
   after_create :welcome_send

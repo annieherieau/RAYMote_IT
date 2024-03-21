@@ -10,6 +10,8 @@ class Workshop < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_and_belongs_to_many :tags
   has_many :reviews, dependent: :destroy
+  has_many :order_workshops
+  has_many :orders, through: :order_workshops
 
   # validations
   validates :name, presence: true, length: { in: 3..15 }
