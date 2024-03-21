@@ -5,11 +5,11 @@
 
 .star-rating .star {
   cursor: pointer;
-  color: #ccc; /* Couleur des étoiles non sélectionnées */
+  color: #ccc; 
 }
 
 .star-rating .star.rated {
-  color: #f5a623; /* Couleur des étoiles sélectionnées */
+  color: #f5a623; 
 }
 </style>
 
@@ -66,21 +66,18 @@ document.addEventListener('DOMContentLoaded', function() {
     stars.forEach(function(star, index) {
         star.addEventListener('click', function() {
             var rating = index + 1;
-            ratingField.value = rating; // Met à jour le champ caché
-            currentRating = rating; // Met à jour la note actuelle
+            ratingField.value = rating;
+            currentRating = rating;
             updateStars(rating);
         });
 
         star.addEventListener('mouseover', function() {
-            // Met à jour les étoiles jusqu'à celle survolée
             updateStars(index + 1);
         });
     });
 
-    // Ajoute un gestionnaire pour réinitialiser les étoiles à la note actuelle lorsque la souris quitte la zone des étoiles
     document.querySelector('.star-rating').addEventListener('mouseleave', resetStars);
 
-    // Pré-sélectionner les étoiles en fonction de la note actuelle
     if (!isNaN(currentRating) && currentRating > 0) {
         updateStars(currentRating);
     }
