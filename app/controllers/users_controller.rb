@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :set_user, only: %i[ edit update destroy ]
   before_action  :check_admin, only: [:validate]
   before_action :authenticate_user!, except: [:validate]
   before_action :authenticate_admin!, only: [:validate]
@@ -8,7 +8,13 @@ class UsersController < ApplicationController
   # GET /profile/1
   def show
     @user = User.find(params[:id])
-    @created_workshops = @user.created_workshops
+    if (current_user == @user || @user.creator)
+      @created_workshops = @user.created_workshops
+    else
+      redirect_to user_path(current_user)
+    end
+    
+    
   end
 
   # PATCH/PUT /profile/1
