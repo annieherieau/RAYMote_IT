@@ -5,93 +5,39 @@
         <div class="row g-5">
 
             <!-- SIDE MENU -->
-            <div class="col-lg-3 col-12">
-                <div class="rbt-my-account-tab-button nav" role="tablist">
-                    
-                    <a href="#profil" class="active" data-bs-toggle="tab">Profil</a>
-                    
-                    <% if @user.creator %>
-                        <a href="#created_workshops" data-bs-toggle="tab">Workshops Créés</a>
-                    <% elsif current_user == @user %>
-                         <a href="#become_creator" data-bs-toggle="tab">Devenir Créateur</a>
-                    <% end %>
-           
-                    <% if current_user == @user %>
-                      <a href="#workshops" data-bs-toggle="tab">Workshops (inscriptions)</a>
-                      <a href="#reviews" data-bs-toggle="tab">Avis</a>
-                      <a href="#orders" data-bs-toggle="tab">Commandes</a>
-                      <a href="#edit" data-bs-toggle="tab">Modifier mes infos</a>
-                      <a href="login.html">Déconnexion</a>
-                    <% end %>
-                    
-          
-                    
-
-                    
-                </div>
-            </div>
+            <%= render "users/side_menu" %>
             <!-- fin SIDE MENU -->
 
             <!-- CONTENU -->
             <div class="col-lg-9 col-12">
                 <div class="tab-content" id="myaccountContent">
                     
-                    <!-- PROFIL -->
-                    <div class="tab-pane fade active show" id="profil" role="tabpanel">
-                        <div class="rbt-my-account-inner">
-                            <h3>Profil</h3>
-                            <%= render "users/user_details" %>
-                        </div>
-                    </div>
+                    <!-- PROFIL Utilisateur-->
+                    <%= render "users/user_details" %>
                     <!--  fin PROFIL -->
 
                     <% if @user.creator %>
                         <!-- CREATED WORKSHOPS -->
-                        <div class="tab-pane fade" id="created_workshops" role="tabpanel">
-                            <div class="rbt-my-account-inner">
-                                <h3>Workshops Créés</h3>
-                                <%= render partial: "workshops/user_created_workshops", locals: {user: @user} %>
-                            </div>
-                        </div>
+                        <%= render partial: "workshops/user_created_workshops", locals: {user: @user} %>
                         <!--  fin CREATED WORKSHOPS  -->
                     <% elsif current_user == @user %>
                         <!-- BECOME CREATOR -->
-                        <div class="tab-pane fade" id="become_creator" role="tabpanel">
-                            <div class="rbt-my-account-inner">
-                                <h3>Devenir Créateur</h3>
-                                <%= render partial: "users/become_creator", locals: {user: @user} %>
-                            </div>
-                        </div>
+                        <%= render partial: "users/become_creator", locals: {user: @user} %>
                         <!--  fin BECOME CREATOR  -->
                     <% end %>
                     
-                    <% if current_user == @user %>
-                      <!-- WORSHOPS inscriptions -->
-                      <div class="tab-pane fade" id="workshops" role="tabpanel">
-                          <div class="rbt-my-account-inner">
-                              <h3>Workshops (inscriptions)</h3>
-                             <%= render partial: "workshops/user_workshops", locals: {workshops: @user.workshops} %>
-                          </div>
-                      </div>
-                      <!-- fin WORSHOPS inscriptions -->
+                    <% if user_signed_in? && current_user == @user %>
+                        <!-- WORSHOPS inscriptions -->
+                        <%= render partial: "workshops/index", locals: {workshops: @user.workshops} %>
+                        <!-- fin WORSHOPS inscriptions -->
 
-                      <!-- ORDERS -->
-                      <div class="tab-pane fade" id="orders" role="tabpanel">
-                          <div class="rbt-my-account-inner">
-                              <h3>Commandes</h3>
-                              <%= render partial: "orders/user_orders", locals: {orders: @user.orders} %>
-                          </div>
-                      </div>
-                      <!-- fin ORDERS -->
+                        <!-- ORDERS -->
+                        <%= render partial: "orders/index", locals: {orders: @user.orders} %>
+                        <!-- fin ORDERS -->
 
-                      <!-- AVIS -->
-                      <div class="tab-pane fade" id="reviews" role="tabpanel">
-                          <div class="rbt-my-account-inner">
-                              <h3>Avis</h3>
-                              <%= render partial: "reviews/user_reviews", locals: {user: @user} %>
-                          </div>
-                      </div>
-                      <!-- fin AVIS -->
+                        <!-- AVIS -->
+                        <%= render partial: "reviews/index", locals: {reviews: @user.reviews} %>
+                        <!-- fin AVIS -->
                     
                     <% end %>
                     
