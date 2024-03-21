@@ -27,8 +27,13 @@ Rails.application.routes.draw do
   resources :tags, only: [:show]
   resources :categories, only: [:show]
   
-  resources :users, only: [:index, :show, :destroy], path: 'profile'
-  resources :admins, only: [:show]
+  get 'users/:id/validate', to: 'workshops#index'
+  resources :users, only: [:index, :show, :destroy], path: 'profile' do
+    member do
+      patch :validate
+    end
+  end
+  resources :admins, only: [:show], path: 'dashboard'
 
   # Stripe
   scope '/checkout' do
