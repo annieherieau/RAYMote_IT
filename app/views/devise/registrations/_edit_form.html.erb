@@ -1,5 +1,4 @@
-<h3>Modifier les identifiants <%= resource_name.to_s.humanize %></h3>
-
+<h3>Modifier vos identifiants <%= devise_fr %></h3>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
