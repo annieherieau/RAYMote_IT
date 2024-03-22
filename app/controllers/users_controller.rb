@@ -9,7 +9,9 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     if (current_user == @user || @user.creator)
+      @workshops = Workshop.all
       @created_workshops = @user.created_workshops
+      @draft_workshops = @user.created_workshops.where(validated: true)
     else
       redirect_to user_path(current_user)
     end
