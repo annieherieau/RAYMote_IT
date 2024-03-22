@@ -4,16 +4,10 @@ class AdminsController < ApplicationController
   def dashboard
     @users = User.all
     @workshops = Workshop.all
+    @pending_workshops = Workshop.where(validated: false)
     @tags = Tag.all
     @categories = Category.all
     @reviews = Review.all
-  end
-
-  def destroy_user
-    @user = User.find(params[:id])
-    @user.destroy
-    flash[:notice] = "L'utilisateur a été supprimé avec succès."
-    redirect_to admin_dashboard_path
   end
 
 end

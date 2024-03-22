@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[ edit update destroy ]
   before_action  :check_admin, only: [:validate]
   before_action :authenticate_user!, except: [:validate]
-  before_action :authenticate_admin!, only: [:validate]
 
 
   # GET /profile/1

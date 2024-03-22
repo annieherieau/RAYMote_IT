@@ -32,7 +32,10 @@
                 <td>
                   <%# # Admin %>
                   <% if admin_signed_in? %>
-                    - boutons admin -
+                    <%= link_to "Voir", workshop, class: "rbt-btn btn-sm" %>
+                    <% if !workshop.validated %>
+                      <%= button_to 'Valider cet atelier', validate_workshop_path(workshop), method: :patch, data: { confirm: 'Êtes-vous sûr ?' }, class: 'btn btn-primary' %>
+                    <% end %>
                   <% end %>
 
                   <%# # si le current_user est inscrit %>
