@@ -10,7 +10,7 @@ class TagsController < ApplicationController
   def show
     @tag = Tag.find(params[:id])
     # Récupère tous les workshops associés à ce tag
-    @workshops = @tag.workshops
+    @workshops = @tag.workshops.where(validated: true)
   end
 
   # GET /tags/new
