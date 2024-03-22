@@ -1,8 +1,8 @@
 <h3>Ateliers</h3>
-      <% if workshops %> 
-      <div class="rbt-my-account-table table-responsive text-center">
+      <% if workshops.any? %> 
+      <div class="rbt-my-account-table table-responsive ">
         <table class="table table-bordered">
-          <thead class="thead-light">
+          <thead class="thead-light text-center">
             <tr>
               <% if admin_signed_in? %>
                 <th>ID</td>
@@ -17,7 +17,7 @@
             </tr>
           </thead>
           <tbody>
-            <% workshops.each do |workshop| %>
+            <% workshops.reverse.each do |workshop| %>
               <tr>
                 <%# # Admin %>
                 <% if admin_signed_in? %>
@@ -26,20 +26,20 @@
                 <td><%= workshop.name %></td>
                 <td><%= workshop.description %></td>
                 <%# TODO: formater la date %>
-                <td><%= workshop.start_date %></td>
+                <td><%= date_format(workshop.start_date) %></td>
                 <%# # Boutons Action %>
                 <td>
                   <%# # Admin %>
                   <% if admin_signed_in? %>
-                    <%= link_to "Voir", workshop, class: "rbt-btn btn-sm" %>
+                    <%= link_to "Voir", workshop, class: "rbt-btn btn-sm btn-gradient" %>
                     <% if !workshop.validated %>
-                      <%= button_to 'Valider cet atelier', validate_workshop_path(workshop), method: :patch, data: { confirm: 'Êtes-vous sûr ?' }, class: 'btn btn-primary' %>
+                      <%= button_to 'Valider', validate_workshop_path(workshop), method: :patch, data: { confirm: 'Êtes-vous sûr ?' }, class: "rbt-btn btn-sm btn-gradient btn-gradient-2 mt-2"%>
                     <% end %>
                   <% end %>
 
                   <%# # si le current_user est inscrit %>
                   <% if current_user && workshop.user_ids.include?(current_user.id) %>
-                    <%= link_to "Voir", workshop, class: "rbt-btn btn-sm" %>
+                    <%= link_to "Voir", workshop, class: "rbt-btn btn-sm btn-gradient" %>
                   <% end %>
                 </td>
                 <% if admin_signed_in? %>

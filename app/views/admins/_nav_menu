@@ -1,24 +1,121 @@
-<ul class="nav nav-tabs" id="myTab" role="tablist">
-    <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button" role="tab" aria-controls="users" aria-selected="true">Utilisateurs</button>
+<div class="advance-tab-button">
+  <ul class="nav nav-tabs tab-button-style-2" id="myTab-4" role="tablist">
+    <!-- UTILISATEUR -->
+    <li role="presentation">
+      <a
+        href="#"
+        class="tab-button"
+        id="users-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#users"
+        type="button"
+        role="tab"
+        aria-controls="users"
+        aria-selected="true"
+      >
+        <span class="title">Utilisateurs</span>
+      </a>
     </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="workshops-tab" data-bs-toggle="tab" data-bs-target="#workshops" type="button" role="tab" aria-controls="workshops" aria-selected="false">Ateliers</button>
+    <!-- ATELIERS -->
+    <li role="presentation">
+      <a
+        href="#"
+        class="tab-button"
+        id="workshops-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#workshops"
+        type="button"
+        role="tab"
+        aria-controls="workshops"
+        aria-selected="false"
+      >
+        <span class="title">Atelier</span>
+      </a>
     </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="workshops_to_validate-tab" data-bs-toggle="tab" data-bs-target="#workshops_to_validate" type="button" role="tab" aria-controls="pending-workshops" aria-selected="false">Ateliers en attente de validation</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="tags-tab" data-bs-toggle="tab" data-bs-target="#tags" type="button" role="tab" aria-controls="tags" aria-selected="false">Tags</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="categories-tab" data-bs-toggle="tab" data-bs-target="#categories" type="button" role="tab" aria-controls="categories" aria-selected="false">Catégories</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab" aria-controls="reviews" aria-selected="false">Avis</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#messages" type="button" role="tab" aria-controls="messages" aria-selected="false">Messages</button>
+    <!-- ATELIERS EN  ATTENTE DE VALIDATION -->
+    <li role="presentation">
+      <a
+        href="#"
+        class="tab-button active"
+        id="workshops_to_validate-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#workshops_to_validate"
+        type="button"
+        role="tab"
+        aria-controls="workshops_to_validate"
+        aria-selected="false"
+      >
+        <span class="title">Ateliers en attente de validation</span>
+      </a>
     </li>
 
+    <!-- TAGS -->
+    <li role="presentation">
+      <a
+        href="#"
+        class="tab-button"
+        id="tags-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#tags"
+        type="button"
+        role="tab"
+        aria-controls="tags"
+        aria-selected="false"
+      >
+        <span class="title">Tags</span>
+      </a>
+
+      <!-- CATEGORIES -->
+    </li>
+
+    <li role="presentation">
+      <a
+        href="#"
+        class="tab-button"
+        id="categories-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#categories"
+        type="button"
+        role="tab"
+        aria-controls="categories"
+        aria-selected="false"
+      >
+        <span class="title">Catégories</span>
+      </a>
+
+      <!-- REVIEWS -->
+    </li>
+
+    <li role="presentation">
+      <a
+        href="#"
+        class="tab-button"
+        id="reviews-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#reviews"
+        type="button"
+        role="tab"
+        aria-controls="reviews"
+        aria-selected="false"
+      >
+        <span class="title">Avis</span>
+      </a>
+    </li>
+    <!-- REVIEWS -->
+    <li role="presentation">
+      <a
+        href="#"
+        class="tab-button"
+        id="messages-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#messages"
+        type="button"
+        role="tab"
+        aria-controls="messages"
+        aria-selected="false"
+      >
+        <span class="title">Messages</span>
+      </a>
+    </li>
   </ul>
+</div>
