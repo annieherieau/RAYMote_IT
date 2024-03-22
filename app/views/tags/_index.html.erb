@@ -1,0 +1,7 @@
+<h3>Tags</h3>
+  <div class ="d-flex">
+      <% tags.sort_by{|t| t.name.downcase }.each do |tag| %>
+        <%= link_to tag.name, tag_path(tag.id), class: "rbt-badge-4"%>
+      <% end %>
+  </div>
+  

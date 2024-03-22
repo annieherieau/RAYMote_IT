@@ -1,0 +1,38 @@
+<%# MENU ADMINISTRATEUR %>
+<div class="header-right">
+  <ul class="quick-access">
+    <li class="access-icon">
+      <i class="feather-search"></i>
+    </li>
+    <!-- Nom du Compte: Administrateur-->
+    <li class="account-access rbt-user-wrapper ">
+        <img src="/assets/user.svg" class="icon">
+        <a href="#"><i class="feather-user"></i>Administrateur</a>
+      <!-- Menu déroulant: Administrateur -->
+      <div class="rbt-user-menu-list-wrapper">
+        <div class="inner">
+          <%# Admin Name %>
+          <div class="rbt-user-profile">
+            <div class="user-info">
+              <span class="name" style="font-weight: bold"><%= current_admin.email %></span>
+            </div>
+          </div>
+            <%# Liens %>
+            <ul class="user-list-wrapper">
+              <%# Dashboard %>
+              <li>
+                  <img src="/assets/dashboard.svg" class="icon">
+                  <%= link_to "Dashboard", dashboard_path %>
+              </li>
+              
+              <%# déconnexion   %>
+              <li>
+                <img src="/assets/logout.svg" class="icon">
+                <%= button_to "Se déconnecter", destroy_admin_session_path, method: :delete, data: {turbo_method: :delete}, class: "dropdown-item"%>
+              </li>
+            </ul>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
