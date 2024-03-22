@@ -16,33 +16,43 @@
                     </div>
                 </div>
 
-                <nav class="mainmenu-nav">
-                    <ul class="mainmenu centered-menu"> <!-- class for center the tabs -->
-                        <li class="">
+                <nav class="mainmenu-nav navbar navbar-expand-lg">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="mainmenu centered-menu navbar-nav mr-auto"> <!-- class for center the tabs -->
+                        <li class="nav-item active">
                             <%= link_to 'Accueil', root_path, class: "nav-link"%>
                         </li>
-                        <li class="">
+                        <li class="nav-item">
                             <a href="#">Cours
                                 <i class=""></i>
                             </a>
                             <!-- Start Cours -->
                         </li>
-                        <li class="">
+                        <li class="nav-item">
                             <%= link_to 'Ateliers', workshops_path, class: "nav-link"%>
                         </li>
-                        <li class="">
+                        <li class="nav-item">
                             <%= link_to 'Contact', contact_path, class: "nav-link"%>
                         </li>
-                    </ul>
-                </nav>
-                <%# MENU UTILISATEUR %>
-                <%= render "layouts/user_menu" %>
+                        <%# MENU ADMINISTRATEUR %>
+                        <% if admin_signed_in? %>
+                        <li class="nav-item">
+                            <%= render "layouts/admin_menu" %>
+                        <% end %>
+                        </li>
+                        <li class="nav-item mt-5 mr-auto">
+                            <%# MENU UTILISATEUR %>
+                            <%= render "layouts/user_menu" %>
+                        </li>
 
-                <%# MENU ADMINISTRATEUR %>
                 
-                <% if admin_signed_in? %>
-                    <%= render "layouts/admin_menu" %>
-                <% end %>
+                
+                </ul>
+                </div>
+                </nav>
                 
         </div>
     </div>
