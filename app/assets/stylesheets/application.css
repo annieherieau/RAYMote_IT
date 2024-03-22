@@ -57,9 +57,13 @@ h5.ft-title {
   font-weight: bold;
 }
 
+
+footer {
+  margin-bottom: 0%;
+
 /* ##### Messagerie ###### */
 .message {
   border: 1px solid #ddd;
   padding: 10px;
-  margin-bottom: 10px;
+
 }
