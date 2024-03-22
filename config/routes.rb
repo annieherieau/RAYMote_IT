@@ -33,7 +33,7 @@ Rails.application.routes.draw do
       patch :validate
     end
   end
-  resources :admins, only: [:show], path: 'dashboard'
+  get 'dashboard', to: 'admins#dashboard'
 
   # Stripe
   scope '/checkout' do
