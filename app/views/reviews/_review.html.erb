@@ -1,12 +1,35 @@
+<style>
+.star-rating {
+  font-size: 24px;
+}
+
+.star-rating .star_to_rate {
+  cursor: pointer;
+  color: #ccc; 
+}
+
+.star-rating .star.rated {
+  color: #f5a623; 
+}
+.already_stared{
+  color: #f5a623; 
+}
+</style>
+
 <div id="<%= dom_id review %>">
   <p>
     <strong>Content:</strong>
     <%= review.content %>
   </p>
 
-  <p>
-    <strong>Rating:</strong>
-    <%= review.rating %>
-  </p>
+<div class="star-rating">
+  <% (1..5).each do |star| %>
+   <% if star <= review.rating %>
+    <span class="star already_stared">&#9733;</span>
+  <% else %>
+    <span class="star empty already_stared">&#9734;</span> 
+    <% end %>
+  <% end %>
+</div>
 
 </div>

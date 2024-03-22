@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_20_201124) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_22_024025) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -118,6 +118,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_20_201124) do
     t.datetime "updated_at", null: false
     t.bigint "category_id"
     t.boolean "validated", default: false
+    t.boolean "brouillon", default: true
     t.index ["category_id"], name: "index_workshops_on_category_id"
     t.index ["creator_id"], name: "index_workshops_on_creator_id"
   end
