@@ -63,7 +63,7 @@ class UsersController < ApplicationController
       current_user.update(pending: true)
     end
   
-    redirect_to root_path, notice: 'Votre demande a été envoyée à tous les administrateurs.'
+    redirect_to @user, notice: 'Votre demande a été envoyée à tous les administrateurs.'
   end
 
   private

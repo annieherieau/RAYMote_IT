@@ -7,6 +7,8 @@ class AdminsController < ApplicationController
     @tags = Tag.all
     @categories = Category.all
     @reviews = Review.all
+    @admin = Admin.find(params[:id])
+    @received_messages = @admin.received_messages
   end
 
   def destroy_user
