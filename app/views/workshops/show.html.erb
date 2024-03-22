@@ -48,7 +48,15 @@
           </tr>
         </tbody>
       </table>
+      <div class="d-flex">
+      <% @workshop.tags.each do |tag| %>
+        <span class="badge bg-primary m-1">
+          <%= link_to tag.name, tag_path(tag), class: "text-white" %>
+        </span>
+      <% end %>
     </div>
+    </div>
+
     <div class="col-md-6">
       <!-- Participants à l'atelier -->
       <% if current_user == @workshop.creator %>
@@ -63,19 +71,6 @@
           <p>Aucun participant pour le moment.</p>
         <% end %>
       <% end %>
-
-      <!-- Tags -->
-      <h3>Tags:</h3>
-      <% if @workshop.tags.present? && @workshop.tags.any? %>
-        <ul>
-          <% @workshop.tags.each do |tag| %>
-            <li><%= link_to tag.name, tag_path(tag) %></li>
-          <% end %>
-        </ul>
-      <% else %>
-        <p>Cet atelier n'a pas de tags associés.</p>
-      <% end %>
-
 
       <!-- Categories -->
       <h3>Catégories:</h3>
@@ -203,8 +198,3 @@
     <%= link_to "Back to workshops", workshops_path, class: "btn btn-secondary mr-2" %>
   </div>
 </div>
-
-
-
-
-
