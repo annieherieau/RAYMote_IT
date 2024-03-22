@@ -16,7 +16,7 @@
           <% orders.each do |order| %>
             <tr>
               <td><%= order.id %></td>
-              <td><%= order.created_at.strftime('%d/%m/%Y %H:%M:%S') %></td>
+              <td><%= date_format(order.created_at) %></td>
               <td><%= number_to_euros(order.amount) %></td>
               <td><%= link_to 'Voir', order_path(order.id), class: "rbt-btn btn-sm" %></td>
             </tr>

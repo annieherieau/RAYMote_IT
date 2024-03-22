@@ -6,7 +6,7 @@ class WorkshopsController < ApplicationController
   
   # GET /workshops or /workshops.json
   def index
-    @workshops = Workshop.where(validated: true).to_a.select do |workshop|
+    @workshops = Workshop.where(validated: true, brouillon: false).to_a.select do |workshop|
       workshop.status == 'en cours' || workshop.status == 'à venir'
     end
   end
@@ -25,6 +25,13 @@ class WorkshopsController < ApplicationController
     @categories = Category.all
     @tags = Tag.all
     
+  end
+
+  def activate
+    @workshop = Workshop.find(params[:id])
+    @workshop.update_attribute(:brouillon, false)
+
+    redirect_to @workshop, notice: "L'atelier a été activé."
   end
 
   # GET /workshops/1/edit
@@ -64,17 +71,28 @@ class WorkshopsController < ApplicationController
 
   # PATCH/PUT /workshops/1 or /workshops/1.json
   def update
-    @tags = Tag.all
-    @workshop.tags_destroy
-    respond_to do |format|
-      if @workshop.update(workshop_params)
-        format.html { redirect_to workshop_url(@workshop), notice: "Workshop was successfully updated." }
-        format.json { render :show, status: :ok, location: @workshop }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @workshop.errors, status: :unprocessable_entity }
-      end
+    @workshop = Workshop.find(params[:id])
+
+  # Supprimez les tags marqués pour suppression
+  if params[:workshop][:deleted_tag_ids].present?
+    deleted_tag_ids = params[:workshop][:deleted_tag_ids].reject(&:blank?).map(&:to_i)
+    @workshop.tags.delete(Tag.where(id: deleted_tag_ids))
+  end
+
+  # Continuez avec la mise à jour des tags existants et des nouveaux tags comme précédemment
+  if params[:workshop][:tag_names].present?
+    params[:workshop][:tag_names].each do |tag_name|
+      tag = Tag.find_or_create_by(name: tag_name)
+      @workshop.tags << tag unless @workshop.tags.include?(tag)
     end
+  end
+
+  # Finalement, mettez à jour le workshop avec les autres paramètres
+  if @workshop.update(workshop_params)
+    redirect_to workshop_url(@workshop), notice: "Workshop was successfully updated."
+  else
+    render :edit, status: :unprocessable_entity
+  end
   end
 
   # DELETE /workshops/1 or /workshops/1.json
@@ -96,7 +114,7 @@ class WorkshopsController < ApplicationController
     end
 
     def authorize_creator!
-      unless @workshop.creator == current_user
+      unless (@workshop.creator == current_user) || current_admin
         flash[:alert] = "You are not authorized to perform this action."
         redirect_to root_path
       end

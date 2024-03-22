@@ -2,6 +2,7 @@
 <html lang="fr">
 
 <head>
+    <%= javascript_importmap_tags %>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>RAYMote IT</title>
@@ -29,6 +30,10 @@
     </header>
     <%= render "layouts/flash" %>
 
+
+
+
+
     <%= yield %>
 
     <footer>
@@ -42,8 +47,7 @@
     <script src="https://js.stripe.com/v3/"></script>
 
     <!-- Main JS -->
-    <%= javascript_include_tag "application" %>
-    <%= javascript_importmap_tags %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload" %>
 </body>
 
 </html>

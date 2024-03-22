@@ -1,0 +1,23 @@
+<section class="my-account-section bg-color-white rbt-section-gap">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="row g-5">
+          <div class="col-lg-3 col-12">
+              <div class="rbt-my-account-tab-button nav" role="tablist">
+                <%= link_to 'Retour au Profil', user_path(current_user), class: "active" %>
+                <%= link_to 'Vos Identifiants', edit_user_registration_path %>
+              </div>
+          </div>
+          <div class="col-lg-9 col-12">
+            <div class="rbt-my-account-inner">
+            <!-- EDIT  -->
+            <%= render partial: "users/form", locals: {user: @user} %>
+            <!-- fin EDIT -->
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</section>
+

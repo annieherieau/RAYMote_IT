@@ -1,0 +1,10 @@
+<div class="creator_send">
+<%= form_with url: become_creator_path, method: :post, local: true do |form| %>
+    <div class="field">
+      <%= form.label :message %>
+      <%= form.text_area :message, required: true %>
+    </div>
+  
+    <%= form.submit "Envoyer la demande", class: "btn btn-primary" %>
+  <% end %>
+  </div>

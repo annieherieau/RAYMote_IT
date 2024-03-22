@@ -1,3 +1,18 @@
+<style>
+.star-rating {
+  font-size: 24px;
+}
+
+.star-rating .star {
+  cursor: pointer;
+  color: #ccc; 
+}
+
+.star-rating .star.rated {
+  color: #f5a623; 
+}
+</style>
+
 <%= form_with(model: [ @workshop, review ], local: true) do |form| %>
   <% if review.errors.any? %>
     <div style="color: red">
@@ -16,10 +31,12 @@
     <%= form.text_area :content %>
   </div>
 
-  <div>
-  <%= form.label :rating, style: "display: block" %>
-  <%= form.number_field :rating, min: 1, max: 5 %>
+  <div class="star-rating">
+  <% (1..5).each do |rating| %>
+    <span class="star" data-rating="<%= rating %>">&#9733;</span>
+  <% end %>
 </div>
+<%= form.hidden_field :rating, id: 'rating_field', value: @review.rating %>
 
   <div>
     <%= form.submit %>
