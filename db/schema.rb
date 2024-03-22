@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_20_201124) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_22_065107) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,6 +48,29 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_20_201124) do
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_likes_on_user_id"
     t.index ["workshop_id"], name: "index_likes_on_workshop_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "body"
+    t.boolean "read"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "sender_type"
+    t.bigint "sender_id"
+    t.string "receiver_type"
+    t.bigint "receiver_id"
+    t.index ["receiver_type", "receiver_id"], name: "index_messages_on_receiver"
+    t.index ["sender_type", "sender_id"], name: "index_messages_on_sender"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.string "notifiable_type", null: false
+    t.bigint "notifiable_id", null: false
+    t.bigint "message_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["message_id"], name: "index_notifications_on_message_id"
+    t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable"
   end
 
   create_table "order_workshops", force: :cascade do |t|
@@ -102,6 +125,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_20_201124) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.boolean "pending"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -118,12 +142,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_20_201124) do
     t.datetime "updated_at", null: false
     t.bigint "category_id"
     t.boolean "validated", default: false
+    t.boolean "brouillon", default: true
     t.index ["category_id"], name: "index_workshops_on_category_id"
     t.index ["creator_id"], name: "index_workshops_on_creator_id"
   end
 
   add_foreign_key "likes", "users"
   add_foreign_key "likes", "workshops"
+  add_foreign_key "notifications", "messages"
   add_foreign_key "orders", "users"
   add_foreign_key "reviews", "users"
   add_foreign_key "reviews", "workshops"

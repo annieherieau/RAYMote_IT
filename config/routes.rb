@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :messages
  
   resources :reviews
   
@@ -20,6 +21,7 @@ Rails.application.routes.draw do
     resources :reviews, only: [:new, :create]
     member do
       patch :validate
+      patch :activate
     end
   end
 
@@ -34,6 +36,9 @@ Rails.application.routes.draw do
     end
   end
   resources :admins, only: [:show], path: 'dashboard'
+
+  post 'become_creator', to: 'users#become_creator', as: :become_creator
+  patch 'users/:user_id/promote_to_creator', to: 'users#promote_to_creator', as: :promote_to_creator
 
   # Stripe
   scope '/checkout' do

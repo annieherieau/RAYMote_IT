@@ -3,10 +3,12 @@ class AdminsController < ApplicationController
 
   def show
     @users = User.all
-    @workshops = Workshop.all
+    @workshops = Workshop.all.where(brouillon: false)
     @tags = Tag.all
     @categories = Category.all
     @reviews = Review.all
+    @admin = Admin.find(params[:id])
+    @received_messages = @admin.received_messages
   end
 
   def destroy_user

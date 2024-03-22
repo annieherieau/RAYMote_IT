@@ -29,10 +29,20 @@ emails_with_names.each do |email, names|
     firstname: names[0],
     lastname: names[1],
     password: "1&Azert",
-    creator: [true, false].sample
+    creator: [true, false].sample,
+    pending: false
   )
 end
 puts('4 Users créés - creator aleatoires')
+
+# Création d'un admin
+emails_with_names.each do |email, names|
+  Admin.create!(
+    email: email,
+    password: "1&Azert"
+  )
+end
+puts ('4 admins créés (mail, password : 1&Azert)')
 
 # Création des catégories
 categories = ["JavaScript", "Python", "Ruby", "Java", "C++", "C#", "Swift", "Go", "PHP", "TypeScript"]
@@ -42,7 +52,7 @@ end
 puts("Categories créés - creator aleatoires")
 
 # Création des ateliers avec Faker
-10.times do
+20.times do
   Workshop.create!(
     name: Faker::Lorem.words(number: 3).join(' ')[0, 15], # Générer un nom de 3 mots et limiter à 15 caractères
     description: Faker::Lorem.paragraph(sentence_count: 2),
@@ -52,7 +62,8 @@ puts("Categories créés - creator aleatoires")
     event: true,
     creator: User.where(creator: true).sample,
     category: Category.all.sample,
-    validated: [true, false].sample
+    validated: [true, false].sample,
+    brouillon: false
   )
 end
 puts('10 Workshops créés')
@@ -77,7 +88,7 @@ end
 # Création des participations
 User.all.each do |user|
   rand(1..5).times do
-    workshop = Workshop.all.sample
+    workshop = Workshop.all.where(validated: true).sample
     unless Attendance.find_by(user: user, workshop: workshop)
       attendance = Attendance.create!(user: user, workshop: Workshop.all.sample)
     end
