@@ -1,38 +1,38 @@
+<% title = "Contactez-nous" %>
+<% subtitle = "Nous sommes à votre écoute pour répondre à vos questions." %>
 
+<%= render partial: "layouts/banner", locals: {title: title, subtitle: subtitle}%>
 
-<div class="rbt-breadcrumb-default ptb--100 ptb_md--50 ptb_sm--30 bg-gradient-1">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb-inner text-center">
-                        <h2 class="title">Contact with us</h2>
-                        <p>Nous sommes impatients de discuter avec vous !</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-<!-- SECTION CONTACT: 2 colonnes -->
-<section class="rbt-contact-address mt-5 mb-5 d-flex">
-  
+<div class= "container ">
+<%= render "static_pages/contact_infos" %>
+  </div>
 
       <!-- Colonne 1: coordonnées -->
-      <div class="container d-flex justify-content-center">
-      <div class="col-lg-6 w-100">
-        <div class="contact-info-wrapper w-100">
-          <%= render "static_pages/contact_infos" %>
+      <div class="container">
+      <div class="row">
+
+        <div class="contact-info-wrapper w-100 ">
+          
         </div>
-      </div>
-      </div>
-      <!-- Colonne 2: Zone Contact form -->
-      <div class="container d-flex justify-content-center">
-      <div class="col-lg-6 w-75">
-        <div class="contact-form-wrapper">
+
+        <div class= "row">
+        <div class= "col-lg-6">
+          <img src="assets/RAYM_office.png" alt="Office">
+        </div>
+
+        <div class= "col-lg-6">
           <%= render "static_pages/contact_form" %>
         </div>
+        </div>
+
       </div>
       </div>
+    
+
+      </br>
+      </br>
+
 
 </section>
+
 
