@@ -39,16 +39,18 @@
           <%= form.label :price %>
           <%= form.number_field :price, class: "form-control", placeholder: "Enter price" %>
         </div>
-
         <div class="form-group">
-          <%= form.label :tags, "Tags:" %>
-          <% @tags.each do |tag| %>
-            <div class="form-check">
-              <%= form.check_box :tag_ids, { multiple: true, class: 'form-check-input' }, tag.id, nil %>
-              <%= form.label nil, tag.name, class: 'form-check-label' %>
-            </div>
+        <%= form.label :tags, "Tags:", class: "form-label" %>
+        <div id="tag-list" class="d-flex flex-wrap gap-2 mb-3">
+          <% @workshop.tags.each do |tag| %>
+            <span class="badge bg-primary d-flex align-items-center destroyable">
+              <%= tag.name %>
+              <button type="button" class="btn-close btn-close-white ms-2 remove-tag" aria-label="Close" data-tag-id="<%= tag.id %>"></button>
+            </span>
           <% end %>
         </div>
+        <%= text_field_tag :tag_input, nil, placeholder: "Add a tag", class: "form-control", id: "tag-input", "data-role" => "tagsinput" %>
+      </div>
 
         <div class="form-group">
           <%= form.label :category_id, "Category" %><br>
@@ -60,3 +62,4 @@
     </div>
   </div>
 </div>
+
