@@ -1,0 +1,74 @@
+<%# MENU UTILISATEUR %>
+<div class="header-right">
+  <ul class="quick-access">
+    <li class="access-icon">
+      <i class="feather-search"></i>
+    </li>
+    <!-- Nom du Compte: Utilisateur-->
+    <li class="account-access rbt-user-wrapper ">
+      <% if user_signed_in? %>
+        <img src="/assets/user.svg" class="icon">
+        <a href="#"><i class="feather-user"></i>Utilisateur</a>
+      <% else %>
+        <img src="/assets/log-in.svg" class="icon">
+        <a href="#"><i class="feather-user"></i>Connexion</a>
+      <% end %>
+
+      <!-- Menu déroulant: Utilisateur -->
+      <div class="rbt-user-menu-list-wrapper">
+        <div class="inner">
+          <%# UTILISATEUR connecté %>
+          <% if user_signed_in? %>
+            <%# User Name %>
+            <div class="rbt-user-profile">
+              <div class="user-info">
+                <span class="name" style="font-weight: bold"><%= current_user.firstname %></span>
+              </div>
+            </div>
+            <%# Liens user connecté %>
+            <ul class="user-list-wrapper">
+              <%# Dashboard %>
+              <li>
+                  <img src="/assets/dashboard.svg" class="icon">
+                  <%= link_to "Dashboard", user_path(current_user) %>
+              </li>
+
+              <%# Créateur: nouveau workshop %>
+              <% if current_user.creator %>
+                <li>
+                  <img src="/assets/dashboard.svg" class="icon">
+                  <%= link_to "Créer un atelier", new_workshop_path %>
+                </li>
+              <% end %>
+              
+              <%# Account settings %>
+              <li>
+                <img src="/assets/dashboard.svg" class="icon">
+                <%= link_to "Éditer mes données", edit_user_path(current_user) %>
+              </li>
+              <%# déconnexion   %>
+              <li>
+                <img src="/assets/logout.svg" class="icon">
+                <%= button_to "Se déconnecter", destroy_user_session_path, method: :delete, data: {turbo_method: :delete}, class: "dropdown-item"%>
+              </li>
+            </ul>
+          <% else %>
+            <%# VISITEUR non contecté %>
+              <%# Liens Connexion/inscriptio %>
+              <ul class="user-list-wrapper">
+                <%# Connexion %>
+                <li>
+                  <%= link_to "Se connecter", new_user_session_path %>
+                </li>
+                
+                <%# inscription %>
+                <li>
+                  <%= link_to "S'inscrire", new_user_registration_path %>
+                </li>
+              </ul>
+          <% end %>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

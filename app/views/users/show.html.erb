@@ -38,8 +38,10 @@
 
                     <%if @user.creator %>
                     <!-- WORKSHOPS BROUILLON -->
+                    <div class="tab-pane fade show" id="draft_workshops" role="tabpanel">
                     <%= render partial: "workshops/workshops_brouillon", locals: {workshops: @user.workshops.where(brouillon: true)} %>
                     <!-- fin WORKSHOPS BROUILLON -->
+                    </div>
                     <% end %>
                     
                     <% if user_signed_in? && current_user == @user %>
