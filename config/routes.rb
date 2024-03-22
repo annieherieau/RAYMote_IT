@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :messages
  
   resources :reviews
   
@@ -35,6 +36,8 @@ Rails.application.routes.draw do
     end
   end
   resources :admins, only: [:show], path: 'dashboard'
+
+  post 'become_creator', to: 'users#become_creator', as: :become_creator
 
   # Stripe
   scope '/checkout' do

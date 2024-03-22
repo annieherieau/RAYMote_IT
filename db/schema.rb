@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_22_024025) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_22_062354) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,6 +48,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_22_024025) do
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_likes_on_user_id"
     t.index ["workshop_id"], name: "index_likes_on_workshop_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "body"
+    t.boolean "read"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "sender_type"
+    t.bigint "sender_id"
+    t.string "receiver_type"
+    t.bigint "receiver_id"
+    t.index ["receiver_type", "receiver_id"], name: "index_messages_on_receiver"
+    t.index ["sender_type", "sender_id"], name: "index_messages_on_sender"
   end
 
   create_table "order_workshops", force: :cascade do |t|
@@ -102,6 +115,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_22_024025) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.boolean "pending"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

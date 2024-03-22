@@ -16,6 +16,12 @@
                     <%= render "users/user_details" %>
                     <!--  fin PROFIL -->
 
+                    <!-- DEVENIR CREATEUR -->
+                    <div class="tab-pane fade" id="creator_send" role="tabpanel">
+                      <%= render partial: "users/send_creator" %>
+                    </div>
+                    <!-- fin DEVENIR CREATEUR -->
+
                     <% if @user.creator %>
                         <!-- CREATED WORKSHOPS -->
                         <%= render partial: "workshops/user_created_workshops", locals: {user: @user} %>

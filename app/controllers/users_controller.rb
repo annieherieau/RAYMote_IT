@@ -51,6 +51,20 @@ class UsersController < ApplicationController
     redirect_back(fallback_location: root_path, notice: notice)
   end
 
+  def become_creator
+    message_content = params[:message]
+  
+    Admin.all.each do |admin|
+      Message.create(
+        body: message_content,
+        sender: current_user, # ou `sender_id: current_user.id`, selon votre modèle
+        receiver: admin # ou `receiver_id: admin.id`, selon votre modèle
+      )
+    end
+  
+    redirect_to root_path, notice: 'Votre demande a été envoyée à tous les administrateurs.'
+  end
+
   private
 
     # Use callbacks to share common setup or constraints between actions.
