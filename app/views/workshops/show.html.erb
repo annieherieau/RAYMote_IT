@@ -48,8 +48,8 @@
           </tr>
         </tbody>
       </table>
-      <% if @workshop.tags.present? && @workshop.tags.any? %>
       <div class="d-flex">
+      <% if @workshop.tags.present? && @workshop.tags.any? %>
       <% @workshop.tags.each do |tag| %>
         <span class="badge bg-primary m-1">
           <%= link_to tag.name, tag_path(tag), class: "text-white" %>
