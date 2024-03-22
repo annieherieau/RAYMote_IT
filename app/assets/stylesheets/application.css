@@ -31,3 +31,7 @@ h5.ft-title {
   font-size: var(--h5);
   font-weight: bold;
 }
+
+footer {
+  margin-bottom: 0%;
+}
