@@ -1,0 +1,21 @@
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button" role="tab" aria-controls="users" aria-selected="true">Utilisateurs</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="workshops-tab" data-bs-toggle="tab" data-bs-target="#workshops" type="button" role="tab" aria-controls="workshops" aria-selected="false">Ateliers</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pending-workshops-tab" data-bs-toggle="tab" data-bs-target="#pending-workshops" type="button" role="tab" aria-controls="pending-workshops" aria-selected="false">Ateliers en attente de validation</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="tags-tab" data-bs-toggle="tab" data-bs-target="#tags" type="button" role="tab" aria-controls="tags" aria-selected="false">Tags</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="categories-tab" data-bs-toggle="tab" data-bs-target="#categories" type="button" role="tab" aria-controls="categories" aria-selected="false">Catégories</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab" aria-controls="reviews" aria-selected="false">Avis</button>
+    </li>
+
+  </ul>

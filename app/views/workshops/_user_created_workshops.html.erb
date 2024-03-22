@@ -1,8 +1,7 @@
-<div class="tab-pane fade" id="created_workshops" role="tabpanel">
-  <div class="rbt-my-account-inner">
+
     <h3>Ateliers Créés</h3>
                                 
-    <% if @user.created_workshops.present? %>
+    <% if @user.created_workshops.any? %>
       <div class="rbt-my-account-table table-responsive text-center">
         <table class="table table-bordered">
           <thead class="thead-light">
@@ -36,5 +35,3 @@
     <% else %>
       <p>Aucun workshop créé pour le moment.</p>
     <% end %>
-  </div>
-</div>

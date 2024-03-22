@@ -1,27 +1,8 @@
 <div class="container">
   <h1>Tableau de bord administrateur</h1>
   
-  <ul class="nav nav-tabs" id="myTab" role="tablist">
-    <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button" role="tab" aria-controls="users" aria-selected="true">Utilisateurs</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="workshops-tab" data-bs-toggle="tab" data-bs-target="#workshops" type="button" role="tab" aria-controls="workshops" aria-selected="false">Ateliers</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="pending-workshops-tab" data-bs-toggle="tab" data-bs-target="#pending-workshops" type="button" role="tab" aria-controls="pending-workshops" aria-selected="false">Ateliers en attente de validation</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="tags-tab" data-bs-toggle="tab" data-bs-target="#tags" type="button" role="tab" aria-controls="tags" aria-selected="false">Tags</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="categories-tab" data-bs-toggle="tab" data-bs-target="#categories" type="button" role="tab" aria-controls="categories" aria-selected="false">Catégories</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab" aria-controls="reviews" aria-selected="false">Avis</button>
-    </li>
-
-  </ul>
+  <%= render "nav_menu" %>
+  
   
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="users" role="tabpanel" aria-labelledby="users-tab">
@@ -55,6 +36,7 @@
     <%= render partial: "workshops/index", locals: {workshops: @workshops} %>
     <!-- fin WORSHOPS inscriptions -->
     
+
     <div class="tab-pane fade" id="pending-workshops" role="tabpanel" aria-labelledby="pending-workshops-tab">
       <h2>Ateliers en attente de validation</h2>
       <% @workshops.where(validated: false).each do |workshop| %>
@@ -68,6 +50,7 @@
           </div>
         <% end %>
     </div>
+
     <div class="tab-pane fade" id="tags" role="tabpanel" aria-labelledby="tags-tab">
       <h2>Tags</h2>
       <ul>
@@ -76,6 +59,7 @@
         <% end %>
       </ul>
     </div>
+
     <div class="tab-pane fade" id="categories" role="tabpanel" aria-labelledby="categories-tab">
       <h2>Catégories</h2>
       <ul>
@@ -84,27 +68,12 @@
         <% end %>
       </ul>
     </div>
-    <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
-      <h2>Avis</h2>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Utilisateur</th>
-            <th>Atelier</th>
-            <th>Contenu</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @reviews.each do |review| %>
-            <tr>
-              <td><%= review.user.firstname %> <%= review.user.lastname %></td>
-              <td><%= review.workshop.name %></td>
-              <td><%= review.content %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+
+    <!-- AVIS -->
+     <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="categories-tab">
+    <%= render partial: "reviews/index", locals: {reviews: @reviews} %>
     </div>
+    <!-- fin AVIS -->
 
   </div>
 </div>

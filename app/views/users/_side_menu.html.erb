@@ -5,8 +5,6 @@
     
     <% if @user.creator %>
         <a href="#created_workshops" data-bs-toggle="tab">Ateliers Créés</a>
-    <% elsif current_user == @user %>
-          <a href="#become_creator" data-bs-toggle="tab">Devenir Créateur</a>
     <% end %>
 
     <% if current_user == @user %>
