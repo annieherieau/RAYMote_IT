@@ -5,8 +5,11 @@
     
     <% if @user.creator %>
         <a href="#created_workshops" data-bs-toggle="tab">Ateliers Créés</a>
+        <%if @user == current_user %>
+          <a href="#draft_workshops" data-bs-toggle="tab">Mes Brouillons</a>
+        <% end %>
     <% elsif current_user == @user %>
-          <a href="#become_creator" data-bs-toggle="tab">Devenir Créateur</a>
+          <a href="#creator_send" data-bs-toggle="tab">Devenir Créateur</a>
     <% end %>
 
     <% if current_user == @user %>

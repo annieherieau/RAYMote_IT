@@ -1,0 +1,10 @@
+<h2>Messages</h2>
+  <div class="messages">
+    <% received_messages.each do |message| %>
+      <div class="message">
+        <p><%= message.body %></p>
+        <small>Envoyé par: <%= link_to message.sender.email,user_path(message.sender.id) %></small>
+        <%= button_to 'Supprimer', message_path(message), method: :delete, data: { confirm: 'Êtes-vous sûr de vouloir supprimer ce message ?' }, class: 'btn btn-danger btn-sm' %>
+      </div>
+    <% end %>
+  </div>

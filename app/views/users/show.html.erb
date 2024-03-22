@@ -13,26 +13,54 @@
                 <div class="tab-content" id="myaccountContent">
                     
                     <!-- PROFIL Utilisateur-->
+                    <div class="tab-pane fade active show" id="profil" role="tabpanel">
                     <%= render "users/user_details" %>
+                    </div>
                     <!--  fin PROFIL -->
+
+                    <!-- DEVENIR CREATEUR -->
+                    <div class="tab-pane fade" id="creator_send" role="tabpanel">
+                    <% if @user.pending == false %>
+                      <%= render partial: "users/send_creator" %>
+                      <% else %>
+                      <p>Votre demande est en cours de traitement</p>
+                    <% end %>
+                    </div>
+                    <!-- fin DEVENIR CREATEUR -->
 
                     <% if @user.creator %>
                         <!-- CREATED WORKSHOPS -->
-                        <%= render partial: "workshops/user_created_workshops", locals: {user: @user} %>
+                        <div class="tab-pane fade show" id="created_workshops" role="tabpanel">
+                          <%= render partial: "workshops/user_created_workshops", locals: {user: @user} %>
+                        </div>
                         <!--  fin CREATED WORKSHOPS  -->
+                    <% end %>
+
+                    <%if @user.creator %>
+                    <!-- WORKSHOPS BROUILLON -->
+                    <div class="tab-pane fade show" id="draft_workshops" role="tabpanel">
+                    <%= render partial: "workshops/workshops_brouillon", locals: {workshops: @user.workshops.where(brouillon: true)} %>
+                    <!-- fin WORKSHOPS BROUILLON -->
+                    </div>
                     <% end %>
                     
                     <% if user_signed_in? && current_user == @user %>
                         <!-- WORSHOPS inscriptions -->
-                        <%= render partial: "workshops/index", locals: {workshops: @user.workshops} %>
+                        <div class="tab-pane fade show" id="workshops" role="tabpanel">
+                          <%= render partial: "workshops/index", locals: {workshops: @user.workshops} %>
+                        </div>
                         <!-- fin WORSHOPS inscriptions -->
 
                         <!-- ORDERS -->
-                        <%= render partial: "orders/index", locals: {orders: @user.orders} %>
+                        <div class="tab-pane fade show" id="orders" role="tabpanel">
+                          <%= render partial: "orders/index", locals: {orders: @user.orders} %>
+                        </div>
                         <!-- fin ORDERS -->
 
                         <!-- AVIS -->
-                        <%= render partial: "reviews/index", locals: {reviews: @user.reviews} %>
+                        <div class="tab-pane fade show" id="reviews" role="tabpanel">
+                          <%= render partial: "reviews/index", locals: {reviews: @user.reviews} %>
+                        </div>
                         <!-- fin AVIS -->
                     
                     <% end %>

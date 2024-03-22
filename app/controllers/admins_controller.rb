@@ -1,19 +1,16 @@
 class AdminsController < ApplicationController
   before_action :authenticate_admin!
 
-  def show
+  def dashboard
     @users = User.all
-    @workshops = Workshop.all
+    @workshops = Workshop.all.where(brouillon: false)
+    # atelier en attente de validation
+    @workshops_to_validate = Workshop.where(validated: false, brouillon: false)
     @tags = Tag.all
     @categories = Category.all
     @reviews = Review.all
-  end
-
-  def destroy_user
-    @user = User.find(params[:id])
-    @user.destroy
-    flash[:notice] = "L'utilisateur a été supprimé avec succès."
-    redirect_to admin_dashboard_path
+    @admin = current_admin
+    @received_messages = @admin.received_messages
   end
 
 end
