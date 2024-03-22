@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ edit update destroy ]
+  before_action :set_user, only: %i[ edit update destroy become_creator ]
   before_action  :check_admin, only: [:validate]
   before_action :authenticate_user!, except: [:validate]
   before_action :authenticate_admin!, only: [:validate]
@@ -60,6 +60,7 @@ class UsersController < ApplicationController
         sender: current_user, # ou `sender_id: current_user.id`, selon votre modèle
         receiver: admin # ou `receiver_id: admin.id`, selon votre modèle
       )
+      current_user.update(pending: true)
     end
   
     redirect_to root_path, notice: 'Votre demande a été envoyée à tous les administrateurs.'

@@ -29,7 +29,8 @@ emails_with_names.each do |email, names|
     firstname: names[0],
     lastname: names[1],
     password: "1&Azert",
-    creator: [true, false].sample
+    creator: [true, false].sample,
+    pending: false
   )
 end
 puts('4 Users créés - creator aleatoires')
