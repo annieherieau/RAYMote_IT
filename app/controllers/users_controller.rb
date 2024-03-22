@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[ edit update destroy become_creator ]
   before_action  :check_admin, only: [:validate]
   before_action :authenticate_user!, except: [:validate]
-  before_action :authenticate_admin!, only: [:validate]
+  before_action :authenticate_admin!, only: [:validate, :promote_to_creator]
 
 
   # GET /profile/1
@@ -64,6 +64,13 @@ class UsersController < ApplicationController
     end
   
     redirect_to @user, notice: 'Votre demande a été envoyée à tous les administrateurs.'
+  end
+
+  def promote_to_creator
+    user = User.find(params[:user_id])
+    user.update(creator: true)
+    user.update(pending: false)
+    redirect_to admin_path(current_admin), notice: "#{user.email} a été promu en tant que créateur."
   end
 
   private

@@ -57,10 +57,10 @@ class MessagesController < ApplicationController
   # DELETE /messages/1 or /messages/1.json
   def destroy
     @message.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to messages_url, notice: "Message was successfully destroyed." }
-      format.json { head :no_content }
+    if current_admin
+    redirect_to admin_path(current_admin), notice: 'Message supprimé avec succès.'
+    elsif current_user
+      redirect_to user_path(current_user), notice: 'Message supprimé avec succès.'
     end
   end
 

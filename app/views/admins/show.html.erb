@@ -55,6 +55,7 @@
               <td>
                 <% if !user.creator? %>
                   <%= link_to "Supprimer", user_path(user), method: :delete, data: { confirm: "Êtes-vous sûr de vouloir supprimer cet utilisateur ?" }, class: "btn btn-danger btn-sm" %>
+                  <%= button_to 'Promouvoir en créateur', promote_to_creator_path(user_id: user.id), method: :patch, class: 'btn btn-success btn-sm' %>
                 <% end %>
               </td>
             </tr>

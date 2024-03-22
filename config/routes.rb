@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   resources :admins, only: [:show], path: 'dashboard'
 
   post 'become_creator', to: 'users#become_creator', as: :become_creator
+  patch 'users/:user_id/promote_to_creator', to: 'users#promote_to_creator', as: :promote_to_creator
 
   # Stripe
   scope '/checkout' do
