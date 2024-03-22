@@ -18,12 +18,28 @@
                     </div>
                     <!--  fin PROFIL -->
 
+                    <!-- DEVENIR CREATEUR -->
+                    <div class="tab-pane fade" id="creator_send" role="tabpanel">
+                    <% if @user.pending == false %>
+                      <%= render partial: "users/send_creator" %>
+                      <% else %>
+                      <p>Votre demande est en cours de traitement</p>
+                    <% end %>
+                    </div>
+                    <!-- fin DEVENIR CREATEUR -->
+
                     <% if @user.creator %>
                         <!-- CREATED WORKSHOPS -->
                         <div class="tab-pane fade show" id="created_workshops" role="tabpanel">
                           <%= render partial: "workshops/user_created_workshops", locals: {user: @user} %>
                         </div>
                         <!--  fin CREATED WORKSHOPS  -->
+                    <% end %>
+
+                    <%if @user.creator %>
+                    <!-- WORKSHOPS BROUILLON -->
+                    <%= render partial: "workshops/workshops_brouillon", locals: {workshops: @user.workshops.where(brouillon: true)} %>
+                    <!-- fin WORKSHOPS BROUILLON -->
                     <% end %>
                     
                     <% if user_signed_in? && current_user == @user %>

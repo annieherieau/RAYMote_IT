@@ -1,7 +1,8 @@
-
+<div class="tab-pane fade" id="workshops_brouillon" role="tabpanel">
+  <div class="rbt-my-account-inner">
     <h3>Ateliers Créés</h3>
                                 
-    <% if @created_workshops.any? %>
+    <% if @user.created_workshops.present? %>
       <div class="rbt-my-account-table table-responsive text-center">
         <table class="table table-bordered">
           <thead class="thead-light">
@@ -9,22 +10,21 @@
               <th scope="col">Name</th>
               <th scope="col">Description</th>
               <th scope="col">Start Date</th>
-              <th scope="col">Validé</th>
               <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
-            <% @draft_workshops.each do |workshop| %>
+            <% @user.created_workshops.where(brouillon: true).each do |workshop| %>
               <tr>
                 <td><%= workshop.name %></td>
                 <td><%= workshop.description %></td>
                 <td><%= date_format(workshop.start_date) %></td>
-                 <td><%= workshop.validated ? 'oui' : 'non' %></td>
                 <td>
                   <%= link_to "Voir", workshop, class: "rbt-btn btn-sm" %>
                   <% if user_signed_in? && current_user == @user %>
                     <%= link_to "Modifier", edit_workshop_path(workshop), class: "rbt-btn btn-sm btn-secondary" %>
                     <%= button_to "Supprimer", workshop, method: :delete, data: { confirm: 'Are you sure?' }, class: "rbt-btn btn-sm btn-violet mt-2" %>
+                    <%= button_to "Valider", activate_workshop_path(workshop), method: :patch, class: "rbt-btn btn-sm btn-secondary" %>
                   <% end %>
                 </td>
               </tr>
@@ -35,3 +35,5 @@
     <% else %>
       <p>Aucun workshop créé pour le moment.</p>
     <% end %>
+  </div>
+</div>

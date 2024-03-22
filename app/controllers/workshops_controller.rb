@@ -6,7 +6,7 @@ class WorkshopsController < ApplicationController
   
   # GET /workshops or /workshops.json
   def index
-    @workshops = Workshop.where(validated: true).to_a.select do |workshop|
+    @workshops = Workshop.where(validated: true, brouillon: false).to_a.select do |workshop|
       workshop.status == 'en cours' || workshop.status == 'à venir'
     end
   end
@@ -25,6 +25,13 @@ class WorkshopsController < ApplicationController
     @categories = Category.all
     @tags = Tag.all
     
+  end
+
+  def activate
+    @workshop = Workshop.find(params[:id])
+    @workshop.update_attribute(:brouillon, false)
+
+    redirect_to @workshop, notice: "L'atelier a été activé."
   end
 
   # GET /workshops/1/edit
