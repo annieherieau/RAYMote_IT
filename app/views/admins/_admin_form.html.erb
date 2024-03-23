@@ -1,0 +1,11 @@
+<div id="notifications">
+    <h2>Envoyer notification système</h2>
+    <%= form_with url: admin_notif_path, method: :post, local: true do |form| %>
+        <div class="field">
+            <%= form.label :message %>
+            <%= form.text_area :message, required: true %>
+        </div>
+        <%= form.submit "Envoyer", class: "btn btn-primary" %>
+    <% end %>
+    </div>
+</div>

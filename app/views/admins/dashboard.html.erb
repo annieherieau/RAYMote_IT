@@ -43,5 +43,12 @@
     <div class="tab-pane fade" id="messages" role="tabpanel" aria-labelledby="messages-tab">
       <%= render partial: "messages/index", locals: {received_messages: @received_messages} %>
     </div>
+    <%# fin MESSAGES %>
+
+    <!-- NOTIFICATIONS -->
+    <div class="tab-pane fade" id="notifications" role="tabpanel" aria-labelledby="notifications-tab">
+      <%= render partial: "admin_form" %>
+    </div>
+    <!-- fin NOTIFICATIONS -->
   </div>
 </div>

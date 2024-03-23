@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ edit update destroy become_creator ]
   before_action  :check_admin, only: [:promote_to_creator]
-  before_action :authenticate_user!, except: [:promote_to_creator]
-  before_action :authenticate_admin!, only: [ :promote_to_creator]
+  before_action :authenticate_user!, except: [:promote_to_creator, :deny_creator]
+  before_action :authenticate_admin!, only: [ :promote_to_creator, :deny_creator ]
 
 
   # GET /profile/1
@@ -78,6 +78,18 @@ class UsersController < ApplicationController
     Message.create!(
       body: "Félicitations ! Vous avez été accepté en tant que créateur.",
       sender: current_admin, # ou nil si vous ne voulez pas spécifier d'expéditeur
+      receiver: user,
+      inbox: user.inbox
+    )
+    redirect_to dashboard_path, notice: "#{user.email} a été promu en tant que créateur."
+  end
+
+  def deny_creator
+    user = User.find(params[:user_id])
+    user.update(pending: false)
+    Message.create!(
+      body: "Votre demande pour devenir créateur a été refusée.",
+      sender: current_admin, 
       receiver: user,
       inbox: user.inbox
     )

@@ -20,6 +20,7 @@
                <% end %>
                <% if user.pending == true %>
                <%= button_to "Promouvoir en créateur", promote_to_creator_path(user_id: user.id), method: :patch, class: "btn btn-success"%>
+               <%= button_to "Refuser la demande", deny_creator_path(user_id: user.id), method: :patch, class: "btn btn-danger"%>
                <% end %>
               </td>
             </tr>
