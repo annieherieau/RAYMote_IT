@@ -1,0 +1,12 @@
+<div id="mailModal">
+
+  <div class="messages-list">
+    <% @received_messages.each do |message| %>
+      <div class="message">
+        <p><strong>De :</strong> <%= message.sender_name %></p>
+        <p><strong>À :</strong> <%= message.receiver_name %></p>
+        <p><strong>Message :</strong> <%= message.body %></p>
+      </div>
+    <% end %>
+  </div>
+</div>

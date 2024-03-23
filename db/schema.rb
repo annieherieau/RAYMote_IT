@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_22_065107) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_22_191628) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,6 +41,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_22_065107) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "inboxes", force: :cascade do |t|
+    t.string "inboxable_type", null: false
+    t.bigint "inboxable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["inboxable_type", "inboxable_id"], name: "index_inboxes_on_inboxable"
+  end
+
   create_table "likes", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "workshop_id", null: false
@@ -59,6 +67,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_22_065107) do
     t.bigint "sender_id"
     t.string "receiver_type"
     t.bigint "receiver_id"
+    t.bigint "inbox_id", null: false
+    t.index ["inbox_id"], name: "index_messages_on_inbox_id"
     t.index ["receiver_type", "receiver_id"], name: "index_messages_on_receiver"
     t.index ["sender_type", "sender_id"], name: "index_messages_on_sender"
   end
@@ -149,6 +159,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_22_065107) do
 
   add_foreign_key "likes", "users"
   add_foreign_key "likes", "workshops"
+  add_foreign_key "messages", "inboxes"
   add_foreign_key "notifications", "messages"
   add_foreign_key "orders", "users"
   add_foreign_key "reviews", "users"

@@ -23,13 +23,27 @@ class MessagesController < ApplicationController
 
   # POST /messages or /messages.json
   def create
-    if  current_admin
+    # Initialisation du nouveau message avec les paramètres du message
+    @message = Message.new(message_params)
+    
+    # Définition de l'expéditeur du message en fonction de l'utilisateur ou de l'administrateur actuellement connecté
+    if current_admin
       @message.sender = current_admin
     elsif current_user
       @message.sender = current_user
     end
-    @message = Message.new(message_params)
-
+  
+    # Récupération de l'Inbox du destinataire du message
+    # Vous devez ajuster 'receiver_id' et 'receiver_type' en fonction de la manière dont vous transmettez ces informations
+    if @message.receiver_type == "Admin"
+      @inbox = Admin.find(@message.receiver_id).inbox
+    elsif @message.receiver_type == "User"
+      @inbox = User.find(@message.receiver_id).inbox
+    end
+  
+    # Association du message à l'Inbox récupéré
+    @message.inbox = @inbox
+  
     respond_to do |format|
       if @message.save
         format.html { redirect_to message_url(@message), notice: "Message was successfully created." }
