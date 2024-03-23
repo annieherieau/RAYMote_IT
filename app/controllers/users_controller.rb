@@ -75,6 +75,12 @@ class UsersController < ApplicationController
     user = User.find(params[:user_id])
     user.update(creator: true)
     user.update(pending: false)
+    Message.create!(
+      body: "Félicitations ! Vous avez été accepté en tant que créateur.",
+      sender: current_admin, # ou nil si vous ne voulez pas spécifier d'expéditeur
+      receiver: user,
+      inbox: user.inbox
+    )
     redirect_to dashboard_path, notice: "#{user.email} a été promu en tant que créateur."
   end
 

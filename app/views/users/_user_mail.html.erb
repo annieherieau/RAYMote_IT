@@ -2,10 +2,16 @@
 
   <div class="messages-list">
     <% @received_messages.each do |message| %>
+        
       <div class="message">
-        <p><strong>De :</strong> <%= message.sender_name %></p>
-        <p><strong>À :</strong> <%= message.receiver_name %></p>
+        <% if message.sender_type == "Admin" %>
+            <p><strong>De : Système</p>
+        <% else %>
+            <p><strong>De :</strong> <%= message.sender.email %></p>
+        <p><strong>De  %></p>
+        <% end %>
         <p><strong>Message :</strong> <%= message.body %></p>
+        <% button_to 'Supprimer', message_path(message), method: :delete, data: { confirm: 'Êtes-vous sûr de vouloir supprimer ce message ?' }, class: 'btn btn-danger btn-sm' %>
       </div>
     <% end %>
   </div>

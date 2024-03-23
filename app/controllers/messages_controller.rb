@@ -1,6 +1,7 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: %i[ show edit update destroy ]
 
+
   # GET /messages or /messages.json
   def index
     @messages = Message.all
@@ -72,8 +73,8 @@ class MessagesController < ApplicationController
   def destroy
     @message.destroy!
     if current_admin
-    redirect_to admin_path(current_admin), notice: 'Message supprimé avec succès.'
-    elsif current_user
+    redirect_to dashboard_path, notice: 'Message supprimé avec succès.'
+    elsif current_user == @message.receiver
       redirect_to user_path(current_user), notice: 'Message supprimé avec succès.'
     end
   end
