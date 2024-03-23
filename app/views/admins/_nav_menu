@@ -101,7 +101,7 @@
         <span class="title">Avis</span>
       </a>
     </li>
-    <!-- REVIEWS -->
+    <!-- MESSAGES -->
     <li role="presentation">
       <a
         href="#"
@@ -117,5 +117,21 @@
         <span class="title">Messages</span>
       </a>
     </li>
+
+    <!-- NOTIFICATION ADMIN-->
+    <li role="presentation">
+      <a
+        href="#"
+        class="tab-button"
+        id="notifications-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#notifications"
+        type="button"
+        role="tab"
+        aria-controls="notifications"
+        aria-selected="false"
+      >
+        <span class="title">Notifications</span>
+      </a>
   </ul>
 </div>
