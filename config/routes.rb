@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     resources :reviews, only: [:new, :create]
     member do
       patch :validate
+      patch :refuse
       patch :activate
     end
   end
