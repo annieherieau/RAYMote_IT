@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'avatars/create'
   resources :messages
  
   resources :reviews

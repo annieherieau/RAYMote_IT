@@ -19,9 +19,9 @@
       </tbody>
     </table>
     <!-- Avatar -->
-    <div class="account-details-form col-lg-4">
+    <div class="account-details-form col-lg-4 text-center">
       <%if @user.avatar.attached?%>
-        <%= image_tag @user.avatar, class: "rounded-4 w-100", alt: 'Avatar utilisateur' %>
+        <%= image_tag @user.avatar, class: "rounded-4 w-50", alt: 'Avatar utilisateur' %>
       <%else%>
         <%= form_with(model: @user, class: "form") do |form| %>
           <% if @user.errors.any? %>
