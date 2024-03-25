@@ -1,7 +1,8 @@
 <%# TODO Ajouter une photo de profil %>
 
-    <h3>Profil <%= @user.creator ? "Créateur" : "Utilisateur" %></h3>
-    <table>
+  <h3>Profil <%= @user.creator ? "Créateur" : "Utilisateur" %></h3>
+  <div class='row'>
+    <table class='col-lg-8'>
       <tbody>
         <tr>
           <td class="w-25"><strong>Prénom :</strong></td>
@@ -17,4 +18,31 @@
         </tr>
       </tbody>
     </table>
+    <!-- Avatar -->
+    <div class="account-details-form col-lg-4 text-center">
+      <%if @user.avatar.attached?%>
+        <%= image_tag @user.avatar, class: "rounded-4 w-50", alt: 'Avatar utilisateur' %>
+      <%else%>
+        <%= form_with(model: @user, class: "form") do |form| %>
+          <% if @user.errors.any? %>
+            <div class="alert alert-danger">
+              <h2><%= pluralize(user.errors.count, "error") %>Les modifications n'ont pas pu etre sauvegardées:</h2>
+
+              <ul>
+                <% user.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div>
+            <%= form.label :avatar, class: 'm-auto'%>
+            <%= form.file_field :avatar, value:  @user.avatar %>
+            <%= form.submit "Enregistrer", class: "rbt-btn btn-sm btn-gradient border-0 m-auto" %>
+          </div>
+        <% end %>
+      <%end%>
+    </div>
+  </div>
 
