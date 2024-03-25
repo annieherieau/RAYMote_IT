@@ -18,6 +18,7 @@ class User < ApplicationRecord
   has_many :received_messages, as: :receiver, class_name: 'Message'
   has_many :notifications, as: :notifiable
   has_one :inbox, as: :inboxable
+  has_one_attached :avatar
 
   
 

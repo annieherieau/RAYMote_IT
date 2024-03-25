@@ -8,6 +8,8 @@ Category.destroy_all
 Tag.destroy_all
 Order.destroy_all
 Review.destroy_all
+Message.destroy_all
+ActiveStorage::Attachment.all.each { |attachment| attachment.purge }
 
 # reset ID 
 ActiveRecord::Base.connection.tables.each do |t|

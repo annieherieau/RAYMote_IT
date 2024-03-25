@@ -50,7 +50,7 @@
                     <% if @user.creator %>
                         <!-- CREATED WORKSHOPS -->
                         <div class="tab-pane fade" id="created_workshops" role="tabpanel">
-                          <%= render partial: "workshops/user_created_workshops", locals: {user: @user} %>
+                          <%= render partial: "workshops/user_created_workshops", locals: {workshops: @validated_workshops, drafts: false} %>
                         </div>
                         <!--  fin CREATED WORKSHOPS  -->
                     <% end %>
@@ -58,7 +58,7 @@
                     <%if @user.creator %>
                     <!-- WORKSHOPS BROUILLON -->
                     <div class="tab-pane fade" id="draft_workshops" role="tabpanel">
-                    <%= render partial: "workshops/workshops_brouillon", locals: {workshops: @user.workshops.where(brouillon: true)} %>
+                    <%= render partial: "workshops/user_created_workshops", locals: {workshops: @draft_workshops, drafts: true} %>
                     <!-- fin WORKSHOPS BROUILLON -->
                     </div>
                     <% end %>

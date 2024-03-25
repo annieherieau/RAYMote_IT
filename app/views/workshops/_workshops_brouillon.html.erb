@@ -1,7 +1,7 @@
 
-    <h3>Ateliers Créés</h3>
+    <h3>Brouillons</h3>
                                 
-    <% if @user.created_workshops.present? %>
+    <% if workshops.any? %>
       <div class="rbt-my-account-table table-responsive text-center">
         <table class="table table-bordered">
           <thead class="thead-light">
@@ -13,7 +13,7 @@
             </tr>
           </thead>
           <tbody>
-            <% @user.created_workshops.where(brouillon: true).each do |workshop| %>
+            <% workshops.each do |workshop| %>
               <tr>
                 <td><%= workshop.name %></td>
                 <td><%= workshop.description %></td>
@@ -32,5 +32,5 @@
         </table>
       </div>
     <% else %>
-      <p>Aucun workshop créé pour le moment.</p>
+      <p>Aucun broullon créé pour le moment.</p>
     <% end %>
