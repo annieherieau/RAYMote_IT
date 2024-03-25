@@ -30,9 +30,23 @@
 
 /* ############# END ROOT ##################*/
 
-
-
-
+h1 {
+  font-family: var(--font-primary);
+}
+h2 {
+  font-family: var(--font-primary);
+}
+h3 {
+  font-family: var(--font-primary);
+}
+h4 {
+  font-family: var(--font-primary);
+}
+h5.ft-title {
+  font-family: var(--font-primary);
+  font-size: var(--h5);
+  font-weight: bold;
+}
 
 /* ########### Navbar #################*/
 
@@ -46,22 +60,20 @@
   align-items: center;
 }
 
+.rbt-header .mainmenu-nav .mainmenu > li > a {
+  font-weight: var(--f-bold);
+}
 
+.access {
+  font-weight: var(--f-bold);
+}
 
 
 /* ########### Footer #################*/
 
-h5.ft-title {
-  font-family: var(--font-primary);
-  font-size: var(--h5);
-  font-weight: bold;
-}
-
-
 footer {
   margin-bottom: 0%;
 }
-
 /* ##### Messagerie ###### */
 .message {
   border: 1px solid #ddd;

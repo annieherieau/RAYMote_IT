@@ -17,7 +17,11 @@
               <td>
                 <% if !user.creator? && !user.created_workshops.any? %>
                 <%= button_to "Supprimer", user_path(user), method: :delete, data: {turbo_method: :delete, confirm: "Êtes-vous sûr de vouloir supprimer cet utilisateur ?"}, class: "btn btn-danger"%>
-                <% end %>
+               <% end %>
+               <% if user.pending == true %>
+               <%= button_to "Promouvoir en créateur", promote_to_creator_path(user_id: user.id), method: :patch, class: "btn btn-success"%>
+               <%= button_to "Refuser la demande", deny_creator_path(user_id: user.id), method: :patch, class: "btn btn-danger"%>
+               <% end %>
               </td>
             </tr>
           <% end %>

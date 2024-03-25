@@ -13,4 +13,17 @@ class AdminsController < ApplicationController
     @received_messages = @admin.received_messages
   end
 
+  def admin_notif
+    message_content = params[:message]
+    
+    User.find_each do |user|
+      user.inbox.messages.create!(
+        body: message_content,
+        sender: current_admin,
+        receiver: user
+      )
+    end
+    redirect_to dashboard_path
+  end
+
 end

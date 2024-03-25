@@ -37,8 +37,12 @@ Rails.application.routes.draw do
   end
   get 'dashboard', to: 'admins#dashboard'
 
+  # Admin notifications
+  post 'admin_notif', to: 'admins#admin_notif', as: :admin_notif
+
   post 'become_creator', to: 'users#become_creator', as: :become_creator
   patch 'users/:user_id/promote_to_creator', to: 'users#promote_to_creator', as: :promote_to_creator
+  patch 'users/:user_id/deny_creator', to: 'users#deny_creator', as: :deny_creator
 
   # Stripe
   scope '/checkout' do
