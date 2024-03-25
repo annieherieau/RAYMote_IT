@@ -23,16 +23,8 @@
         <%= form.label :lastname %>
         <%= form.text_field :lastname, class: "form-control", placeholder: "Nom", value: user.lastname %>
       </div>
-    
-      <% if !user.creator || !user.created_workshops.any? %>
-        <div class="col-lg-6 col-12">
-          <%= form.check_box :creator %>
-          <%= form.label :creator, "Devenir Créateur" %>
-        </div>
-      <% end %>
-    
-    <div>
-      <%= form.submit "Enregistrer", class: "rbt-btn btn-md btn-gradient border-0 w-100" %>
+    <div class="d-flex justify-content-end">
+      <%= form.submit "Enregistrer", class: "rbt-btn btn-md btn-gradient border-0" %>
     </div>
   </div>  
   <% end %>
