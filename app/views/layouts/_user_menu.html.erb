@@ -8,10 +8,10 @@
     <li class="account-access rbt-user-wrapper ">
       <% if user_signed_in? %>
         <img src="/assets/user.svg" class="icon">
-        <a href="#"><i class="feather-user"></i>Utilisateur</a>
+        <a href="#"><i class="feather-user"></i><strong>Utilisateurs</strong></a>
       <% else %>
         <img src="/assets/log-in.svg" class="icon">
-        <a href="#"><i class="feather-user"></i>Connexion</a>
+        <a href="#"><i class="feather-user"></i><strong>Connexion</strong></a>
       <% end %>
 
       <!-- Menu déroulant: Utilisateur -->
@@ -29,26 +29,26 @@
             <ul class="user-list-wrapper">
               <%# Dashboard %>
               <li>
-                  <img src="/assets/dashboard.svg" class="icon">
+                  <i class="fa-solid fa-house"></i>
                   <%= link_to "Dashboard", user_path(current_user) %>
               </li>
 
               <%# Créateur: nouveau workshop %>
               <% if current_user.creator %>
                 <li>
-                  <img src="/assets/dashboard.svg" class="icon">
+                  <i class="fa-solid fa-screwdriver-wrench"></i>
                   <%= link_to "Créer un atelier", new_workshop_path %>
                 </li>
               <% end %>
               
               <%# Account settings %>
               <li>
-                <img src="/assets/dashboard.svg" class="icon">
+                <i class="fa-solid fa-gear"></i>
                 <%= link_to "Éditer mes données", edit_user_path(current_user) %>
               </li>
               <%# déconnexion   %>
               <li>
-                <img src="/assets/logout.svg" class="icon">
+                <i class="fa-solid fa-right-from-bracket"></i>
                 <%= button_to "Se déconnecter", destroy_user_session_path, method: :delete, data: {turbo_method: :delete}, class: "dropdown-item"%>
               </li>
             </ul>

@@ -24,38 +24,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12 mt--30">
-                <div class="footer-widget">
-                    <h5 class="ft-title">Où sommes-nous ?</h5>
-                    <ul class="ft-link">
-                        <li><span>Location:</span> <a href="https://www.google.fr/maps/place/Polytech+Nice+Sophia/@43.6124563,7.0319833,14.34z/data=!4m17!1m8!3m7!1s0x12cc2b041fdcfb15:0x768ca98a78648601!2sSophia+Antipolis!3b1!8m2!3d43.6163539!4d7.0552218!16zL20vMDJzMW1f!3m7!1s0x12cc2b1b41c11d4d:0x225231c497224ba5!8m2!3d43.6155521!4d7.0717782!9m1!1b1!16s%2Fm%2F03w8672?entry=ttu">Sophia Antipolis, France</a></li>
-                        <li><span>Téléphone:</span> 00351 96789212</li>
-                        <li><span>E-mail:</span> <a href="mailto:hr@example.com">rainbow@example.com</a></li>
-                    </ul>
-                    <ul class="social-icon social-default icon-naked justify-content-start mt--20">
-                        <li>
-                            <a href="https://www.linkedin.com/">
-                                <i class="fa-brands fa-linkedin"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.linkedin.com/">
-                                <i class="fa-brands fa-linkedin"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.linkedin.com/">
-                                <i class="fa-brands fa-linkedin"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.linkedin.com/">
-                                <i class="fa-brands fa-linkedin"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            
         </div>
     </div>
 </div>
@@ -71,7 +40,7 @@
                     <li><a href="#">Terms of service</a></li>
                     <li><a href="privacy-policy.html">Privacy policy</a></li>
                     <% if admin_signed_in? %>
-                    <li><a href="<%= admin_path(current_admin) %>">Dashboard</a></li>
+                    <li><a href="<%= dashboard_path(current_admin) %>">Dashboard</a></li>
                     <li><%= button_to "Logout", destroy_admin_session_path, class: "rbt-badge-4 border-0", method: :delete %></li>
                     <% else %>
                     <li><a href="<%= new_admin_session_path %>">Login admin</a></li>
