@@ -24,7 +24,7 @@ def tags_destroy
 end
 
 
-
+#fais une moyenne des notes des reviews
 def update_average_rating
   update_column(:average, reviews.average(:rating).to_f)
 end

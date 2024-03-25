@@ -12,7 +12,7 @@ class Review < ApplicationRecord
   validates :user_id, uniqueness: { scope: :workshop_id, message: "You have already reviewed this workshop" }
 
   private
-
+#fait une moyenne des reviews du workshop à chaque review
   def update_workshop_average_rating
     workshop.update_average_rating
   end
