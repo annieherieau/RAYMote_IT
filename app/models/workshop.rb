@@ -33,6 +33,10 @@ def status
   end
 end
 
+def activate_btn
+  self.brouillon ? "Publier" : "Dépublier"
+end
+
   private
 
   def assign_tags
