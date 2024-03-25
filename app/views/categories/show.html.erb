@@ -1,7 +1,7 @@
-<% title = "Catégories" %>
+<% title = @category.name %>
 <% subtitle = "" %>
 
-<%= render partial: "layouts/banner", locals: {title: title, subtitle: subtitle}%>
+<%= render partial: "layouts/banner", locals: {title: title, subtitle: subtitle, icon: @category.icon}%>
 <div class= "container ">
 
   <%= render partial: "categories/category", locals: {category: @category}%>
