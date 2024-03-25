@@ -72,8 +72,7 @@
   <div class="mt-4">
     <% if user_signed_in? %>
       <% if current_user == @workshop.creator %>
-        <p>Vous ne pouvez pas vous inscrire à votre propre événement.</p>
-        <%= link_to "Modifier l'atelier", edit_workshop_path(@workshop), class: "btn btn-secondary" %>
+        <%= link_to "Modifier l'atelier", edit_workshop_path(@workshop), class: "rbt-btn btn-gradient" %>
       <% elsif @workshop.attendances.exists?(user: current_user) %>
         <% attendance = @workshop.attendances.find_by(user: current_user) %>
         <% if @workshop.price == 0 %>
@@ -120,7 +119,6 @@
     <% end %>
   </div>
     <% elsif current_user == @workshop.creator %>
-        <p> Vous ne pouvez pas commenter votre propre atelier </p>
     <% elsif already_reviewed %>
         <p>Vous avez déjà noté cet atelier</p>
     <% else %>

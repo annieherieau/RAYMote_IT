@@ -1,7 +1,8 @@
-<h3>Tags</h3>
-  <div class ="d-flex">
-      <% tags.sort_by{|t| t.name.downcase }.each do |tag| %>
-        <%= link_to tag.name, tag_path(tag.id), class: "rbt-badge-4"%>
-      <% end %>
-  </div>
-  
+<div class="d-flex">
+  <% tags.sort_by{|t| t.name.downcase }.each do |tag| %>
+    <%= link_to tag.name, tag_path(tag.id), class: "rbt-btn btn-border square w-50 d-flex justify-content-between align-items-center"%>
+  <% end %>
+</div>
+<div class="mt-2">
+  <%= link_to "New tags", new_tag_path, class: "rbt-btn btn-gradient" %>
+</div>

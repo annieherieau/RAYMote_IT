@@ -1,56 +1,48 @@
-<h3>Ateliers</h3>
-      <% if workshops.any? %> 
-      <div class="rbt-my-account-table table-responsive ">
-        <table class="table table-bordered">
-          <thead class="thead-light text-center">
-            <tr>
-              <% if admin_signed_in? %>
-                <th>ID</td>
-              <% end %>
-              <th>Name</th>
-              <th scope="col">Description</th>
-              <th scope="col">Start Date</th>
-              <th scope="col">Actions</th>
-              <% if admin_signed_in? %>
-                <th>Créateur</td>
-              <% end %>
-            </tr>
-          </thead>
-          <tbody>
-            <% workshops.reverse.each do |workshop| %>
-              <tr>
-                <%# # Admin %>
-                <% if admin_signed_in? %>
-                 <td><%=  workshop.id %></td>
-                <% end %>
-                <td><%= workshop.name %></td>
-                <td><%= workshop.description %></td>
-                <%# TODO: formater la date %>
-                <td><%= date_format(workshop.start_date) %></td>
-                <%# # Boutons Action %>
-                <td>
-                  <%# # Admin %>
-                  <% if admin_signed_in? %>
-                    <%= link_to "Voir", workshop, class: "rbt-btn btn-sm btn-gradient" %>
-                    <% if !workshop.validated %>
-                      <%= button_to 'Valider', validate_workshop_path(workshop), method: :patch, data: { confirm: 'Êtes-vous sûr ?' }, class: "rbt-btn btn-sm btn-gradient btn-gradient-2 mt-2"%>
-                      <%= button_to 'Refuser', refuse_workshop_path(workshop), method: :patch, data: { confirm: 'Êtes-vous sûr ?' }, class: "rbt-btn btn-sm btn-gradient btn-gradient-2 mt-2"%>
-                    <% end %>
-                  <% end %>
-
-                  <%# # si le current_user est inscrit %>
-                  <% if current_user && workshop.user_ids.include?(current_user.id) %>
-                    <%= link_to "Voir", workshop, class: "rbt-btn btn-sm btn-gradient" %>
-                  <% end %>
-                </td>
-                <% if admin_signed_in? %>
-                  <th><%= workshop.creator.firstname %> <%= workshop.creator.lastname %></td>
-                <% end %>
-              </tr>
+<% if workshops.any? %>
+  <div class="rbt-my-account-table table-responsive">
+    <table class="table table-bordered">
+      <thead class="thead-light text-center">
+        <tr>
+          <% if admin_signed_in? %>
+            <th>ID</th>
+          <% end %>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Start Date</th>
+          <th>Actions</th>
+          <% if admin_signed_in? %>
+            <th>Créateur</th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% workshops.reverse.each do |workshop| %>
+          <tr>
+            <% if admin_signed_in? %>
+              <td><%= workshop.id %></td>
             <% end %>
-          </tbody>
-        </table>
-      </div>
-  <% else %>
-      <p>Aucun workshops pour le moment.</p>
-    <% end %> 
+            <td><%= workshop.name %></td>
+            <td><%= workshop.description %></td>
+            <td><%= workshop.start_date.strftime("%d/%m/%Y %H:%M") %></td>
+            <td>
+              <% if admin_signed_in? %>
+                <%= link_to "Voir", workshop, class: "rbt-btn btn-sm btn-gradient" %>
+                <% unless workshop.validated %>
+                  <%= button_to 'Valider', validate_workshop_path(workshop), method: :patch, data: { confirm: 'Êtes-vous sûr ?' }, class: "rbt-btn btn-sm btn-gradient btn-gradient-2 mt-2" %>
+                      <%= button_to 'Refuser', refuse_workshop_path(workshop), method: :patch, data: { confirm: 'Êtes-vous sûr ?' }, class: "rbt-btn btn-sm btn-gradient btn-gradient-2 mt-2"%>
+                <% end %>
+              <% elsif current_user && workshop.user_ids.include?(current_user.id) %>
+                <%= link_to "Voir", workshop, class: "rbt-btn btn-sm btn-gradient" %>
+              <% end %>
+            </td>
+            <% if admin_signed_in? %>
+              <td><%= "#{workshop.creator.firstname} #{workshop.creator.lastname}" %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <p>Aucun atelier pour le moment.</p>
+<% end %>

@@ -4,27 +4,32 @@
       <div class="col-12">
         <div class="row g-5">
           <div class="col-lg-3 col-12">
-              <div class="rbt-my-account-tab-button nav" role="tablist">
-                <%= link_to 'Retour au Profil', user_path(current_user), class: "active" %>
-                <%= link_to 'Vos Informations', edit_user_path(current_user)%>
-              </div>
+            <div class="rbt-my-account-tab-button nav" role="tablist">
+              <%= link_to 'Retour au Profil', user_path(current_user), class: "active" %>
+              <%= link_to 'Vos Informations', edit_user_path(current_user) %>
+            </div>
           </div>
           <div class="col-lg-9 col-12">
 
             <!-- EDIT  -->
             <%= render "devise/registrations/edit_form" %>
             <!-- fin EDIT -->
-  
+            
+            <h3>Cancel my account</h3>
+
+            <div>
+              Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), class: "rbt-btn btn-gradient", data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %>
+            </div>
+
+            <%= link_to "Back", :back %>
           </div>
         </div>
       </div>
+    </div>
   </div>
 </section>
 
 
 
-<h3>Cancel my account</h3>
 
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
 
-<%= link_to "Back", :back %>
