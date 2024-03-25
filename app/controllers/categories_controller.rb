@@ -8,8 +8,8 @@ class CategoriesController < ApplicationController
 
   # GET /categories/1
   def show
-    @category = Category.find(params[:id])
-    @workshops = @category.workshops
+    @workshops =  @category.workshops.where(event: true)
+    @courses = @category.workshops.where(event: false)
   end
 
   # GET /categories/new
@@ -43,11 +43,7 @@ class CategoriesController < ApplicationController
   # DELETE /categories/1
   def destroy
     @category.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to categories_url, notice: "Category was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to categories_url, notice: "Category was successfully destroyed."
   end
 
 

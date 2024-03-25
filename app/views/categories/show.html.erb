@@ -1,11 +1,39 @@
-<h1><%= @category.name %></h1>
+<% title = "Catégories" %>
+<% subtitle = "" %>
 
-<h2>Ateliers associés :</h2>
-<ul>
-  <% @workshops.each do |workshop| %>
-    <li>
-      <%= link_to workshop.name, workshop_path(workshop) %>
-      <!-- Plus de détails sur l'atelier si nécessaire -->
-    </li>
+<%= render partial: "layouts/banner", locals: {title: title, subtitle: subtitle}%>
+<div class= "container ">
+
+  <%= render partial: "categories/category", locals: {category: @category}%>
+
+  <h3>Ateliers associés :</h3>
+  
+  <% if  @workshops.any? %>
+    <ul>
+    <% @workshops.each do |workshop| %>
+      <li>
+        <%= link_to workshop.name, workshop_path(workshop) %>
+        <!-- Plus de détails sur l'atelier si nécessaire -->
+      </li>
+    <% end %>
+    </ul>
+  <% else %>
+      <p>Aucun atelier trouvé</p>
   <% end %>
-</ul>
+  
+
+  <h3>Cours associés :</h3>
+  <% if  @courses.any? %>
+    <ul>
+      <% @courses.each do |course| %>
+        <li>
+          <%= link_to course.name, workshop_path(course) %>
+          <!-- Plus de détails sur l'atelier si nécessaire -->
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>Aucun cours trouvé</p>
+  <% end %>
+  
+</div>
