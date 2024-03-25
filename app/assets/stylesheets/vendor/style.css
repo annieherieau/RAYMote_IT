@@ -14136,7 +14136,7 @@ a.rbt-moderbt-btn::before {
   left: 0;
   display: block;
   border-radius: 28px;
-  background: rgb(255, 0, 247);
+  background: #0b00d9;
   opacity: 1;
   width: 56px;
   height: 56px;
@@ -14159,7 +14159,7 @@ a.rbt-moderbt-btn:hover i {
 }
 a.rbt-moderbt-btn:hover::before {
   width: 100%;
-  background: rgb(255, 0, 247);
+  background: #0b00d9;
   opacity: 1;
 }
 
