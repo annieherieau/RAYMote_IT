@@ -15,10 +15,10 @@
       <% end %>
 
       <!-- Menu déroulant: Utilisateur -->
-      <div class="rbt-user-menu-list-wrapper">
+      <div class="rbt-user-menu-list-wrapper dropdown">
         <div class="inner">
           <%# UTILISATEUR connecté %>
-          <% if user_signed_in? %>
+          <% if user_signed_in? && current_user.firstname.present? %>
             <%# User Name %>
             <div class="rbt-user-profile">
               <div class="user-info">
@@ -26,7 +26,7 @@
               </div>
             </div>
             <%# Liens user connecté %>
-            <ul class="user-list-wrapper">
+            <ul class="user-list-wrapper" >
               <%# Dashboard %>
               <li>
                   <i class="fa-solid fa-house"></i>

@@ -40,15 +40,12 @@
                     <li><a href="#">Terms of service</a></li>
                     <li><a href="privacy-policy.html">Privacy policy</a></li>
                     <% if admin_signed_in? %>
-                    <li><a href="<%= dashboard_path(current_admin) %>">Dashboard</a></li>
+                    <li><a href="<%= dashboard_path %>">Dashboard</a></li>
                     <li><%= button_to "Logout", destroy_admin_session_path, class: "rbt-badge-4 border-0", method: :delete %></li>
                     <% else %>
                     <li><a href="<%= new_admin_session_path %>">Login admin</a></li>
                     <% end %>
-
-                    
-
-                </ul>
+                    </ul>
             </div>
         </div>
     </div>
