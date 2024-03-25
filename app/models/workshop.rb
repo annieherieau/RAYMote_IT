@@ -37,6 +37,10 @@ def activate_btn
   self.brouillon ? "Publier" : "Dépublier"
 end
 
+def validate_btn
+  self.brouillon ? "Valider" : "Refuser"
+end
+
   private
 
   def assign_tags
