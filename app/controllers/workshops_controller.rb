@@ -6,6 +6,8 @@ class WorkshopsController < ApplicationController
   
   # GET /workshops or /workshops.json
   def index
+    @top_categories = Category.left_joins(:workshops).group(:id).order('COUNT(workshops.id) DESC').limit(4)
+  
     @workshops = Workshop.where(validated: true, brouillon: false).to_a.select do |workshop|
       workshop.status == 'en cours' || workshop.status == 'à venir'
     end
