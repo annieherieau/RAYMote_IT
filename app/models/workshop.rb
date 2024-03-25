@@ -2,6 +2,7 @@ class Workshop < ApplicationRecord
   attr_accessor :tags_names
   after_save :assign_tags
   belongs_to :category, optional: true
+  after_save :update_average_rating
 
   # Associations
   belongs_to :creator, class_name: 'User'
@@ -20,6 +21,12 @@ class Workshop < ApplicationRecord
 
 def tags_destroy
   self.tags.clear
+end
+
+
+
+def update_average_rating
+  update_column(:average, reviews.average(:rating).to_f)
 end
 
 def status

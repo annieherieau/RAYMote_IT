@@ -2,8 +2,9 @@
 <!-- Start Single Course -->
 <div class="rbt-card variation-01 rbt-hover">
     <div class="rbt-card-img">
-        <a href="course-details.html">
+          <%= link_to workshop do %>
             <img src="assets/course-01.jpg" alt="Card image">
+          <% end %>
             <div class="rbt-badge-3 bg-white">
                 <span>-50%</span>
                 <span>Off</span>
@@ -14,20 +15,26 @@
         <div class="rbt-card-top">
             <div class="rbt-review">
                 <div class="rating">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
+                <div class="star-rating">
+                <% (1..5).each do |star| %>
+                  <% if star <= workshop.average.floor %>
+                    <i class="fas fa-star already_stared"></i> <!-- Étoile pleine -->
+                  <% elsif star == workshop.average.floor + 1 && workshop.average % 1 >= 0.5 %>
+                    <i class="fas fa-star-half-alt half_stared"></i> <!-- Étoile à moitié pleine -->
+                  <% else %>
+                    <i class="far fa-star empty already_stared"></i> <!-- Étoile vide -->
+                  <% end %>
+                <% end %>
                 </div>
-                <span class="rating-count"><%= workshop.likes.count %></span>
+                </div>
+                <span class="rating-count"><%= workshop.reviews.count %></span>
             </div>
             <div class="rbt-bookmark-btn">
                 <a class="rbt-round-btn" title="Bookmark" href="#"><i class="feather-bookmark"></i></a>
             </div>
         </div>
         <!-- Product name-->
-        <h4 class="rbt-card-title"><a href="course-details.html"><%= workshop.name %></a></h4>
+        <h4 class="rbt-card-title"><%= link_to workshop.name, workshop %></a></h4>
         <ul class="rbt-meta">
             <li><i class="feather-users"></i>40 Students</li>
         </ul>
