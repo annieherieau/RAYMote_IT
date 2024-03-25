@@ -9,7 +9,7 @@
                             <h1 class="title"> 
                                 <span style="color: #0b00d9;">R</span><span style="color: white;">evolutionize</span> <span style="color: #0b00d9;">A</span><span style="color: white;">ll</span> <span style="color: #0b00d9;">Y</span><span style="color: white;">our</span> <span style="color: #0b00d9;">M</span><span style="color: white;">asteries</span>
                             </h1>
-                            <p class="description" style="color: #ebebeb;"> 
+                            <p class="text" style="color: #ebebeb;"> 
                                 Plongez dans une expérience d'e-learning innovante qui bouleverse les normes établies et propulse<br> votre apprentissage vers de nouveaux sommets. Transformez vos ambitions en réalité en rejoignant <strong><br>la révolution de l'éducation</strong> aujourd'hui.
                             </p>
                             <div class="d-flex align-items-center mt-3">
@@ -19,7 +19,7 @@
                                         <span class="moderbt-btn-text" style="color: white;">
                                             Start the revolution now
                                         </span>
-                                        <i class="feather-arrow-right"></i> 
+                                        <span class="btn-icon"><i class="fa-solid fa-arrow-right" style="color: white;"></i></span>
                                     </a>
                                 </div>
                             </div>
@@ -31,12 +31,52 @@
     </div>
     <!-- End Banner Area -->
 
+    <!-- Marge between 2 sections -->
+    <div class="mt-5"></div>
+    <!-- End of Marge -->
 
+    <!-- Categories Courses -->
+    <div class="rbt-categories-area bg-color-white rbt-section-gapBottom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="section-title text-center">
+                                <span class="subtitle bg-primary-opacity">CATÉGORIES POPULAIRES</span>
+                                <h2 class="title">Les Catégories Les Plus Polpulaires <br/> Grâce à nos Créateurs Superactifs</h2>
+                            </div>
+                        </div>
+                    </div>
 
+                   
+                    <div class="row g-5 mt--20">
+                        <!-- Start Category Box Layout  -->
+                        <% @top_categories.each do |category| %>
+                            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                                <a class="rbt-cat-box rbt-cat-box-1 text-center" href= "<%= category_path(category) %>">
+                                    <div class="inner">
+                                        <div class="icons">
+                                            <img src="assets/images/category/web-design.png" alt="Icons Images">
+                                        </div>
+                                        <div class="content">
+                                            <h5 class="title">
+                                            <%= category.name %>      
+                                            </h5>
+                                            <div class="read-more-btn">
+                                                <span class="rbt-btn-link"> <%= category.workshops.count %> cours</span>
+                                                <span class="btn-icon"><i class="fa-solid fa-arrow-right" style="color: dark; font-size: 0.6em;"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        <% end %>
+                    </div>
+                </div> 
+            </div>
 
+            <!-- End Category Box Layout  -->
 
-
-
+    <!-- End Categories Courses -->
 
 
 
@@ -44,24 +84,40 @@
 
 
         <!-- Start Workshops Area -->
+        <div class="rbt-course-area bg-color-extra2 rbt-section-gap">
+            <div class="container">
+                <div class="row mb--60">
+                    <div class="col-lg-12">
+                        <div class="section-title text-center">
+                            <span class="subtitle bg-secondary-opacity">les cours les plus populaires</span>
+                            <h2 class="title">Les Tops Cours Séléctionnés<br /> Par La RAYM Community</h2>
+                        </div>
+                    </div>
+                </div>
 
-        <h1>Workshops</h1>
-        <div class="container">
-        <div id="workshops">
-        <% @workshops.reverse.each_slice(3) do |workshop_row| %>
-            <div class="row mb-4 justify-content-around">
-            <% workshop_row.each do |workshop| %>
-                <% if workshop.status != "passé" %>
-                <%= render partial: "workshops/workshop_card", locals: {workshop: workshop} %>
-                <% end %>
-            <% end %>
-            </div>
-        <% end %>
-        </div>
-        </div>
+                <!-- Start Single Course  -->
+                <div class="row g-5">
+                    <div class="container">
+                        <div id="workshops">
+                            <div class="row mb-4 justify-content-around">
+                                <% @workshops.reverse.take(3).each do |workshop| %>
+                                    <% if workshop.status != "passé" %>
+                                    <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                                        <%= render partial: "workshops/workshop_card", locals: {workshop: workshop} %>
+                                    </div>
+                                    <% end %>                                    
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div> 
+      <!-- End Workshops Area -->
 
 
 
+        
 
     </main>
 
