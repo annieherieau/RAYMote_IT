@@ -3,5 +3,31 @@
     <strong>Name:</strong>
     <%= category.name %>
   </p>
+ <!-- icon -->
+    <div class="account-details-form col-lg-4 text-center">
+      <%if category.icon.attached?%>
+        <%= image_tag category.icon, class: "rounded-4 w-50", alt: 'Avatar utilisateur' %>
+      <%else%>
+        <%= form_with(model: category, class: "form") do |form| %>
+          <% if category.errors.any? %>
+            <div class="alert alert-danger">
+              <h2><%= pluralize(category.errors.count, "error") %>Les modifications n'ont pas pu etre sauvegardées:</h2>
+
+              <ul>
+                <% category.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div>
+            <%= form.label :icon, class: 'm-auto'%>
+            <%= form.file_field :icon, value:  category.icon %>
+            <%= form.submit "Enregistrer", class: "rbt-btn btn-sm btn-gradient border-0 m-auto" %>
+          </div>
+        <% end %>
+      <%end%>
+    </div>
 
 </div>
