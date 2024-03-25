@@ -18,13 +18,15 @@
       <div class="rbt-user-menu-list-wrapper dropdown">
         <div class="inner">
           <%# UTILISATEUR connecté %>
-          <% if user_signed_in? && current_user.firstname.present? %>
+          <% if user_signed_in? %>
+          <% if  current_user.firstname.present? %>
             <%# User Name %>
             <div class="rbt-user-profile">
               <div class="user-info">
                 <span class="name" style="font-weight: bold"><%= current_user.firstname %></span>
               </div>
             </div>
+          <% end %>
             <%# Liens user connecté %>
             <ul class="user-list-wrapper" >
               <%# Dashboard %>

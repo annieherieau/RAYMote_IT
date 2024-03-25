@@ -1,58 +1,63 @@
 
-
-<div class="card h-75 w-25">
-    <!-- Product image-->
-    <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="...">
-    <!-- Product details-->
-    <div class="card-body p-4">
-        <div class="text-center">
-        <!-- Status -->
-        <%= workshop.status %>
-            <!-- Product name-->
-              <p>
-                <strong>Name:</strong>
-                <%= workshop.name %>
-              </p>
-            <!-- description-->
-              <p>
-                <strong>Description:</strong>
-                <%= workshop.description %>
-              </p>
-              <!--Start date-->
-              <p>
-                <strong>Start_date:</strong>
-                <%= date_format(workshop.start_date) %>
-              </p>
-              <!--Duration-->
-              <p>
-                <strong>Duration:</strong>
-                <%= workshop.duration %>
-              </p>
-            <!-- Product price-->
-              <p>
-                  <strong>Price:</strong>
-                  <%= workshop.price %> €
-              </p>
-
-              <% if workshop.tags.any? %>
-                <ul>
-                  <% workshop.tags.each do |tag| %>
-                    <li><%= tag.name %></li>
+<!-- Start Single Course -->
+<div class="rbt-card variation-01 rbt-hover">
+    <div class="rbt-card-img">
+          <%= link_to workshop do %>
+            <img src="assets/course-01.jpg" alt="Card image">
+          <% end %>
+            <div class="rbt-badge-3 bg-white">
+                <span>-50%</span>
+                <span>Off</span>
+            </div>
+        </a>
+    </div>
+    <div class="rbt-card-body">
+        <div class="rbt-card-top">
+            <div class="rbt-review">
+                <div class="rating">
+                <div class="star-rating">
+                  <% (1..5).each do |star| %>
+                    <% if star <= workshop.average.floor %>
+                      <i class="fas fa-star already_stared"></i> <!-- Étoile pleine -->
+                    <% elsif star == workshop.average.floor + 1 && workshop.average % 1 >= 0.5 %>
+                      <i class="fas fa-star-half-alt half_stared"></i> <!-- Étoile à moitié pleine -->
+                    <% else %>
+                      <i class="far fa-star empty already_stared"></i> <!-- Étoile vide -->
+                    <% end %>
                   <% end %>
-                </ul>
-              <% else %>
-                <p>Cet atelier n'a pas de tags associés.</p>
-              <% end %>
-
-              <% if workshop.likes.exists?(user: current_user) %>
-              <%= button_to 'Déliker', workshop_like_path(workshop), method: :delete, class: "btn btn-warning" %>
-            <% else %>
-            <%= button_to 'Liker', workshop_like_path(workshop), method: :post, class: "btn btn-primary" %>
-            <% end %>
+                  </div>
+                </div>
+                <span class="rating-count"><%= workshop.reviews.count %></span>
+            </div>
+            <div class="rbt-bookmark-btn">
+                <a class="rbt-round-btn" title="Bookmark" href="#"><i class="feather-bookmark"></i></a>
+            </div>
+        </div>
+        <!-- Product name-->
+        <h4 class="rbt-card-title"><%= link_to workshop.name, workshop %></a></h4>
+        <ul class="rbt-meta">
+            <li><i class="feather-users"></i>40 Students</li>
+        </ul>
+        <!-- Product description-->
+        <p class="rbt-card-text"><%= workshop.description %></p>
+        <div class="rbt-author-meta mb--20">                  
+            <!-- Author information-->
+            <div class="rbt-author-info">
+                By <a href="profile.html"><%= workshop.creator.firstname %></a> In <span><%= workshop.category.name %></span>
+            </div>
+        </div>
+        <div class="rbt-card-bottom">
+            <div class="rbt-price">
+                <!-- Product price-->
+                <span class="current-price"><%= workshop.price %>€</span>
+                <span class="off-price">120€</span>
+            </div>
+            <!-- Link to the course-details-->
+            <div>
+                <%= link_to "Voir plus", workshop, class: "rbt-btn-link" %>
+                <span class="btn-icon"><i class="fa-solid fa-arrow-right" style="color: dark; font-size: 0.6em;"></i></span>
+            </div>
         </div>
     </div>
-    <!-- Product actions-->
-    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">                               
-        <%= link_to "Show this workshop", workshop, class: "btn btn-outline-dark" %>
-    </div>
 </div>
+<!-- End Single Course -->

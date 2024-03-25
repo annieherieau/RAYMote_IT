@@ -2,6 +2,7 @@ class Workshop < ApplicationRecord
   attr_accessor :tags_names
   after_save :assign_tags
   belongs_to :category, optional: true
+  after_save :update_average_rating
 
   # Associations
   belongs_to :creator, class_name: 'User'
@@ -22,6 +23,12 @@ def tags_destroy
   self.tags.clear
 end
 
+
+#fais une moyenne des notes des reviews
+def update_average_rating
+  update_column(:average, reviews.average(:rating).to_f)
+end
+
 def status
   end_date = start_date + duration.minutes
   if start_date > Time.current
@@ -35,6 +42,10 @@ end
 
 def activate_btn
   self.brouillon ? "Publier" : "Dépublier"
+end
+
+def validate_btn
+  self.brouillon ? "Valider" : "Refuser"
 end
 
   private

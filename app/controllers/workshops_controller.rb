@@ -1,11 +1,13 @@
 class WorkshopsController < ApplicationController
-  before_action :authenticate_user!, only: %i[ new create edit update destroy ]
-  before_action :set_workshop, only: %i[ show edit update destroy ]
-  before_action :authorize_creator!, only: %i[ edit update destroy ]
+  before_action :authenticate_user!, except: %i[ index show ]
+  before_action :set_workshop, except: %i[ index new create ]
+  before_action :authorize_creator!, only: %i[ edit update activate destroy ]
   before_action  :check_admin, only: [:validate]
   
   # GET /workshops or /workshops.json
   def index
+    @top_categories = Category.left_joins(:workshops).group(:id).order('COUNT(workshops.id) DESC').limit(4)
+  
     @workshops = Workshop.where(validated: true, brouillon: false).to_a.select do |workshop|
       workshop.status == 'en cours' || workshop.status == 'à venir'
     end
@@ -13,7 +15,6 @@ class WorkshopsController < ApplicationController
 
   # GET /workshops/1 or /workshops/1.json
   def show
-    @workshop = Workshop.find(params[:id])
     @attendances = @workshop.attendances || []
     @category = @workshop.category
     @status = @workshop.status
@@ -23,28 +24,41 @@ class WorkshopsController < ApplicationController
   def new
     @workshop = Workshop.new
     @categories = Category.all
-    @tags = Tag.all
-    
+    @tags = Tag.all  
   end
 
   def activate
-    @workshop = Workshop.find(params[:id])
-    @workshop.update_attribute(:brouillon, !@workshop.brouillon)
-    @workshop.update_attribute(:validated, false)
-    redirect_to request.referer || root_path, notice: "L'atelier a été activé."
+    @workshop.update(brouillon: !@workshop.brouillon, validated: false)
+    if @workshop.save
+      redirect_to request.referer || root_path, notice: "Mise à jour effectuée."
+    end
+    
   end
 
   # GET /workshops/1/edit
   def edit
-    @workshop = Workshop.find(params[:id])
     @categories = Category.all
     @tags = Tag.all
   end
 
   def validate
-    workshop = Workshop.find(params[:id])
-    workshop.update(validated: true)
-    redirect_back(fallback_location: root_path, notice: 'Workshop validé avec succès.')
+    @workshop.update(validated: true, brouillon: false)
+    if @workshop.save
+      redirect_to request.referer || root_path, notice: "Mise à jour effectuée."
+    end
+  end
+
+  def refuse
+    @workshop.update(brouillon: true)
+    Message.create!(
+      body: "Désolé, votre atelier n'a pas été validé, car il ne respecte pas la charte des créateurs.",
+      sender: current_admin, # ou nil si vous ne voulez pas spécifier d'expéditeur
+      receiver: @workshop.creator,
+      inbox: @workshop.creator.inbox
+    )
+    if @workshop.save
+      redirect_to request.referer || root_path, notice: "Mise à jour effectuée."
+    end
   end
 
   # POST /workshops or /workshops.json
@@ -71,28 +85,26 @@ class WorkshopsController < ApplicationController
 
   # PATCH/PUT /workshops/1 or /workshops/1.json
   def update
-    @workshop = Workshop.find(params[:id])
-
-  # Supprimez les tags marqués pour suppression
-  if params[:workshop][:deleted_tag_ids].present?
-    deleted_tag_ids = params[:workshop][:deleted_tag_ids].reject(&:blank?).map(&:to_i)
-    @workshop.tags.delete(Tag.where(id: deleted_tag_ids))
-  end
-
-  # Continuez avec la mise à jour des tags existants et des nouveaux tags comme précédemment
-  if params[:workshop][:tag_names].present?
-    params[:workshop][:tag_names].each do |tag_name|
-      tag = Tag.find_or_create_by(name: tag_name)
-      @workshop.tags << tag unless @workshop.tags.include?(tag)
+    # Supprimez les tags marqués pour suppression
+    if params[:workshop][:deleted_tag_ids].present?
+      deleted_tag_ids = params[:workshop][:deleted_tag_ids].reject(&:blank?).map(&:to_i)
+      @workshop.tags.delete(Tag.where(id: deleted_tag_ids))
     end
-  end
 
-  # Finalement, mettez à jour le workshop avec les autres paramètres
-  if @workshop.update(workshop_params)
-    redirect_to workshop_url(@workshop), notice: "Workshop was successfully updated."
-  else
-    render :edit, status: :unprocessable_entity
-  end
+    # Continuez avec la mise à jour des tags existants et des nouveaux tags comme précédemment
+    if params[:workshop][:tag_names].present?
+      params[:workshop][:tag_names].each do |tag_name|
+        tag = Tag.find_or_create_by(name: tag_name)
+        @workshop.tags << tag unless @workshop.tags.include?(tag)
+      end
+    end
+
+    # Finalement, mettez à jour le workshop avec les autres paramètres
+    if @workshop.update(workshop_params)
+      redirect_to workshop_url(@workshop), notice: "Workshop was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   # DELETE /workshops/1 or /workshops/1.json
@@ -122,7 +134,7 @@ class WorkshopsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def workshop_params
-      params.require(:workshop).permit(:name, :description, :start_date, :duration, :price, :category_id, tag_ids: [])
+      params.require(:workshop).permit(:name, :description, :start_date, :duration, :price, :category_id, :validated, :brouillon, tag_ids: [])
     end
 
 end

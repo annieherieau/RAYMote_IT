@@ -29,6 +29,7 @@
                 <%= link_to "Voir", workshop, class: "rbt-btn btn-sm btn-gradient" %>
                 <% unless workshop.validated %>
                   <%= button_to 'Valider', validate_workshop_path(workshop), method: :patch, data: { confirm: 'Êtes-vous sûr ?' }, class: "rbt-btn btn-sm btn-gradient btn-gradient-2 mt-2" %>
+                      <%= button_to 'Refuser', refuse_workshop_path(workshop), method: :patch, data: { confirm: 'Êtes-vous sûr ?' }, class: "rbt-btn btn-sm btn-gradient btn-gradient-2 mt-2"%>
                 <% end %>
               <% elsif current_user && workshop.user_ids.include?(current_user.id) %>
                 <%= link_to "Voir", workshop, class: "rbt-btn btn-sm btn-gradient" %>
