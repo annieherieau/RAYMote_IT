@@ -29,9 +29,10 @@ class WorkshopsController < ApplicationController
 
   def activate
     @workshop = Workshop.find(params[:id])
-    @workshop.update_attribute(:brouillon, false)
-
-    redirect_to @workshop, notice: "L'atelier a été activé."
+    draft = !@workshop.brouillon
+    validate = false if draft
+    @workshop.update_attribute(:brouillon, !@workshop.brouillon)
+    redirect_to request.referer || root_path, notice: "L'atelier a été activé."
   end
 
   # GET /workshops/1/edit

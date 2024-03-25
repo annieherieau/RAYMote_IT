@@ -1,7 +1,7 @@
 
-    <h3>Ateliers Créés</h3>
+    <h3>Ateliers créés <%= drafts ? "(Brouillons)" : ''%> </h3>
                                 
-    <% if @created_workshops.any? %>
+    <% if workshops.any? %>
       <div class="rbt-my-account-table table-responsive text-center">
         <table class="table table-bordered">
           <thead class="thead-light">
@@ -14,7 +14,7 @@
             </tr>
           </thead>
           <tbody>
-            <% @draft_workshops.each do |workshop| %>
+            <% workshops.each do |workshop| %>
               <tr>
                 <td><%= workshop.name %></td>
                 <td><%= workshop.description %></td>
@@ -24,6 +24,8 @@
                   <%= link_to "Voir", workshop, class: "rbt-btn btn-sm" %>
                   <% if user_signed_in? && current_user == @user %>
                     <%= link_to "Modifier", edit_workshop_path(workshop), class: "rbt-btn btn-sm btn-secondary" %>
+                  <%= button_to workshop.activate_btn, activate_workshop_path(workshop), method: :patch, class: "rbt-btn btn-sm btn-secondary mt-2" %>
+
                     <%= button_to "Supprimer", workshop, method: :delete, data: { confirm: 'Are you sure?' }, class: "rbt-btn btn-sm btn-violet mt-2" %>
                   <% end %>
                 </td>
