@@ -1,7 +1,7 @@
 <%# TODO Ajouter une photo de profil %>
 
-    <h3>Profil <%= @user.creator ? "Créateur" : "Utilisateur" %></h3>
-    <div class='row'>
+  <h3>Profil <%= @user.creator ? "Créateur" : "Utilisateur" %></h3>
+  <div class='row'>
     <table class='col-lg-8'>
       <tbody>
         <tr>
@@ -40,7 +40,9 @@
             <%= form.label :avatar, class: 'm-auto'%>
             <%= form.file_field :avatar, value:  @user.avatar %>
             <%= form.submit "Enregistrer", class: "rbt-btn btn-sm btn-gradient border-0 m-auto" %>
+          </div>
         <% end %>
       <%end%>
     </div>
+  </div>
 
