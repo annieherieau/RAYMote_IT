@@ -7,7 +7,7 @@
     <!-- Nom du Compte: Administrateur-->
     <li class="account-access rbt-user-wrapper ">
         <img src="/assets/user.svg" class="icon">
-        <a href="#"><i class="feather-user"></i>Administrateur</a>
+        <a href="#"><i class="feather-user"></i><strong>Administrateur</strong></a>
       <!-- Menu déroulant: Administrateur -->
       <div class="rbt-user-menu-list-wrapper">
         <div class="inner">
@@ -21,13 +21,13 @@
             <ul class="user-list-wrapper">
               <%# Dashboard %>
               <li>
-                  <img src="/assets/dashboard.svg" class="icon">
+                  <i class="fa-solid fa-house"></i>
                   <%= link_to "Dashboard", dashboard_path %>
               </li>
               
               <%# déconnexion   %>
               <li>
-                <img src="/assets/logout.svg" class="icon">
+                <i class="fa-solid fa-right-from-bracket"></i>
                 <%= button_to "Se déconnecter", destroy_admin_session_path, method: :delete, data: {turbo_method: :delete}, class: "dropdown-item"%>
               </li>
             </ul>

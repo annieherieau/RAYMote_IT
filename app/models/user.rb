@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  # création de la boite de réception
+  after_create :create_inbox
+
   # associations
   has_many :created_workshops, class_name: 'Workshop', foreign_key: :creator_id
   has_many :attendances
@@ -14,6 +17,7 @@ class User < ApplicationRecord
   has_many :sent_messages, as: :sender, class_name: 'Message'
   has_many :received_messages, as: :receiver, class_name: 'Message'
   has_many :notifications, as: :notifiable
+  has_one :inbox, as: :inboxable
 
   
 
@@ -26,5 +30,9 @@ class User < ApplicationRecord
     UserMailer.welcome_email(self).deliver_now
   end
 
-  
+   private
+
+  def create_inbox
+    Inbox.create(inboxable: self)
+  end
 end

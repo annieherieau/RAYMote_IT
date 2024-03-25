@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ edit update destroy become_creator ]
-  before_action  :check_admin, only: [:validate]
-  before_action :authenticate_user!, except: [:validate]
-  before_action :authenticate_admin!, only: [:validate, :promote_to_creator]
+  before_action  :check_admin, only: [:promote_to_creator]
+  before_action :authenticate_user!, except: [:promote_to_creator, :deny_creator]
+  before_action :authenticate_admin!, only: [ :promote_to_creator, :deny_creator ]
 
 
   # GET /profile/1
@@ -15,6 +15,9 @@ class UsersController < ApplicationController
     else
       redirect_to user_path(current_user)
     end
+
+    @received_messages = Message.where(receiver: @user)
+    @sent_messages = Message.where(sender: @user)
     
     
   end
@@ -55,24 +58,42 @@ class UsersController < ApplicationController
 
   def become_creator
     message_content = params[:message]
-  
-    Admin.all.each do |admin|
-      Message.create(
+    
+    Admin.find_each do |admin|
+      admin.inbox.messages.create!(
         body: message_content,
-        sender: current_user, # ou `sender_id: current_user.id`, selon votre modèle
-        receiver: admin # ou `receiver_id: admin.id`, selon votre modèle
+        sender: current_user,
+        receiver: admin
       )
-      current_user.update(pending: true)
     end
   
-    redirect_to @user, notice: 'Votre demande a été envoyée à tous les administrateurs.'
+    current_user.update(pending: true)
+    redirect_to user_path(current_user), notice: 'Votre demande a été envoyée à tous les administrateurs.'
   end
 
   def promote_to_creator
     user = User.find(params[:user_id])
     user.update(creator: true)
     user.update(pending: false)
-    redirect_to admin_path(current_admin), notice: "#{user.email} a été promu en tant que créateur."
+    Message.create!(
+      body: "Félicitations ! Vous avez été accepté en tant que créateur.",
+      sender: current_admin, # ou nil si vous ne voulez pas spécifier d'expéditeur
+      receiver: user,
+      inbox: user.inbox
+    )
+    redirect_to dashboard_path, notice: "#{user.email} a été promu en tant que créateur."
+  end
+
+  def deny_creator
+    user = User.find(params[:user_id])
+    user.update(pending: false)
+    Message.create!(
+      body: "Votre demande pour devenir créateur a été refusée.",
+      sender: current_admin, 
+      receiver: user,
+      inbox: user.inbox
+    )
+    redirect_to dashboard_path, notice: "#{user.email} a été promu en tant que créateur."
   end
 
   private
