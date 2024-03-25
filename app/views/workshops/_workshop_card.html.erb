@@ -17,15 +17,17 @@
                 <div class="rating">
                 <div class="star-rating">
                 <% (1..5).each do |star| %>
-                  <% if star <= workshop.average %>
-                    <span class="star already_stared">&#9733;</span>
+                  <% if star <= workshop.average.floor %>
+                    <i class="fas fa-star already_stared"></i> <!-- Étoile pleine -->
+                  <% elsif star == workshop.average.floor + 1 && workshop.average % 1 >= 0.5 %>
+                    <i class="fas fa-star-half-alt half_stared"></i> <!-- Étoile à moitié pleine -->
                   <% else %>
-                    <span class="star empty already_stared">&#9734;</span> 
+                    <i class="far fa-star empty already_stared"></i> <!-- Étoile vide -->
                   <% end %>
                 <% end %>
                 </div>
                 </div>
-                <span class="rating-count"><%= workshop.likes.count %></span>
+                <span class="rating-count"><%= workshop.reviews.count %></span>
             </div>
             <div class="rbt-bookmark-btn">
                 <a class="rbt-round-btn" title="Bookmark" href="#"><i class="feather-bookmark"></i></a>

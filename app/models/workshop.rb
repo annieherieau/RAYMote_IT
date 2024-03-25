@@ -26,7 +26,7 @@ end
 
 
 def update_average_rating
-  update_column(:average_rating, reviews.average(:rating).to_f)
+  update_column(:average, reviews.average(:rating).to_f)
 end
 
 def status
