@@ -29,6 +29,7 @@
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
-
-    <%= f.submit "Enregistrer", class: "rbt-btn btn-md btn-gradient border-0 w-100" %>
+  <div class="d-flex justify-content-end">
+    <%= f.submit "Enregistrer", class: "rbt-btn btn-md btn-gradient border-0" %>
+  </div>
 <% end %>
