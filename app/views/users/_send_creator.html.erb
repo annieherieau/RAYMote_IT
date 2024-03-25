@@ -1,10 +1,14 @@
-<div class="creator_send">
-<%= form_with url: become_creator_path, method: :post, local: true do |form| %>
-    <div class="field">
-      <%= form.label :message %>
-      <%= form.text_area :message, required: true %>
-    </div>
-  
-    <%= form.submit "Envoyer la demande", class: "btn btn-primary" %>
+<h3>Devenir Créateur</h3>
+  <% if @user.pending %> 
+    <p>Votre demande est en cours de traitement</p>
+  <% else %>     
+    <%= form_with url: become_creator_path, method: :post, local: true do |form| %>
+      <div class="field">
+        <%= form.label :message %>
+        <%= form.text_area :message, required: true %>
+      </div>
+      <div class="d-flex justify-content-end">
+        <%= form.submit "Envoyer la demande", class: "rbt-btn btn-md btn-gradient border-0" %>
+      </div>
+    <% end %>
   <% end %>
-  </div>
