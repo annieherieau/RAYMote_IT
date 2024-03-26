@@ -8,17 +8,18 @@ class User < ApplicationRecord
   after_create :create_inbox
 
   # associations
-  has_many :created_workshops, class_name: 'Workshop', foreign_key: :creator_id
-  has_many :attendances
-  has_many :workshops, through: :attendances
+  has_many :created_workshops, class_name: 'Workshop', foreign_key: :creator_id, dependent: :destroy
+  has_many :attendances, dependent: :destroy
+  has_many :workshops, through: :attendances, dependent: :destroy, foreign_key: :user_id
   has_many :likes, dependent: :destroy
-  has_many :orders
-  has_many :reviews
-  has_many :sent_messages, as: :sender, class_name: 'Message'
-  has_many :received_messages, as: :receiver, class_name: 'Message'
-  has_many :notifications, as: :notifiable
-  has_one :inbox, as: :inboxable
+  has_many :orders, dependent: :destroy
+  has_many :reviews, dependent: :destroy
+  has_many :sent_messages, as: :sender, class_name: 'Message', dependent: :destroy
+  has_many :received_messages, as: :receiver, class_name: 'Message', dependent: :destroy
+  has_many :notifications, as: :notifiable, dependent: :destroy
+  has_one :inbox, as: :inboxable, dependent: :destroy
   has_one_attached :avatar
+  has_one :setting
 
   
 

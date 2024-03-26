@@ -24,7 +24,7 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
 </head>
 
-<body data-turbo="false" class="rbt-header-sticky">
+<body data-turbo="false" class="rbt-header-sticky <%= 'high-contrast' if current_user&.setting&.high_contrast == true %> <%= 'opendys-enabled' if current_user&.setting&.opendys == true %>">
     <header>
         <%= render "layouts/navbar" %>
     </header>

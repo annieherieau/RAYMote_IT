@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_25_222720) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_26_112838) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -147,6 +147,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_25_222720) do
     t.index ["workshop_id"], name: "index_reviews_on_workshop_id"
   end
 
+  create_table "settings", force: :cascade do |t|
+    t.boolean "high_contrast", default: false
+    t.boolean "opendys", default: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_settings_on_user_id"
+  end
+
   create_table "tags", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -204,6 +213,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_25_222720) do
   add_foreign_key "orders", "users"
   add_foreign_key "reviews", "users"
   add_foreign_key "reviews", "workshops"
+  add_foreign_key "settings", "users"
   add_foreign_key "workshops", "categories"
   add_foreign_key "workshops", "users", column: "creator_id"
 end

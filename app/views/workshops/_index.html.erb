@@ -23,13 +23,13 @@
             <% end %>
             <td><%= workshop.name %></td>
             <td><%= workshop.description %></td>
-            <td><%= workshop.start_date.strftime("%d/%m/%Y %H:%M") %></td>
+            <td><%= date_format(workshop.start_date) %></td>
             <td>
               <% if admin_signed_in? %>
                 <%= link_to "Voir", workshop, class: "rbt-btn btn-sm btn-gradient" %>
-                <% unless workshop.validated %>
+                <% unless workshop.validated || workshop.brouillon %>
                   <%= button_to 'Valider', validate_workshop_path(workshop), method: :patch, data: { confirm: 'Êtes-vous sûr ?' }, class: "rbt-btn btn-sm btn-gradient btn-gradient-2 mt-2" %>
-                      <%= button_to 'Refuser', refuse_workshop_path(workshop), method: :patch, data: { confirm: 'Êtes-vous sûr ?' }, class: "rbt-btn btn-sm btn-gradient btn-gradient-2 mt-2"%>
+                  <%= button_to 'Refuser', refuse_workshop_path(workshop), method: :patch, data: { confirm: 'Êtes-vous sûr ?' }, class: "rbt-btn btn-sm btn-gradient btn-gradient-2 mt-2"%>
                 <% end %>
               <% elsif current_user && workshop.user_ids.include?(current_user.id) %>
                 <%= link_to "Voir", workshop, class: "rbt-btn btn-sm btn-gradient" %>

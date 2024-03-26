@@ -11,6 +11,6 @@ module ApplicationHelper
 
   # formate les dates
   def date_format(date)
-    date.strftime("%d/%m/%Y %H:%M")
+    date ? date.strftime("%d/%m/%Y %H:%M") : ''
   end
 end

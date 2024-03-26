@@ -12,10 +12,10 @@
         <% end %>
           
         <div class="mb-3">
-          <%= form.label :name, class: "form-label" %>
+          <%= form.label :name, 'Nom', class: "form-label" %>
           <%= form.text_field :name, class: "form-control", required: true %>
           <div class="invalid-feedback">
-            Please provide a name for the workshop.
+            Merci de renseigner un nom.
           </div>
         </div>
 
@@ -23,41 +23,35 @@
           <%= form.label :description, class: "form-label" %>
           <%= form.text_area :description, class: "form-control", rows: 4, required: true %>
           <div class="invalid-feedback">
-            Please provide a description for the workshop.
+            Merci de renseigner une description.
           </div>
         </div>
 
         <div class="mb-3">
         <%= form.check_box :event, class: "form-check-input", id: "workshop_event", data: { bs_toggle: "collapse", bs_target: "#event_date_container" } %>
-        <%= form.label :event, "Is this an event?", class: "form-check-label" %>
+        <%= form.label :event, "Atelier évènement", class: "form-check-label" %>
       </div>
 
         <div class="mb-3 collapse <%= 'show' if workshop.event %>" id="event_date_container">
-          <%= form.label :start_date, "Start Date", class: "form-label" %>
-          <%= form.datetime_field :start_date, class: "form-control", required: true %>
-          <div class="invalid-feedback">
-            Please provide a start date for the workshop.
-          </div>
-          <%= form.label :duration, "Duration", class: "form-label" %>
-          <%= form.number_field :duration, class: "form-control", required: true %>
-          <div class="invalid-feedback">
-            Please provide the duration of the workshop.
-          </div>
+            <%= form.label :start_date, "Date de début", class: "form-label" %>
+            <%= form.datetime_field :start_date, class: "form-control", required: workshop.event %>
+
+            <%= form.label :duration, "Durée", class: "form-label" %>
+            <%= form.number_field :duration, class: "form-control", required: workshop.event, value: 0 %>
         </div>
 
         <div class="mb-3">
+          <%= form.label :price, 'Prix', class: "form-label" %>
+          <%= form.number_field :price, class: "form-control", required: true, value: 0 %>
         </div>
 
         <div class="mb-3">
-          <%= form.label :price, class: "form-label" %>
-          <%= form.number_field :price, class: "form-control", required: true %>
-          <div class="invalid-feedback">
-            Please provide the price of the workshop.
-          </div>
+          <%= form.label :photo %>
+          <%= form.file_field :photo %>
         </div>
 
         <div class="mb-3">
-        <%= form.label :tags, "Tags:", class: "form-label" %>
+        <%= form.label :tags, "Tags :", class: "form-label" %>
         <div id="tag-list" class="d-flex flex-wrap gap-2 mb-3">
           <% @workshop.tags.each do |tag| %>
             <span class="badge bg-primary d-flex align-items-center destroyable">
@@ -70,19 +64,15 @@
         </div>
 
         <div class="mb-3">
-          <%= form.label :category_id, "Category", class: "form-label" %><br>
-          <%= form.collection_select :category_id, @categories, :id, :name, { include_blank: "Please select" }, class: "form-select", required: true %>
-          <div class="invalid-feedback">
-            Please select a category for the workshop.
-          </div>
+          <%= form.label :category_id, "Catégorie", class: "form-label" %><br>
+          <%= form.collection_select :category_id, @categories, :id, :name, { include_blank: "Liste des catégories" }, class: "form-select", required: true %>
         </div>
+
         <div class="mb-3">
         <%= render 'courseitems/form_course_items', form: form %>
         </div>
 
-
         <div class="mb-3">
-          <%= form.submit "Save", class: "btn btn-primary" %>
-          <%= link_to "Back to workshops", workshops_path, class: "btn btn-secondary" %>
+          <%= form.submit "Enregistrer", class: "btn btn-primary" %>
         </div>
       <% end %>

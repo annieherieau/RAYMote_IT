@@ -16,18 +16,24 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :workshops do
-    resource :like, only: [:create, :destroy], controller: 'likes'
-    resources :attendances, only: [:create, :destroy]
-    resources :reviews, only: [:new, :create]
-    resources :course_items, only: [:create, :destroy]
     member do
       patch :validate
       patch :refuse
       patch :activate
     end
+    resource :like, only: [:create, :destroy], controller: 'likes'
+    resources :attendances, only: [:create, :destroy]
+    resources :reviews, only: [:new, :create]
+    resources :course_items, only: [:create, :destroy]
+    
   end
 
-  
+  resource :settings do
+    collection do
+      patch :update_accessibility_settings
+    end
+  end
+
   get 'workshops/:id/validate', to: 'workshops#index'
   resources :tags, only: [:show]
   resources :categories, only: [:show]
