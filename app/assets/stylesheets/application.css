@@ -54,6 +54,10 @@ h5.ft-title {
 h6 {
   font-family: var(--font-primary);  
 }
+.custom-textarea {
+  font-size: 16px; /* Ajoutez la taille de police souhaitée */
+}
+
 
 /* ########### Navbar #################*/
 
