@@ -1,8 +1,7 @@
 class WorkshopsController < ApplicationController
-  before_action :authenticate_user!, except: %i[ index show ]
   before_action :set_workshop, except: %i[ index new create ]
-  before_action :authorize_creator!, only: %i[ edit update activate destroy ]
-  before_action  :check_admin, only: [:validate]
+  before_action :authorize_creator!, only: %i[ new create edit update activate destroy ]
+  before_action :authenticate_admin!, only: %i[ validate refuse]
   
   # GET /workshops or /workshops.json
   def index

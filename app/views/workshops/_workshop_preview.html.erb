@@ -48,8 +48,7 @@
                     <div class="inner">
 
                         <%# Bouton inscription %>
-                        
-                        <% if !user_signed_in? || current_user != @workshop.creator %>
+                        <% if current_user != @workshop.creator%>
                           <div class="content pt--30">
                           <% if @workshop.price.zero? %>
                             <%= button_to "S'inscrire", workshop_attendances_path(@workshop), method: :post, class: "rbt-btn btn-md btn-gradient w-100" %>
@@ -74,12 +73,20 @@
                             </ul>
                         </div>
                     </div>
+                  <%#  lien créateur %>
                    <% if current_user == @workshop.creator %>
-                  <%= link_to "Modifier", edit_workshop_path(@workshop), class: "rbt-btn btn-sm btn-gradient mt-5 w-100 text-center" %>
-                  <%= button_to @workshop.activate_btn, activate_workshop_path(@workshop), method: :patch, class: "rbt-btn btn-sm btn-gradient mt-2 w-100" %>
-                  <%= button_to "Supprimer", @workshop, method: :delete, data: { confirm: 'Are you sure?' }, class: "rbt-btn btn-sm btn-gradient btn-gradient-2 mt-2 w-100" %>
-                <% end %>
-                <%= link_to "Retour", workshops_path, class: "rbt-btn btn-sm btn-border mt-5 w-100 text-center" %>
+                      <%= link_to "Modifier", edit_workshop_path(@workshop), class: "rbt-btn btn-sm btn-gradient mt-5 w-100 text-center" %>
+                      <%= button_to @workshop.activate_btn, activate_workshop_path(@workshop), method: :patch, class: "rbt-btn btn-sm btn-gradient mt-2 w-100" %>
+                      <%= button_to "Supprimer", @workshop, method: :delete, data: { confirm: 'Are you sure?' }, class: "rbt-btn btn-sm btn-gradient btn-gradient-2 mt-2 w-100" %>
+                    <% end %>
+                  <%# Liens admin %>
+                   <% if admin_signed_in? %>
+                      <% unless workshop.validated || workshop.brouillon %>
+                        <%= button_to 'Valider', validate_workshop_path(workshop), method: :patch, data: { confirm: 'Êtes-vous sûr ?' }, class: "rbt-btn btn-sm btn-gradient w-100 mt-5" %>
+                        <%= button_to 'Refuser', refuse_workshop_path(workshop), method: :patch, data: { confirm: 'Êtes-vous sûr ?' }, class: "rbt-btn btn-sm btn-gradient btn-gradient-2 w-100 mt-2"%>
+                      <% end %>
+                    <% end %>
+                  <%= link_to "Retour", workshops_path, class: "rbt-btn btn-sm btn-border mt-5 w-100 text-center" %>
                 </div>
                 
                
