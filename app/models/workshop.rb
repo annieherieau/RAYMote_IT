@@ -13,6 +13,8 @@ class Workshop < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :order_workshops
   has_many :orders, through: :order_workshops
+  has_many :course_items, dependent: :destroy
+  accepts_nested_attributes_for :course_items, allow_destroy: true
 
   # validations
   validates :name, presence: true, length: { in: 3..15 }
