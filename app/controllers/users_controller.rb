@@ -1,14 +1,12 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ edit update destroy become_creator ]
-  before_action  :check_admin, only: [:promote_to_creator]
-  before_action :authenticate_user!, except: [:promote_to_creator, :deny_creator]
-  before_action :authenticate_admin!, only: [ :promote_to_creator, :deny_creator ]
-
+  before_action :set_user, only: %i[edit update destroy become_creator]
+  before_action :authenticate_user!, except: [:promote_to_creator, :deny_creator, :destroy]
+  before_action :authenticate_admin!, only: [:destroy, :promote_to_creator, :deny_creator]
 
   # GET /profile/1
   def show
     @user = User.find(params[:id])
-    if (current_user == @user || @user.creator)
+    if current_user == @user || @user.creator
       @workshops = Workshop.all
       @validated_workshops = @user.created_workshops.where(brouillon: false)
       @draft_workshops = @user.created_workshops.where(brouillon: true)
@@ -18,8 +16,6 @@ class UsersController < ApplicationController
 
     @received_messages = Message.where(receiver: @user)
     @sent_messages = Message.where(sender: @user)
-    
-    
   end
 
   # PATCH/PUT /profile/1
@@ -35,15 +31,25 @@ class UsersController < ApplicationController
 
   # DELETE /profile/1
   def destroy
-    @user.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: "User was successfully destroyed." }
-      format.json { head :no_content }
-      
+    @user = User.find(params[:id])
+    if !@user.creator
+      @user.destroy
+      flash[:notice] = "L'utilisateur a été supprimé avec succès."
+    else
+       @user.created_workshops.each do |workshop|
+        if workshop.users.any?
+          workshop.update_attribute(:creator_id, 1)
+        else
+          workshop.destroy
+       end
+      end
+      @user.destroy
+      flash[:alert] = "Créateur supprimé. "
     end
-    redirect_to root_path
+  
+    redirect_to dashboard_path
   end
+
 
   # validation de la demande de compte creator
   def validate
@@ -58,7 +64,6 @@ class UsersController < ApplicationController
 
   def become_creator
     message_content = params[:message]
-    
     Admin.find_each do |admin|
       admin.inbox.messages.create!(
         body: message_content,
@@ -66,7 +71,6 @@ class UsersController < ApplicationController
         receiver: admin
       )
     end
-  
     current_user.update(pending: true)
     redirect_to user_path(current_user), notice: 'Votre demande a été envoyée à tous les administrateurs.'
   end
@@ -77,7 +81,7 @@ class UsersController < ApplicationController
     user.update(pending: false)
     Message.create!(
       body: "Félicitations ! Vous avez été accepté en tant que créateur.",
-      sender: current_admin, # ou nil si vous ne voulez pas spécifier d'expéditeur
+      sender: current_admin,
       receiver: user,
       inbox: user.inbox
     )
@@ -89,22 +93,23 @@ class UsersController < ApplicationController
     user.update(pending: false)
     Message.create!(
       body: "Votre demande pour devenir créateur a été refusée.",
-      sender: current_admin, 
+      sender: current_admin,
       receiver: user,
       inbox: user.inbox
     )
     redirect_to dashboard_path, notice: "#{user.email} a été promu en tant que créateur."
   end
 
+
   private
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = current_user
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = current_user
+  end
 
-    # Only allow a list of trusted parameters through.
-    def user_params
-      params.require(:user).permit(:firstname, :lastname, :email, :creator, :avatar)
-    end
+  # Only allow a list of trusted parameters through.
+  def user_params
+    params.require(:user).permit(:firstname, :lastname, :email, :creator, :avatar)
+  end
 end
