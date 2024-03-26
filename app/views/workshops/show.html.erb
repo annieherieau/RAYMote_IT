@@ -21,13 +21,18 @@
             <td><%=date_format(@workshop.start_date) %></td>
           </tr>
           <tr>
-            <th scope="row">Duration:</th>
+            <th scope="row">Durée</th>
             <td><%= @workshop.duration %></td>
           </tr>
           <tr>
-            <th scope="row">Price:</th>
+            <th scope="row">Prix </th>
             <td><%= @workshop.price %> €</td>
           </tr>
+           <tr>
+            <th scope="row">Catégorie </th>
+            <td><%= link_to @category.name, category_path(@category)%></td>
+          </tr>
+          
         </tbody>
       </table>
       <div class="d-flex">
@@ -39,6 +44,20 @@
         <%end%>
       <% end %>
     </div>
+
+    <%# LIEN RESSOURECES - course_items %>
+    <div>
+    <% if @workshop.course_items.any?%>
+      <ul>
+      <% @workshop.course_items.each do |item| %>
+          <li><%= link_to item.link %></li>
+        </span>
+        <%end%>
+      </ul>
+      <% end %>
+    <div>
+    
+
     </div>
 
     <div class="col-md-6">
@@ -54,16 +73,6 @@
         <% else %>
           <p>Aucun participant pour le moment.</p>
         <% end %>
-      <% end %>
-
-      <!-- Categories -->
-      <h3>Catégories:</h3>
-      <% if @category.present? %>
-        <div class="categories-container">
-          <%= link_to @category.name, category_path(@category)%>
-        </div>
-      <% else %>
-        <p>Cet atelier n'est associé à aucune catégorie.</p>
       <% end %>
     </div>
   </div>

@@ -1,14 +1,13 @@
 <div class="d-flex justify-content-center align-items-center vh-100">
     <div class="rbt-contact-form contact-form-style-1 max-width-auto w-50">
-    <h1>Editing workshop</h1>
+    <h1>Modifier l'atelier</h1>
 
     <%= render "form", workshop: @workshop %>
 
     <br>
 
     <div class="text-center">
-      <%= link_to "Show this workshop", @workshop, class: "btn btn-secondary mr-2" %>
-      <%= link_to "Back to workshops", workshops_path, class: "btn btn-secondary" %>
+      <%= link_to "Annuler", @workshop, class: "btn btn-secondary mr-2" %>
     </div>
   </div>
 </div>
