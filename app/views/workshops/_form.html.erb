@@ -10,7 +10,7 @@
             </ul>
           </div>
         <% end %>
-
+          
         <div class="mb-3">
           <%= form.label :name, class: "form-label" %>
           <%= form.text_field :name, class: "form-control", required: true %>
@@ -28,19 +28,24 @@
         </div>
 
         <div class="mb-3">
+        <%= form.check_box :event, class: "form-check-input", id: "workshop_event", data: { bs_toggle: "collapse", bs_target: "#event_date_container" } %>
+        <%= form.label :event, "Is this an event?", class: "form-check-label" %>
+      </div>
+
+        <div class="mb-3 collapse <%= 'show' if workshop.event %>" id="event_date_container">
           <%= form.label :start_date, "Start Date", class: "form-label" %>
           <%= form.datetime_field :start_date, class: "form-control", required: true %>
           <div class="invalid-feedback">
             Please provide a start date for the workshop.
           </div>
-        </div>
-
-        <div class="mb-3">
           <%= form.label :duration, "Duration", class: "form-label" %>
           <%= form.number_field :duration, class: "form-control", required: true %>
           <div class="invalid-feedback">
             Please provide the duration of the workshop.
           </div>
+        </div>
+
+        <div class="mb-3">
         </div>
 
         <div class="mb-3">
@@ -81,6 +86,3 @@
           <%= link_to "Back to workshops", workshops_path, class: "btn btn-secondary" %>
         </div>
       <% end %>
-
-
-
