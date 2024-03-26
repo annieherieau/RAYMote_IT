@@ -135,7 +135,7 @@ class WorkshopsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def workshop_params
-      params.require(:workshop).permit(:name, :description, :start_date, :duration, :price, :category_id, :validated, :brouillon, :event, tag_ids: [], course_items_attributes: [:id, :link, :_destroy])
+      params.require(:workshop).permit(:name, :description, :start_date, :duration, :price, :category_id, :photo, :validated, :brouillon, :event, tag_ids: [], course_items_attributes: [:id, :link, :_destroy])
     end
 
 end
