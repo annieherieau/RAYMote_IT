@@ -3,7 +3,7 @@
     <div class="section-title text-center"> <!-- Correction de la classe text-start en text-center -->
       <span class="subtitle bg-primary-opacity">Mot de passe oublié?</span>
     </div>
-    <h3 class="title text-center">Réinitialiser le mot de passe</h3> <!-- Ajout de la classe text-center -->
+    <h3 class="title text-center">Réinitialiser</h3> <!-- Ajout de la classe text-center -->
     <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
@@ -13,7 +13,7 @@
       </div>
 
       <div class="form-submit-group">
-        <%= f.submit "Envoyez-moi les instructions de réinitialisation du mot de passe", class: "rbt-btn btn-md btn-gradient hover-icon-reverse w-100 border-0" %>
+        <%= f.submit "Envoyez-moi les instructions", class: "rbt-btn btn-md btn-gradient hover-icon-reverse w-100 border-0" %>
       </div>
     <% end %>
     <%= render "devise/shared/links" %>
