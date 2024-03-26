@@ -1,11 +1,12 @@
 class WorkshopsController < ApplicationController
   before_action :set_workshop, except: %i[ index new create ]
-  before_action :authorize_creator!, only: %i[ new create edit update activate destroy ]
+  before_action :authorize_creator!, only: %i[edit update activate destroy ]
   before_action :authenticate_admin!, only: %i[ validate refuse]
+  before_action :check_creator, only: %i[ new create ]
   
   # GET /workshops or /workshops.json
   def index
-    @top_categories = Category.left_joins(:workshops).group(:id).order('COUNT(workshops.id) DESC').limit(4)
+    @top_categories = Category.left_joins(:workshops).group(:id).order('COUNT(workshops.id) DESC').limit(8)
   
     @workshops = Workshop.where(validated: true, brouillon: false).to_a.select do |workshop|
       workshop.status == 'en cours' || workshop.status == 'à venir'
@@ -133,6 +134,14 @@ class WorkshopsController < ApplicationController
       flash[:alert] = "You are not authorized to perform this action."
       redirect_to root_path
     end
+
+    def check_creator
+      unless current_user.creator == true
+        flash[:alert] = "You are not authorized to perform this action."
+        redirect_to root_path
+      end
+    end
+
 
     # Only allow a list of trusted parameters through.
     def workshop_params

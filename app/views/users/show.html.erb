@@ -42,6 +42,12 @@
                     <!--  fin PROFIL -->
 
                     
+                    <!-- PARAMETRES D'ACCESSIBILITE -->
+                    <div class="tab-pane fade" id="accessibility" role="tabpanel">
+                    <%= render partial: 'settings/accessibility_settings', locals: { setting: current_user.setting } %>
+                    </div>
+                    <!-- fin PARAMETRES D'ACCESSIBILITE -->
+                    
 
                     <% if @user.creator %>
                         <!-- CREATED WORKSHOPS -->

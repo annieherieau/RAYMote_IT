@@ -19,6 +19,7 @@ class User < ApplicationRecord
   has_many :notifications, as: :notifiable, dependent: :destroy
   has_one :inbox, as: :inboxable, dependent: :destroy
   has_one_attached :avatar
+  has_one :setting
 
   
 

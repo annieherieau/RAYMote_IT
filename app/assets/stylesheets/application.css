@@ -16,6 +16,7 @@
 
  @import url(vendor/bootstrap.min.css);
  @import url(vendor/style.css);
+ @import url(fonts.css.erb);
 
 
 
@@ -97,6 +98,15 @@ footer {
 }
 .already_stared{
   color: #f5a623; 
+}
+/* ##### Accessibility ###### */
+.high-contrast {
+  background-color: white !important;
+  color: black !important;
+}
+
+.opendys-enabled {
+  font-family: 'OpenDyslexic';
 }
 
 /* ##### Banner Homepage ###### */
