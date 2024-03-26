@@ -19,6 +19,7 @@ class User < ApplicationRecord
   has_many :notifications, as: :notifiable
   has_one :inbox, as: :inboxable
   has_one_attached :avatar
+  has_one :setting
 
   
 

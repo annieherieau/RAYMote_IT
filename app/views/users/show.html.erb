@@ -62,6 +62,12 @@
                     <!-- fin WORKSHOPS BROUILLON -->
                     </div>
                     <% end %>
+
+                    <!-- PARAMETRES D'ACCESSIBILITE -->
+                    <div class="tab-pane fade" id="accessibility" role="tabpanel">
+                    <%= render partial: 'settings/accessibility_settings', locals: { setting: current_user.setting } %>
+                    </div>
+                    <!-- fin PARAMETRES D'ACCESSIBILITE -->
                     
                     <% if user_signed_in? && current_user == @user %>
                         <!-- WORSHOPS inscriptions -->
@@ -81,6 +87,7 @@
                           <%= render partial: "reviews/index", locals: {reviews: @user.reviews} %>
                         </div>
                         <!-- fin AVIS -->
+                    
                     
                     <% end %>
                     
