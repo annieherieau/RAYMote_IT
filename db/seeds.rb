@@ -16,8 +16,10 @@ ActiveRecord::Base.connection.tables.each do |t|
     ActiveRecord::Base.connection.reset_pk_sequence!(t)
   end 
 
-User.create(email: "user01@annieherieau.fr", password: "password",firstname: "Utilisateur", lastname: "anonyme", creator: true)
-puts "User anonyme créés"
+puts ('---- START SEEDING ----')
+
+User.create(email: "user01@annieherieau.fr", password: "password",firstname: "Utilisateur", lastname: "Supprimé", creator: false)
+puts "User anonyme créé"
 
 # Création des utilisateurs avec Faker
 emails_with_names = {
@@ -27,7 +29,7 @@ emails_with_names = {
   'yann.rezigui@gmail.com' => ['Yann', 'Rezigui']
 }
 
-puts ('---- START SEEDING ----')
+
 emails_with_names.each do |email, names|
   user = User.create!(
     email: email,
@@ -56,7 +58,7 @@ categories = ["JavaScript", "Python", "Ruby", "Java", "C++", "C#", "Swift", "Kot
 categories.each do |name|
   Category.create!(name: name)
 end
-puts("Categories créés - creator aleatoires")
+puts("Categories créés")
 
 # Création des ateliers avec Faker
 20.times do
