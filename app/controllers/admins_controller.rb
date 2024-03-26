@@ -3,8 +3,7 @@ class AdminsController < ApplicationController
 
   def dashboard
     @users = User.all
-    @workshops = Workshop.all.where(brouillon: false)
-    # atelier en attente de validation
+    @workshops = Workshop.where(brouillon: false)
     @workshops_to_validate = Workshop.where(validated: false, brouillon: false)
     @tags = Tag.all
     @categories = Category.all
@@ -26,4 +25,6 @@ class AdminsController < ApplicationController
     redirect_to dashboard_path
   end
 
+
+  
 end
