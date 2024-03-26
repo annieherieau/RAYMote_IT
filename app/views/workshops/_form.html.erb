@@ -51,10 +51,17 @@
   </div>
 
   <div class="mb-3">
-    <%= form.label :tag_id, "Tag", class: "form-label" %><br>
-    <%= form.collection_select :tag_id, @tags, :id, :name, { include_blank: "Liste des tags" }, class: "form-select custom-textarea", required: true %>
-  </div>
-
+        <%= form.label :tags, "Tags :", class: "form-label" %>
+        <div id="tag-list" class="d-flex flex-wrap gap-2 mb-3">
+          <% @workshop.tags.each do |tag| %>
+            <span class="badge bg-primary d-flex align-items-center destroyable">
+              <%= tag.name %>
+              <button type="button" class="btn-close btn-close-white ms-2 remove-tag" aria-label="Close" data-tag-id="<%= tag.id %>"></button>
+            </span>
+          <% end %>
+          </div>
+          <%= text_field_tag :tag_input, nil, class: "form-control", id: "tag-input", "data-role" => "tagsinput" %>
+        </div>
 
   <div class="mb-3">
     <%= form.label :category_id, "Catégorie", class: "form-label" %><br>
