@@ -43,11 +43,21 @@ h3 {
 h4 {
   font-family: var(--font-primary);
 }
+h5 {
+  font-family: var(--font-primary);  
+}
 h5.ft-title {
   font-family: var(--font-primary);
   font-size: var(--h5);
   font-weight: bold;
 }
+h6 {
+  font-family: var(--font-primary);  
+}
+.custom-textarea {
+  font-size: 16px; /* Ajoutez la taille de police souhaitée */
+}
+
 
 /* ########### Navbar #################*/
 
