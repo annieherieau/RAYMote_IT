@@ -1,21 +1,3 @@
-<style>
-.star-rating {
-  font-size: 24px;
-}
-
-.star-rating .star_to_rate {
-  cursor: pointer;
-  color: #ccc; 
-}
-
-.star-rating .star.rated {
-  color: #f5a623; 
-}
-.already_stared{
-  color: #f5a623; 
-}
-</style>
-
 <div class="container">
   <h1 class="mt-4 mb-3">Détails de l'atelier</h1>
   <div class="row">
@@ -90,8 +72,7 @@
   <div class="mt-4">
     <% if user_signed_in? %>
       <% if current_user == @workshop.creator %>
-        <p>Vous ne pouvez pas vous inscrire à votre propre événement.</p>
-        <%= link_to "Modifier l'atelier", edit_workshop_path(@workshop), class: "btn btn-secondary" %>
+        <%= link_to "Modifier l'atelier", edit_workshop_path(@workshop), class: "rbt-btn btn-gradient" %>
       <% elsif @workshop.attendances.exists?(user: current_user) %>
         <% attendance = @workshop.attendances.find_by(user: current_user) %>
         <% if @workshop.price == 0 %>
@@ -138,7 +119,6 @@
     <% end %>
   </div>
     <% elsif current_user == @workshop.creator %>
-        <p> Vous ne pouvez pas commenter votre propre atelier </p>
     <% elsif already_reviewed %>
         <p>Vous avez déjà noté cet atelier</p>
     <% else %>

@@ -1,8 +1,40 @@
-<h3>Categories</h3>
-  <% categories.each do |category| %>
-    <%= link_to category_path(category.id), class: "rbt-btn btn-border square w-50 d-flex justify-content-between align-items-center" do %>
-        <%= category.name %>
-        <span class="rbt-badge-6 bg-primary-opacity my-auto"> <%= category.workshops.count %></span>
-
-    <% end %> 
-  <% end %>
+<h3>Catégories</h3>
+    <% if categories.any? %>
+  <div class="rbt-my-account-table table-responsive">
+    <table class="table table-bordered text-center">
+      <thead class="thead-light">
+          <tr>
+            <th>ID</th>
+            <th>Icone</th>
+            <th>Nom</th>
+            <th>Nombre de cours</th>
+            <th >Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% categories.each do |category| %>
+            <tr>
+              <td><%= category.id %></td>
+              <td>
+                <!-- icon -->
+                <%if category.icon.attached?%>
+                  <%= image_tag category.icon, width: "30px", alt: category.name + " icon"  %>
+                <%end%>
+              </td>
+              <td><%= category.name %></td>
+              <td><%= category.workshops.count %></td>
+              <td>
+                <%= link_to 'Voir', category_path(category.id), class: "rbt-btn btn-sm" %>
+                <%= link_to 'Modifier', edit_category_path(category.id), class: "rbt-btn btn-sm" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <% else %>
+      <p>Aucune catégorie pour le moment.</p>
+    <% end %>
+<div class="mt-2">
+  <%= link_to "New category", new_category_path, class: "rbt-btn btn-gradient" %>
+</div>
