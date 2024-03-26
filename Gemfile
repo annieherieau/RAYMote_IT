@@ -77,5 +77,3 @@ gem "devise", "~> 4.9"
 gem "stripe", "~> 10.12"
 
 gem "dockerfile-rails", ">= 1.6", :group => :development
-
-gem "open-uri", "~> 0.4.1"
