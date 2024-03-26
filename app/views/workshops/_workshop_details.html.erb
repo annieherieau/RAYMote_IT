@@ -1,11 +1,245 @@
-    <%# LIEN RESSOURECES - course_items %>
-    <div>
-    <% if @workshop.course_items.any?%>
-      <ul>
-      <% @workshop.course_items.each do |item| %>
-          <li><%= link_to item.link %></li>
-        </span>
-        <%end%>
-      </ul>
-      <% end %>
+<%# section Préview %>
+<section class="rbt-course-details-area">
+    <div class="container">
+        <div class="row g-5">
+            <%# COLONNE 1 contenu %>
+            <div class="col-lg-8">
+                <%# Détails de l'atelier %>
+                <div class="course-details-content">
+                    <%# Photo %>
+                    <%if @workshop.photo.attached?%>
+                      <div class="rbt-feature-box rbt-shadow-box thumbnail">
+                        <%= image_tag @workshop.photo, class: "rounded-4 w-100", alt: @workshop.name %>
+                      </div>
+                    <% end %>
+
+
+                    <!-- Start Course Feature Box DESCRIPTION -->
+                    <div class="rbt-feature-box rbt-shadow-box mt--60">
+                        <div class="row g-5">
+                            <!-- Start Feture Box  -->
+                            <div class="col-lg-12">
+                                <div class="section-title">
+                                    <h4 class="title mb--20">Description</h4>
+                                </div>
+                                <p><%= @workshop.description %></p>
+                                <div class="d-flex justify-content-end">
+                                  <% if @workshop.tags.present? && @workshop.tags.any? %>
+                                  <% @workshop.tags.each do |tag| %>
+                                    <span class="badge bg-primary m-1">
+                                      <%= link_to tag.name, tag_path(tag), class: "text-white" %>
+                                    </span>
+                                    <%end%>
+                                  <% end %>
+                                </div>
+                            </div>
+                            <!-- End Feture Box  -->
+                        </div>
+                    </div>
+                    <!-- End Course Feature Box  -->
+
+                  <!-- Start Feture UTILISATEUR -->
+                  <div class="rbt-feature-box rbt-shadow-box mt--60">
+                    <% if @purchased_workshop %>
+                      <div class="col-lg-8">
+                        <% if @workshop.course_items.any?%>
+                          <div class="section-title">
+                              <h4 class="title mb--20">Ressources</h4>
+                          </div>
+                          <ul>
+                          <% @workshop.course_items.each do |item| %>
+                              <li><%= link_to item.link %></li>
+                            </span>
+                            <%end%>
+                          </ul>
+                        <% end %>
+
+                        <div class="section-title">
+                            <h4 class="title mb--20">Donnez votre avis</h4>
+                        </div>
+                          <!-- Bouton review -->
+                          <div class="container justify-content-center mb-5">
+                              <% if !@already_reviewed %>
+                                <div class="star-rating">
+                                <% (1..5).each do |rating| %>
+                                  <span class="star star_to_rate" data-rating="<%= rating %>" data-form-url="<%= new_workshop_review_path(@workshop, rating: rating) %>">&#9733;</span>
+                                <% end %>
+                                </div>
+                              <% else %>
+                                  <p>Vous avez déjà noté cet atelier</p>
+                              <% end %>
+                          </div>
+
+                        <div class="section-title">
+                            <h4 class="title mb--20">Désinscription</h4>
+                        </div>
+                        <% if @workshop.price.zero? %>
+                          <%= button_to 'Se désinscrire', workshop_attendance_path(@workshop, attendance), method: :delete, class: "rbt-btn btn-md btn-gradient" %>
+                        <% else %>
+                          <p>Cet événement est payant. Veuillez contacter l'administrateur pour vous désinscrire.</p>
+                          <%= link_to "Formulaire de contact", contact_path, class: "rbt-btn btn-md btn-gradient" %>
+                        <% end %>
+                      </div>
+                    <% end %>
+                    <!-- End Feture Box  -->
+                  </div>
+                  <!-- End Course Feature Box  -->
+                </div>
+            </div>
+
+            <%# COLONNE 2 Sidebar%>
+            <div class="col-lg-4">
+                <div class="course-sidebar rbt-gradient-border sticky-top rbt-shadow-box ">
+                    <div class="inner">
+
+                        <%# Bouton inscription %>
+                        <% if current_user != @workshop.creator%>
+                          <div class="content pt--30">
+                          <% if @workshop.price.zero? %>
+                            <%= button_to "S'inscrire", workshop_attendances_path(@workshop), method: :post, class: "rbt-btn btn-md btn-gradient w-100" %>
+                          <% else %>
+                            <%= button_to "Acheter " + number_to_euros(@workshop.price), new_checkout_create_path(workshop_id: @workshop.id), method: :post, data: { turbo: false }, class: "rbt-btn btn-md btn-gradient w-100" %>
+                          <% end %>
+                          </div>
+                        <% end %>
+                        <%# Détails %>
+                        <div class="rbt-widget-details has-show-more">
+                            <ul class="has-show-more-inner-content rbt-course-details-list-wrapper">
+                                
+                                <% if @workshop.event %>
+                                  <li><span>Date de début</span><span class="rbt-feature-value rbt-badge-5"><%= date_format(@workshop.start_date) %></span>
+                                  </li>
+                                  <li><span>Durée</span><span class="rbt-feature-value rbt-badge-5"><%= @workshop.duration %> min</span></li>
+                                <% end %>
+                                <li><span>Catégorie</span><span class="rbt-feature-value rbt-badge-5"><%= link_to @category.name, category_path(@category)%></span></li>
+                                <li><span>Créateur</span><span class="rbt-feature-value rbt-badge-5"><%= link_to "#{@workshop.creator.firstname} #{@workshop.creator.lastname}", user_path(@workshop.creator) %></span></li>
+
+                                <li><span>Likes</span><span class="rbt-feature-value rbt-badge-5"><%= @workshop.likes.count %></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                  <%#  lien créateur %>
+                   <% if current_user == @workshop.creator %>
+                      <%= link_to "Modifier", edit_workshop_path(@workshop), class: "rbt-btn btn-sm btn-gradient mt-5 w-100 text-center" %>
+                      <%= button_to @workshop.activate_btn, activate_workshop_path(@workshop), method: :patch, class: "rbt-btn btn-sm btn-gradient mt-2 w-100" %>
+                      <%= button_to "Supprimer", @workshop, method: :delete, data: { confirm: 'Are you sure?' }, class: "rbt-btn btn-sm btn-gradient btn-gradient-2 mt-2 w-100" %>
+                    <% end %>
+                  <%# Liens admin %>
+                   <% if admin_signed_in? %>
+                      <% unless workshop.validated || workshop.brouillon %>
+                        <%= button_to 'Valider', validate_workshop_path(workshop), method: :patch, data: { confirm: 'Êtes-vous sûr ?' }, class: "rbt-btn btn-sm btn-gradient w-100 mt-5" %>
+                        <%= button_to 'Refuser', refuse_workshop_path(workshop), method: :patch, data: { confirm: 'Êtes-vous sûr ?' }, class: "rbt-btn btn-sm btn-gradient btn-gradient-2 w-100 mt-2"%>
+                      <% end %>
+                    <% end %>
+                  
+                  <%# Liens User connecté %>
+                    <%# bouton Like %>
+                    <% if @workshop.likes.exists?(user: current_user) %>
+                      <%= button_to 'Déliker', workshop_like_path(@workshop), method: :delete, class: "rbt-btn btn-sm btn-gradient mt-2 w-100" %>
+                    <% else %>
+                      <%= button_to 'Liker', workshop_like_path(@workshop), method: :post, class: "rbt-btn btn-sm btn-gradient mt-2 w-100" %>
+                    <% end %>
+                    
+                    <% if @purchased_workshop && @workshop.price.zero? %>
+                      <%= button_to 'Se désinscrire', workshop_attendance_path(@workshop, attendance), method: :delete, class: "rbt-btn btn-md btn-gradient" %>
+                    <% end %>
+                    
+                  
+
+                  <%= link_to "Retour", :back, class: "rbt-btn btn-sm btn-border mt-5 w-100 text-center" %>
+                </div>
+                
+               
+            </div>
+            
+        </div>
     </div>
+</section>
+
+
+
+<%# section pour le créateur %>
+<% if current_user == @workshop.creator %>
+  <section class="rbt-course-details-area">
+      <div class="container">
+        <%# Détails %>
+        <div class="course-details-content">
+          <!-- Start Course Feature Box DESCRIPTION -->
+          <div class="rbt-feature-box rbt-shadow-box mt--60">
+              <div class="row g-5">
+                  <!-- Start Feture Box  -->
+                  <div class="col-lg-12">
+                      <div class="section-title">
+                          <h4 class="title mb--20">Participants</h4>
+                      </div>
+                      <% if @attendances.exists? %>
+                        <ul>
+                          <% @attendances.each do |attendance| %>
+                            <li><%= attendance.user.email %></li>
+                          <% end %>
+                        </ul>
+                      <% else %>
+                        <p>Aucun participant inscrit</p>
+                      <% end %>
+                  </div>
+                  <!-- End Feture Box  -->
+              </div>
+          </div>
+          <!-- End Course Feature Box  -->
+        </div>
+      </div>
+  </section>
+<% end %>
+
+<%# Section Reviews %>
+<section class="rbt-course-details-area">
+    <div class="container">
+      <%# Détails %>
+      <div class="course-details-content">
+          <!-- Start Course Feature Box AVIS -->
+          <div class="rbt-feature-box rbt-shadow-box mt--60">
+            <!-- Start Feture Box  -->
+            <div class="section-title">
+                <h4 class="title mb--20">Avis et Évaluations</h4>
+            </div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Utilisateur</th>
+                  <th>Évaluation</th>
+                  <th>Contenu</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if @workshop.reviews.exists? %>
+                  <% @workshop.reviews.each do |review| %>
+                    <tr>
+                      <td><%= review.user.firstname %> <%= review.user.lastname %></td>
+                      <td><div class="star-rating">
+                      <% (1..5).each do |star| %>
+                        <% if star <= review.rating %>
+                          <span class="star already_stared">&#9733;</span>
+                        <% else %>
+                          <span class="star empty already_stared">&#9734;</span> 
+                        <% end %>
+                      <% end %>
+                    </div></td>
+                      <td><%= review.content %></td>
+                      <% if current_user == review.user %>
+                        <td><%= link_to "Modifier", edit_review_path(review) %></td>
+                        <td><%= button_to "Supprimer", review, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                      <% end %>
+                    </tr>
+                  <% end %>
+                <% else %>
+                  <tr>
+                    <td colspan="3">Aucun avis pour le moment.</td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <!-- End Course Feature Box  -->
+      </div>
+    </div>
+</section>

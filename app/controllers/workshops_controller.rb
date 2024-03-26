@@ -17,6 +17,8 @@ class WorkshopsController < ApplicationController
     @attendances = @workshop.attendances
     @category = @workshop.category
     @status = @workshop.status
+    @purchased_workshop = @workshop.users.include?(current_user)
+    @already_reviewed = @workshop.reviews.exists?(user: current_user)
   end
 
   # GET /workshops/new

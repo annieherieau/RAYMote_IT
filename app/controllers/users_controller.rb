@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ edit update destroy become_creator ]
-  before_action  :check_admin, only: [:promote_to_creator]
   before_action :authenticate_user!, except: [:promote_to_creator, :deny_creator]
-  before_action :authenticate_admin!, only: [ :promote_to_creator, :deny_creator ]
+  before_action :authenticate_admin!, only: [ :promote_to_creator, :deny_creator, :destroy ]
 
 
   # GET /profile/1
