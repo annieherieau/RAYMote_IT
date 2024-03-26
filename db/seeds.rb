@@ -37,6 +37,8 @@ emails_with_names.each do |email, names|
     creator: [true, false].sample,
     pending: false
   )
+  #création d'un setting pour chaque user
+  Setting.create!(user: user)
 end
 puts('4 Users créés - creator aleatoires')
 
