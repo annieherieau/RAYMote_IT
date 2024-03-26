@@ -1,0 +1,11 @@
+    <%# LIEN RESSOURECES - course_items %>
+    <div>
+    <% if @workshop.course_items.any?%>
+      <ul>
+      <% @workshop.course_items.each do |item| %>
+          <li><%= link_to item.link %></li>
+        </span>
+        <%end%>
+      </ul>
+      <% end %>
+    </div>

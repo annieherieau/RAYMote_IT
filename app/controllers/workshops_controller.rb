@@ -15,7 +15,7 @@ class WorkshopsController < ApplicationController
 
   # GET /workshops/1 or /workshops/1.json
   def show
-    @attendances = @workshop.attendances || []
+    @attendances = @workshop.attendances
     @category = @workshop.category
     @status = @workshop.status
   end
