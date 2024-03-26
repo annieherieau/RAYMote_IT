@@ -1,0 +1,11 @@
+<h3>Paramètres d'accessibilité</h3>
+<p>Personnalisez votre expérience en choisissant les paramètres d'accessibilité qui vous conviennent.</p>
+<%= form_with(model: setting, url: update_accessibility_settings_settings_path) do |form| %>
+    <%= form.check_box :high_contrast, class: "form-check-input", id: "highContrast" %>
+    <%= form.label :high_contrast, "Mode Contraste Élevé", class: "form-check-label", :for => "highContrast" %>
+
+    <%= form.check_box :opendys, class: "form-check-input", id: "openDys" %>
+    <%= form.label :opendys, "Police Opendys", class: "form-check-label", :for => "openDys" %>
+
+  <%= form.submit "Enregistrer les préférences" %>
+<% end %>

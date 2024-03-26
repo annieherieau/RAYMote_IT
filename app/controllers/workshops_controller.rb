@@ -1,7 +1,8 @@
 class WorkshopsController < ApplicationController
   before_action :set_workshop, except: %i[ index new create ]
-  before_action :authorize_creator!, only: %i[ new create edit update activate destroy ]
+  before_action :authorize_creator!, only: %i[edit update activate destroy ]
   before_action :authenticate_admin!, only: %i[ validate refuse]
+  before_action :check_creator, only: %i[ new create ]
   
   # GET /workshops or /workshops.json
   def index
@@ -133,6 +134,14 @@ class WorkshopsController < ApplicationController
         redirect_to root_path
       end
     end
+
+    def check_creator
+      unless current_user.creator == true
+        flash[:alert] = "You are not authorized to perform this action."
+        redirect_to root_path
+      end
+    end
+
 
     # Only allow a list of trusted parameters through.
     def workshop_params

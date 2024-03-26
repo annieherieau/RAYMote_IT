@@ -6,7 +6,8 @@ class UsersController < ApplicationController
   # GET /profile/1
   def show
     @user = User.find(params[:id])
-    if current_user == @user || @user.creator
+    if (current_user == @user || @user.creator)
+      @accessibility_settings = current_user.setting
       @workshops = Workshop.all
       @validated_workshops = @user.created_workshops.where(brouillon: false)
       @draft_workshops = @user.created_workshops.where(brouillon: true)

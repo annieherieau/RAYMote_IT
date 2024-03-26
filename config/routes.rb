@@ -28,7 +28,12 @@ Rails.application.routes.draw do
     
   end
 
-  
+  resource :settings do
+    collection do
+      patch :update_accessibility_settings
+    end
+  end
+
   get 'workshops/:id/validate', to: 'workshops#index'
   resources :tags, only: [:show]
   resources :categories, only: [:show]
