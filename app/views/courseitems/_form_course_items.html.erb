@@ -1,0 +1,6 @@
+<%= form.fields_for :course_items do |course_item_form| %>
+    <div class="field">
+      <%= course_item_form.label :link %>
+      <%= course_item_form.text_field :link, id: :course_item_link %>
+    </div>
+  <% end %>

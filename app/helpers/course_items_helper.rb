@@ -1,0 +1,2 @@
+module CourseItemsHelper
+end

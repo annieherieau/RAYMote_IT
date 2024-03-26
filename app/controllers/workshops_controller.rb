@@ -25,6 +25,7 @@ class WorkshopsController < ApplicationController
     @workshop = Workshop.new
     @categories = Category.all
     @tags = Tag.all  
+    @workshop.course_items.build
   end
 
   def activate
@@ -134,7 +135,7 @@ class WorkshopsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def workshop_params
-      params.require(:workshop).permit(:name, :description, :start_date, :duration, :price, :category_id, :validated, :brouillon, tag_ids: [])
+      params.require(:workshop).permit(:name, :description, :start_date, :duration, :price, :category_id, :validated, :brouillon, tag_ids: [], course_items_attributes: [:id, :link, :_destroy])
     end
 
 end
