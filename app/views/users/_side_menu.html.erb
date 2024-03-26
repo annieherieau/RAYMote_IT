@@ -14,7 +14,6 @@
       <a href="#orders" data-bs-toggle="tab">Commandes</a>
       <a href="#accessibility" data-bs-toggle="tab">Paramètres d'accessibilité</a>
       <a href="<%= edit_user_path(@user)%>">Modifier mes infos</a> 
-    <% end %>
   </div>
   <%= button_to "Se déconnecter", destroy_user_session_path, method: :delete, data: {turbo_method: :delete}, class: "rbt-btn btn-sm btn-gradient btn-gradient-2 w-100 my-5"%>
 </div>
