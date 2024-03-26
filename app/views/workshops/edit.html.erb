@@ -1,13 +1,22 @@
-<div class="d-flex justify-content-center align-items-center vh-100">
-    <div class="rbt-contact-form contact-form-style-1 max-width-auto w-50">
-    <h1>Modifier l'atelier</h1>
+<div class="container mt-5 mb-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-8 d-flex justify-content-center">
+      <div class="rbt-contact-form">
+        <div class="text-center">
+          <h1>Modifier l'atelier</h1>
+        </div>
 
-    <%= render "form", workshop: @workshop %>
+        <%= render "form", workshop: @workshop %>
 
-    <br>
+        <br>
 
-    <div class="text-center">
-      <%= link_to "Annuler", @workshop, class: "btn btn-secondary mr-2" %>
+        <div class="text-center">
+          <%= link_to "Annuler", @workshop, class: "btn btn-secondary mr-2" %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+
+
