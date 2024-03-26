@@ -50,7 +50,7 @@ end
 puts ('4 admins créés (mail, password : 1&Azert)')
 
 # Création des catégories
-categories = ["JavaScript", "Python", "Ruby", "Java", "C++", "C#", "Swift", "Go", "PHP", "TypeScript"]
+categories = ["JavaScript", "Python", "Ruby", "Java", "C++", "C#", "Swift", "Kotlin", "PHP", "TypeScript", "Cybersécurité", "Intelligence Artificielle", "Go"]
 categories.each do |name|
   Category.create!(name: name)
 end
