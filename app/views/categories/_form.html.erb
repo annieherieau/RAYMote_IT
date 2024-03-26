@@ -17,6 +17,11 @@
   </div>
 
   <div>
+    <%= form.label :icon %>
+    <%= form.file_field :icon, value:  category.icon  %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>
