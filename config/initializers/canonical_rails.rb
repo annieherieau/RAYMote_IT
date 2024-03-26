@@ -1,4 +1,5 @@
 # Do yourself a favor and set these up right when you install the engine.
+# https://github.com/jumph4x/canonical-rails?tab=readme-ov-file
 
 CanonicalRails.setup do |config|
 
