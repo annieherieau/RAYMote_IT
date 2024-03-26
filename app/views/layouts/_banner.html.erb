@@ -6,8 +6,11 @@
                         <div class='d-flex justify-content-center align-items-center'>
                             <!-- icon -->
                             <div>
-                                <%if icon.attached? %>
-                                <%= image_tag icon, width:"30px", alt: 'icon' %>
+                                <%if icon != false %>
+                                 
+                                 <% if icon.attached? %>
+                                    <%= image_tag icon, width:"30px", alt: 'icon' %>
+                                 <% end %>
                                 <%end%>
                             </div>
                         
@@ -19,6 +22,4 @@
             </div>
         </div>
     </div>
-
-<div class='d-flex justify-content-start'>
  
