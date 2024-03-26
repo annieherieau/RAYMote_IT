@@ -39,8 +39,8 @@
                     <!-- End Course Feature Box  -->
 
                   <!-- Start Feture UTILISATEUR -->
+                  <% if @purchased_workshop %>
                   <div class="rbt-feature-box rbt-shadow-box mt--60">
-                    <% if @purchased_workshop %>
                       <div class="col-lg-8">
                         <% if @workshop.course_items.any?%>
                           <div class="section-title">
@@ -80,9 +80,10 @@
                           <%= link_to "Formulaire de contact", contact_path, class: "rbt-btn btn-md btn-gradient" %>
                         <% end %>
                       </div>
-                    <% end %>
+                   
                     <!-- End Feture Box  -->
                   </div>
+                   <% end %>
                   <!-- End Course Feature Box  -->
                 </div>
             </div>
