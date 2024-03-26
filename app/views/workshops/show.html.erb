@@ -127,6 +127,18 @@
   <% end %>
 </div>
 
+<!-- course items -->
+<div class="container">
+  <h3>Support</h3>
+  <ul>
+  <% if @workshop.course_items.present? %>
+    <% @workshop.course_items.each do |course_item| %>
+      <li><a href="<%= course_item.link %>"><%= course_item.link %></a></li>
+    <% end %>
+  <% end %>
+</ul>
+</div>
+
   
 
   <!-- affichage des reviews -->
