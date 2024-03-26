@@ -121,7 +121,12 @@ footer {
 
 /* ##### Banner Homepage ###### */
 
+.raym_title {
+  background: var(--gradient-8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 
+}
 
 
 
