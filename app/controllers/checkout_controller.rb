@@ -1,5 +1,6 @@
 class CheckoutController < ApplicationController
-
+  before_action :authenticate_user!
+  
   # creation du checkout à partir du Workshop
   def create
     @workshop = Workshop.find(params[:workshop_id])
