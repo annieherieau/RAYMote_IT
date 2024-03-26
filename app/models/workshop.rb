@@ -15,6 +15,7 @@ class Workshop < ApplicationRecord
   has_many :orders, through: :order_workshops
   has_many :course_items, dependent: :destroy
   accepts_nested_attributes_for :course_items, allow_destroy: true
+  has_one_attached :photo
 
   # validations
   validates :name, presence: true, length: { in: 3..15 }
@@ -32,13 +33,17 @@ def update_average_rating
 end
 
 def status
-  end_date = start_date + duration.minutes
-  if start_date > Time.current
-    'à venir'
-  elsif end_date < Time.current
-    'passé'
+  if self.event
+    end_date = start_date + duration.minutes
+    if start_date > Time.current
+      'à venir'
+    elsif end_date < Time.current
+      'passé'
+    else
+      'en cours'
+    end
   else
-    'en cours'
+    false
   end
 end
 

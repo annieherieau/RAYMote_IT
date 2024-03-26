@@ -1,5 +1,5 @@
 class AttendancesController < ApplicationController
-  before_action :authenticate_admin!
+  before_action :authenticate_user!
     def create
       @attendance = Attendance.new(user_id: current_user.id, workshop_id: params[:workshop_id])
   
