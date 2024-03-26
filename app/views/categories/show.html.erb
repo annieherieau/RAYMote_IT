@@ -4,18 +4,16 @@
 <%= render partial: "layouts/banner", locals: {title: title, subtitle: subtitle, icon: @category.icon}%>
 <div class= "container ">
 
-  <%= render partial: "categories/category", locals: {category: @category}%>
-
   <h3>Ateliers associés :</h3>
   
   <% if  @workshops.any? %>
     <ul>
-    <% @workshops.each do |workshop| %>
-      <li>
-        <%= link_to workshop.name, workshop_path(workshop) %>
-        <!-- Plus de détails sur l'atelier si nécessaire -->
-      </li>
-    <% end %>
+      <% @workshops.each do |workshop| %>
+        <li>
+          <%= link_to workshop.name, workshop_path(workshop) %>
+          <!-- Plus de détails sur l'atelier si nécessaire -->
+        </li>
+      <% end %>
     </ul>
   <% else %>
       <p>Aucun atelier trouvé</p>

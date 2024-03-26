@@ -6,7 +6,7 @@
                         <div class='d-flex justify-content-center align-items-center'>
                             <!-- icon -->
                             <div>
-                                <%if icon %>
+                                <%if icon.attached? %>
                                 <%= image_tag icon, width:"30px", alt: 'icon' %>
                                 <%end%>
                             </div>
