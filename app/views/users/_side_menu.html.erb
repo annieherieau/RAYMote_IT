@@ -4,16 +4,12 @@
     <a href="#profil" class="active" data-bs-toggle="tab">Profil</a>
     
     <% if @user.creator %>
-        <a href="#created_workshops" data-bs-toggle="tab">Ateliers Créés</a>
-        <%if @user == current_user %>
-          <a href="#draft_workshops" data-bs-toggle="tab">Mes Brouillons</a>
-        <% end %>
-    <% elsif current_user == @user %>
-          <a href="#creator_send" data-bs-toggle="tab">Devenir Créateur</a>
+      <a href="#created_workshops" data-bs-toggle="tab">Ateliers Créés</a>
+      <a href="#draft_workshops" data-bs-toggle="tab">Mes Brouillons</a>
+    <% else %>
+      <a href="#creator_send" data-bs-toggle="tab">Devenir Créateur</a>
     <% end %>
-
-    <% if current_user == @user %>
-      <a href="#workshops" data-bs-toggle="tab">Ateliers</a>
+      <a href="#workshops" data-bs-toggle="tab">Inscriptions</a>
       <a href="#reviews" data-bs-toggle="tab">Avis</a>
       <a href="#orders" data-bs-toggle="tab">Commandes</a>
       <a href="#accessibility" data-bs-toggle="tab">Paramètres d'accessibilité</a>

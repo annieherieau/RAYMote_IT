@@ -1,8 +1,7 @@
 class WorkshopsController < ApplicationController
-  before_action :authenticate_user!, except: %i[ index show ]
   before_action :set_workshop, except: %i[ index new create ]
-  before_action :authorize_creator!, only: %i[ edit update activate destroy ]
-  before_action  :check_admin, only: [:validate]
+  before_action :authorize_creator!, only: %i[ new create edit update activate destroy ]
+  before_action :authenticate_admin!, only: %i[ validate refuse]
   
   # GET /workshops or /workshops.json
   def index
@@ -15,9 +14,11 @@ class WorkshopsController < ApplicationController
 
   # GET /workshops/1 or /workshops/1.json
   def show
-    @attendances = @workshop.attendances || []
+    @attendances = @workshop.attendances
     @category = @workshop.category
     @status = @workshop.status
+    @purchased_workshop = @workshop.users.include?(current_user)
+    @already_reviewed = @workshop.reviews.exists?(user: current_user)
   end
 
   # GET /workshops/new
@@ -135,7 +136,7 @@ class WorkshopsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def workshop_params
-      params.require(:workshop).permit(:name, :description, :start_date, :duration, :price, :category_id, :validated, :brouillon, :event, tag_ids: [], course_items_attributes: [:id, :link, :_destroy])
+      params.require(:workshop).permit(:name, :description, :start_date, :duration, :price, :category_id, :photo, :validated, :brouillon, :event, tag_ids: [], course_items_attributes: [:id, :link, :_destroy])
     end
 
 end

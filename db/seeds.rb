@@ -16,6 +16,9 @@ ActiveRecord::Base.connection.tables.each do |t|
     ActiveRecord::Base.connection.reset_pk_sequence!(t)
   end 
 
+User.create(email: "user01@annieherieau.fr", password: "password",firstname: "Utilisateur", lastname: "anonyme", creator: true)
+puts "User anonyme créés"
+
 # Création des utilisateurs avec Faker
 emails_with_names = {
   'annie.herieau@gmail.com' => ['Annie', 'Herieau'],

@@ -3,10 +3,23 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-inner text-center">
-                        <h2 class="title"><%= title %></h2>
+                        <div class='d-flex justify-content-center align-items-center'>
+                            <!-- icon -->
+                            <div>
+                                <%if icon != false %>
+                                 
+                                 <% if icon.attached? %>
+                                    <%= image_tag icon, width:"30px", alt: 'icon' %>
+                                 <% end %>
+                                <%end%>
+                            </div>
+                        
+                            <h2 class="title mx-5"><%= title %></h2>
+                        </div>
                         <p><%= subtitle %></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+ 
