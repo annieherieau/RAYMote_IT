@@ -32,7 +32,7 @@ AVATARS = [
 ]
   
 # category.name => video_ids
-VIDEOS = {
+VIDEO_DATA = {
 'JavaScript' => ['l0dpwuuh-D0', 'c68_zfYskhU', 'NRxzvpdduvQ', 'CjZnG_X85ww'],
 'Cybersécurité' => ['VLr0mTzYfRE', 'YHBSuVAOp58'],
 'Ruby' => ['KJDbcOh_ITM', 'x2DyrZz2JeQ' ],
@@ -41,4 +41,6 @@ VIDEOS = {
 'C#' => ['NeKy63suy_w'],
 'PHP' => ['FKdctsQ1v7U','US9JCsnAVTU']
 }
+
+TAGS = ["Débutant", "Intermédiaire", "Avancé", "DIY", "Loisir", "Professionnel"]
 

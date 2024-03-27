@@ -18,8 +18,8 @@ class Workshop < ApplicationRecord
   has_one_attached :photo
 
   # validations
-  validates :name, presence: true, length: { in: 3..15 }
-  validates :description, presence: true, length: { in: 20..500 }
+  validates :name, presence: true, length: { in: 3..100 }
+  validates :description, presence: true, length: { in: 20..1000 }
   validates :price,  presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 1000 }
 
 def tags_destroy

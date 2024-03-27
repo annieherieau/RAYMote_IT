@@ -81,3 +81,5 @@ gem "dockerfile-rails", ">= 1.6", :group => :development
 gem 'canonical-rails', github: 'jumph4x/canonical-rails'
 
 gem 'google-apis-youtube_v3'
+
+gem "open-uri", "~> 0.4.1"
