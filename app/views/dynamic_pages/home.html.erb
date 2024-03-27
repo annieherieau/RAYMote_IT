@@ -63,9 +63,9 @@
                                             <% end %>
                                         </div>
                                         <div class="content">
-                                            <h3 class="title">
+                                            <h4 class="title">
                                             <%= category.name %>      
-                                            </h3>
+                                            </h4>
                                             <div class="read-more-btn">
                                                 <span class="rbt-btn-link"> <%= category.workshops.count %> cours</span>
                                                 <span class="btn-icon"><i class="fa-solid fa-arrow-right" style="font-size: 0.6em;"></i></span>
@@ -105,18 +105,18 @@
                     <div class="container">
                         <div id="workshops">
                             <div class="row mb-4 justify-content-around">
-                                <% @workshops.reverse.take(3).each do |workshop| %>
-                                    <% if workshop.status != "passé" %>
+                                <% @courses.reverse.take(3).each do |workshop| %>
+        
                                     <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                                         <%= render partial: "workshops/workshop_card", locals: {workshop: workshop} %>
                                     </div>
-                                    <% end %>                                    
+                                               
                                 <% end %>
                             </div>
                             <div class="contact-btn mt--80 d-flex justify-content-center">
-                                <a class="rbt-btn hover-icon-reverse btn-gradient radius-round" href="">
+                                <a class="rbt-btn hover-icon-reverse btn-gradient radius-round" href="<%= workshops_path(event: true) %>">
                                     <div class="icon-reverse-wrapper">
-                                        <span class="btn-text">Voir tout les cours</span>
+                                        <span class="btn-text">Voir tous les cours</span>
                                         <span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span>
                                         <span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span>
                                     </div>
@@ -437,10 +437,6 @@
         <!-- End Teacher Area -->
 
     
-
-
-        
-
 
 
 <!-- Start Counter Area   -->

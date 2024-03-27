@@ -3,58 +3,46 @@
 <div class="rbt-card variation-01 rbt-hover">
     <div class="rbt-card-img">
           <%= link_to workshop do %>
-            <% if workshop.photo.attached? %>
-              <%= image_tag workshop.photo, alt: workshop.name %>
-            <% else %>
-              <img src="assets/course-01.jpg" alt="<%= workshop.name %>" >
-            <% end %>
+            <% photo =  workshop.photo.attached? ? workshop.photo : "assets/course-01.jpg" %>
+              <%= image_tag photo, alt: workshop.name %>
           <% end %>
-            <div class="rbt-badge-3 bg-white">
-                <span>-50%</span>
-                <span>Off</span>
-            </div>
-        </a>
     </div>
     <div class="rbt-card-body">
         <div class="rbt-card-top">
             <div class="rbt-review">
                 <div class="rating">
-                <div class="star-rating">
-                  <% (1..5).each do |star| %>
-                    <% if star <= workshop.average.floor %>
-                      <i class="fas fa-star already_stared"></i> <!-- Étoile pleine -->
-                    <% elsif star == workshop.average.floor + 1 && workshop.average % 1 >= 0.5 %>
-                      <i class="fas fa-star-half-alt half_stared"></i> <!-- Étoile à moitié pleine -->
-                    <% else %>
-                      <i class="far fa-star empty already_stared"></i> <!-- Étoile vide -->
+                  <div class="star-rating">
+                    <% (1..5).each do |star| %>
+                      <% if star <= workshop.average.floor %>
+                        <i class="fas fa-star already_stared"></i> <!-- Étoile pleine -->
+                      <% elsif star == workshop.average.floor + 1 && workshop.average % 1 >= 0.5 %>
+                        <i class="fas fa-star-half-alt half_stared"></i> <!-- Étoile à moitié pleine -->
+                      <% else %>
+                        <i class="far fa-star empty already_stared"></i> <!-- Étoile vide -->
+                      <% end %>
                     <% end %>
-                  <% end %>
                   </div>
                 </div>
                 <span class="rating-count"><%= workshop.reviews.count %></span>
             </div>
-            <div class="rbt-bookmark-btn">
-                <a class="rbt-round-btn" title="Bookmark" href="#"><i class="feather-bookmark"></i></a>
-            </div>
         </div>
         <!-- Product name-->
-        <h3 class="rbt-card-title"><%= link_to workshop.name, workshop %></a></h3>
+        <h3 class="rbt-card-title"><%= link_to workshop.name, workshop %></h3>
         <ul class="rbt-meta">
-            <li><i class="feather-users"></i>40 Students</li>
+            <li><i class="feather-users"></i><%= workshop.users.count %> inscrits</li>
         </ul>
         <!-- Product description-->
-        <p class="rbt-card-text"><%= workshop.description %></p>
+        <p class="rbt-card-text"><%= workshop.description[0..100]+ '...' %></p>
         <div class="rbt-author-meta mb--20">                  
             <!-- Author information-->
             <div class="rbt-author-info">
-                By <a href="profile.html"><%= workshop.creator.firstname %></a> In <span><%= workshop.category.name %></span>
+                par <%= link_to workshop.creator.firstname, user_path(workshop.creator) %> - <span><%= workshop.category.name %></span>
             </div>
         </div>
         <div class="rbt-card-bottom">
             <div class="rbt-price">
                 <!-- Product price-->
-                <span class="current-price"><%= workshop.price %>€</span>
-                <span class="off-price">120€</span>
+                <span class="current-price"><%= workshop.price %> €</span>
             </div>
             <!-- Link to the course-details-->
             <div>

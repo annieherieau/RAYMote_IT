@@ -11,15 +11,15 @@ class Workshop < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_and_belongs_to_many :tags
   has_many :reviews, dependent: :destroy
-  has_many :order_workshops
+  has_many :order_workshops, dependent: :destroy
   has_many :orders, through: :order_workshops
   has_many :course_items, dependent: :destroy
   accepts_nested_attributes_for :course_items, allow_destroy: true
   has_one_attached :photo
 
   # validations
-  validates :name, presence: true, length: { in: 3..15 }
-  validates :description, presence: true, length: { in: 20..500 }
+  validates :name, presence: true, length: { in: 3..100 }
+  validates :description, presence: true, length: { in: 20..1000 }
   validates :price,  presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 1000 }
 
 def tags_destroy

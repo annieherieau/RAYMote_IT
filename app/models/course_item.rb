@@ -18,7 +18,7 @@ class CourseItem < ApplicationRecord
       elsif link =~ /\Ahttps?:\/\/+/i
         # C'est probablement un lien général vers un site web
       else
-        errors.add(:link, 'must lead to a valid PDF, YouTube/Vimeo video, or website')
+        errors.add(:link, 'doit conduire à un PDF, une vidéo YouTube/Vimeo ou un site Web valide')
       end
     end
   end
