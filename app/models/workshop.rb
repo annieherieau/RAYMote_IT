@@ -11,7 +11,7 @@ class Workshop < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_and_belongs_to_many :tags
   has_many :reviews, dependent: :destroy
-  has_many :order_workshops
+  has_many :order_workshops, dependent: :destroy
   has_many :orders, through: :order_workshops
   has_many :course_items, dependent: :destroy
   accepts_nested_attributes_for :course_items, allow_destroy: true
