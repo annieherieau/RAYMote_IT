@@ -105,18 +105,18 @@
                     <div class="container">
                         <div id="workshops">
                             <div class="row mb-4 justify-content-around">
-                                <% @workshops.reverse.take(3).each do |workshop| %>
-                                    <% if workshop.status != "passé" %>
+                                <% @courses.reverse.take(3).each do |workshop| %>
+        
                                     <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                                         <%= render partial: "workshops/workshop_card", locals: {workshop: workshop} %>
                                     </div>
-                                    <% end %>                                    
+                                               
                                 <% end %>
                             </div>
                             <div class="contact-btn mt--80 d-flex justify-content-center">
-                                <a class="rbt-btn hover-icon-reverse btn-gradient radius-round" href="">
+                                <a class="rbt-btn hover-icon-reverse btn-gradient radius-round" href="<%= workshops_path(event: true) %>">
                                     <div class="icon-reverse-wrapper">
-                                        <span class="btn-text">Voir tout les cours</span>
+                                        <span class="btn-text">Voir tous les cours</span>
                                         <span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span>
                                         <span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span>
                                     </div>
@@ -545,7 +545,7 @@
                         <div class="inner pl--50 pl_sm--0 pl_md--0">
                             <div class="section-title text-start">
                                 <span class="subtitle bg-pink-opacity">POURQUOI NOUS</span>
-                                <h2 class="title">Rejoignez La <br /> RAYM Community</h2>
+                                <h2 class="title">Rejoignez La <br> RAYM Community</h2>
                                 <p class="description has-medium-font-size mt--20 mb--0">Plongez dans une expérience d'e-learning innovante qui bouleverse les normes établies et propulse
                                 votre apprentissage vers de nouveaux sommets.</p>
                             </div>
