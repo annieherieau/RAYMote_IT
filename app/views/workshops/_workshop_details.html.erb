@@ -5,11 +5,14 @@
             <%# COLONNE 1 contenu %>
             <div class="col-lg-8">
                 <%# Détails de l'atelier %>
+                
                 <div class="course-details-content">
                     <%# Photo %>
-                    <%if @workshop.photo.attached?%>
+                    <% photo = @workshop.photo.attached? ? @workshop.photo : 'assets/course-01.png' %>
+                    <% link = @purchased_workshop ?  @workshop.course_items.first.link : '' %>
+                    <%= link_to(link) do %>
                       <div class="rbt-feature-box rbt-shadow-box thumbnail">
-                        <%= image_tag @workshop.photo, class: "rounded-4 w-100", alt: @workshop.name %>
+                          <%= image_tag(photo, class: "rounded-4 w-100", alt: @workshop.name) %>
                       </div>
                     <% end %>
 
@@ -48,7 +51,7 @@
                           </div>
                           <ul>
                           <% @workshop.course_items.each do |item| %>
-                              <li><%= link_to item.link %></li>
+                              <li><%= link_to item.link, item.link %></li>
                             </span>
                             <%end%>
                           </ul>
@@ -94,7 +97,7 @@
                     <div class="inner">
 
                         <%# Bouton inscription %>
-                        <% if current_user != @workshop.creator%>
+                        <% if current_user != @workshop.creator && !@purchased_workshop%>
                           <div class="content pt--30">
                           <% if @workshop.price.zero? %>
                             <%= button_to "S'inscrire", workshop_attendances_path(@workshop), method: :post, class: "rbt-btn btn-md btn-gradient w-100" %>
