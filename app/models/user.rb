@@ -10,7 +10,7 @@ class User < ApplicationRecord
   # associations
   has_many :created_workshops, class_name: 'Workshop', foreign_key: :creator_id, dependent: :destroy
   has_many :attendances, dependent: :destroy
-  has_many :workshops, through: :attendances, dependent: :destroy, foreign_key: :user_id
+  has_many :workshops, through: :attendances, foreign_key: :user_id
   has_many :likes, dependent: :destroy
   has_many :orders, dependent: :destroy
   has_many :reviews, dependent: :destroy
