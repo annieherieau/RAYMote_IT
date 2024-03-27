@@ -17,7 +17,7 @@ class UserMailer < ApplicationMailer
     @email = params[:email]
     @message = params[:message]
     @url = application_url
-    mail(to: ENV["DEFAULT_ADMIN_EMAIL"], subject: 'Catysfaction: Nous avons reçu votre message')
+    mail(to: ENV["DEFAULT_ADMIN_EMAIL"], subject: 'RAYMot it: Nous avons reçu votre message')
   end
 
   def admin_contact_email(params)
@@ -25,7 +25,7 @@ class UserMailer < ApplicationMailer
     @email = params[:email]
     @message = params[:message]
     @url = application_url
-    mail(to: ENV["DEFAULT_ADMIN_EMAIL"], subject: 'Catysfaction: Nouveau contact')
+    mail(to: ENV["DEFAULT_ADMIN_EMAIL"], subject: 'RAYMot it: Nouveau contact')
   end
 
   def order_to_admin(admin, order)

@@ -14136,7 +14136,7 @@ a.rbt-moderbt-btn::before {
   left: 0;
   display: block;
   border-radius: 28px;
-  background: #0b00d9;
+  background: var(--gradient-8);
   opacity: 1;
   width: 56px;
   height: 56px;
@@ -14159,7 +14159,7 @@ a.rbt-moderbt-btn:hover i {
 }
 a.rbt-moderbt-btn:hover::before {
   width: 100%;
-  background: #0b00d9;
+  background: var(--gradient-8);
   opacity: 1;
 }
 
@@ -24611,7 +24611,7 @@ blockquote.has-text-align-right cite,
   padding: 0 150px;
   position: relative;
   overflow: hidden;
-  background-image: url(../images/bg/bg-g1.webp);
+  background-image: url(assets/bg-g1.jpg);
   background-position: top center;
 }
 @media only screen and (min-width: 1200px) and (max-width: 1599px) {
@@ -24639,7 +24639,7 @@ blockquote.has-text-align-right cite,
   position: absolute;
   bottom: -1px;
   left: 0;
-  background: url(../images/bg/banner-bg-shape-1.svg);
+  background: url(assets/banner-bg-shape-1.svg);
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;

@@ -121,6 +121,41 @@ footer {
 
 /* ##### Banner Homepage ###### */
 
+.raym_title {
+  background: var(--gradient-8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+}
+
+/* ##### Reviews ###### */
+.star-rating {
+  font-size: 24px;
+}
+
+.star-rating .star_to_rate {
+  cursor: pointer;
+  color: #ccc; 
+}
+
+.star-rating .star.rated {
+  color: #f5a623; 
+}
+.already_stared{
+  color: #f5a623; 
+}
+
+/* ##### Margin between two BUTTONS ###### */
+
+.btn-raym-margin {
+  margin-top: 50px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+
+
 
 
 

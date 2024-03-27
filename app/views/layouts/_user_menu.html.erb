@@ -8,9 +8,11 @@
     <li class="account-access rbt-user-wrapper ">
       <% if user_signed_in? %>
         <img src="/assets/user.svg" class="icon">
-        <a href="#"><i class="feather-user"></i><strong>Utilisateurs</strong></a>
+        <a href="#"><i class="feather-user"></i><strong>
+        <%= current_user.firstname.present? ? current_user.firstname : "Utilisateur" %>
+        </strong></a>
       <% else %>
-        <img src="/assets/log-in.svg" class="icon">
+        <img src="/assets/log-in.svg" class="icon" alt="log-in icon">
         <a href="#"><i class="feather-user"></i><strong>Connexion</strong></a>
       <% end %>
 
@@ -19,18 +21,10 @@
         <div class="inner">
           <%# UTILISATEUR connecté %>
           <% if user_signed_in? %>
-          <% if  current_user.firstname.present? %>
-            <%# User Name %>
-            <div class="rbt-user-profile">
-              <div class="user-info">
-                <span class="name" style="font-weight: bold"><%= current_user.firstname %></span>
-              </div>
-            </div>
-          <% end %>
             <%# Liens user connecté %>
             <ul class="user-list-wrapper" >
-              <%# Dashboard %>
-              <li>
+            <li></li> 
+            <li>
                   <i class="fa-solid fa-house"></i>
                   <%= link_to "Dashboard", user_path(current_user) %>
               </li>
