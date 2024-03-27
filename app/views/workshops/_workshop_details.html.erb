@@ -230,8 +230,8 @@
                     </div></td>
                       <td><%= review.content %></td>
                       <% if current_user == review.user %>
-                        <td><%= link_to "Modifier", edit_review_path(review) %></td>
-                        <td><%= button_to "Supprimer", review, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                        <td style="text-align: center;"><%= link_to "Modifier", edit_review_path(review), class: "rbt-btn btn-sm" %></td>
+                        <td style="text-align: center;"><%= button_to "Supprimer", review, method: :delete, class: "rbt-btn btn-sm", data: { confirm: 'Are you sure?' } %></td>
                       <% end %>
                     </tr>
                   <% end %>
