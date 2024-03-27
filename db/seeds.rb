@@ -19,53 +19,47 @@ ActiveRecord::Base.connection.tables.each do |t|
   end 
 
 puts ('---- START SEEDING ----')
-VIDEOS.each do |cat, videos|
-  puts cat
-end
-
-
-# User.create(email: "user01@annieherieau.fr", password: "password",firstname: "Créateur", lastname: "Supprimé", creator: false)
-# puts "User anonyme créé (password : password)"
-
-# # Création des utilisateurs avec Faker
-# emails_with_names = {
-#   'annie.herieau@gmail.com' => ['Annie', 'Herieau'],
-#   'r.robena@gmail.com' => ['Robena', 'R.'],
-#   'malo.bastianelli@gmail.com' => ['Malo', 'Bastianelli'],
-#   'yann.rezigui@gmail.com' => ['Yann', 'Rezigui']
-# }
-
-
-# emails_with_names.each do |email, names|
-#   user = User.create!(
-#     email: email,
-#     firstname: names[0],
-#     lastname: names[1],
-#     password: "1&Azert",
-#     creator: [true, false].sample,
-#     pending: false
-#   )
-#   #création d'un setting pour chaque user
-#   Setting.create!(user: user)
-# end
-# puts('4 Users créés - creator aleatoires')
-
-# # Création des admin
-# emails_with_names.each do |email, names|
-#   Admin.create!(
-#     email: email,
-#     password: "1&Azert"
-#   )
-# end
-# puts ('4 admins créés (mail, password : 1&Azert)')
-
 # Création des catégories
-CATEGORIES.each do |name|
+CATEGORIES.each do |name, url|
   category = Category.create!(name: name)
-  category.icon.attach(io: File.open("app/assets/images/cat-icons/#{format('%02d', category.id)}.png'), filename: 'counter-01.png')
+  category.icon.attach(io: File.open(url), filename: url.split('/').last)
+end
+puts("#{CATEGORIES.length} Categories créés")
+
+# Création des admin
+RAYM_TEAM.each do |email, names|
+  Admin.create!(
+    email: email,
+    password: "1&Azert"
+  )
+end
+puts ("#{RAYM_TEAM.length} Admin créés (password : 1&Azert)")
+
+VIDEOS.each do |cat, videos|
+
 end
 
-puts("Categories créés")
+# Création du Creator supprimé
+anonymous = User.create(email: "user01@annieherieau.fr", password: "password",firstname: "Créateur", lastname: "Supprimé", creator: true)
+puts "1 Créateur anonyme créé (password : password)"
+Setting.create!(user: anonymous)
+
+
+# Création des utilisateurs Test
+RAYM_TEAM.each do |email, names|
+  user = User.create!(
+    email: email,
+    firstname: names[0],
+    lastname: names[1],
+    password: "1&Azert",
+    creator: [true, false].sample,
+    pending: false
+  )
+  #création d'un setting pour chaque user
+  Setting.create!(user: user)
+end
+puts("#{RAYM_TEAM.length}  Users créés - creator aleatoires")
+
 
 # # Création des ateliers avec Faker
 # 20.times do
