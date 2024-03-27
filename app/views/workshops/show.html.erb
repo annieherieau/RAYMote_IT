@@ -9,3 +9,6 @@
 <%= render partial: "workshops/workshop_details", locals: {workshop: @workshop }%>
   
 
+<script type="application/ld+json">
+      <%= workshop_jsonld(@workshop) %>
+</script>
