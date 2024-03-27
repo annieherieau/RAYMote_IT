@@ -3,6 +3,9 @@ Rails.application.routes.draw do
  
   resources :reviews
   
+  # Page d'accueil
+  get 'home', to: 'dynamic_pages#home'
+
   # Page Contact
   get 'contact', to: 'static_pages#contact'
   post 'contact',  to: 'static_pages#send_contact'
@@ -65,5 +68,5 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
-  root "workshops#index"
+  root 'dynamic_pages#home'
 end
