@@ -1,5 +1,19 @@
-<h1>Commande Annulée</h1>
-<p>Votre commande a été annulée. Si vous avez rencontré un problème, veuillez nous contacter pour obtenir de l'aide.</p>
 
-  <%= link_to "Retour à l'accueil", root_path %>
-  <%= link_to 'Retour au cours', workshop_path(@workshop.id) %> 
+  <div class="rbt-categories-area bg-color-white rbt-section-gap">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="section-title text-center">
+                                
+                                <h1 class="title mb-5">Commande Annulée</h1>
+                                
+                                <p>Votre commande a été annulée. Si vous avez rencontré un problème, veuillez nous contacter pour obtenir de l'aide.</p>
+
+                                <%= link_to "Retour à l'accueil", root_path, class: "rbt-btn hover-icon-reverse btn-gradient radius-round btn-raym-margin" %>
+                                <%= link_to 'Retour au cours', workshop_path(@workshop.id), class: "rbt-btn hover-icon-reverse btn-gradient radius-round btn-raym-margin" %>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
