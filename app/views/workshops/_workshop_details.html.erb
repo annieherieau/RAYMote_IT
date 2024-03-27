@@ -8,7 +8,7 @@
                 
                 <div class="course-details-content">
                     <%# Photo %>
-                    <% photo = @workshop.photo.attached? ? @workshop.photo : 'assets/course-01.png' %>
+                    <% photo = @workshop.photo.attached? ? @workshop.photo : '/assets/course-01.jpg' %>
                     <% link = @purchased_workshop ?  @workshop.course_items.first.link : '' %>
                     <%= link_to(link) do %>
                       <div class="rbt-feature-box rbt-shadow-box thumbnail">
