@@ -38,12 +38,12 @@
             <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-12">
                 <ul class="copyright-link rbt-link-hover justify-content-center justify-content-lg-end mt_sm--10 mt_md--10">
                     <li><a href="#">Conditions d'utilisation</a></li>
-                    <li><a href="privacy-policy.html">Mentions légales</a></li>
+                    <li><a href="#">Mentions légales</a></li>
                     <% if admin_signed_in? %>
                     <li><a href="<%= dashboard_path %>">Dashboard</a></li>
                     <li><%= button_to "Logout", destroy_admin_session_path, class: "rbt-badge-4 border-0", method: :delete %></li>
                     <% else %>
-                    <li><a href="<%= new_admin_session_path %>">Connection admin</a></li>
+                    <li><a href="<%= new_admin_session_path %>">Connexion admin</a></li>
                     <% end %>
                     </ul>
             </div>
