@@ -13,4 +13,22 @@ module ApplicationHelper
   def date_format(date)
     date ? date.strftime("%d/%m/%Y %H:%M") : ''
   end
-end
+
+  def workshop_jsonld(workshop)
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": workshop.name, 
+      "description": workshop.description, 
+      "creator": {
+        "@type": "Person",
+        "givenName": workshop.creator.firstname, 
+        "familyName": workshop.creator.lastname, 
+        "email": workshop.creator.email 
+      },
+      "dateCreated": workshop.created_at.iso8601, 
+      "dateModified": workshop.updated_at.iso8601 
+      
+    }.to_json.html_safe
+  end
+end  
