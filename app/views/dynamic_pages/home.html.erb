@@ -444,118 +444,104 @@
 
 
 <!-- Start Counter Area   -->
-     <section class="rbt-counterup-area bg-color-white rbt-section-gap">
-        <div class="conter-style-2">
-            <div class="container">
-                <div class="row g-5 align-items-center">
-
-                    <div class="col-lg-6 order-2 order-lg-1">
-                        <div class="row row--30">
-                            <!-- Start Single Counter  -->
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="rbt-counterup rbt-hover-03">
-                                    <div class="inner">
-                                        <div class="icon">
-                                            <img src="assets/counter-01.png" alt="images">
+        <section class="rbt-counterup-area bg-color-white rbt-section-gap">
+            <div class="conter-style-2">
+                <div class="container">
+                    <div class="row g-5 align-items-center">
+                        <div class="col-lg-6 order-2 order-lg-1">
+                            <div class="row row--30">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="rbt-counterup rbt-hover-03">
+                                        <div class="inner">
+                                            <div class="icon">
+                                                <img src="assets/counter-01.png" alt="images">
+                                            </div>
+                                            <div class="content">
+                                                <h3 class="counter"><span class="odometer" data-count="500"><%= @total_non_creator_users %></span></h3>
+                                                <span class="subtitle">Étudiants</span>
+                                            </div>
                                         </div>
-                                        <div class="content">
-                                            <h3 class="counter"><span class="odometer" data-count="500"><%= @total_non_creator_users %></span>
-                                            </h3>
-                                            <span class="subtitle">Étudiants</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-12 mt--60">
+                                    <div class="rbt-counterup rbt-hover-03">
+                                        <div class="inner">
+                                            <div class="icon">
+                                                <img src="assets/counter-02.png" alt="images">
+                                            </div>
+                                            <div class="content">
+                                                <h3 class="counter"><span class="odometer" data-count="800"><%= @workshops.count %></span></h3>
+                                                <span class="subtitle">Cours & Ateliers</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-12 mt_mobile--40">
+                                    <div class="rbt-counterup rbt-hover-03 transform-sm-none" data-parallax='{"x": 0, "y": -60}'>
+                                        <div class="inner">
+                                            <div class="icon">
+                                                <img src="assets/counter-03.png" alt="Images">
+                                            </div>
+                                            <div class="content">
+                                                <h3 class="counter"><span class="odometer" data-count="1000"><%= @total_creator_users %></span></h3>
+                                                <span class="subtitle">Formateurs & Créateurs</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-12 mt--60 mt_mobile--40">
+                                    <div class="rbt-counterup rbt-hover-03 transform-sm-none" data-parallax='{"x": 0, "y": 60}'>
+                                        <div class="inner">
+                                            <div class="icon">
+                                                <img src="assets/counter-04.png" alt="Images">
+                                            </div>
+                                            <div class="content">
+                                                <h3 class="counter"><span class="odometer" data-count="100"><%= @total_attendances %></span></h3>
+                                                <span class="subtitle">Cours suivis</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- End Single Counter  -->
-
-                            <!-- Start Single Counter  -->
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-12 mt--60">
-                                <div class="rbt-counterup rbt-hover-03">
-                                    <div class="inner">
-                                        <div class="icon">
-                                            <img src="assets/counter-02.png" alt="images">
-                                        </div>
-                                        <div class="content">
-                                            <h3 class="counter"><span class="odometer" data-count="800"><%= @workshops.count %></span>
-                                            </h3>
-                                            <span class="subtitle">Cours & Ateliers</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Single Counter  -->
-
-                            <!-- Start Single Counter  -->
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-12 mt_mobile--40">
-                                <div class="rbt-counterup rbt-hover-03 transform-sm-none" data-parallax='{"x": 0, "y": -60}'>
-                                    <div class="inner">
-                                        <div class="icon">
-                                            <img src="assets/counter-03.png" alt="Images">
-                                        </div>
-                                        <div class="content">
-                                            <h3 class="counter"><span class="odometer" data-count="1000"><%= @total_creator_users %></span>
-                                            </h3>
-                                            <span class="subtitle">Formateurs & Créateurs</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Single Counter  -->
-
-                            <!-- Start Single Counter  -->
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-12 mt--60 mt_mobile--40">
-                                <div class="rbt-counterup rbt-hover-03 transform-sm-none" data-parallax='{"x": 0, "y": 60}'>
-                                    <div class="inner">
-                                        <div class="icon">
-                                            <img src="assets/counter-04.png" alt="Images">
-                                        </div>
-                                        <div class="content">
-                                            <h3 class="counter"><span class="odometer" data-count="100"><%= @total_attendances %></span>
-                                            </h3>
-                                            <span class="subtitle">Cours suivis</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Single Counter  -->
                         </div>
-                    </div>
-                    <div class="col-lg-6 order-1 order-lg-2">
-                        <div class="inner pl--50 pl_sm--0 pl_md--0">
-                            <div class="section-title text-start">
-                                <span class="subtitle bg-pink-opacity">POURQUOI NOUS</span>
-                                <h2 class="title">Rejoignez La <br /> RAYM Community</h2>
-                                <p class="description has-medium-font-size mt--20 mb--0">Plongez dans une expérience d'e-learning innovante qui bouleverse les normes établies et propulse
-                                votre apprentissage vers de nouveaux sommets.</p>
-                            </div>
 
-                            <div class="rbt-feature-wrapper mt--30">
-
-                                <div class="rbt-feature feature-style-1 align-items-center">
-                                    <div class="icon bg-primary-opacity">
-                                        <i class="fa-regular fa-clock"></i>
-                                    </div>
-                                    <div class="feature-content">
-                                        <h4 class="feature-title">Heure Flexible</h4>
-                                        
-                                    </div>
+                        <div class="col-lg-6 order-1 order-lg-2">
+                            <div class="inner pl--50 pl_sm--0 pl_md--0">
+                                <div class="section-title text-start">
+                                    <span class="subtitle bg-pink-opacity">POURQUOI NOUS</span>
+                                    <h2 class="title">Rejoignez La <br /> RAYM Community</h2>
+                                    <p class="description has-medium-font-size mt--20 mb--0">Plongez dans une expérience d'e-learning innovante qui bouleverse les normes établies et propulse votre apprentissage vers de nouveaux sommets.</p>
                                 </div>
 
-                                <div class="rbt-feature feature-style-1 align-items-center">
-                                    <div class="icon bg-secondary-opacity">
-                                        <i class="fa-solid fa-map-location-dot"></i>
+                                <div class="rbt-feature-wrapper mt--30">
+                                    <div class="rbt-feature feature-style-1 align-items-center">
+                                        <div class="icon bg-primary-opacity">
+                                            <i class="fa-regular fa-clock"></i>
+                                        </div>
+                                        <div class="feature-content">
+                                            <h4 class="feature-title">Heure Flexible</h4>
+                                        </div>
                                     </div>
-                                    <div class="feature-content">
-                                        <h4 class="feature-title">Lieux Flexible</h4>
-                                    </div>
-                                </div>
 
-                                <div class="rbt-feature feature-style-1 align-items-center">
-                                    <div class="icon bg-pink-opacity">
-                                        <i class="fa-solid fa-book-open-reader"></i>
+                                    <div class="rbt-feature feature-style-1 align-items-center">
+                                        <div class="icon bg-secondary-opacity">
+                                            <i class="fa-solid fa-map-location-dot"></i>
+                                        </div>
+                                        <div class="feature-content">
+                                            <h4 class="feature-title">Lieux Flexible</h4>
+                                        </div>
                                     </div>
-                                    <div class="feature-content">
-                                        <h4 class="feature-title">Ressources Illimitées - Support Des Formateurs RAYM</h4>
+
+                                    <div class="rbt-feature feature-style-1 align-items-center">
+                                        <div class="icon bg-pink-opacity">
+                                            <i class="fa-solid fa-book-open-reader"></i>
+                                        </div>
+                                        <div class="feature-content">
+                                            <h4 class="feature-title">Ressources Illimitées - Support Des Formateurs RAYM</h4>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -563,9 +549,9 @@
                     </div>
                 </div>
             </div>
-        </div>
-        </div>
-    </section>
+        </section>
+
+
 
 
 
