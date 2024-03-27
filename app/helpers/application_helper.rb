@@ -16,15 +16,19 @@ module ApplicationHelper
 
   def workshop_jsonld(workshop)
     {
-      "@context": "http://schema.org",
+      "@context": "https://schema.org",
       "@type": "Course",
-      "name": workshop.name,
-      "description": workshop.description,
-      "author": {
+      "name": workshop.name, 
+      "description": workshop.description, 
+      "creator": {
         "@type": "Person",
-        "name": workshop.creator
+        "givenName": workshop.creator.firstname, 
+        "familyName": workshop.creator.lastname, 
+        "email": workshop.creator.email 
       },
-      # Ajout d'autres propriétés ici selon les besoins
+      "dateCreated": workshop.created_at.iso8601, 
+      "dateModified": workshop.updated_at.iso8601 
+      
     }.to_json.html_safe
   end
-end
+end  
