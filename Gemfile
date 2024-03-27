@@ -79,3 +79,5 @@ gem "stripe", "~> 10.12"
 gem "dockerfile-rails", ">= 1.6", :group => :development
 
 gem 'canonical-rails', github: 'jumph4x/canonical-rails'
+
+gem 'google-apis-youtube_v3'
