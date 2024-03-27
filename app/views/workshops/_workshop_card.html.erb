@@ -3,7 +3,11 @@
 <div class="rbt-card variation-01 rbt-hover">
     <div class="rbt-card-img">
           <%= link_to workshop do %>
-            <img src="assets/course-01.jpg" alt="Card image">
+            <% if workshop.photo.attached? %>
+              <%= image_tag workshop.photo, alt: workshop.name %>
+            <% else %>
+              <img src="assets/course-01.jpg" alt="<%= workshop.name %>" >
+            <% end %>
           <% end %>
             <div class="rbt-badge-3 bg-white">
                 <span>-50%</span>
