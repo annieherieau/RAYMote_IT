@@ -7,7 +7,7 @@
     <!-- Nom du Compte: Utilisateur-->
     <li class="account-access rbt-user-wrapper ">
       <% if user_signed_in? %>
-        <img src="/assets/user.svg" class="icon">
+        <img src="/assets/user.svg" class="icon" alt="icon">
         <a href="#"><i class="feather-user"></i><strong>
         <%= current_user.firstname.present? ? current_user.firstname : "Utilisateur" %>
         </strong></a>
