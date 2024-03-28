@@ -1,0 +1,6 @@
+// Mise à jour du nombre de likes
+console.log('Le fichier create.js.erb est exécuté.');
+$("#likes-count").html("<%= escape_javascript(@workshop.likes.count.to_s) %>");
+
+// Changement du bouton Déliker en Liker
+$("#like-button").replaceWith("<div id='like-button'><%= escape_javascript(button_to 'Liker', workshop_like_path(@workshop), method: :post, remote: true, class: 'rbt-btn btn-sm btn-gradient mt-2 w-100') %></div>");
