@@ -26,6 +26,10 @@
               <td>
                 <%= link_to 'Voir', category_path(category.id), class: "rbt-btn btn-sm" %>
                 <%= link_to 'Modifier', edit_category_path(category.id), class: "rbt-btn btn-sm" %>
+                <% if category.workshops.count == 0 %>
+                  <%= button_to "Supprimer", category, method: :delete, class: "rbt-btn btn-sm mt-2" %>
+                <% end %>
+
               </td>
             </tr>
           <% end %>

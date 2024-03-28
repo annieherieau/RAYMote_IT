@@ -20,7 +20,6 @@ RAYM_TEAM = {
   'annie.herieau@gmail.com' => ['Annie', 'Herieau', 'app/assets/images/raym_team/team-03.png' ],
   'r.robena@gmail.com' => ['Robena', 'R.', 'app/assets/images/raym_team/team-04.png'],
   'malo.bastianelli@gmail.com' => ['Malo', 'Bastianelli', 'app/assets/images/raym_team/team-02.png'],
-  'yann.rezigui@gmail.com' => ['Yann', 'Rezigui', 'app/assets/images/raym_team/team-01.png'],
   'yann.rezigui@gmail.com' => ['Yann', 'Rezigui', 'app/assets/images/raym_team/team-01.png']
 }
 
