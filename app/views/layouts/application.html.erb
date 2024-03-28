@@ -19,14 +19,13 @@
     <%# Pages canonique %>
     <%= canonical_tag -%>
 
-    
-
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="<%= asset_path('RAYM_favicon.png') %>">
 
     <!-- CSS -->
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
 </head>
+
 
 <body data-turbo="false" class="rbt-header-sticky <%= 'high-contrast' if current_user&.setting&.high_contrast == true %> <%= 'opendys-enabled' if current_user&.setting&.opendys == true %>">
     <header class="rbt-header rbt-header-10">
@@ -35,13 +34,12 @@
     <%= render "layouts/flash" %>
 
 
-
-
-
-    <%= yield %>
+    <main>
+        <%= yield %>
+    </main>
 
     <footer>
-    <%= render "layouts/footer" %>
+        <%= render "layouts/footer" %>
     </footer>
 
     <!-- JS BOOTSTRAP -->
@@ -53,7 +51,7 @@
     <!-- Main JS -->
     <%= javascript_include_tag "application", "data-turbo-track": "reload" %>
 
-
 </body>
 
 </html>
+
