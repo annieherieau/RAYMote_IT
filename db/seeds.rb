@@ -38,8 +38,8 @@ def fake(email='')
   firstname = name.first
   lastname = name.length == 2 ? name.last : (email.split('@').last).split('.').first
   { email: email, 
-  firstname: firstname,
-  lastname: lastname
+  firstname: firstname.capitalize,
+  lastname: lastname.capitalize
   }
 end
 
