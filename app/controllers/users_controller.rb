@@ -7,16 +7,15 @@ class UsersController < ApplicationController
   # GET /profile/1
   def show
     @user = User.find(params[:id])
-    if (current_user == @user)
-      @accessibility_settings = current_user.setting
-      @workshops = Workshop.all
-      @validated_workshops = @user.created_workshops.where(brouillon: false)
-      @draft_workshops = @user.created_workshops.where(brouillon: true)
-      @received_messages = Message.where(receiver: @user)
-      @sent_messages = Message.where(sender: @user)
-    else
-      redirect_to user_path(current_user)
-    end
+    redirect_to user_path(current_user) if (current_user != @user)
+    
+    @accessibility_settings = current_user.setting
+    @workshops = Workshop.all
+    @validated_workshops = @user.created_workshops.where(brouillon: false)
+    @draft_workshops = @user.created_workshops.where(brouillon: true)
+    @received_messages = Message.where(receiver: @user)
+    @sent_messages = Message.where(sender: @user)
+
   end
 
   # PATCH/PUT /profile/1

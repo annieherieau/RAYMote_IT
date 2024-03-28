@@ -1,8 +1,10 @@
 
     <h3>Ateliers créés <%= drafts ? "(Brouillons)" : ''%> </h3>
-                                
+    <% if user_signed_in? && current_user.creator %>
+      <p class='text-end'><%= link_to 'Nouveau', new_workshop_path, class: 'rbt-btn btn-sm btn-gradient mx-5' %><p>
+    <% end %>                       
     <% if workshops.any? %>
-      <div class="rbt-my-account-table table-responsive text-center">
+      <div class="rbt-my-account-table table-responsive">
         <table class="table table-bordered">
           <thead class="thead-light">
             <tr>
