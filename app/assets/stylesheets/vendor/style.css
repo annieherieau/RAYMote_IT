@@ -12386,8 +12386,8 @@ ul.rbt-dropdown-menu.currency-menu li .sub-menu {
 .rbt-header .mainmenu-nav .mainmenu li.with-megamenu .rbt-megamenu .wrapper .btn-wrapper a {
   font-size: 16px;
 }
-.rbt-header .mainmenu-nav .mainmenu li.with-megamenu .rbt-megamenu.menu-skin-dark .wrapper {
-  background: var(--color-bodyest);
+.rbt-header .mainmenu-nav .mainmenu li.with-megamenu .rbt-megamenu.menu-skin-gradient .wrapper {
+  background: var(--gradient-1);
   box-shadow: none;
   padding: 40px;
 }

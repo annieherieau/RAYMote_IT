@@ -1,8 +1,16 @@
 <%# TODO Ajouter une photo de profil %>
 
   <h3>Profil <%= @user.creator ? "Créateur" : "Utilisateur" %></h3>
+
+  
+  <% if @user.creator %>
+    <p class='text-end'><%= link_to 'Voir mon profil public', public_user_path, class: 'rbt-btn btn-sm btn-gradient mx-5' %><p>
+  <% end %>
+  
+   
+
   <div class='row'>
-    <table class='col-lg-8'>
+    <table class='col-lg-8 m-auto'>
       <tbody>
         <tr>
           <td class="w-25"><strong>Prénom :</strong></td>
@@ -14,7 +22,7 @@
         </tr>
         <tr>
           <td class="w-25"><strong>Email :</strong></td>
-          <td><%= current_user == @user ? @user.email : "*"* 10 %></td>
+          <td><%= @user.email %></td>
         </tr>
       </tbody>
     </table>
@@ -45,4 +53,3 @@
       <%end%>
     </div>
   </div>
-

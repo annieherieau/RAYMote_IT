@@ -55,4 +55,18 @@ module ApplicationHelper
           },
     }.to_json.html_safe
   end
+
+  def bootstrap_class_for_flash(flash_type)
+    case flash_type.to_sym
+    when :success
+      "alert-success"
+    when :error
+      "alert-danger" # Classe Bootstrap pour les erreurs
+    when :alert
+      "alert-warning"
+    when :notice
+      "alert-info"
+    else
+      flash_type.to_s
+    end
 end  

@@ -1,5 +1,6 @@
 <% if workshops.any? %>
   <div class="rbt-my-account-table table-responsive">
+  
     <table class="table table-bordered">
       <thead class="thead-light text-center">
         <tr>
@@ -7,7 +8,6 @@
             <th>ID</th>
           <% end %>
           <th>Name</th>
-          <th>Description</th>
           <th>Start Date</th>
           <th>Actions</th>
           <% if admin_signed_in? %>
@@ -22,7 +22,6 @@
               <td><%= workshop.id %></td>
             <% end %>
             <td><%= workshop.name %></td>
-            <td><%= workshop.description %></td>
             <td><%= date_format(workshop.start_date) %></td>
             <td>
               <% if admin_signed_in? %>

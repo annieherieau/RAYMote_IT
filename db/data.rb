@@ -15,7 +15,7 @@ CATEGORIES = {
   "Go" => 'app/assets/images/categories/Golang.png'
 }
 
-# email => [prenom, nom, avatar]
+# email => [prenom, nom, url avatar]
 RAYM_TEAM = {
   'annie.herieau@gmail.com' => ['Annie', 'Herieau', 'app/assets/images/raym_team/team-03.png' ],
   'r.robena@gmail.com' => ['Robena', 'R.', 'app/assets/images/raym_team/team-04.png'],
@@ -23,7 +23,9 @@ RAYM_TEAM = {
   'yann.rezigui@gmail.com' => ['Yann', 'Rezigui', 'app/assets/images/raym_team/team-01.png']
 }
 
+# [fichiers avatars]
 AVATARS = [
+  'team-01.jpg', 'team-02.jpg', 'team-03.jpg', 'team-04.jpg', 'team-05.jpg','team-06.jpg',
   'client-01.png', 'client-02.png', 'client-03.png', 'client-04.png', 'client-05.png',
   'client-06.png', 'client-07.png', 'gallery-thumb-01.jpg', 'gallery-thumb-01.jpg', 'gallery-thumb-01.jpg',
   'gallery-thumb-01.jpg', 'gallery-thumb-02.jpg', 'gallery-thumb-03.jpg', 'gallery-thumb-04.jpg', 'gallery-thumb-05.jpg',
@@ -31,7 +33,7 @@ AVATARS = [
   'gallery-thumb-11.jpg', 'gallery-thumb-12.jpg',
 ]
   
-# category.name => video_ids
+# category.name => [video_ids]
 VIDEO_DATA = {
 'JavaScript' => ['l0dpwuuh-D0', 'c68_zfYskhU', 'NRxzvpdduvQ', 'CjZnG_X85ww'],
 'Cybersécurité' => ['VLr0mTzYfRE', 'YHBSuVAOp58'],
@@ -42,5 +44,7 @@ VIDEO_DATA = {
 'PHP' => ['FKdctsQ1v7U','US9JCsnAVTU']
 }
 
+# [tag names ]
 TAGS = ["Débutant", "Intermédiaire", "Avancé", "DIY", "Loisir", "Professionnel"]
 
+ATELIERS=[0..10]

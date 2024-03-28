@@ -3,7 +3,7 @@
 <h1>Messages</h1>
 
 <div id="messages">
-  <% @messages.each do |message| %>
+  <% @received_messages.each do |message| %>
     <%= render message %>
     <p>
       <%= link_to "Show this message", message %>

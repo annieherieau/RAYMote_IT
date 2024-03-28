@@ -9,7 +9,7 @@
                             <div class="inner rbt-section-gap">
                                 
                                 <h1 class="title">
-                                    <span class="raym_title">R</span><span>evolutionize</span> <span class="raym_title">A</span><span>ll</span> <span class="raym_title">Y</span><span>our</span> <span class="raym_title">M</span><span>astery</span>
+                                    <span class="theme-gradient">R</span><span>evolutionize</span> <span class="theme-gradient">A</span><span>ll</span> <span class="theme-gradient">Y</span><span>our</span> <span class="theme-gradient">M</span><span>astery</span>
                                 </h1>
                                 <p class="text"> 
                                     Plongez dans une expérience d'e-learning innovante qui bouleverse les normes établies et propulse<br> votre apprentissage vers de nouveaux sommets. Transformez vos ambitions en réalité en rejoignant <strong><br>la révolution de l'éducation</strong> aujourd'hui.
@@ -18,7 +18,7 @@
                                 <div class="d-flex justify-content-start align-items-center mt-3">
                                 
                                     <div class="slider-btn">
-                                        <a class="rbt-moderbt-btn" href="#">
+                                        <a class="rbt-moderbt-btn" href="<%=new_user_registration_path%>">
                                             <span class="moderbt-btn-text" style="">
                                                 Start the revolution now
                                             </span>
@@ -114,7 +114,7 @@
                                 <% end %>
                             </div>
                             <div class="contact-btn mt--80 d-flex justify-content-center">
-                                <a class="rbt-btn hover-icon-reverse btn-gradient radius-round" href="<%= workshops_path(event: true) %>">
+                                <a class="rbt-btn hover-icon-reverse btn-gradient radius-round" href="<%= workshops_path(event: false) %>">
                                     <div class="icon-reverse-wrapper">
                                         <span class="btn-text">Voir tous les cours</span>
                                         <span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span>
@@ -198,7 +198,7 @@
                                 </div>
                             </div>
                             <div class="contact-btn mt--80 d-flex justify-content-center">
-                                <a class="rbt-btn hover-icon-reverse btn-gradient radius-round" href="">
+                                <a class="rbt-btn hover-icon-reverse btn-gradient radius-round" href="<%= workshops_path(event: true)%>">
                                     <div class="icon-reverse-wrapper">
                                         <span class="btn-text">Voir tout les ateliers</span>
                                         <span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span>

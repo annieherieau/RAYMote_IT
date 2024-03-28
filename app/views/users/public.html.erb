@@ -1,0 +1,65 @@
+<% title = "Profil Créateur" %>
+<% subtitle = "" %>
+
+<%= render partial: "layouts/banner", locals: {title: title, subtitle: subtitle, icon: false}%>
+
+
+<section class="container">
+    <!-- Start Tab Content  -->
+    <div class="rbt-team-tab-content tab-content w-50 m-auto">
+
+        <div class="inner">
+            <%# AVATAR %>
+            <%if @user.avatar.attached?%>
+              <div class="rbt-team-thumbnail">
+                  <div class="thumb">
+                      
+                      <%= image_tag @user.avatar, alt: 'Avatar utilisateur' %>
+                  </div>
+              </div>    
+            <% end %>
+            <%# fin AVATAR %>
+            
+            <div class="rbt-team-details">
+                <div class="author-info">
+                    <h4 class="title"><%= @user.firstname %> <%= @user.lastname %></h4>
+                    <span class="theme-gradient"> <%= @published_workshops.count %> cours / ateliers publiés</span>
+                    <span class="team-form">
+                    <span> <%= @total_attendances %> étudiants inscrits</span>
+                    </span>
+                </div>
+                <ul>
+                  <% @categories.each do |category| %>
+                    <li><%= category.name %></li>
+                  <% end %>
+                </ul>
+            </div>
+        </div>
+       
+        <div class="top-circle-shape"></div>
+    </div>
+    <!-- End Tab Content  -->
+</section>
+
+<!-- Start workshop Area -->
+<% if  @published_workshops.any? %>
+<section class="container">
+  <div class="row g-5 mt-5 mb-5">
+    <div class="container">
+      <div id="workshops">
+        <div class="row g-4 mb-4 justify-content-around ">
+          
+            <% @published_workshops.each do |workshop| %>
+              <% if workshop.status != "passé" %>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                  <%= render partial: "workshops/workshop_card", locals: {workshop: workshop} %>
+                </div>
+              <% end %>
+            <% end %>
+          <% end %>       
+        </div>
+      </div>
+    </div> 
+  </div> 
+</section>
+  <!-- End Live workshop Area -->
