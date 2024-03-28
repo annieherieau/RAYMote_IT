@@ -251,7 +251,7 @@ end
 
 # Création des Ateliers evènements (lives)
 def seed_events
-  ATELIERS.each do |event|
+  EVENTS.each do |event|
     workshop = Workshop.create!(
       name: Faker::Lorem.words(number: rand(3..8)).join(' ')[0, 99], # Générer un nom limiter à 99 caractères
       description: Faker::Lorem.paragraph(sentence_count: rand(4..8)),

@@ -47,4 +47,6 @@ VIDEO_DATA = {
 # [tag names ]
 TAGS = ["Débutant", "Intermédiaire", "Avancé", "DIY", "Loisir", "Professionnel"]
 
-ATELIERS=[0..10]
+EVENTS=[
+  'G1dogn-E0jQ','wicQkVvSA_U'
+]
