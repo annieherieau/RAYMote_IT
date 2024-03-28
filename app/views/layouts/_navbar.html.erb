@@ -1,23 +1,42 @@
-<div class="rbt-sticky-placeholder"></div>
+    <div class="rbt-sticky-placeholder"></div>
 
     <div class="rbt-header-wrapper header-space-betwween header-sticky">
         <div class="container-fluid">
             <div class="mainbar-row rbt-navigation-center align-items-center">
                 <div class="header-left rbt-header-content">
                     <div class="header-info">
-                        <div class="logo">
+                        <!-- Regular Logo -->
+                        <div class="logo d-none d-lg-block">
                             <a href="index.html">
                                 <%= link_to(root_path) do %>
                                     <%= image_tag("RAYM_logo.png", alt: "RAYM_logo_white", style: "height: 30px") %>
                                 <% end %>
                             </a>
                         </div>
+                        <!-- Small Logo for the Toggle Menu-->
+                        <div class="logo d-lg-none">
+                            <a href="index.html">
+                                <%= link_to(root_path) do %>
+                                    <%= image_tag("RAYM_favicon.png", alt: "RAYM_logo_white", style: "height: 40px") %>
+                                <% end %>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <nav class="mainmenu-nav navbar navbar-expand-lg">
-                        <ul class="mainmenu centered-menu navbar-nav mr-auto"> 
 
+                <!-- Navbar -->
+                <nav class="mainmenu-nav navbar navbar-expand-lg">
+                    <!-- Toggle Button -->
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <!-- Navbar Tabs -->
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="mainmenu centered-menu navbar-nav mr-auto">
+
+                            <!-- Start Home -->  
                             <li class="nav-item">
                                 <%= link_to 'Accueil', root_path, class: "nav-link"%>
                             </li>
@@ -25,7 +44,7 @@
                             <!-- Start Categories  -->
                             <li class="with-megamenu has-menu-child-item position-static">
                             <a href="#">Catégories <i class="fa-solid fa-chevron-down mx-2"></i></a>
-                            <div class="rbt-megamenu menu-skin-gradient">
+                            <div class="rbt-megamenu menu-skin-raym-gradient">
                                 <div class="wrapper">
                                     <div class="row row--15 home-plesentation-wrapper single-dropdown-menu-presentation">
                                         <% Category.all.each do |category| %>
@@ -43,9 +62,26 @@
                                             </div>
                                         <% end %>
                                     </div>
+                                    <div class="row">
+
+                                    <!-- Youtube Button -->
+                                    <div class="col-lg-12">
+                                        <div class="btn-wrapper">
+                                            <a class="rbt-btn btn-gradient hover-icon-reverse square btn-xl w-100 text-center mt--30 hover-transform-none" href="https://www.youtube.com/channel/UCQPscnhJYRnYhBPOiLi3-gQ">
+                                                <span class="icon-reverse-wrapper">
+                                                    <span class="btn-text">
+                                                        <strong>RAYMot.it est sur YouTube ! Live - Chat - Tuto</strong> 💻🍵💪
+                                                    </span>
+                                                    <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
+                                                    <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
+                                                    <i class="fab fa-youtube mb-2" style="color: #ff0000; font-size: 40px;"></i>
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </li>
+                        </div>      
                         <!-- End Categories -->
 
 
@@ -58,6 +94,7 @@
                             </li>
                         <!-- End Workshops -->  
 
+                        <!-- Start Admin & User Dropdown Tabs --> 
                             <li class="nav-item">
                                 <%= link_to 'Contact', contact_path, class: "nav-link"%>
                             </li>
@@ -77,3 +114,21 @@
             </div>
         </div>
     </div>
+
+    <!-- End Menu-->  
+
+
+
+    <!-- JS for Toggle Menu--> 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var navbarToggle = document.querySelector(".navbar-toggler");
+            var navbarMenu = document.querySelector(".navbar-collapse");
+
+            navbarToggle.addEventListener("click", function() {
+                navbarMenu.classList.toggle("show");
+                document.body.classList.toggle("toggle-navbar-open");
+            });
+        });
+    </script>
+    <!-- End JS for Toggle Menu--> 
