@@ -12,12 +12,12 @@
   <% end %>
 
   <div>
-    <%= form.label :titre, style: "display: block" %>
+    <%= form.label :name, 'Titre' %>
     <%= form.text_field :name %>
   </div>
 
   <div class="mt-5">
-    <%= form.label :icone %>
+    <%= form.label :icon, 'Icone' %>
     <%= form.file_field :icon, value:  category.icon  %>
   </div>
 

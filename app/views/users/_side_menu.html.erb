@@ -3,7 +3,7 @@
     
     <a href="#profil" class="active" data-bs-toggle="tab">Profil</a>
     
-    <% if @user.creator %>
+    <% if current_user.creator %>
       <a href="#created_workshops" data-bs-toggle="tab">Ateliers Créés</a>
       <a href="#draft_workshops" data-bs-toggle="tab">Mes Brouillons</a>
     <% else %>

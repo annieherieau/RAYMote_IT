@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   resources :users, except: [:new, :create], path: 'profile' do
     member do
       patch :validate
+      get :public
     end
   end
   get 'dashboard', to: 'admins#dashboard'

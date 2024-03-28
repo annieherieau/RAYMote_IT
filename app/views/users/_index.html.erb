@@ -1,6 +1,7 @@
       <table class="table">
         <thead>
           <tr>
+            <th>ID</th>
             <th>Nom</th>
             <th>Email</th>
             <th>Rôle</th>
@@ -10,12 +11,17 @@
         <tbody>
           <% users.each do |user| %>
             <tr>
+              <td><%= user.id %></td>
               <td><%= user.firstname %> <%= user.lastname %></td>
               <td><%= user.email %></td>
               <td><%= user.creator ? 'Créateur' : '' %></td>
               <td>
               <% if current_admin %>
-                <%= link_to "Voir", user_path(user), class: "btn btn-primary" %>
+                
+                <% if user.creator %>
+                   <%= link_to "Voir", public_user_path(user), class: "btn btn-primary" %>
+                <% end %>
+
                 <%= button_to "Supprimer", user_path(user), method: :delete, class: "btn btn-danger" %> 
               <% end %>
                <% if user.pending %>
