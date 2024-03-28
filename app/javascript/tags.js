@@ -1,83 +1,60 @@
-import { map } from './common/map.js';
-import { nullTag } from './common/null.js';
-import { seq } from './common/seq.js';
-import { string } from './common/string.js';
-import { boolTag } from './core/bool.js';
-import { float, floatExp, floatNaN } from './core/float.js';
-import { int, intHex, intOct } from './core/int.js';
-import { schema } from './core/schema.js';
-import { schema as schema$1 } from './json/schema.js';
-import { binary } from './yaml-1.1/binary.js';
-import { omap } from './yaml-1.1/omap.js';
-import { pairs } from './yaml-1.1/pairs.js';
-import { schema as schema$2 } from './yaml-1.1/schema.js';
-import { set } from './yaml-1.1/set.js';
-import { timestamp, floatTime, intTime } from './yaml-1.1/timestamp.js';
-
-const schemas = new Map([
-    ['core', schema],
-    ['failsafe', [map, seq, string]],
-    ['json', schema$1],
-    ['yaml11', schema$2],
-    ['yaml-1.1', schema$2]
-]);
-const tagsByName = {
-    binary,
-    bool: boolTag,
-    float,
-    floatExp,
-    floatNaN,
-    floatTime,
-    int,
-    intHex,
-    intOct,
-    intTime,
-    map,
-    null: nullTag,
-    omap,
-    pairs,
-    seq,
-    set,
-    timestamp
-};
-const coreKnownTags = {
-    'tag:yaml.org,2002:binary': binary,
-    'tag:yaml.org,2002:omap': omap,
-    'tag:yaml.org,2002:pairs': pairs,
-    'tag:yaml.org,2002:set': set,
-    'tag:yaml.org,2002:timestamp': timestamp
-};
-function getTags(customTags, schemaName) {
-    let tags = schemas.get(schemaName);
-    if (!tags) {
-        if (Array.isArray(customTags))
-            tags = [];
-        else {
-            const keys = Array.from(schemas.keys())
-                .filter(key => key !== 'yaml11')
-                .map(key => JSON.stringify(key))
-                .join(', ');
-            throw new Error(`Unknown schema "${schemaName}"; use one of ${keys} or define customTags array`);
+document.addEventListener("DOMContentLoaded", function() {
+    let newTags = [];
+    const tagInput = document.getElementById('tag-input');
+    const form = document.querySelector('form.form');
+    const tagList = document.getElementById('tag-list');
+  
+    // Ajout de nouveaux tags
+    if (tagInput) {
+      tagInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' && tagInput.value.trim() !== '') {
+          e.preventDefault();
+          const tagName = tagInput.value.trim();
+          newTags.push(tagName); // Stocke le nouveau tag
+    
+          // Crée et ajoute le badge Bootstrap pour le nouveau tag
+          const newTag = document.createElement('span');
+          newTag.textContent = tagName;
+          newTag.classList.add('badge', 'bg-primary');
+          tagList.appendChild(newTag);
+    
+          tagInput.value = ''; // Réinitialise le champ d'entrée
         }
+      });
     }
-    if (Array.isArray(customTags)) {
-        for (const tag of customTags)
-            tags = tags.concat(tag);
+    
+  
+    // Soumission du formulaire
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        newTags.forEach(tagName => {
+          const hiddenInput = document.createElement('input');
+          hiddenInput.type = 'hidden';
+          hiddenInput.name = 'workshop[tag_names][]';
+          hiddenInput.value = tagName;
+          form.appendChild(hiddenInput);
+        });
+      });
     }
-    else if (typeof customTags === 'function') {
-        tags = customTags(tags.slice());
+  
+    // Gestion des clics pour la suppression des tags
+    if (tagList) {
+      tagList.addEventListener('click', function(e) {
+        if (e.target.classList.contains('remove-tag')) {
+          e.preventDefault();
+          const tagElement = e.target.closest('.destroyable');
+          const tagId = e.target.getAttribute('data-tag-id');
+    
+          // Crée un champ caché pour marquer le tag comme supprimé
+          const hiddenInputForDeletion = document.createElement('input');
+          hiddenInputForDeletion.type = 'hidden';
+          hiddenInputForDeletion.name = 'workshop[deleted_tag_ids][]';
+          hiddenInputForDeletion.value = tagId;
+          form.appendChild(hiddenInputForDeletion);
+    
+          tagElement.remove(); // Supprime visuellement l'étiquette du tag
+        }
+      });
     }
-    return tags.map(tag => {
-        if (typeof tag !== 'string')
-            return tag;
-        const tagObj = tagsByName[tag];
-        if (tagObj)
-            return tagObj;
-        const keys = Object.keys(tagsByName)
-            .map(key => JSON.stringify(key))
-            .join(', ');
-        throw new Error(`Unknown custom tag "${tag}"; use one of ${keys}`);
-    });
-}
-
-export { coreKnownTags, getTags };
+  });
+  
