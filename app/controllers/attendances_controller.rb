@@ -11,9 +11,14 @@ class AttendancesController < ApplicationController
     end
   
     def destroy
-        @attendance = Attendance.find(params[:id])
-        @attendance.destroy
-        redirect_to @attendance.workshop, notice: 'Vous vous êtes désinscrit avec succès de cet atelier.'
+        
+      @attendance = Attendance.find(params[:id])
+      if params[:workshop_id]
+        @Workshop = Workshop.find(params[:workshop_id])
+        @attendance = Attendance.find_by(workshop: @Workshop, user: current_user)
       end
+      @attendance.destroy
+      redirect_to @attendance.workshop, notice: 'Vous vous êtes désinscrit avec succès de cet atelier.'
+    end
   end
   
