@@ -82,7 +82,7 @@ def seed_creator_requests(number)
 
   users.each do |user|
     # ajouter le nom du creteur
-    seed_name(user) if user.creator
+    seed_name(user)
     # création de la demande
     user.update_attribute(:pending, true)
     
@@ -129,7 +129,7 @@ def seed_users
       firstname: infos[0],
       lastname: infos[1],
       password: "1&Azert",
-      creator: boolean_ratio(70),
+      creator: boolean_ratio,
       pending: false
     )
     # avatar
@@ -143,10 +143,10 @@ def seed_users
     user = User.create!(
       email: email,
       password: "1&Azert",
-      creator: i<6 ? true : boolean_ratio(30),
+      creator: i<6 ? true : false,
       pending: false
     )
-    # aouter le nom du creteur
+    # aouter le nom du createur
     seed_name(user) if user.creator
 
     # avatar
@@ -163,10 +163,10 @@ def seed_attendances(workshop)
 
   attendees.each do |user|
     # exclure le Cretaor et User anonymous
-    break if user == workshop.creator || user.id == 1
-    
+    next if user == workshop.creator || user.id == 1
+
     # inscription
-    Attendance.create_or_find_by(user: user, workshop: workshop)
+    Attendance.create!(user: user, workshop: workshop)
     
     # création de l'Order si payant
     if workshop.price > 0
@@ -186,7 +186,9 @@ end
 def seed_reviews(user, workshop)
   Review.create!(
     rating: rand(3..5),
-    content: Faker::Lorem.paragraph(sentence_count: rand(2..5))
+    content: Faker::Lorem.paragraph(sentence_count: rand(2..5)),
+    user: user,
+    workshop: workshop
   )
 end
 # Procedure de publication
@@ -198,7 +200,7 @@ def seed_publish(workshop)
   return false if workshop.brouillon
   
   # statut attente de validation ou validé
-  workshop.update_attribute(:validated, [true, false].sample)
+  workshop.update_attribute(:validated, boolean_ratio(70))
 
   # Ajouter les inscription + Avis
   seed_attendances(workshop)
@@ -223,7 +225,7 @@ def seed_courses
       workshop = Workshop.create!(
         name: video.title[0..99],
         description: video.description[0..500],
-        price: rand(0..30),
+        price: boolean_ratio ? 0 : rand(1..30), # 50% gratuit
         event: false,
         creator: User.where(creator: true).sample,
         category: Category.find_by(name: category),
@@ -253,7 +255,7 @@ def seed_events
     workshop = Workshop.create!(
       name: Faker::Lorem.words(number: rand(3..8)).join(' ')[0, 99], # Générer un nom limiter à 99 caractères
       description: Faker::Lorem.paragraph(sentence_count: rand(4..8)),
-      price: rand(0..50),
+      price: boolean_ratio ? 0 : rand(1..30), # 50% gratuit
       start_date: Faker::Time.between(from: DateTime.now + 1, to: DateTime.now + 30),
       duration: rand(1..30) * 5,
       event: true,
@@ -292,6 +294,9 @@ def perform
   seed_creator_requests(4)
   seed_courses
   seed_events
+  puts ("#{Attendance.all.count} Attendances créées")
+  puts ("#{Review.all.count} Reviews créés")
+  puts ("#{Order.all.count} Orders créés")
   puts ('---- END SEEDING ----')
 end
 
