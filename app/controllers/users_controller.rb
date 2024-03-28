@@ -72,14 +72,14 @@ class UsersController < ApplicationController
         receiver: admin
       )
     end
-    current_user.update(pending: true)
+    current_user.update_attribute(:pending, true)
     redirect_to user_path(current_user), notice: 'Votre demande a été envoyée à tous les administrateurs.'
   end
 
   def promote_to_creator
     user = User.find(params[:user_id])
-    user.update(creator: true)
-    user.update(pending: false)
+    user.update_attribute(:creator, true)
+    user.update_attribute(:pending, false)
     Message.create!(
       body: "Félicitations ! Vous avez été accepté en tant que créateur.",
       sender: current_admin,

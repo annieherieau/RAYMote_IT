@@ -20,11 +20,13 @@ RAYM_TEAM = {
   'annie.herieau@gmail.com' => ['Annie', 'Herieau', 'app/assets/images/raym_team/team-03.png' ],
   'r.robena@gmail.com' => ['Robena', 'R.', 'app/assets/images/raym_team/team-04.png'],
   'malo.bastianelli@gmail.com' => ['Malo', 'Bastianelli', 'app/assets/images/raym_team/team-02.png'],
+  'yann.rezigui@gmail.com' => ['Yann', 'Rezigui', 'app/assets/images/raym_team/team-01.png'],
   'yann.rezigui@gmail.com' => ['Yann', 'Rezigui', 'app/assets/images/raym_team/team-01.png']
 }
 
 # [fichiers avatars]
 AVATARS = [
+  'team-01.jpg', 'team-02.jpg', 'team-03.jpg', 'team-04.jpg', 'team-05.jpg','team-06.jpg',
   'client-01.png', 'client-02.png', 'client-03.png', 'client-04.png', 'client-05.png',
   'client-06.png', 'client-07.png', 'gallery-thumb-01.jpg', 'gallery-thumb-01.jpg', 'gallery-thumb-01.jpg',
   'gallery-thumb-01.jpg', 'gallery-thumb-02.jpg', 'gallery-thumb-03.jpg', 'gallery-thumb-04.jpg', 'gallery-thumb-05.jpg',
@@ -46,3 +48,4 @@ VIDEO_DATA = {
 # [tag names ]
 TAGS = ["Débutant", "Intermédiaire", "Avancé", "DIY", "Loisir", "Professionnel"]
 
+ATELIERS=[0..10]
