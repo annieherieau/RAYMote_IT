@@ -19,19 +19,21 @@
                                         </div>
                                     </div>
                                     <div class="feature-sin rating">
-                                        <a href="#">4.8</a>
-                                        <a href="#"><i class="fa fa-star"></i></a>
-                                        <a href="#"><i class="fa fa-star"></i></a>
-                                        <a href="#"><i class="fa fa-star"></i></a>
-                                        <a href="#"><i class="fa fa-star"></i></a>
-                                        <a href="#"><i class="fa fa-star"></i></a>
+                                        <span><%= @total_rating_average %></span>
+                                        <% @total_rating_average.to_i.times do |star| %>
+                                            <i class="fa fa-star"></i>
+                                        <% end %>
+                                        <% (5-@total_rating_average.to_i).times do |star| %>
+                                            <i class="fa-regular fa-star"></i>
+                                        <% end %>
+                                        
                                     </div>
                                     
                                     <div class="feature-sin total-rating">
-                                        <a class="rbt-badge-4" href="#">215,475 notes</a>
+                                        <span class="rbt-badge-4"><%= @total_reviews %> notes</span>
                                     </div>
                                     <div class="feature-sin total-student">
-                                        <span>616,029 étudiants</span>
+                                        <span><%= @total_students %> étudiants et créateurs</span>
                                     </div>
                                 </div>
 

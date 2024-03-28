@@ -294,9 +294,9 @@ def perform
   seed_creator_requests(4)
   seed_courses
   seed_events
-  puts ("#{Attendance.all.count} Attendances créées")
-  puts ("#{Review.all.count} Reviews créés")
-  puts ("#{Order.all.count} Orders créés")
+  puts ("#{Attendance.count} Attendances créées")
+  puts ("#{Review.count} Reviews créés")
+  puts ("#{Order.count} Orders créés")
   puts ("#{User.where(pending: true).count} demandes de compte créateur créés + messages aux Admins")
   puts ('---- END SEEDING ----')
 end
