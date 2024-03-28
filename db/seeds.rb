@@ -297,6 +297,7 @@ def perform
   puts ("#{Attendance.all.count} Attendances créées")
   puts ("#{Review.all.count} Reviews créés")
   puts ("#{Order.all.count} Orders créés")
+  puts ("#{User.where(pending: true).count} demandes de compte créateur créés + messages aux Admins")
   puts ('---- END SEEDING ----')
 end
 
