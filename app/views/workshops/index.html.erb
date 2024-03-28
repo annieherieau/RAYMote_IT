@@ -33,7 +33,15 @@
           <p>Aucun atelier trouvé</p>
       <% end %>
   </div>
-  <!-- End Live workshop Area -->
+  <% if @workshops.any?  %>
+  <% @workshops.each do |workshop| %>
+    <script type="application/ld+json">
+    <%= course_jsonld(workshop) %>
+  </script>
+  <% end %>
+ 
+<% end %>
+
 
 
 
