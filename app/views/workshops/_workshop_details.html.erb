@@ -116,7 +116,7 @@
                                   <li><span>Durée</span><span class="rbt-feature-value rbt-badge-5"><%= @workshop.duration %> min</span></li>
                                 <% end %>
                                 <li><span>Catégorie</span><span class="rbt-feature-value rbt-badge-5"><%= link_to @category.name, category_path(@category)%></span></li>
-                                <li><span>Créateur</span><span class="rbt-feature-value rbt-badge-5"><%= link_to "#{@workshop.creator.firstname} #{@workshop.creator.lastname}", user_path(@workshop.creator) %></span></li>
+                                <li><span>Créateur</span><span class="rbt-feature-value rbt-badge-5"><%= link_to "#{@workshop.creator.firstname} #{@workshop.creator.lastname}", public_user_path(@workshop.creator) %></span></li>
 
                                 <li><span>Likes</span><span class="rbt-feature-value rbt-badge-5"><%= @workshop.likes.count %></span></li>
                             </ul>

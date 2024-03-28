@@ -36,7 +36,7 @@
         <div class="rbt-author-meta mb--20">                  
             <!-- Author information-->
             <div class="rbt-author-info">
-                par <%= link_to workshop.creator.firstname, user_path(workshop.creator) %> - <span><%= workshop.category.name %></span>
+                par <%= link_to workshop.creator.firstname, public_user_path(workshop.creator) %> - <span><%= workshop.category.name %></span>
             </div>
         </div>
         <div class="rbt-card-bottom">

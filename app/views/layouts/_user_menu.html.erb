@@ -25,8 +25,8 @@
             <ul class="user-list-wrapper" >
             <li></li> 
             <li>
-                  <i class="fa-solid fa-house"></i>
-                  <%= link_to "Dashboard", user_path(current_user) %>
+                <i class="fa-solid fa-house"></i>
+                <%= link_to "Profil", user_path(current_user) %>
               </li>
 
               <%# Créateur: nouveau workshop %>
@@ -34,6 +34,10 @@
                 <li>
                   <i class="fa-solid fa-screwdriver-wrench"></i>
                   <%= link_to "Créer un atelier", new_workshop_path %>
+                </li>
+                <li>
+                  <i class="fa-solid fa-user"></i>
+                  <%= link_to "Profil public", public_user_path(current_user) %>
                 </li>
               <% end %>
               
