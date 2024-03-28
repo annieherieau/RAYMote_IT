@@ -14,7 +14,7 @@ module ApplicationHelper
     date ? date.strftime("%d/%m/%Y %H:%M") : ''
   end
 
-  def workshop_jsonld(workshop)
+  def course_jsonld(workshop)
     {
       "@context": "https://schema.org",
       "@type": "Course",
@@ -24,11 +24,35 @@ module ApplicationHelper
         "@type": "Person",
         "givenName": workshop.creator.firstname, 
         "familyName": workshop.creator.lastname, 
-        "email": workshop.creator.email 
+        "email": workshop.creator.email,
       },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": workshop.average,
+          },
       "dateCreated": workshop.created_at.iso8601, 
       "dateModified": workshop.updated_at.iso8601 
       
+    }.to_json.html_safe
+  end
+
+  def event_jsonld(workshop)
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": workshop.name, 
+      "description": workshop.description, 
+      "startDate": workshop.start_date, 
+      "Duration": workshop.duration, 
+      "organizer": {
+        "@type": "Person",
+        "givenName": workshop.creator.firstname, 
+        "familyName": workshop.creator.lastname, 
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": workshop.average,
+          },
     }.to_json.html_safe
   end
 
@@ -45,5 +69,5 @@ module ApplicationHelper
     else
       flash_type.to_s
     end
-  end
 end  
+end

@@ -1,24 +1,22 @@
-<div class="rbt-categories-area bg-color-white rbt-section-gap">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="section-title text-center">
-                                
-                                <h1 class="title mb-5">Confirmation de Commande</h1>
-                                
-                                <p>Merci pour votre commande !</p>
-                                <p>Votre numéro de commande est : <%= @order.id %> </p>
-                                <p>Date de la commande : <%= date_format(@order.created_at) %> </p>
-
-                                <br>
-                                <br>
-                                  <%= link_to "Retour à l'accueil", root_path, class: "rbt-btn hover-icon-reverse btn-gradient radius-round" %>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<% content_for :title, "Votre commande" %>
+<% title = "Confirmation de Commande" %>
+<% subtitle = "Trouvez ici tout les détails de votre commande " %>
+<%= render partial: "layouts/banner", locals: {title: title, subtitle: subtitle, icon: false}%>
+<div class="d-flex justify-content-center align-items-center ">
+    <div class="rbt-contact-form contact-form-style-1 max-width-auto w-50 text-center">
 
 
-  
+  <p><strong>Merci pour votre commande !</strong></p>
+  <p><strong>Votre numéro de commande est : <%= @order.id %></p>
+  <p><strong>Date de la commande : <%= date_format(@order.created_at) %></p>
 
+  <h2>Articles commandés :</h2>
+  <ul class="list-unstyled">
+    <% @order.workshops.each do |workshop| %>
+      <li><%= link_to workshop.name, workshop_path(workshop) %> - <%= number_to_currency(workshop.price) %></li>
+    <% end %>
+  </ul>
+
+  <%= link_to "Retour", 'javascript:history.back()', class: "rbt-btn hover-icon-reverse btn-gradient radius-round" %>
+</div>
+</div>

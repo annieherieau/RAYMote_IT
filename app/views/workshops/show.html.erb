@@ -9,6 +9,13 @@
 <%= render partial: "workshops/workshop_details", locals: {workshop: @workshop }%>
   
 
+
+<% if @workshop.start_date %>
 <script type="application/ld+json">
-      <%= workshop_jsonld(@workshop) %>
+      <%= event_jsonld(@workshop) %>
 </script>
+<% else %>
+<script type="application/ld+json">
+      <%= course_jsonld(@workshop) %>
+</script>
+<% end %>

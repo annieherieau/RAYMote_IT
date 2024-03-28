@@ -118,7 +118,7 @@
                                 <li><span>Catégorie</span><span class="rbt-feature-value rbt-badge-5"><%= link_to @category.name, category_path(@category)%></span></li>
                                 <li><span>Créateur</span><span class="rbt-feature-value rbt-badge-5"><%= link_to "#{@workshop.creator.firstname} #{@workshop.creator.lastname}", public_user_path(@workshop.creator) %></span></li>
 
-                                <li><span>Likes</span><span class="rbt-feature-value rbt-badge-5"><%= @workshop.likes.count %></span></li>
+                                <li><span>Likes</span><span class="rbt-feature-value rbt-badge-5", id="likes-count"><%= @workshop.likes.count %></span></li>
                             </ul>
                         </div>
                     </div>
@@ -138,11 +138,9 @@
                   
                   <%# Liens User connecté %>
                     <%# bouton Like %>
-                    <% if @workshop.likes.exists?(user: current_user) %>
-                      <%= button_to 'Déliker', workshop_like_path(@workshop), method: :delete, class: "rbt-btn btn-sm btn-gradient mt-2 w-100" %>
-                    <% else %>
-                      <%= button_to 'Liker', workshop_like_path(@workshop), method: :post, class: "rbt-btn btn-sm btn-gradient mt-2 w-100" %>
-                    <% end %>
+                    <div id="like-button">
+                      <%= button_to 'liker', workshop_like_path(@workshop), method: :post, remote: true, class: "rbt-btn btn-sm btn-gradient mt-2 w-100" %>
+                      </div>
                     
                     <% if @purchased_workshop && @workshop.price.zero? %>
                       <%= button_to 'Se désinscrire', workshop_attendance_path(workshop_id: @workshop), method: :delete, class: "rbt-btn btn-sm btn-gradient mt-2 w-100" %>
@@ -247,7 +245,3 @@
       </div>
     </div>
 </section>
-
-<script type="application/ld+json">
-      <%= workshop_jsonld(@workshop) %>
-</script>
