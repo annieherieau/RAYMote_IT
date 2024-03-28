@@ -6,22 +6,43 @@ require 'open-uri'
 require_relative './data.rb'
 
 # Supprimer toutes les données existantes
-Workshop.destroy_all
-Admin.destroy_all
-User.destroy_all
-Category.destroy_all
-Tag.destroy_all
-Order.destroy_all
-Review.destroy_all
-Message.destroy_all
-ActiveStorage::Attachment.all.each { |attachment| attachment.purge }
-
-# reset ID 
-ActiveRecord::Base.connection.tables.each do |t|
+def seed_reset
+  Workshop.destroy_all
+  Admin.destroy_all
+  User.destroy_all
+  Category.destroy_all
+  Tag.destroy_all
+  Order.destroy_all
+  Review.destroy_all
+  Message.destroy_all
+  ActiveStorage::Attachment.all.each { |attachment| attachment.purge }
+  
+  # reset ID 
+  ActiveRecord::Base.connection.tables.each do |t|
     ActiveRecord::Base.connection.reset_pk_sequence!(t)
-  end 
+  end
 
-puts ('---- START SEEDING ----')
+  puts ('drop and reset all tables')
+end
+
+# Boolean random avec un ratio true. exple 70% de true
+def boolean_ratio(percent=50)
+  ratio = percent.to_f/100
+  Faker::Boolean.boolean(true_ratio: ratio)
+end
+
+# créer des fake identities 
+def fake(email='')
+  email = Faker::Internet.unique.email if email ==''
+  name = (email.split('@').first).split('.')
+  firstname = name.first
+  lastname = name.length == 2 ? name.last : (email.split('@').last).split('.').first
+  { email: email, 
+  firstname: firstname,
+  lastname: lastname
+  }
+end
+
 # Création des catégories
 def seed_categories
   CATEGORIES.each do |name, url|
@@ -49,6 +70,34 @@ def seed_assign_tags(workshop)
   end
 end
 
+# mettre à jour les nom et prénom du user
+def seed_name(user)
+  user.update_attribute(:firstname, fake(user.email)[:firstname])
+  user.update_attribute(:lastname, fake(user.email)[:lastname])
+end
+
+# demandes pour devenir créateur
+def seed_creator_requests(number)
+  users = User.where(creator: false).take(number)
+
+  users.each do |user|
+    # ajouter le nom du creteur
+    seed_name(user)
+    # création de la demande
+    user.update_attribute(:pending, true)
+    
+    # message aux Admin
+    Admin.find_each do |admin|
+      admin.inbox.messages.create!(
+        body: Faker::Lorem.paragraph(sentence_count: rand(2..5)),
+        sender: user,
+        receiver: admin
+      )
+    end
+  end
+  
+end
+
 # Création des admin
 def seed_admins
   RAYM_TEAM.each do |email, names|
@@ -62,10 +111,11 @@ end
 
 # Création du Creator supprimé
 def seed_anonymous
-  anonymous = User.create(email: "user01@annieherieau.fr", password: "password",firstname: "Créateur", lastname: "Supprimé", creator: true)
+  user = User.create(email: "user01@annieherieau.fr", password: "password",firstname: "Créateur", lastname: "Supprimé", creator: true)
+
+  # avatar
+  user.avatar.attach(io: File.open('app/assets/images/raym_team/anonymous.avif'), filename: 'anonymous.avif')
   puts "1 Créateur anonyme créé (password : password)"
-  Setting.create!(user: anonymous)
-  anonymous.avatar.attach(io: File.open('app/assets/images/raym_team/anonymous.avif'), filename: 'anonymous.avif')
 end
 
 # Création des utilisateurs
@@ -73,44 +123,97 @@ def seed_users
   seed_anonymous
 
   # team raym
-  RAYM_TEAM.each do |email, names|
+  RAYM_TEAM.each do |email, infos|
     user = User.create!(
       email: email,
-      firstname: names[0],
-      lastname: names[1],
+      firstname: infos[0],
+      lastname: infos[1],
       password: "1&Azert",
-      creator: [true, false].sample,
+      creator: boolean_ratio,
       pending: false
     )
-    #création d'un setting pour chaque user
-    Setting.create!(user: user)
+    # avatar
+    user.avatar.attach(io: File.open(infos[2]), filename: infos[2].split('/').last)
   end
 
-  AVATARS.each do |avatar|
+  # autres utilisateurs
+  i = 0
+  AVATARS.each do |avatar_file|
+    email = Faker::Internet.unique.email
     user = User.create!(
-      email: Faker::Internet.unique.email,
+      email: email,
       password: "1&Azert",
-      creator: [true, false].sample,
+      creator: i<6 ? true : false,
       pending: false
     )
-    if user.creator
-      user.update_attribute(:firstname, Faker::Name.first_name)
-      user.update_attribute(:lastname, Faker::Name.last_name)
-    end
-    #création d'un setting pour chaque user
-    Setting.create!(user: user)
+    # aouter le nom du createur
+    seed_name(user) if user.creator
+
+    # avatar
+    user.avatar.attach(io: File.open("app/assets/images/#{avatar_file}"), filename: avatar_file)
+    i += 1
   end
   puts("#{RAYM_TEAM.length + AVATARS.length + 1 } Users créés")
+  
+end
+# Création des inscription
+def seed_attendances(workshop)
+  # sélection des users inscrits
+  attendees = User.all.take(rand(4..12))
+
+  attendees.each do |user|
+    # exclure le Cretaor et User anonymous
+    next if user == workshop.creator || user.id == 1
+
+    # inscription
+    Attendance.create!(user: user, workshop: workshop)
+    
+    # création de l'Order si payant
+    if workshop.price > 0
+      order = Order.create!(user: user, date: Date.today)
+      order.add_workshops([workshop.id])
+    end
+
+    # Ajout d'un Avis (review)
+    if boolean_ratio(70)
+      seed_reviews(user, workshop)
+    end
+  end
 end
 
 
-# Création des ateliers avec Youtube API
+# Ajouter les Reviews (Avis)
+def seed_reviews(user, workshop)
+  Review.create!(
+    rating: rand(3..5),
+    content: Faker::Lorem.paragraph(sentence_count: rand(2..5)),
+    user: user,
+    workshop: workshop
+  )
+end
+# Procedure de publication
+def seed_publish(workshop)
+  # ajouter les tags
+  seed_assign_tags(workshop)
+
+  # exclure les brouillons
+  return false if workshop.brouillon
+  
+  # statut attente de validation ou validé
+  workshop.update_attribute(:validated, boolean_ratio(70))
+
+  # Ajouter les inscription + Avis
+  seed_attendances(workshop)
+end
+
+# Création des Cours avec Youtube API
 def seed_courses
 
   # Appel de l'API
   youtube = Google::Apis::YoutubeV3::YouTubeService.new
   youtube.key = ENV['YOUTUBE_KEY']
 
+  # Extraction des données de la vidéo pour créer le Workshop
   VIDEO_DATA.each do |category, videos|
     videos.each do |video_id|
 
@@ -122,15 +225,12 @@ def seed_courses
       workshop = Workshop.create!(
         name: video.title[0..99],
         description: video.description[0..500],
-        price: rand(0..30),
+        price: boolean_ratio ? 0 : rand(1..30), # 50% gratuit
         event: false,
         creator: User.where(creator: true).sample,
         category: Category.find_by(name: category),
-        brouillon: [true, false].sample,
+        brouillon: boolean_ratio(30),
       )
-      unless workshop.brouillon
-        workshop.update_attribute(:validated, [true, false].sample)
-      end
 
       # Lien vers la video
       CourseItem.create!(
@@ -141,67 +241,64 @@ def seed_courses
       cover_image_url = video.thumbnails.high.url
       workshop.photo.attach(io: URI.open(cover_image_url), filename: cover_image_url.split('/').last)
 
-      # tags
-      seed_assign_tags(workshop)
+      # Publication
+      seed_publish(workshop)
+
     end
   end
-  puts("#{VIDEO_DATA.length} Workshops Cours créés")
-end
+  puts("#{VIDEO_DATA.length} COURS créés #{Workshop.where(event:false, validated: true).count} publiés")
+end   
 
+# Création des Ateliers evènements (lives)
 def seed_events
-  10.times do |i|
+  ATELIERS.each do |event|
     workshop = Workshop.create!(
       name: Faker::Lorem.words(number: rand(3..8)).join(' ')[0, 99], # Générer un nom limiter à 99 caractères
       description: Faker::Lorem.paragraph(sentence_count: rand(4..8)),
-      price: rand(0..50),
+      price: boolean_ratio ? 0 : rand(1..30), # 50% gratuit
       start_date: Faker::Time.between(from: DateTime.now + 1, to: DateTime.now + 30),
       duration: rand(1..30) * 5,
       event: true,
       creator: User.where(creator: true).sample,
       category: Category.all.sample,
-      brouillon: [true, false].sample,
+      brouillon: boolean_ratio(30),
     )
-
-    unless workshop.brouillon
-      workshop.update_attribute(:validated, [true, false].sample)
-    end
 
     # Lien vers le live
     CourseItem.create!(
-      link: "https://www.youtube.com/",
+      link: "https://www.youtube.com/watch?v=",
       workshop: workshop
     )
+
     # photo
     cover_image_path = 'app/assets/images/course-01.jpg'
     workshop.photo.attach(io: File.open(cover_image_path), filename: cover_image_path.split('/').last)
 
-    # tags
-    seed_assign_tags(workshop)
+     # Publication
+     seed_publish(workshop)
   end
 
-  puts("10 Workshops Events créés")
+  puts("10 ATELIERS LIVE créés dont #{Workshop.where(event:true, validated: true).count} publiés")
 end
 
-# # Création des participations
-def seed_attendances
-  User.all.each do |user|
-    rand(1..5).times do
-      workshop = Workshop.all.where(validated: true).sample
-      unless Attendance.find_by(user: user, workshop: workshop)
-        attendance = Attendance.create!(user: user, workshop: Workshop.all.sample)
-      end
-    end
-  end
-end
+
 
 
 def perform
+  puts ('---- START SEEDING ----')
+  seed_reset
   seed_categories
   seed_tags
   seed_admins
   seed_users
+  seed_creator_requests(4)
   seed_courses
   seed_events
+  puts ("#{Attendance.all.count} Attendances créées")
+  puts ("#{Review.all.count} Reviews créés")
+  puts ("#{Order.all.count} Orders créés")
+  puts ("#{User.where(pending: true).count} demandes de compte créateur créés + messages aux Admins")
+  puts ('---- END SEEDING ----')
 end
 
 

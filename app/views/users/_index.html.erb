@@ -12,12 +12,13 @@
             <tr>
               <td><%= user.firstname %> <%= user.lastname %></td>
               <td><%= user.email %></td>
-              <td><%= user.creator? ? 'Créateur' : 'Utilisateur' %></td>
+              <td><%= user.creator ? 'Créateur' : '' %></td>
               <td>
               <% if current_admin %>
-                <%= button_to "Supprimer", user_path(user), method: :delete, class: "btn btn-danger" %>
+                <%= link_to "Voir", user_path(user), class: "btn btn-primary" %>
+                <%= button_to "Supprimer", user_path(user), method: :delete, class: "btn btn-danger" %> 
               <% end %>
-               <% if user.pending == true %>
+               <% if user.pending %>
                <%= button_to "Promouvoir en créateur", promote_to_creator_path(user_id: user.id), method: :patch, class: "btn btn-success"%>
                <%= button_to "Refuser la demande", deny_creator_path(user_id: user.id), method: :patch, class: "btn btn-danger"%>
                <% end %>
