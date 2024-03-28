@@ -25,26 +25,18 @@
                             <!-- Start Categories  -->
                             <li class="with-megamenu has-menu-child-item position-static">
                             <a href="#">Catégories <i class="fa-solid fa-chevron-down mx-2"></i></a>
-                            <div class="rbt-megamenu">
+                            <div class="rbt-megamenu menu-skin-gradient">
                                 <div class="wrapper">
                                     <div class="row row--15 home-plesentation-wrapper single-dropdown-menu-presentation">
                                         <% Category.all.each do |category| %>
                                             <!-- Start Single Demo  -->
-                                            <div class="col-lg-12 col-xl-2 col-xxl-2 col-md-12 col-sm-12 col-12 single-mega-item">
-                                                <div class="demo-single">
+                                            <div class="col-lg-12 col-xl-2 col-xxl-2 col-md-12 col-sm-12 col-12 single-mega-item d-flex justify-content-center">
+                                                <div class="demo-single raym-icon" >
                                                     <div class="inner">
                                                         <div class="thumbnail">
                                                             <a href="<%= category_path(category) %>">
-                                                                <%= image_tag category.icon, alt: "Icons Images", class: "raym-icon" %>
+                                                                <%= image_tag category.icon, alt: "Icons Images"%>
                                                             </a>
-                                                        </div>
-                                                        <div class="content">
-                                                            <h4 class="title">
-                                                                <a href="<%= category_path(category) %>">
-                                                                    <%= category.name %>
-                                                                    <span class="btn-icon"><i class="feather-arrow-right"></i></span>
-                                                                </a>
-                                                            </h4>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -8,8 +8,10 @@ class WorkshopsController < ApplicationController
   def index
     @event_status = params[:event] == 'true' ? true : false
     @workshops = Workshop.where(event: @event_status, validated: true)
-
-    
+    @total_rating_average = (Review.sum(:rating).to_f / Review.count).ceil(2)
+    @total_reviews = Review.count
+    @total_students = User.count
+    @annie = User.find_by(lastname: 'Hérieau')
   end
 
   # GET /workshops/1 or /workshops/1.json

@@ -77,7 +77,7 @@
                             <h4 class="title mb--20">Désinscription</h4>
                         </div>
                         <% if @workshop.price.zero? %>
-                          <%= button_to 'Se désinscrire', workshop_attendance_path(@workshop, attendance), method: :delete, class: "rbt-btn btn-md btn-gradient" %>
+                          <%= button_to 'Se désinscrire', workshop_attendance_path(@workshop), method: :delete, class: "rbt-btn btn-md btn-gradient" %>
                         <% else %>
                           <p>Cet événement est payant. Veuillez contacter l'administrateur pour vous désinscrire.</p>
                           <%= link_to "Formulaire de contact", contact_path, class: "rbt-btn btn-md btn-gradient" %>
@@ -100,7 +100,7 @@
                         <% if current_user != @workshop.creator && !@purchased_workshop%>
                           <div class="content pt--30">
                           <% if @workshop.price.zero? %>
-                            <%= button_to "S'inscrire", workshop_attendances_path(@workshop), method: :post, class: "rbt-btn btn-md btn-gradient w-100" %>
+                            <%= button_to "S'inscrire", workshop_attendances_path(workshop_id: @workshop), method: :post, class: "rbt-btn btn-md btn-gradient w-100" %>
                           <% else %>
                             <%= button_to "Acheter " + number_to_euros(@workshop.price), new_checkout_create_path(workshop_id: @workshop.id), method: :post, data: { turbo: false }, class: "rbt-btn btn-md btn-gradient w-100" %>
                           <% end %>
@@ -145,7 +145,7 @@
                     <% end %>
                     
                     <% if @purchased_workshop && @workshop.price.zero? %>
-                      <%= button_to 'Se désinscrire', workshop_attendance_path(@workshop, attendance), method: :delete, class: "rbt-btn btn-md btn-gradient" %>
+                      <%= button_to 'Se désinscrire', workshop_attendance_path(workshop_id: @workshop), method: :delete, class: "rbt-btn btn-sm btn-gradient mt-2 w-100" %>
                     <% end %>
                     
                   
