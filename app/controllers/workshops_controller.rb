@@ -6,11 +6,10 @@ class WorkshopsController < ApplicationController
   
   # GET /workshops or /workshops.json
   def index
-    @top_categories = Category.left_joins(:workshops).group(:id).order('COUNT(workshops.id) DESC').limit(8)
-  
-    @workshops = Workshop.where(validated: true, brouillon: false).to_a.select do |workshop|
-      workshop.status == 'en cours' || workshop.status == 'à venir'
-    end
+    @event_status = params[:event] == 'true' ? true : false
+    @workshops = Workshop.where(event: @event_status, validated: true)
+
+    
   end
 
   # GET /workshops/1 or /workshops/1.json

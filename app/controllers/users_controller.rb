@@ -1,22 +1,22 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[edit update destroy become_creator]
-  before_action :authenticate_user!, except: [:promote_to_creator, :deny_creator, :destroy]
   before_action :authenticate_admin!, only: [:destroy, :promote_to_creator, :deny_creator]
+  before_action :authenticate_user!, except: [:promote_to_creator, :deny_creator, :destroy]
+  
 
   # GET /profile/1
   def show
     @user = User.find(params[:id])
-    if (current_user == @user || @user.creator)
+    if (current_user == @user)
       @accessibility_settings = current_user.setting
       @workshops = Workshop.all
       @validated_workshops = @user.created_workshops.where(brouillon: false)
       @draft_workshops = @user.created_workshops.where(brouillon: true)
+      @received_messages = Message.where(receiver: @user)
+      @sent_messages = Message.where(sender: @user)
     else
       redirect_to user_path(current_user)
     end
-
-    @received_messages = Message.where(receiver: @user)
-    @sent_messages = Message.where(sender: @user)
   end
 
   # PATCH/PUT /profile/1
@@ -72,14 +72,14 @@ class UsersController < ApplicationController
         receiver: admin
       )
     end
-    current_user.update(pending: true)
+    current_user.update_attribute(:pending, true)
     redirect_to user_path(current_user), notice: 'Votre demande a été envoyée à tous les administrateurs.'
   end
 
   def promote_to_creator
     user = User.find(params[:user_id])
-    user.update(creator: true)
-    user.update(pending: false)
+    user.update_attribute(:creator, true)
+    user.update_attribute(:pending, false)
     Message.create!(
       body: "Félicitations ! Vous avez été accepté en tant que créateur.",
       sender: current_admin,
