@@ -80,6 +80,13 @@ h6 {
 }
 
 
+.rbt-megamenu.menu-skin-raym-gradient .wrapper {
+  background: var(--gradient-4);
+  box-shadow: none;
+  
+}
+
+
 /* ########### Footer #################*/
 
 footer {
