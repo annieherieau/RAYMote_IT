@@ -7,7 +7,6 @@
           <thead class="thead-light">
             <tr>
               <th scope="col">Name</th>
-              <th scope="col">Description</th>
               <th scope="col">Start Date</th>
               <th scope="col">Validé</th>
               <th scope="col">Actions</th>
@@ -17,7 +16,6 @@
             <% workshops.each do |workshop| %>
               <tr>
                 <td><%= workshop.name %></td>
-                <td><%= workshop.description %></td>
                 <td><%= date_format(workshop.start_date) %></td>
                  <td><%= workshop.validated ? 'oui' : 'non' %></td>
                 <td>
