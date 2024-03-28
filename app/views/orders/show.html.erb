@@ -1,5 +1,10 @@
-<div class="container text-center">
-  <h1>Détails de la commande</h1>
+<% content_for :title, "Votre commande" %>
+<% title = "Détails de la commande" %>
+<% subtitle = "Trouvez ici tout les détails de votre commande " %>
+<%= render partial: "layouts/banner", locals: {title: title, subtitle: subtitle, icon: false}%>
+<div class="d-flex justify-content-center align-items-center ">
+    <div class="rbt-contact-form contact-form-style-1 max-width-auto w-50 text-center">
+
 
   <p><strong>Numéro de commande :</strong> <%= @order.id %></p>
   <p><strong>Montant total :</strong> <%= display_order_amount(@order) %></p>
@@ -12,5 +17,6 @@
     <% end %>
   </ul>
 
-  <%= link_to 'Retour aux commandes', 'javascript:history.back()', class: 'btn btn-secondary' %>
+  <%= link_to 'Retour aux commandes', 'javascript:history.back()', class: 'rbt-btn hover-icon-reverse btn-gradient radius-round' %>
+</div>
 </div>
