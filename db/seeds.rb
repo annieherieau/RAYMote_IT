@@ -62,10 +62,12 @@ end
 
 # Création du Creator supprimé
 def seed_anonymous
-  anonymous = User.create(email: "user01@annieherieau.fr", password: "password",firstname: "Créateur", lastname: "Supprimé", creator: true)
+  user = User.create(email: "user01@annieherieau.fr", password: "password",firstname: "Créateur", lastname: "Supprimé", creator: true)
+  # settings
+  Setting.create!(user: user)
+  # avatar
+  user.avatar.attach(io: File.open('app/assets/images/raym_team/anonymous.avif'), filename: 'anonymous.avif')
   puts "1 Créateur anonyme créé (password : password)"
-  Setting.create!(user: anonymous)
-  anonymous.avatar.attach(io: File.open('app/assets/images/raym_team/anonymous.avif'), filename: 'anonymous.avif')
 end
 
 # Création des utilisateurs
@@ -73,24 +75,28 @@ def seed_users
   seed_anonymous
 
   # team raym
-  RAYM_TEAM.each do |email, names|
+  RAYM_TEAM.each do |email, infos|
     user = User.create!(
       email: email,
-      firstname: names[0],
-      lastname: names[1],
+      firstname: infos[0],
+      lastname: infos[1],
       password: "1&Azert",
       creator: [true, false].sample,
       pending: false
     )
     #création d'un setting pour chaque user
     Setting.create!(user: user)
+    # avatar
+    user.avatar.attach(io: File.open(infos[2]), filename: infos[2].split('/').last)
   end
 
-  AVATARS.each do |avatar|
+  # autres utilisateurs
+  i = 0
+  AVATARS.each do |avatar_file|
     user = User.create!(
       email: Faker::Internet.unique.email,
       password: "1&Azert",
-      creator: [true, false].sample,
+      creator: i < 7 ? true : false,
       pending: false
     )
     if user.creator
@@ -99,12 +105,16 @@ def seed_users
     end
     #création d'un setting pour chaque user
     Setting.create!(user: user)
+    # avatar
+    user.avatar.attach(io: File.open("app/assets/images/#{avatar_file}"), filename: avatar_file)
+    i += 1
   end
   puts("#{RAYM_TEAM.length + AVATARS.length + 1 } Users créés")
+  
 end
 
 
-# Création des ateliers avec Youtube API
+# Création des Cours avec Youtube API
 def seed_courses
 
   # Appel de l'API
@@ -148,6 +158,7 @@ def seed_courses
   puts("#{VIDEO_DATA.length} Workshops Cours créés")
 end
 
+# Création des Ateliers evènements (lives)
 def seed_events
   10.times do |i|
     workshop = Workshop.create!(
@@ -182,26 +193,24 @@ def seed_events
   puts("10 Workshops Events créés")
 end
 
-# # Création des participations
+# # Création des inscription
 def seed_attendances
   User.all.each do |user|
     rand(1..5).times do
       workshop = Workshop.all.where(validated: true).sample
-      unless Attendance.find_by(user: user, workshop: workshop)
-        attendance = Attendance.create!(user: user, workshop: Workshop.all.sample)
-      end
+      Attendance.create_or_find_by(user: user, workshop: workshop)
     end
   end
 end
 
 
 def perform
-  seed_categories
-  seed_tags
+  # seed_categories
+  # seed_tags
   seed_admins
   seed_users
-  seed_courses
-  seed_events
+  # seed_courses
+  # seed_events
 end
 
 
