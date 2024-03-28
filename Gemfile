@@ -83,3 +83,4 @@ gem 'canonical-rails', github: 'jumph4x/canonical-rails'
 gem 'google-apis-youtube_v3'
 
 gem "open-uri", "~> 0.4.1"
+gem "jquery-rails", "~> 4.6"
