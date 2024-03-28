@@ -1,22 +1,21 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[edit update destroy become_creator]
   before_action :authenticate_admin!, only: [:destroy, :promote_to_creator, :deny_creator]
-  before_action :authenticate_user!, except: [:promote_to_creator, :deny_creator, :destroy]
+  before_action :authenticate_user!, except: [:promote_to_creator, :deny_creator, :destroy, :public]
   
 
   # GET /profile/1
   def show
     @user = User.find(params[:id])
-    if (current_user == @user)
-      @accessibility_settings = current_user.setting
-      @workshops = Workshop.all
-      @validated_workshops = @user.created_workshops.where(brouillon: false)
-      @draft_workshops = @user.created_workshops.where(brouillon: true)
-      @received_messages = Message.where(receiver: @user)
-      @sent_messages = Message.where(sender: @user)
-    else
-      redirect_to user_path(current_user)
-    end
+    redirect_to user_path(current_user) if (current_user != @user)
+    
+    @accessibility_settings = current_user.setting
+    @workshops = Workshop.all
+    @validated_workshops = @user.created_workshops.where(brouillon: false)
+    @draft_workshops = @user.created_workshops.where(brouillon: true)
+    @received_messages = Message.where(receiver: @user)
+    @sent_messages = Message.where(sender: @user)
+
   end
 
   # PATCH/PUT /profile/1
@@ -101,7 +100,21 @@ class UsersController < ApplicationController
     redirect_to dashboard_path, notice: "#{user.email} a été promu en tant que créateur."
   end
 
+  def public
+    @user = User.find(params[:id])
+    unless @user.creator
+      redirect_to request.referer || root_path
+    end
+    @published_workshops = @user.created_workshops.where(validated: true)
+    @total_attendances = 0
+    @categories = []
+    @published_workshops.each do |workshop|
+      @total_attendances += workshop.users.count
+      @categories << workshop.category
+    end
+    
 
+  end
   private
 
   # Use callbacks to share common setup or constraints between actions.

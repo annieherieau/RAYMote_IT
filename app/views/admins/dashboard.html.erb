@@ -35,22 +35,24 @@
     </div>
     <!-- fin CATEGORIES -->
 
+     <%# MESSAGES %>
+    <div class="tab-pane fade" id="messages" role="tabpanel" aria-labelledby="messages-tab">
+      <%= render partial: "messages/index", locals: {received_messages: @received_messages} %>
+    </div>
+    <%# fin MESSAGES %>
+
     <!-- REVIEWS -->
      <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="categories-tab">
     <%= render partial: "reviews/index", locals: {reviews: @reviews} %>
     </div>
     <!-- fin REVIEWS -->
 
-    <%# MESSAGES %>
-    <div class="tab-pane fade" id="messages" role="tabpanel" aria-labelledby="messages-tab">
-      <%= render partial: "messages/index", locals: {received_messages: @received_messages} %>
-    </div>
-    <%# fin MESSAGES %>
+   
 
-    <!-- NOTIFICATIONS -->
+    <!-- NOTIFICATIONS non fonctionnel 
     <div class="tab-pane fade" id="notifications" role="tabpanel" aria-labelledby="notifications-tab">
       <%= render partial: "admins/admin_form" %>
     </div>
-    <!-- fin NOTIFICATIONS -->
+     fin NOTIFICATIONS -->
   </div>
 </div>
