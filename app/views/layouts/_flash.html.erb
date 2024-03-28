@@ -1,16 +1,6 @@
-
-<% if flash %>
-    <% flash.each do |type, message| %>
-        <% bootstrap_class = case type
-            when 'notice' then 'text-info'
-            when 'success' then 'text-success'
-            when 'error' then 'text-danger'
-            when 'alert' then 'text-warning'
-            else 'alert'
-        end %>
-        <p class="<%= bootstrap_class %>" role="alert">
-            <%= message %>
-        </p>
-    <% end %>
-<% end %>
+   <% flash.each do |type, message| %>
+     <div data-controller="flash" class="alert <%= bootstrap_class_for_flash(type) %> alert-dismissible fade show" role="alert">
+       <%= message %>
+     </div>
+   <% end %>
 
