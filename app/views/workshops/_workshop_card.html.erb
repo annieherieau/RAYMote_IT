@@ -36,13 +36,13 @@
         <div class="rbt-author-meta mb--20">                  
             <!-- Author information-->
             <div class="rbt-author-info">
-                par <%= link_to workshop.creator.firstname, public_user_path(workshop.creator) %> - <span><%= workshop.category.name %></span>
+                par <%= link_to workshop.creator.firstname, public_user_path(workshop.creator) %> - <span><%= link_to workshop.category.name, category_path(workshop.category) %></span>
             </div>
         </div>
         <div class="rbt-card-bottom">
             <div class="rbt-price">
                 <!-- Product price-->
-                <span class="current-price"><%= workshop.price %> €</span>
+                <span class="current-price"><%= number_to_euros(workshop.price, 0) %></span>
             </div>
             <!-- Link to the course-details-->
             <div>

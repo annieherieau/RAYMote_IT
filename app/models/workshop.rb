@@ -31,7 +31,7 @@ end
 def update_average_rating
   update_column(:average, reviews.average(:rating).to_f)
 end
-
+# status des workshops en fonction de la date
 def status
   if self.event
     end_date = start_date + duration.minutes
@@ -47,6 +47,7 @@ def status
   end
 end
 
+# text d'affichage des boutons toggles
 def activate_btn
   self.brouillon ? "Publier" : "Dépublier"
 end
@@ -54,6 +55,11 @@ end
 def validate_btn
   self.brouillon ? "Valider" : "Refuser"
 end
+
+def date_format
+  start_date ? start_date.strftime("%d/%m/%Y %H:%M") : ''
+end
+
 
   private
 
