@@ -3,12 +3,16 @@
     <div class="rbt-banner-area rbt-banner-8 variation-01 bg_image bg_image--9">
         <div class="wrapper w-100">
             <div class="container">
+                
                 <div class="row g-5 align-items-center">
+                <% if @top_event %>
+                    <!-- top Event contenu -->
                     <div class="col-lg-6 order-2 order-lg-1">
                         <div class="content">
                             <div class="inner">
                                 <div class="rbt-badge-group justify-content-start">
                                     <span class="meta-text d-flex align-items-center"><img class="mb-4" style="height: 50px" source src="/assets/youtubelive.png">Atelier Live</span>
+                                    
                                     <a href="<%= public_user_path(@top_event.creator)%>" class="rbt-badge-2">
                                         <%if @top_event.creator.avatar.attached?%>
                                             <div class="image">
@@ -37,6 +41,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- top event VIDEO -->
                     <div class="col-lg-5 offset-xl-1 order-1 order-lg-2">
                         <div class="video-popup-wrapper">
                             <% photo = @top_event.photo.attached? ? @top_event.photo : image_path('video-01')%>
@@ -46,7 +51,13 @@
                             </a>
                         </div>
                     </div>
+                <% else %>
+                <span class="meta-text d-flex align-items-center"><img class="mb-4" style="height: 50px" source src="/assets/youtubelive.png">Atelier Live</span>
+                <h1>Aucun Atelier à venir</h1>
+                <% end %>
                 </div>
+
+                
             </div>
         </div>
     </div>

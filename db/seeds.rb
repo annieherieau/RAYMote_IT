@@ -221,7 +221,7 @@ def seed_courses
       video_response = youtube.list_videos('snippet', id: video_id)
       video = video_response.items.first.snippet
 
-      # infos extraites du snippet
+      # infos extraites du snippet pour créer le workshop
       workshop = Workshop.create!(
         name: video.title[0..99],
         description: video.description[0..500],
@@ -246,39 +246,69 @@ def seed_courses
 
     end
   end
-  puts("#{VIDEO_DATA.length} COURS créés #{Workshop.where(event:false, validated: true).count} publiés")
+  puts("#{Workshop.where(event:false).count} COURS créés dont #{Workshop.where(event:false, validated: true).count} publiés")
 end   
 
-# Création des Ateliers evènements (lives)
+# Création des Ateliers evènements (live_broadcasts de notre channel youtube)
 def seed_events
-  EVENTS.each do |event|
+
+  # Appel de l'API
+  youtube = Google::Apis::YoutubeV3::YouTubeService.new
+  youtube.key = ENV['YOUTUBE_KEY']
+  channel_id = ENV['CHANNEL_ID']
+
+  # extraire les videos de la chaine
+  list_response = youtube.list_searches('snippet', channel_id: channel_id, max_results: 20)
+  # garder les ids des videos
+  video_ids = list_response.items.map { |item| item.id.video_id }.compact
+
+  # extraire les infos de chaque video et créer l'event
+  video_ids.each do |video_id|
+
+    # infos de la video (snippet)
+    snippet_response = youtube.list_videos('snippet', id: video_id)
+    video = snippet_response.items.first.snippet
+
+   
+    
+    # infos du live associé : liveStreamingDetails
+    stream_response = youtube.list_videos('liveStreamingDetails', id: video_id)
+    live = stream_response.items.first
+
+    #  date de début du live (scheduled_start_time)
+    start_date = live.live_streaming_details.scheduled_start_time
+
+    # exclure si start_date passée
+    next if start_date < DateTime.now
+
     workshop = Workshop.create!(
-      name: Faker::Lorem.words(number: rand(3..8)).join(' ')[0, 99], # Générer un nom limiter à 99 caractères
-      description: Faker::Lorem.paragraph(sentence_count: rand(4..8)),
-      price: boolean_ratio ? 0 : rand(1..30), # 50% gratuit
-      start_date: Faker::Time.between(from: DateTime.now + 1, to: DateTime.now + 30),
-      duration: rand(1..30) * 5,
-      event: true,
-      creator: User.where(creator: true).sample,
-      category: Category.all.sample,
-      brouillon: boolean_ratio(30),
-    )
+        name: video.title,
+        description: video.description,
+        price: boolean_ratio ? 0 : rand(1..30), # 50% gratuit
+        event: true,
+        start_date: start_date,
+        duration: 360, # 6h pour les tests
+        creator: User.where(creator: true).sample,
+        category: Category.find_by(name: video.tags.first),
+        brouillon: false,
+        validated: true
+      )
 
-    # Lien vers le live
-    CourseItem.create!(
-      link: "https://www.youtube.com/watch?v=",
-      workshop: workshop
-    )
+      # Lien vers le live
+      CourseItem.create!(
+        link: "https://www.youtube.com/watch?v=#{video_id}",
+        workshop: workshop
+      )
+      
+      # photo
+      cover_image_url = video.thumbnails.standard.url
+      workshop.photo.attach(io: URI.open(cover_image_url), filename: cover_image_url.split('/').last)
 
-    # photo
-    cover_image_path = 'app/assets/images/course-01.jpg'
-    workshop.photo.attach(io: File.open(cover_image_path), filename: cover_image_path.split('/').last)
+      # Publication
+      seed_publish(workshop)
 
-     # Publication
-     seed_publish(workshop)
   end
-
-  puts("10 ATELIERS LIVE créés dont #{Workshop.where(event:true, validated: true).count} publiés")
+  puts("#{Workshop.where(event:true).count} LIVES créés et publiés")
 end
 
 
@@ -292,8 +322,8 @@ def perform
   seed_admins
   seed_users
   seed_creator_requests(4)
-  seed_courses
-  seed_events
+  # seed_courses
+  # seed_events
   puts ("#{Attendance.count} Attendances créées")
   puts ("#{Review.count} Reviews créés")
   puts ("#{Order.count} Orders créés")
