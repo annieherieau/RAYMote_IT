@@ -22,7 +22,7 @@
               <td><%= workshop.id %></td>
             <% end %>
             <td><%= workshop.name %></td>
-            <td><%= date_format(workshop.start_date) %></td>
+            <td><%= workshop.event ? date_format(workshop.start_date) : '' %></td>
             <td>
               <% if admin_signed_in? %>
                 <%= link_to "Voir", workshop, class: "rbt-btn btn-sm btn-gradient" %>

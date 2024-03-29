@@ -14,16 +14,12 @@
  *= require_self
  */
 
- @import url(vendor/bootstrap.min.css);
- @import url(vendor/style.css);
- @import url(fonts.css.erb);
-
-
-
-
+@import url(vendor/bootstrap.min.css);
+@import url(vendor/style.css);
+@import url(fonts.css.erb);
 
 /* ########### ROOT #################*/
- 
+
 :root {
   --font-primary: "Euclid Circular", sans-serif;
   --h5: 20px;
@@ -44,7 +40,7 @@ h4 {
   font-family: var(--font-primary);
 }
 h5 {
-  font-family: var(--font-primary);  
+  font-family: var(--font-primary);
 }
 h5.ft-title {
   font-family: var(--font-primary);
@@ -52,19 +48,17 @@ h5.ft-title {
   font-weight: bold;
 }
 h6 {
-  font-family: var(--font-primary);  
+  font-family: var(--font-primary);
 }
 .custom-textarea {
   font-size: 16px; /* Ajoutez la taille de police souhaitée */
 }
 
-
 /* ########### Navbar #################*/
 
 .mainmenu li {
-  margin-right: 2rem; 
+  margin-right: 2rem;
 }
-
 
 .user-list-wrapper li {
   display: flex;
@@ -79,35 +73,23 @@ h6 {
   font-weight: var(--f-bold);
 }
 
-
 .rbt-megamenu.menu-skin-raym-gradient .wrapper {
   background: var(--gradient-4);
   box-shadow: none;
-  
 }
 
-
-
 /* ########### Toogle Navbar #################*/
-
-
-
-
-
-
 
 /* ########### Footer #################*/
 
 footer {
   margin-bottom: 0%;
-
 }
 
 /* ##### Messagerie ###### */
 .message {
   border: 1px solid #ddd;
   padding: 10px;
-
 }
 /* ##### Star Rating ###### */
 .star-rating {
@@ -116,14 +98,14 @@ footer {
 
 .star-rating .star_to_rate {
   cursor: pointer;
-  color: #ccc; 
+  color: #ccc;
 }
 
 .star-rating .star.rated {
-  color: #f5a623; 
+  color: #f5a623;
 }
-.already_stared{
-  color: #f5a623; 
+.already_stared {
+  color: #f5a623;
 }
 /* ##### Accessibility ###### */
 .high-contrast {
@@ -132,7 +114,7 @@ footer {
 }
 
 .opendys-enabled {
-  font-family: 'OpenDyslexic';
+  font-family: "OpenDyslexic";
 }
 
 /* ##### Banner Homepage ###### */
@@ -144,14 +126,14 @@ footer {
 
 .star-rating .star_to_rate {
   cursor: pointer;
-  color: #ccc; 
+  color: #ccc;
 }
 
 .star-rating .star.rated {
-  color: #f5a623; 
+  color: #f5a623;
 }
-.already_stared{
-  color: #f5a623; 
+.already_stared {
+  color: #f5a623;
 }
 
 /* ##### Margin between two BUTTONS ###### */
@@ -165,10 +147,11 @@ footer {
 
 /*######### CategoriesIcons###### */
 .raym-icon {
-  width: 40px; 
-  height: 40px; 
+  width: 40px;
+  height: 40px;
 }
 
-
-
-
+/*######### Event banner ###### */
+.top-event-title {
+  font-size: 34px;
+}

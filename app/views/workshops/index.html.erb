@@ -19,18 +19,16 @@
           <div class="row g-4 mb-4 justify-content-around ">
             <% if  @workshops.any? %>
               <% @workshops.each do |workshop| %>
-                <% if workshop.status != "passé" %>
                   <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                     <%= render partial: "workshops/workshop_card", locals: {workshop: workshop} %>
                   </div>
-                <% end %>
               <% end %>       
           </div>
         </div>
       </div> 
     </div> 
       <% else %>
-          <p>Aucun atelier trouvé</p>
+          <p class='text-center'>Aucun atelier trouvé</p>
       <% end %>
   </div>
   <% if @workshops.any?  %>

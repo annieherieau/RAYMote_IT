@@ -2,6 +2,13 @@
 <!-- Start Single Course -->
 <div class="rbt-card variation-01 rbt-hover">
     <div class="rbt-card-img">
+        
+        <% if workshop.event %>
+           <div class="theme-gradient mb--10 text-end">
+                    <strong>Le <%= workshop.date_format %></strong>
+                </div>
+        <% end %>
+        
           <%= link_to workshop do %>
             <% photo =  workshop.photo.attached? ? workshop.photo : "assets/course-01.jpg" %>
               <%= image_tag photo, alt: workshop.name %>
@@ -36,13 +43,13 @@
         <div class="rbt-author-meta mb--20">                  
             <!-- Author information-->
             <div class="rbt-author-info">
-                par <%= link_to workshop.creator.firstname, public_user_path(workshop.creator) %> - <span><%= workshop.category.name %></span>
+                par <%= link_to workshop.creator.firstname, public_user_path(workshop.creator) %> - <span><%= link_to workshop.category.name, category_path(workshop.category) %></span>
             </div>
         </div>
         <div class="rbt-card-bottom">
             <div class="rbt-price">
                 <!-- Product price-->
-                <span class="current-price"><%= workshop.price %> €</span>
+                <span class="current-price"><%= number_to_euros(workshop.price, 0) %></span>
             </div>
             <!-- Link to the course-details-->
             <div>
