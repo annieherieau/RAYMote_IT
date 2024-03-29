@@ -138,9 +138,16 @@
                   
                   <%# Liens User connecté %>
                     <%# bouton Like %>
+                    <% if current_user && @workshop.likes.exists?(user: current_user) %>
+                    <div id="like-button">
+                     <%= button_to 'Déliker', workshop_like_path(@workshop), method: :delete, remote: true, class: "rbt-btn btn-sm btn-gradient mt-2 w-100" %>
+                    </div>
+                    <% else %>
                     <div id="like-button">
                       <%= button_to 'liker', workshop_like_path(@workshop), method: :post, remote: true, class: "rbt-btn btn-sm btn-gradient mt-2 w-100" %>
-                      </div>
+                     </div>
+                    <% end %>
+                    <%# bouton inscription %>
                     
                     <% if @purchased_workshop && @workshop.price.zero? %>
                       <%= button_to 'Se désinscrire', workshop_attendance_path(workshop_id: @workshop), method: :delete, class: "rbt-btn btn-sm btn-gradient mt-2 w-100" %>
