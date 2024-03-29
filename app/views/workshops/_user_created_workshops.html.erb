@@ -18,7 +18,7 @@
             <% workshops.each do |workshop| %>
               <tr>
                 <td><%= workshop.name %></td>
-                <td><%= date_format(workshop.start_date) %></td>
+                <td><%= workshop.event ? date_format(workshop.start_date) : '' %></td>
                  <td><%= workshop.validated ? 'oui' : 'non' %></td>
                 <td>
                   <%= link_to "Voir", workshop, class: "rbt-btn btn-sm" %>

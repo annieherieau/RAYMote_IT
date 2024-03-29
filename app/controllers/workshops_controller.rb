@@ -16,15 +16,17 @@ class WorkshopsController < ApplicationController
       @workshops = events.filter{|event| event.status == 'à venir'}
       
       # Event en Top banner: en cours ou prochain
-      @top_event = events.filter{|event| event.status == 'à venir' || event.status == 'en cours'}.first
-      # user inscrit au top event ?
-      if user_signed_in?
-        @is_registred = @top_event.users.include?(current_user)
-      else
-        @is_registred = false
+      if @top_event = events.filter{|event| event.status == 'à venir' || event.status == 'en cours'}.first
+         # user inscrit au top event ?
+        if user_signed_in?
+          @is_registred = @top_event.users.include?(current_user)
+        else
+          @is_registred = false
+        end
+        # lien vers workshop détails ou vers le live
+        @link = @is_registred || current_user == @top_event.creator ?  @top_event.course_items.first.link : '' 
       end
-      # lien vers workshop détails ou vers le live
-      @link = @is_registred || current_user == @top_event.creator ?  @top_event.course_items.first.link : ''
+     
       
     else
       # COURS
@@ -33,6 +35,7 @@ class WorkshopsController < ApplicationController
 
     # statistiques du course banner
     @total_rating_average = (Review.sum(:rating).to_f / Review.count).ceil(2)
+    @total_rating_average = 0.0 if  @total_rating_average.nil? || @total_rating_average.nan?
     @total_reviews = Review.count
     @total_students = User.count
     

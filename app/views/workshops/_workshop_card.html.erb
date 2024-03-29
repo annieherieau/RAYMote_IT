@@ -2,6 +2,13 @@
 <!-- Start Single Course -->
 <div class="rbt-card variation-01 rbt-hover">
     <div class="rbt-card-img">
+        
+        <% if workshop.event %>
+           <div class="theme-gradient mb--10 text-end">
+                    <strong>Le <%= workshop.date_format %></strong>
+                </div>
+        <% end %>
+        
           <%= link_to workshop do %>
             <% photo =  workshop.photo.attached? ? workshop.photo : "assets/course-01.jpg" %>
               <%= image_tag photo, alt: workshop.name %>

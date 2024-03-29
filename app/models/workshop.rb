@@ -21,7 +21,7 @@ class Workshop < ApplicationRecord
   validates :name, presence: true, length: { in: 3..100 }
   validates :description, presence: true, length: { in: 20..1000 }
   validates :price,  presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 1000 }
-  validates_comparison_of :start_date, greater_than: DateTime.now
+  # validates_comparison_of :start_date, greater_than: DateTime.now
   validates :duration, numericality: { only_integer: true, greater_than: 0 }, if: :is_multiple_of_5?
 
   def tags_destroy
