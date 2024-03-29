@@ -27,7 +27,7 @@
                                 <h1 class="top-event-title"><%= @top_event.name %></h1>
                                 <h5 class="subtitle">Débute le <%= @top_event.date_format %> - <%= @top_event.status.capitalize %></h5>
                                 <p class="description has-medium-font-size mt--20">
-                                  <%= @top_event.description %>
+                                  <%= @top_event.description.split('.')[1..3].join('. ') %>
                                 </p>
                                 <div class="slider-btn rbt-button-group justify-content-start">
                                     <a class="rbt-btn btn-gradient radius-round hover-icon-reverse" href="<%= workshop_path(@top_event) %>">

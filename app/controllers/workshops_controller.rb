@@ -35,6 +35,7 @@ class WorkshopsController < ApplicationController
 
     # statistiques du course banner
     @total_rating_average = (Review.sum(:rating).to_f / Review.count).ceil(2)
+    @total_rating_average = 0.0 if  @total_rating_average.nil? || @total_rating_average.nan?
     @total_reviews = Review.count
     @total_students = User.count
     
