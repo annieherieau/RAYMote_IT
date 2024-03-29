@@ -1,19 +1,17 @@
 <%# MENU UTILISATEUR %>
 <div class="header-right">
   <ul class="quick-access">
-    <li class="access-icon">
-      <i class="feather-search"></i>
-    </li>
+
     <!-- Nom du Compte: Utilisateur-->
-    <li class="account-access rbt-user-wrapper ">
+    <li class="account-access rbt-user-wrapper">
       <% if user_signed_in? %>
         <img src="/assets/user.svg" class="icon" alt="icon">
-        <a href="#"><i class="feather-user"></i><strong>
+        <a href="#"><i class="fa-regular fa-user"></i><strong>
         <%= current_user.firstname.present? ? current_user.firstname : "Utilisateur" %>
         </strong></a>
       <% else %>
         <img src="/assets/log-in.svg" class="icon" alt="log-in icon">
-        <a href="#"><i class="feather-user"></i><strong>Connexion</strong></a>
+        <a href="#"><strong>Connexion</strong></a>
       <% end %>
 
       <!-- Menu déroulant: Utilisateur -->
@@ -23,8 +21,7 @@
           <% if user_signed_in? %>
             <%# Liens user connecté %>
             <ul class="user-list-wrapper" >
-            <li></li> 
-            <li>
+              <li>
                 <i class="fa-solid fa-house"></i>
                 <%= link_to "Profil", user_path(current_user) %>
               </li>
@@ -53,16 +50,15 @@
               </li>
             </ul>
           <% else %>
-            <%# VISITEUR non contecté %>
-              <%# Liens Connexion/inscriptio %>
+            <%# VISITEUR non connecté %>
+              <%# Liens Connexion/inscription %>
               <ul class="user-list-wrapper">
-              <li></li> 
                 <%# Connexion %>
                 <li>
                   <%= link_to "Se connecter", new_user_session_path %>
                 </li>
                 
-                <%# inscription %>
+                <%# Inscription %>
                 <li>
                   <%= link_to "S'inscrire", new_user_registration_path %>
                 </li>
