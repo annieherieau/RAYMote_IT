@@ -7,16 +7,35 @@ class WorkshopsController < ApplicationController
   # GET /workshops or /workshops.json
   def index
     @event_status = params[:event] == 'true' ? true : false
+
+    # EVENT ATLIER
     if @event_status
-      # selection events futurs
-      @workshops = Workshop.order('start_date').where(event: true, validated: true, start_date: DateTime.now...)
+      # selection events publiés
+      events = Workshop.order('start_date').where(event: true, validated: true)
+      # selection events à venir
+      @workshops = events.filter{|event| event.status == 'à venir'}
+      
+      # Event en Top banner: en cours ou prochain
+      @top_event = events.filter{|event| event.status == 'à venir' || event.status == 'en cours'}.first
+      # user inscrit au top event ?
+      if user_signed_in?
+        @is_registred = @top_event.users.include?(current_user)
+      else
+        @is_registred = false
+      end
+      # lien vers workshop détails ou vers le live
+      @link = @is_registred || current_user == @top_event.creator ?  @top_event.course_items.first.link : ''
+      
     else
+      # COURS
       @workshops = Workshop.where(event: false, validated: true)
     end
+
+    # statistiques du course banner
     @total_rating_average = (Review.sum(:rating).to_f / Review.count).ceil(2)
     @total_reviews = Review.count
     @total_students = User.count
-    @annie = User.find_by(lastname: 'Hérieau')
+    
   end
 
   # GET /workshops/1 or /workshops/1.json

@@ -8,16 +8,17 @@
                 
                 <div class="course-details-content">
                     <%# Photo %>
-                    <% photo = @workshop.photo.attached? ? @workshop.photo : "/assets/course-01}.jpg" %>
-                    <% link = @purchased_workshop ?  @workshop.course_items.first.link : '' %>
+                    <% photo = @workshop.photo.attached? ? @workshop.photo : image_path("video-01") %>
+                    <% link = @purchased_workshop || current_user == @workshop.creator ?  @workshop.course_items.first.link : '' %>
                     <%= link_to(link) do %>
-                      <div class="rbt-feature-box rbt-shadow-box thumbnail">
+                      <div class="video-popup-wrapper">
                           <%= image_tag(photo, class: "rounded-4 w-100", alt: @workshop.name) %>
-                          <a class="rbt-btn rounded-player-2 sm-size popup-video position-to-top with-animation" href="https://www.youtube.com/watch?v=nA1Aqp0sPQo">
+                          <a class="rbt-btn rounded-player-2 popup-video position-to-top with-animation" href="<%= link %>">
                           <span class="play-icon"></span>
                           </a>
                       </div>
                     <% end %>
+                    
 
 
                     <!-- Start Course Feature Box DESCRIPTION -->
