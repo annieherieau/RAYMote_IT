@@ -5,40 +5,9 @@
 
 
 <section class="container">
-    <!-- Start Tab Content  -->
-    <div class="rbt-team-tab-content tab-content w-50 m-auto">
-
-        <div class="inner">
-            <%# AVATAR %>
-            <%if @user.avatar.attached?%>
-              <div class="rbt-team-thumbnail">
-                  <div class="thumb">
-                      
-                      <%= image_tag @user.avatar, alt: 'Avatar utilisateur' %>
-                  </div>
-              </div>    
-            <% end %>
-            <%# fin AVATAR %>
-            
-            <div class="rbt-team-details">
-                <div class="author-info">
-                    <h4 class="title"><%= @user.firstname %> <%= @user.lastname %></h4>
-                    <span class="theme-gradient"> <%= @published_workshops.count %> cours / ateliers publiés</span>
-                    <span class="team-form">
-                    <span> <%= @total_attendances %> étudiants inscrits</span>
-                    </span>
-                </div>
-                <ul>
-                  <% @categories.each do |category| %>
-                    <li><%= category.name %></li>
-                  <% end %>
-                </ul>
-            </div>
-        </div>
-       
-        <div class="top-circle-shape"></div>
-    </div>
-    <!-- End Tab Content  -->
+  <div class="rbt-team-tab-content tab-content w-75 m-auto">
+    <%= render partial: "users/public_card", locals:{user: @user}%>
+  </div>
 </section>
 
 <!-- Start workshop Area -->
