@@ -1,5 +1,5 @@
 class LikesController < ApplicationController
-
+  before_action :authenticate_user!, only [:destroy]
   
     def create
       @workshop = Workshop.find(params[:workshop_id])
