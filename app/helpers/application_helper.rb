@@ -1,6 +1,7 @@
 module ApplicationHelper
   # formate le nombre en Euros
-  def number_to_euros(number)
+  def number_to_euros(number, digits=2)
+    return 'Gratuit' if number.zero?
     return number_to_currency(number, unit: "€", separator: ",", format: "%n %u")
   end
 

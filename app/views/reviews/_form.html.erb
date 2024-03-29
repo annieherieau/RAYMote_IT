@@ -2,7 +2,7 @@
 <%= form_with(model: [ @workshop, review ], local: true) do |form| %>
   <% if review.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h2>
+      <h2><%= pluralize(review.errors.count, "erreur") %> :</h2>
 
       <ul>
         <% review.errors.each do |error| %>
