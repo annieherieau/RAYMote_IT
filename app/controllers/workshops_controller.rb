@@ -7,7 +7,12 @@ class WorkshopsController < ApplicationController
   # GET /workshops or /workshops.json
   def index
     @event_status = params[:event] == 'true' ? true : false
-    @workshops = Workshop.where(event: @event_status, validated: true)
+    if @event_status
+      # selection events futurs
+      @workshops = Workshop.order('start_date').where(event: true, validated: true, start_date: DateTime.now...)
+    else
+      @workshops = Workshop.where(event: false, validated: true)
+    end
     @total_rating_average = (Review.sum(:rating).to_f / Review.count).ceil(2)
     @total_reviews = Review.count
     @total_students = User.count

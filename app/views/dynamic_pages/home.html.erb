@@ -144,9 +144,7 @@
                     <div class="row g-5">
                         <!-- EVENT card-->
                         <% @events.each do |event| %>
-                            <% if event.status  != "passé"%> 
-                                <%= render partial: "workshops/event_card", locals: {event: event} %>
-                            <% end %>
+                            <%= render partial: "workshops/event_card", locals: {event: event} %>
                         <% end %>
                         <div class="contact-btn mt--80 d-flex justify-content-center">
                             <a class="rbt-btn hover-icon-reverse btn-gradient radius-round" href="<%= workshops_path(event: true)%>">

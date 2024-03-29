@@ -10,7 +10,7 @@ class DynamicPagesController < ApplicationController
             
     #cours suivis
     @courses = Workshop.where(event: false, validated: true).reverse.take(3)
-    @events = Workshop.where(event: true, validated: true)
+    @events = Workshop.order('start_date').where(event: true, validated: true, start_date: DateTime.now...).take(2)
     @total_attendances = Attendance.count
 
     @top_categories = Category.left_joins(:workshops).group(:id).order('COUNT(workshops.id) DESC').limit(8)
