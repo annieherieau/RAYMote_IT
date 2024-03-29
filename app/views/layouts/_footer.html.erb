@@ -1,4 +1,11 @@
 <br><br>
+<style>
+.btn-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+</style>
 
 <div class="footer-top">
     <div class="container">
@@ -44,9 +51,9 @@
                     <li><%= button_to "Logout", destroy_admin_session_path, class: "rbt-badge-4 border-0", method: :delete %></li>
                     <% else %>
                     <li><a href="<%= new_admin_session_path %>">Connexion admin</a></li>
-                    <li><a href="#top">Retour en haut</a></li>
                     <% end %>
                     </ul>
+                    <a href="#top" class="btn rbt-btn btn-gradient btn-to-top vadroite"><i class="fa-solid fa-arrow-up"></i></a>
             </div>
         </div>
     </div>
