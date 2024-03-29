@@ -1,13 +1,49 @@
-<h1>Tag: <%= @tag.name %></h1>
 
-<h3>Ateliers associés :</h3>
-<% if @workshops.any? %>
-  <ul>
-    <% @workshops.each do |workshop| %>
-      <li><%= link_to workshop.name, workshop_path(workshop) %></li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>Aucun atelier n'est associé à ce tag pour le moment.</p>
-<% end %>
+<% title = "" %>
+<% subtitle = "" %>
+<%= render partial: "layouts/banner", locals: {title: title, subtitle: subtitle, icon: false}%>
+                
+
+<section class="rbt-course-area mb-5">
+        <div class="container">
+
+          <div class="col-lg-12">
+              <div class="section-title text-center">
+                  <span class="subtitle bg-primary-opacity">ATELIERS ET COURS ASSOCIÉS AU TAG :</span>
+                  <h1 style="text-align: center; margin-top: 10px; margin-bottom: 150px"><%= @tag.name %></h1>
+              </div>
+          </div>
+
+          <!-- Start Single Course  -->
+          <div class="row g-5">
+              <div class="container">
+                  <div id="workshops">
+                      <% if @workshops.any? %>
+                          <% @workshops.each_slice(3) do |workshops_slice| %>
+                              <div class="row mb-4 justify-content-around">
+                                  <% workshops_slice.each do |workshop| %>
+                                      <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                                          <%= render partial: "workshops/workshop_card", locals: {workshop: workshop} %>
+                                      </div>
+                                  <% end %>
+                              </div>
+                          <% end %>
+                      <% else %>
+                          <p>Aucun atelier n'est associé à ce tag pour le moment.</p>
+                      <% end %>
+                  </div>
+              </div>
+          </div>
+        </div>
+    </section>
+      
+<!-- End Single Course  -->
+
+
+
+
+
+
+
+
 
