@@ -24,7 +24,7 @@
                                         En intéraction avec<strong><%= @top_event.creator.firstname %> <%= @top_event.creator.lastname %></strong>
                                     </a>
                                 </div>
-                                <h1 class="title"><%= @top_event.name %> </h1>
+                                <h1 class="top-event-title"><%= @top_event.name %></h1>
                                 <h5 class="subtitle">Débute le <%= @top_event.date_format %> - <%= @top_event.status.capitalize %></h5>
                                 <p class="description has-medium-font-size mt--20">
                                   <%= @top_event.description %>
@@ -53,11 +53,9 @@
                     </div>
                 <% else %>
                 <span class="meta-text d-flex align-items-center"><img class="mb-4" style="height: 50px" source src="/assets/youtubelive.png">Atelier Live</span>
-                <h1>Aucun Atelier à venir</h1>
+                <h1 class='top-event-title'>Aucun Atelier à venir</h1>
                 <% end %>
-                </div>
-
-                
+                </div>   
             </div>
         </div>
     </div>
