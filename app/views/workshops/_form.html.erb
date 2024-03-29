@@ -1,7 +1,7 @@
 <%= form_with(model: @workshop, class: "form") do |form| %>
   <% if @workshop.errors.any? %>
     <div class="alert alert-danger">
-      <h2><%= pluralize(@workshop.errors.count, "erreur(s)") %> interdit l'enregistrement :</h2>
+      <h2><%= pluralize(@workshop.errors.count, "erreur") %> :</h2>
 
       <ul>
         <% @workshop.errors.full_messages.each do |message| %>
