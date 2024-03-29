@@ -227,6 +227,7 @@ def seed_courses
         description: video.description[0..500],
         price: boolean_ratio ? 0 : rand(1..30), # 50% gratuit
         event: false,
+        duration: 0,
         creator: User.where(creator: true).sample,
         category: Category.find_by(name: category),
         brouillon: boolean_ratio(30),
@@ -322,8 +323,8 @@ def perform
   seed_admins
   seed_users
   seed_creator_requests(4)
-  # seed_courses
-  # seed_events
+  seed_courses
+  seed_events
   puts ("#{Attendance.count} Attendances créées")
   puts ("#{Review.count} Reviews créés")
   puts ("#{Order.count} Orders créés")
