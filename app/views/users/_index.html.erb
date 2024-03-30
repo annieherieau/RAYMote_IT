@@ -21,8 +21,11 @@
                 <% if user.creator %>
                    <%= link_to "Voir", public_user_path(user), class: "btn btn-primary" %>
                 <% end %>
-
-                <%= button_to "Supprimer", user_path(user), method: :delete, class: "btn btn-danger" %> 
+                <! -- Le user ID = 1 est anonyme et ne peut être supprimé >
+                 <% if user.id != 1 %>
+                  <%= button_to "Supprimer", user_path(user), method: :delete, class: "btn btn-danger" %> 
+                <% end %>
+                  
               <% end %>
                <% if user.pending %>
                <%= button_to "Promouvoir en créateur", promote_to_creator_path(user_id: user.id), method: :patch, class: "btn btn-success"%>

@@ -2,7 +2,7 @@ class AdminsController < ApplicationController
   before_action :authenticate_admin!
 
   def dashboard
-    @users = User.all
+    @users = User.order('pending DESC').all
     @workshops = Workshop.where(brouillon: false)
     @workshops_to_validate = Workshop.where(validated: false, brouillon: false)
     @tags = Tag.all
