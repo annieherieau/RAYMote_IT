@@ -145,13 +145,13 @@ footer {
 /* ##### Banner Homepage ###### */
 
 .rbt-banner-1{
-  background-image: url("../images/bg-g1.jpg");
+  background-image: url("https://res.cloudinary.com/dbu3s1gn0/image/upload/v1711814897/Raymote-it/bg-g1.jpg");
   background-size: cover;
   background-position: center;
 }
 
 .rbt-banner-1::after {
-  background: url("../images/banner-bg-shape-1.svg");
+  background: url("https://res.cloudinary.com/dbu3s1gn0/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1711814893/Raymote-it/banner-bg-shape-1.jpg?_s=public-apps");
 }
 
 /* ##### Reviews ###### */
