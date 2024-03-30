@@ -5,57 +5,58 @@
             <div class="container">
                 
                 <div class="row g-5 align-items-center">
-                <% if @top_event %>
-                    <!-- top Event contenu -->
-                    <div class="col-lg-6 order-2 order-lg-1">
-                        <div class="content">
-                            <div class="inner">
-                                <div class="rbt-badge-group justify-content-start">
-                                    <span class="meta-text d-flex align-items-center">
-                                        <%= image_tag "youtubelive.png", class: "mb-4", height: "50" %>Atelier Live</span>
-                                    
-                                    <a href="<%= public_user_path(@top_event.creator)%>" class="rbt-badge-2">
-                                        <%if @top_event.creator.avatar.attached?%>
-                                            <div class="image">
-                                            <%= image_tag @top_event.creator.avatar, alt: 'Avatar utilisateur' %>
-                                            </div>
+                    <% if @top_event %>
+                        <!-- top Event contenu -->
+                        <div class="col-lg-6 order-2 order-lg-1">
+                            <div class="content">
+                                <div class="inner">
+                                    <div class="rbt-badge-group justify-content-start">
+                                        <span class="meta-text d-flex align-items-center">
+                                            <%= image_tag "youtubelive.png", class: "mb-4" %>Atelier Live</span>
                                         
-                                        <% end %>
-                
-                                        En intéraction avec<strong><%= @top_event.creator.firstname %> <%= @top_event.creator.lastname %></strong>
-                                    </a>
-                                </div>
-                                <h1 class="top-event-title"><%= @top_event.name %></h1>
-                                <h5 class="subtitle">Débute le <%= @top_event.date_format %> - <%= @top_event.status.capitalize %></h5>
-                                <p class="description has-medium-font-size mt--20">
-                                  <%= @top_event.description.split('.')[1..3].join('. ') %>
-                                </p>
-                                <div class="slider-btn rbt-button-group justify-content-start">
-                                    <a class="rbt-btn btn-gradient radius-round hover-icon-reverse" href="<%= workshop_path(@top_event) %>">
-                                        <span class="icon-reverse-wrapper">
-                                            <span class="btn-text">voir plus</span>
-                                            <span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span>
-                                            <span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span>
-                                        </span>
-                                    </a>
+                                        <a href="<%= public_user_path(@top_event.creator)%>" class="rbt-badge-2">
+                                            <%if @top_event.creator.avatar.attached?%>
+                                                <div class="image">
+                                                <%= image_tag @top_event.creator.avatar, alt: 'Avatar utilisateur' %>
+                                                </div>
+                                            
+                                            <% end %>
+                    
+                                            En intéraction avec<strong><%= @top_event.creator.firstname %> <%= @top_event.creator.lastname %></strong>
+                                        </a>
+                                    </div>
+                                    <h1 class="top-event-title"><%= @top_event.name %></h1>
+                                    <h5 class="subtitle">Débute le <%= @top_event.date_format %> - <%= @top_event.status.capitalize %></h5>
+                                    <p class="description has-medium-font-size mt--20">
+                                    <%= @top_event.description.split('.')[1..3].join('. ') %>
+                                    </p>
+                                    <div class="slider-btn rbt-button-group justify-content-start">
+                                        <a class="rbt-btn btn-gradient radius-round hover-icon-reverse" href="<%= workshop_path(@top_event) %>">
+                                            <span class="icon-reverse-wrapper">
+                                                <span class="btn-text">voir plus</span>
+                                                <span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span>
+                                                <span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span>
+                                            </span>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- top event VIDEO -->
-                    <div class="col-lg-5 offset-xl-1 order-1 order-lg-2">
-                        <div class="video-popup-wrapper">
-                            <% photo = @top_event.photo.attached? ? @top_event.photo : image_path('video-01')%>
-                            <%= image_tag photo, alt: 'Video Images', class: 'w-100 rbt-radius' %>
-                            <a class="rbt-btn rounded-player-2 popup-video position-to-top with-animation" href="<%= %>">
-                                <span class="play-icon"></span>
-                            </a>
+                        <!-- top event VIDEO -->
+                        <div class="col-lg-5 offset-xl-1 order-1 order-lg-2">
+                            <div class="video-popup-wrapper">
+                                <% photo = @top_event.photo.attached? ? @top_event.photo : image_path('video-01')%>
+                                <%= image_tag photo, alt: 'Video Images', class: 'w-100 rbt-radius' %>
+                                <a class="rbt-btn rounded-player-2 popup-video position-to-top with-animation" href="<%= %>">
+                                    <span class="play-icon"></span>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                <% else %>
-                <span class="meta-text d-flex align-items-center"><%= image_tag "youtubelive.png", class: "mb-4", height: "50" %>Atelier Live</span>
-                <h1 class='top-event-title'>Aucun Atelier à venir</h1>
-                <% end %>
+                    <% else %>
+                        <span class="meta-text d-flex align-items-center">
+                        <%= image_tag "youtubelive.png", class: "mb-4" %>Atelier Live</span>
+                        <h1 class='top-event-title'>Aucun Atelier à venir</h1>
+                    <% end %>
                 </div>   
             </div>
         </div>
