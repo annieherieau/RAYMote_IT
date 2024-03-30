@@ -146,6 +146,8 @@ footer {
 
 .rbt-banner-1{
   background-image: url("../images/bg-g1.jpg");
+  background-size: cover;
+  background-position: center;
 }
 
 .rbt-banner-1::after {
