@@ -144,6 +144,18 @@ footer {
 
 /* ##### Banner Homepage ###### */
 
+.rbt-banner-1{
+  background-image: url("https://res.cloudinary.com/dbu3s1gn0/image/upload/v1711814897/Raymote-it/bg-g1.jpg");
+  background-size: cover;
+  background-position: center top;
+}
+
+.rbt-banner-1::after {
+  background: url("https://res.cloudinary.com/dbu3s1gn0/image/upload/v1711814893/Raymote-it/banner-bg-shape-1.svg");
+  background-size: cover;
+  background-position: center top;
+}
+
 /* ##### Reviews ###### */
 .star-rating {
   font-size: 24px;
