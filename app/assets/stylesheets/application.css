@@ -145,10 +145,11 @@ footer {
 /* ##### Banner Homepage ###### */
 
 .rbt-banner-1{
-  background-image: url(https://asset.cloudinary.com/dbu3s1gn0/5d9810452aa06d5bf2648aaf0b31e9bc);
+  background-image: url("../images/bg-g1.jpg");
 }
+
 .rbt-banner-1::after {
-  background: url(https://asset.cloudinary.com/dbu3s1gn0/5d9810452aa06d5bf2648aaf0b31e9bc);
+  background: url("../images/banner-bg-shape-1.svg");
 }
 
 /* ##### Reviews ###### */
