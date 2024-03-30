@@ -119,6 +119,13 @@ footer {
 
 /* ##### Banner Homepage ###### */
 
+.rbt-banner-1{
+  background-image: url(https://asset.cloudinary.com/dbu3s1gn0/5d9810452aa06d5bf2648aaf0b31e9bc);
+}
+.rbt-banner-1::after {
+  background: url(https://asset.cloudinary.com/dbu3s1gn0/5d9810452aa06d5bf2648aaf0b31e9bc);
+}
+
 /* ##### Reviews ###### */
 .star-rating {
   font-size: 24px;

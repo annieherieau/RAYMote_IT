@@ -24611,7 +24611,7 @@ blockquote.has-text-align-right cite,
   padding: 0 150px;
   position: relative;
   overflow: hidden;
-  background-image: url(../../images/bg-g1.jpg);
+  background-image: url(assets/bg-g1.jpg);
   background-position: top center;
 }
 @media only screen and (min-width: 1200px) and (max-width: 1599px) {
@@ -24639,7 +24639,7 @@ blockquote.has-text-align-right cite,
   position: absolute;
   bottom: -1px;
   left: 0;
-  background: url(../../images/banner-bg-shape-1.svg);
+  background: url(assets/banner-bg-shape-1.svg);
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
