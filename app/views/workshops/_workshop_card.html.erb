@@ -13,9 +13,6 @@
           <%= link_to workshop do %>
             <% photo =  workshop.photo.attached? ? workshop.photo : "assets/course-01.jpg"%>
               <%= image_tag photo, alt: workshop.name %>
-              <a class="rbt-btn rounded-player-2 popup-video position-to-top with-animation" href="<%= %>">
-            <span class="play-icon"></span>
-            </a>
           <% end %>
         </div>
           

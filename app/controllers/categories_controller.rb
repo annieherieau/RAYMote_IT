@@ -24,8 +24,9 @@ class CategoriesController < ApplicationController
   # POST /categories
   def create
     @category = Category.new(category_params)
+    @category.default_icon unless @category.icon.attached?
       if @category.save
-        redirect_to request.referer || root_path, notice: "Category was successfully created." 
+        redirect_to category_path(@category) || root_path, notice: "Category was successfully created." 
       else
         render :new, status: :unprocessable_entity 
       end

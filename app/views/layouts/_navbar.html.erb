@@ -6,7 +6,7 @@
             <div class="header-left rbt-header-content">
                 <div class="header-info">
                     <!-- Regular Logo -->
-                    <div class="logo d-none d-lg-block", id="top">
+                    <div class="logo d-none d-lg-block">
                         <a href="index.html">
                             <%= link_to(root_path) do %>
                                 <%= image_tag("RAYM_logo.png", alt: "RAYM_logo_white", style: "height: 30px") %>
@@ -39,49 +39,54 @@
                         <!-- Start Home -->  
                         <li class="nav-item">
                             <%= link_to 'Accueil', root_path, class: "nav-link"%>
+                        
+                       
                         </li>
-
+                       
+                    
                         <!-- Start Categories  -->
                         <li class="with-megamenu has-menu-child-item position-static">
-                        <a href="#">Catégories <i class="fa-solid fa-chevron-down mx-2"></i></a>
-                        <div class="rbt-megamenu menu-skin-raym-gradient">
-                            <div class="wrapper">
-                                <div class="row row--15 home-plesentation-wrapper single-dropdown-menu-presentation">
-                                    <% Category.all.each do |category| %>
-                                        <!-- Start Single Demo  -->
-                                        <div class="col-lg-12 col-xl-2 col-xxl-2 col-md-12 col-sm-12 col-12 single-mega-item d-flex justify-content-center">
-                                            <div class="demo-single raym-icon" >
-                                                <div class="inner">
-                                                    <div class="thumbnail">
-                                                        <a href="<%= category_path(category) %>">
-                                                            <%= image_tag category.icon, alt: "Icons Images"%>
-                                                        </a>
+                            <a href="#">Catégories <i class="fa-solid fa-chevron-down mx-2"></i></a>
+                            <div class="rbt-megamenu menu-skin-raym-gradient">
+                                <div class="wrapper">
+                                    <div class="row row--15 home-plesentation-wrapper single-dropdown-menu-presentation">
+                                        <% Category.all.each do |category| %>
+                                            <!-- Start Single Demo  -->
+                                            <div class="col-lg-12 col-xl-2 col-xxl-2 col-md-12 col-sm-12 col-12 single-mega-item d-flex justify-content-center">
+                                                <div class="demo-single raym-icon" >
+                                                    <div class="inner">
+                                                        <div class="thumbnail">
+                                                            <a href="<%= category_path(category) %>">
+                                                                <%= image_tag category.icon, alt: "Icons Images"%>
+                                                            </a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    <% end %>
-                                </div>
-                                <div class="row">
+                                        <% end %>
+                                    </div>
+                                    <div class="row">
 
-                                <!-- Youtube Button -->
-                                <div class="col-lg-12">
-                                    <div class="btn-wrapper">
-                                        <a class="rbt-btn btn-gradient hover-icon-reverse square btn-xl w-100 text-center mt--30 hover-transform-none" href="https://www.youtube.com/channel/UCQPscnhJYRnYhBPOiLi3-gQ">
-                                            <span class="icon-reverse-wrapper">
-                                                <span class="btn-text">
-                                                    Nous sommes sur YouTube ! Live - Chat - Tuto
-                                                </span>
-                                                <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
-                                                <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
-                                                <i class="fab fa-youtube mb-2" style="color: #ff0000; font-size: 40px;"></i>
-                                            </span>
-                                        </a>
+                                        <!-- Youtube Button -->
+                                        <div class="col-lg-12">
+                                            <div class="btn-wrapper">
+                                                <a class="rbt-btn btn-gradient hover-icon-reverse square btn-xl w-100 text-center mt--30 hover-transform-none" href="https://www.youtube.com/channel/UCQPscnhJYRnYhBPOiLi3-gQ">
+                                                    <span class="icon-reverse-wrapper">
+                                                        <span class="btn-text">
+                                                            Nous sommes sur YouTube ! Live - Chat - Tuto
+                                                        </span>
+                                                        <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
+                                                        <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
+                                                        <i class="fab fa-youtube mb-2" style="color: #ff0000; font-size: 40px;"></i>
+                                                    </span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <!-- fin Youtube Button -->
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>      
+                        </li>     
                     <!-- End Categories -->
 
 
@@ -94,19 +99,21 @@
                         </li>
                     <!-- End Workshops -->  
 
-                    <!-- Start Admin & User Dropdown Tabs --> 
+                     
                         <li class="nav-item">
                             <%= link_to 'Contact', contact_path, class: "nav-link"%>
                         </li>
 
-                        <%# MENU ADMINISTRATEUR %>
+                        <!-- Start Admin & User Dropdown Tabs -->
+                        <!-- MENU ADMINISTRATEUR -->
                         <% if admin_signed_in? %>
                         <li class="nav-item mt-5 dropdown">
                             <%= render "layouts/admin_menu" %>
-                        <% end %>
+                        
                         </li>
+                        <% end %>
+                        <!-- MENU UTILISATEUR -->
                         <li class="nav-item mt-5 dropdown">
-                            <%# MENU UTILISATEUR %>
                             <%= render "layouts/user_menu" %>
                         </li>
                     </ul>

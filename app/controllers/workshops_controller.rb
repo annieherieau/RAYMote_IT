@@ -26,7 +26,6 @@ class WorkshopsController < ApplicationController
         # lien vers workshop détails ou vers le live
         @link = @is_registred || current_user == @top_event.creator ?  @top_event.course_items.first.link : '' 
       end
-     
       
     else
       # COURS
@@ -100,7 +99,9 @@ class WorkshopsController < ApplicationController
     @workshop.creator = current_user
     @tags = Tag.all
     @categories = Category.all
-  
+
+    @workshop.default_photo unless @workshop.photo.attached?
+    
     respond_to do |format|
       if @workshop.save
         format.html { redirect_to workshop_url(@workshop), notice: "Workshop was successfully created." }
@@ -132,6 +133,7 @@ class WorkshopsController < ApplicationController
 
     # Finalement, mettez à jour le workshop avec les autres paramètres
     if @workshop.update(workshop_params)
+      @workshop.default_photo unless @workshop.photo.attached?
       redirect_to workshop_url(@workshop), notice: "Workshop was successfully updated."
     else
       render :edit, status: :unprocessable_entity

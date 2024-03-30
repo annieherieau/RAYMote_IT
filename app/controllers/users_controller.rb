@@ -32,6 +32,10 @@ class UsersController < ApplicationController
   # DELETE /profile/1
   def destroy
     @user = User.find(params[:id])
+    if @user.id == 1
+      redirect_to dashboard_path, alert: "Le User ID= 1 (anonyme) ne peut être supprimé !" 
+    end
+
     if !@user.creator
       @user.destroy
       flash[:notice] = "L'utilisateur a été supprimé avec succès."

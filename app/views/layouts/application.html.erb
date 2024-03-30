@@ -28,7 +28,7 @@
 
 
 <body data-turbo="false" class="rbt-header-sticky <%= 'high-contrast' if current_user&.setting&.high_contrast == true %> <%= 'opendys-enabled' if current_user&.setting&.opendys == true %>">
-    <header class="rbt-header rbt-header-10">
+    <header class="rbt-header rbt-header-10" id="top">
         <%= render "layouts/navbar" %>
     </header>
     <%= render "layouts/flash" %>
