@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Salut <%= @user.email %> et bienvenue chez RAYMOTE IT !</h1>
+    <p>
+      Tu t'es inscrit en utilisant l'e-mail suivant : <%= @user.email %>.
+    </p>
+    <p>
+      Pour accéder à ton espace client, connecte-toi via : <a href="<%= @signin_url %>">/user/signin</a>.
+    </p>
+    <p> À très vite sur <a href="<%= @url %>">https://raymote-it.fr</a> !</p>
+
+  </body>
+</html>

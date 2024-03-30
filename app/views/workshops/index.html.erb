@@ -1,4 +1,4 @@
-<p style="color: green"><%= notice %></p>
+
 <header class="bg-dark py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
@@ -9,15 +9,18 @@
         </header>
 
 <h1>Workshops</h1>
-
+<div class="container">
 <div id="workshops">
-  <% @workshops.each_slice(3) do |workshop_row| %>
+  <% @workshops.reverse.each_slice(3) do |workshop_row| %>
     <div class="row mb-4 justify-content-around">
       <% workshop_row.each do |workshop| %>
+        <% if workshop.status != "passé" %>
           <%= render workshop %>
+          <% end %>
       <% end %>
     </div>
   <% end %>
+</div>
 </div>
 
 

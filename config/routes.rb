@@ -1,12 +1,37 @@
 Rails.application.routes.draw do
+  resources :reviews
+  
+  # Page Contact
+  get 'contact', to: 'static_pages#contact'
+  post 'contact',  to: 'static_pages#send_contact'
+  
+  resources :categories
+  resources :tags
+  resources :orders
+  
+
   devise_for :users
 
-  resources :workshops
+  resources :workshops do
+    resource :like, only: [:create, :destroy], controller: 'likes'
+    resources :attendances, only: [:create, :destroy]  # Ajouter cette ligne
+    resources :reviews, only: [:new, :create]
+  end
 
+  resources :tags, only: [:show]
+  resources :categories, only: [:show]
+  
   resources :users, only: [:index, :show], path: 'profile'
 
   #resource :profile, controller: 'users', only: [:show], path: 'profile'
 
+  # Stripe
+  scope '/checkout' do
+    post 'create', to: 'checkout#create', as: 'new_checkout_create'
+    get 'success', to: 'checkout#success', as: 'checkout_success'
+    get 'cancel', to: 'checkout#cancel', as: 'checkout_cancel'
+  end
+  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

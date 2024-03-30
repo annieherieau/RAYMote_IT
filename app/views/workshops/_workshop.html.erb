@@ -6,6 +6,8 @@
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
+                                <!-- Status -->
+                                <%= workshop.status %>
                                     <!-- Product name-->
                                       <p>
                                         <strong>Name:</strong>
@@ -19,7 +21,7 @@
                                       <!--Start date-->
                                       <p>
                                         <strong>Start_date:</strong>
-                                        <%= workshop.start_date %>
+                                        <%= workshop.start_date.strftime("%d/%m/%Y %H:%M") %>
                                       </p>
                                       <!--Duration-->
                                       <p>
@@ -29,8 +31,24 @@
                                     <!-- Product price-->
                                       <p>
                                          <strong>Price:</strong>
-                                          <%= workshop.price %>
+                                          <%= workshop.price %> €
                                       </p>
+
+                                      <% if workshop.tags.any? %>
+                                        <ul>
+                                          <% workshop.tags.each do |tag| %>
+                                            <li><%= tag.name %></li>
+                                          <% end %>
+                                        </ul>
+                                      <% else %>
+                                        <p>Cet atelier n'a pas de tags associés.</p>
+                                      <% end %>
+
+                                      <% if workshop.likes.exists?(user: current_user) %>
+                                      <%= button_to 'Déliker', workshop_like_path(workshop), method: :delete, class: "btn btn-warning" %>
+                                    <% else %>
+                                    <%= button_to 'Liker', workshop_like_path(workshop), method: :post, class: "btn btn-primary" %>
+                                    <% end %>
                                 </div>
                             </div>
                             <!-- Product actions-->

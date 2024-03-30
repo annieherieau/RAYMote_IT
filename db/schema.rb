@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_15_144519) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_19_201252) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,10 +23,67 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_15_144519) do
     t.index ["workshop_id"], name: "index_attendances_on_workshop_id"
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "workshop_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_likes_on_user_id"
+    t.index ["workshop_id"], name: "index_likes_on_workshop_id"
+  end
+
+  create_table "order_workshops", force: :cascade do |t|
+    t.bigint "order_id"
+    t.bigint "workshop_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_workshops_on_order_id"
+    t.index ["workshop_id"], name: "index_order_workshops_on_workshop_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.datetime "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.text "content"
+    t.integer "rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "workshop_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+    t.index ["workshop_id"], name: "index_reviews_on_workshop_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tags_workshops", id: false, force: :cascade do |t|
+    t.bigint "tag_id", null: false
+    t.bigint "workshop_id", null: false
+    t.index ["tag_id", "workshop_id"], name: "index_tags_workshops_on_tag_id_and_workshop_id"
+    t.index ["workshop_id", "tag_id"], name: "index_tags_workshops_on_workshop_id_and_tag_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "firstname"
     t.string "lastname"
     t.string "email"
+    t.boolean "creator", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "encrypted_password", default: "", null: false
@@ -41,10 +98,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_15_144519) do
     t.string "name"
     t.text "description"
     t.integer "price"
-    t.time "start_date"
+    t.datetime "start_date"
     t.integer "duration"
+    t.boolean "event", default: false, null: false
+    t.bigint "creator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_workshops_on_category_id"
+    t.index ["creator_id"], name: "index_workshops_on_creator_id"
   end
 
+  add_foreign_key "likes", "users"
+  add_foreign_key "likes", "workshops"
+  add_foreign_key "orders", "users"
+  add_foreign_key "reviews", "users"
+  add_foreign_key "reviews", "workshops"
+  add_foreign_key "workshops", "categories"
+  add_foreign_key "workshops", "users", column: "creator_id"
 end

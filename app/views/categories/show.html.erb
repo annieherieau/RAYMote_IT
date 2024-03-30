@@ -1,0 +1,11 @@
+<h1><%= @category.name %></h1>
+
+<h2>Ateliers associés :</h2>
+<ul>
+  <% @workshops.each do |workshop| %>
+    <li>
+      <%= link_to workshop.name, workshop_path(workshop) %>
+      <!-- Plus de détails sur l'atelier si nécessaire -->
+    </li>
+  <% end %>
+</ul>

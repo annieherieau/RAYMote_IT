@@ -1,6 +1,11 @@
-<h1>User Details</h1>
-<p><strong>Firstname:</strong> <%= @user.firstname %></p>
-<p><strong>Lastname:</strong> <%= @user.lastname %></p>
-<p><strong>Email:</strong> <%= @user.email %></p>
-
-<%= link_to "Retour à l'accueil", workshops_path, class: "btn btn-dark" %>
+<div class="container">
+  <%= render "users/user_details" %>
+  <%= render partial: "workshops/user_created_workshops", locals: {user: @user} %>
+  
+  <% if current_user == @user %>
+     <%= render partial: "workshops/user_workshops", locals: {workshops: @user.workshops} %>
+     <%= render partial: "reviews/user_reviews", locals: {user: @user} %>
+     <%= render partial: "orders/user_orders", locals: {orders: @user.orders} %>
+  <% end %>
+  <%= link_to "Retour à l'accueil", workshops_path, class: "btn btn-dark" %>
+</div>
