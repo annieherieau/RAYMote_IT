@@ -8,7 +8,6 @@
             <p><strong>De : Système</p>
         <% else %>
             <p><strong>De :</strong> <%= message.sender.email %></p>
-        <p><strong>De  %></p>
         <% end %>
         <p><strong>Message :</strong> <%= message.body %></p>
         <%= button_to 'Supprimer', message_path(message), method: :delete, data: { confirm: 'Êtes-vous sûr de vouloir supprimer ce message ?' }, class: 'btn btn-danger btn-sm' %>

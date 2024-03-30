@@ -49,6 +49,11 @@ class Workshop < ApplicationRecord
     end
   end
 
+  def default_photo
+    self.event ? url = 'app/assets/images/video-01.jpg' : url = 'app/assets/images/course-01.jpg'
+    self.photo.attach(io: File.open(url), filename: url.split('/').last)
+  end
+
   # text d'affichage des boutons toggles
   def activate_btn
     self.brouillon ? "Publier" : "Dépublier"

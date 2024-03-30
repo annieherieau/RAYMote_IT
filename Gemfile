@@ -42,7 +42,7 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.2"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -78,9 +78,12 @@ gem "stripe", "~> 10.12"
 
 gem "dockerfile-rails", ">= 1.6", :group => :development
 
-gem 'canonical-rails', github: 'jumph4x/canonical-rails'
 
 gem 'google-apis-youtube_v3'
 
 gem "open-uri", "~> 0.4.1"
 gem "jquery-rails", "~> 4.6"
+
+gem "cloudinary", "~> 1.29"
+
+gem "canonical-rails", "~> 0.2.15"

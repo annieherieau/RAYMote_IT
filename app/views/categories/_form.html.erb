@@ -12,8 +12,8 @@
   <% end %>
 
   <div>
-    <%= form.label :name, 'Titre' %>
-    <%= form.text_field :name %>
+    <%= form.label :name, 'Nom' %>
+    <%= form.text_field :name, required: true, value:  category.name%>
   </div>
 
   <div class="mt-5">
