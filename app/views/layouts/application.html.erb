@@ -19,7 +19,12 @@
 </head>
 <body data-turbo="false" class="rbt-header-sticky <%= 'high-contrast' if current_user&.setting&.high_contrast == true %> <%= 'opendys-enabled' if current_user&.setting&.opendys == true %>">
     <header class="rbt-header rbt-header-10" id="top">
+    <div id="navbarPC" class="d-none d-lg-block">
         <%= render "layouts/navbar" %>
+    </div>
+    <div id="navbarMobile" class="d-block d-lg-none">
+        <%= render "layouts/navbar_mobile" %>
+    </div>
     </header>
     <%= render "layouts/flash" %>
 
