@@ -318,13 +318,13 @@ end
 def perform
   puts ('---- START SEEDING ----')
   seed_reset
-  seed_categories
-  seed_tags
-  seed_admins
-  seed_users
-  seed_creator_requests(4)
-  seed_courses
-  seed_events
+  # seed_categories
+  # seed_tags
+  # seed_admins
+  # seed_users
+  # seed_creator_requests(4)
+  # seed_courses
+  # seed_events
   puts ("#{Attendance.count} Attendances créées")
   puts ("#{Review.count} Reviews créés")
   puts ("#{Order.count} Orders créés")
