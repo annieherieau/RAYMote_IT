@@ -84,3 +84,5 @@ gem 'google-apis-youtube_v3'
 
 gem "open-uri", "~> 0.4.1"
 gem "jquery-rails", "~> 4.6"
+
+gem "cloudinary", "~> 1.29"
