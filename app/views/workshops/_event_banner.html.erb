@@ -11,7 +11,8 @@
                         <div class="content">
                             <div class="inner">
                                 <div class="rbt-badge-group justify-content-start">
-                                    <span class="meta-text d-flex align-items-center"><img class="mb-4" style="height: 50px" source src="/assets/youtubelive.png">Atelier Live</span>
+                                    <span class="meta-text d-flex align-items-center">
+                                        <%= image_tag "youtubelive.png", class: "mb-4", height: "50" %>Atelier Live</span>
                                     
                                     <a href="<%= public_user_path(@top_event.creator)%>" class="rbt-badge-2">
                                         <%if @top_event.creator.avatar.attached?%>
@@ -52,7 +53,7 @@
                         </div>
                     </div>
                 <% else %>
-                <span class="meta-text d-flex align-items-center"><img class="mb-4" style="height: 50px" source src="/assets/youtubelive.png">Atelier Live</span>
+                <span class="meta-text d-flex align-items-center"><%= image_tag "youtubelive.png", class: "mb-4", height: "50" %>Atelier Live</span>
                 <h1 class='top-event-title'>Aucun Atelier à venir</h1>
                 <% end %>
                 </div>   

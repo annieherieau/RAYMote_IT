@@ -23,7 +23,7 @@
         <!-- MAIL -->
         <% if current_user == @user %>
           <%= link_to "#", class: "mail-icon-link", "data-bs-toggle": "modal", "data-bs-target": "#mailModal" do %>
-            <img src="/assets/email.svg" class="icon" alt="mail">
+            <%= image_tag "email.svg", class: "icon", alt:"mail" %>
           <% end %>
         <% end %>
         <!-- FIN MAIL -->

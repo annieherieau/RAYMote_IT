@@ -26,7 +26,6 @@ class WorkshopsController < ApplicationController
         # lien vers workshop détails ou vers le live
         @link = @is_registred || current_user == @top_event.creator ?  @top_event.course_items.first.link : '' 
       end
-     
       
     else
       # COURS
