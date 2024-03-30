@@ -13,9 +13,9 @@ class LikesController < ApplicationController
         return
       end
   
-      flash[:notice] = "Vous avez aimé cet atelier."
+      
       respond_to do |format|
-        format.html { redirect_to @workshop, notice: "Vous avez aimé cet atelier." }
+        format.html { redirect_to @workshop}
         format.js  
       end
     end
@@ -25,9 +25,9 @@ class LikesController < ApplicationController
       workshop = Workshop.find(params[:workshop_id])
       workshop.likes.where(user: current_user).destroy_all
   
-      flash[:notice] = "Vous n'aimez plus cet atelier."
+      
       respond_to do |format|
-        format.html { redirect_to @workshop, notice: "Vous avez aimé cet atelier." }
+        format.html { redirect_to @workshop }
         format.js  
       end
     end
