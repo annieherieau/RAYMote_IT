@@ -318,9 +318,9 @@ end
 def perform
   puts ('---- START SEEDING ----')
   seed_reset
-  # seed_categories
+  seed_categories
   # seed_tags
-  # seed_admins
+  seed_admins
   # seed_users
   # seed_creator_requests(4)
   # seed_courses

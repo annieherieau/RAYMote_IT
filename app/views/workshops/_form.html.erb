@@ -42,7 +42,7 @@
 
   <div class="mb-3">
     <%= form.label :price, 'Prix', class: "form-label" %>
-    <%= form.number_field :price, class: "form-control", required: true, value: 0 %>
+    <%= form.number_field :price, class: "form-control", required: true, value: @workshop.price %>
   </div>
 
   <div class="mb-3">
