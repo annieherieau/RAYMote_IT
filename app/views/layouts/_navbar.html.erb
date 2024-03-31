@@ -3,7 +3,7 @@
 <div class="rbt-header-wrapper header-space-betwween header-sticky">
     <div class="container-fluid">
         <div class="mainbar-row rbt-navigation-center align-items-center justify-content-center" style="padding-left: 15px;"> <!-- Modification ici pour centrer les onglets dans la navbar -->
-            <div class="header-left rbt-header-content d-none d-lg-block">
+            <div class="header-left rbt-header-content d-none d-xl-block"> <!-- Modification pour basculer en menu mobile à partir de la résolution d'un iPad Pro -->
                 <div class="header-info">
                     <!-- Regular Logo -->
                     <div class="logo">
@@ -17,7 +17,7 @@
             </div>
 
             <!-- Navbar -->
-            <nav class="mainmenu-nav navbar navbar-expand-lg">
+            <nav class="mainmenu-nav navbar navbar-expand-xl"> <!-- Modification pour basculer en menu mobile à partir de la résolution d'un iPad Pro -->
                 <!-- Toggle Button -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -93,122 +93,12 @@
                         <!-- MENU ADMINISTRATEUR -->
                         <% if admin_signed_in? %>
                             <li class="nav-item mt-5 dropdown">
-                                <div class="header-right">
-                                    <ul class="quick-access">
-                                        <li class="access-icon">
-                                            <i class="feather-search"></i>
-                                        </li>
-                                        <!-- Nom du Compte: Administrateur-->
-                                        <li class="account-access rbt-user-wrapper ">
-                                            <%= image_tag "user.svg", class: "icon", alt: "icon"%>
-                                            <a href="#"><i class="feather-user"></i><strong>Administrateur</strong></a>
-                                            <!-- Menu déroulant: Administrateur -->
-                                            <div class="rbt-user-menu-list-wrapper">
-                                                <div class="inner">
-                                                    <!-- Admin Name -->
-                                                    <div class="rbt-user-profile">
-                                                        <div class="user-info">
-                                                            <span class="name" style="font-weight: bold"><%= current_admin.email %></span>
-                                                        </div>
-                                                    </div>
-                                                    <!--  Liens -->
-                                                    <ul class="user-list-wrapper">
-                                                        <li></li>
-                                                        <!--  Dashboard -->
-                                                        <li>
-                                                            <i class="fa-solid fa-house"></i>
-                                                            <%= link_to "Dashboard", dashboard_path %>
-                                                        </li>
-
-                                                        <!-- déconnexion   -->
-                                                        <li>
-                                                            <i class="fa-solid fa-right-from-bracket"></i>
-                                                            <%= button_to "Se déconnecter", destroy_admin_session_path, method: :delete, data: {turbo_method: :delete}, class: "dropdown-item"%>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <%= render "layouts/admin_menu" %>
                             </li>
                         <% end %>
                         <!-- MENU UTILISATEUR -->
                         <li class="nav-item mt-5 dropdown">
-                            <div class="header-right">
-                                <ul class="quick-access">
-                                    <li class="access-icon">
-                                        <i class="feather-search"></i>
-                                    </li>
-                                    <!-- Nom du Compte: Utilisateur-->
-                                    <li class="account-access rbt-user-wrapper ">
-                                        <% if user_signed_in? %>
-                                            <%= image_tag "user.svg", class: "icon", alt: "icon" %>
-                                            <a href="#"><i class="feather-user"></i><strong>
-                                                <%= current_user.firstname.present? ? current_user.firstname : "Utilisateur" %>
-                                            </strong></a>
-                                        <% else %>
-                                            <%= image_tag "log-in.svg", class: "icon", alt: "log-in icon" %>
-                                            <a href="#"><i class="feather-user"></i><strong>Connexion</strong></a>
-                                        <% end %>
-
-                                        <!-- Menu déroulant: Utilisateur -->
-                                        <div class="rbt-user-menu-list-wrapper dropdown" style="">
-                                            <div class="inner">
-                                                <!--  UTILISATEUR connecté -->
-                                                <% if user_signed_in? %>
-                                                    <!--  Liens user connecté -->
-                                                    <ul class="user-list-wrapper" >
-                                                        <li></li>
-                                                        <li>
-                                                            <i class="fa-solid fa-house"></i>
-                                                            <%= link_to "Profil", user_path(current_user) %>
-                                                        </li>
-
-                                                        <!--  Créateur: nouveau workshop -->
-                                                        <% if current_user.creator %>
-                                                            <li>
-                                                                <i class="fa-solid fa-screwdriver-wrench"></i>
-                                                                <%= link_to "Créer un atelier", new_workshop_path %>
-                                                            </li>
-                                                            <li>
-                                                                <i class="fa-solid fa-user"></i>
-                                                                <%= link_to "Profil public", public_user_path(current_user) %>
-                                                            </li>
-                                                        <% end %>
-
-                                                        <!-- Account settings -->
-                                                        <li>
-                                                            <i class="fa-solid fa-gear"></i>
-                                                            <%= link_to "Éditer mes données", edit_user_path(current_user) %>
-                                                        </li>
-                                                        <!-- déconnexion   -->
-                                                        <li>
-                                                            <i class="fa-solid fa-right-from-bracket"></i>
-                                                            <%= button_to "Se déconnecter", destroy_user_session_path, method: :delete, data: {turbo_method: :delete}, class: "dropdown-item"%>
-                                                        </li>
-                                                    </ul>
-                                                <% else %>
-                                                    <!-- VISITEUR non contecté -->
-                                                    <!--  Liens Connexion/inscription -->
-                                                    <ul class="user-list-wrapper">
-                                                        <li></li>
-                                                        <!--  Connexion -->
-                                                        <li>
-                                                            <%= link_to "Se connecter", new_user_session_path %>
-                                                        </li>
-
-                                                        <!-- inscription -->
-                                                        <li>
-                                                            <%= link_to "S'inscrire", new_user_registration_path %>
-                                                        </li>
-                                                    </ul>
-                                                <% end %>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
+                            <%= render "layouts/user_menu" %>
                         </li>
                     </ul>
                 </div>
