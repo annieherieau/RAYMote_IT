@@ -23,7 +23,9 @@
         <%= f.submit "S'inscrire", class: "rbt-btn btn-md btn-gradient border-0 w-100" %>
       </div>
     <% end %>
-    <%= render "devise/shared/links" %>
+      <div class="rbt-lost-password text-center mt-3">
+          <%= link_to "Se connecter", new_user_session_path, class: "rbt-btn-link" %>
+      </div>
   </div>
 </div>
 

@@ -6,12 +6,16 @@
             <div class="header-left rbt-header-content d-none d-xl-block"> <!-- Modification pour basculer en menu mobile à partir de la résolution d'un iPad Pro -->
                 <div class="header-info">
                     <!-- Regular Logo -->
-                    <div class="logo">
-                        <a href="index.html">
-                            <%= link_to(root_path) do %>
-                                <%= image_tag("RAYM_logo.png", alt: "RAYM_logo_white", style: "height: 30px; margin-right: 290px;") %> <!-- Ajout d'une marge à droite du logo -->
-                            <% end %>
-                        </a>
+                    <div class="logo d-none d-lg-block">
+                        <%= link_to(root_path) do %>
+                            <%= image_tag("RAYM_logo.png", alt: "RAYM_logo_white", style: "height: 30px") %>
+                        <% end %>
+                    </div>
+                    <!-- Small Logo for the Toggle Menu-->
+                    <div class="logo d-lg-none">
+                        <%= link_to(root_path) do %>
+                            <%= image_tag("RAYM_favicon.png", alt: "RAYM_logo_white", style: "height: 40px") %>
+                        <% end %>
                     </div>
                 </div>
             </div>
