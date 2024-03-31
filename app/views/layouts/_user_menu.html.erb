@@ -1,75 +1,77 @@
- <!--  MENU UTILISATEUR -->
-<div class="header-right">
-  <ul class="quick-access">
-    <li class="access-icon">
-      <i class="feather-search"></i>
-    </li>
-    <!-- Nom du Compte: Utilisateur-->
-    <li class="account-access rbt-user-wrapper ">
-      <% if user_signed_in? %>
-        <%= image_tag "user.svg", class: "icon", alt: "icon" %>
-        <a href="#"><i class="feather-user"></i><strong>
-        <%= current_user.firstname.present? ? current_user.firstname : "Utilisateur" %>
-        </strong></a>
-      <% else %>
-        <%= image_tag "log-in.svg", class: "icon", alt: "log-in icon" %>
-        <a href="#"><i class="feather-user"></i><strong>Connexion</strong></a>
-      <% end %>
+<!-- MENU UTILISATEUR -->
+<li class="nav-item mt-5 dropdown">
+    <div class="header-right">
+        <ul class="quick-access">
+            <li class="access-icon">
+                <i class="feather-search"></i>
+            </li>
+            <!-- Nom du Compte: Utilisateur-->
+            <li class="account-access rbt-user-wrapper">
+                <% if user_signed_in? %>
+                    <%= image_tag "user.svg", class: "icon", alt: "icon" %>
+                    <a href="#"><i class="feather-user"></i><strong>
+                        <%= current_user.firstname.present? ? current_user.firstname : "Utilisateur" %>
+                    </strong></a>
+                <% else %>
+                    <%= image_tag "log-in.svg", class: "icon", alt: "log-in icon" %>
+                    <a href="#"><i class="feather-user"></i><strong>Connexion</strong></a>
+                <% end %>
 
-      <!-- Menu déroulant: Utilisateur -->
-      <div class="rbt-user-menu-list-wrapper dropdown" style="left: -7em" >
-        <div class="inner">
-           <!--  UTILISATEUR connecté -->
-          <% if user_signed_in? %>
-             <!--  Liens user connecté -->
-            <ul class="user-list-wrapper" >
-            <li></li> 
-            <li>
-                <i class="fa-solid fa-house"></i>
-                <%= link_to "Profil", user_path(current_user) %>
-              </li>
+                <!-- Menu déroulant: Utilisateur -->
+                <div class="rbt-user-menu-list-wrapper dropdown" style="">
+                    <div class="inner">
+                        <!--  UTILISATEUR connecté -->
+                        <% if user_signed_in? %>
+                            <!--  Liens user connecté -->
+                            <ul class="user-list-wrapper" >
+                                <li></li>
+                                <li>
+                                    <i class="fa-solid fa-house"></i>
+                                    <%= link_to "Profil", user_path(current_user) %>
+                                </li>
 
-               <!--  Créateur: nouveau workshop -->
-              <% if current_user.creator %>
-                <li>
-                  <i class="fa-solid fa-screwdriver-wrench"></i>
-                  <%= link_to "Créer un atelier", new_workshop_path %>
-                </li>
-                <li>
-                  <i class="fa-solid fa-user"></i>
-                  <%= link_to "Profil public", public_user_path(current_user) %>
-                </li>
-              <% end %>
-              
-               <!-- Account settings -->
-              <li>
-                <i class="fa-solid fa-gear"></i>
-                <%= link_to "Éditer mes données", edit_user_path(current_user) %>
-              </li>
-               <!-- déconnexion   -->
-              <li>
-                <i class="fa-solid fa-right-from-bracket"></i>
-                <%= button_to "Se déconnecter", destroy_user_session_path, method: :delete, data: {turbo_method: :delete}, class: "dropdown-item"%>
-              </li>
-            </ul>
-          <% else %>
-             <!-- VISITEUR non contecté -->
-               <!--  Liens Connexion/inscription -->
-              <ul class="user-list-wrapper">
-              <li></li> 
-                 <!--  Connexion -->
-                <li>
-                  <%= link_to "Se connecter", new_user_session_path %>
-                </li>
-                
-                 <!-- inscription -->
-                <li>
-                  <%= link_to "S'inscrire", new_user_registration_path %>
-                </li>
-              </ul>
-          <% end %>
-        </div>
-      </div>
-    </li>
-  </ul>
-</div>
+                                <!--  Créateur: nouveau workshop -->
+                                <% if current_user.creator %>
+                                    <li>
+                                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                                        <%= link_to "Créer un atelier", new_workshop_path %>
+                                    </li>
+                                    <li>
+                                        <i class="fa-solid fa-user"></i>
+                                        <%= link_to "Profil public", public_user_path(current_user) %>
+                                    </li>
+                                <% end %>
+
+                                <!-- Account settings -->
+                                <li>
+                                    <i class="fa-solid fa-gear"></i>
+                                    <%= link_to "Éditer mes données", edit_user_path(current_user) %>
+                                </li>
+                                <!-- déconnexion   -->
+                                <li>
+                                    <i class="fa-solid fa-right-from-bracket"></i>
+                                    <%= button_to "Se déconnecter", destroy_user_session_path, method: :delete, data: {turbo_method: :delete}, class: "dropdown-item"%>
+                                </li>
+                            </ul>
+                        <% else %>
+                            <!-- VISITEUR non connecté -->
+                            <!--  Liens Connexion/inscription -->
+                            <ul class="user-list-wrapper">
+                                <li></li>
+                                <!--  Connexion -->
+                                <li>
+                                    <%= link_to "Se connecter", new_user_session_path %>
+                                </li>
+
+                                <!-- inscription -->
+                                <li>
+                                    <%= link_to "S'inscrire", new_user_registration_path %>
+                                </li>
+                            </ul>
+                        <% end %>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</li>
