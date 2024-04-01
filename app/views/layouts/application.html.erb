@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <%= javascript_importmap_tags %>
+    <%= javascript_include_tag 'tags' %>
+    <%= javascript_include_tag 'starsystem' %>
     <title><%= yield :title %> | RAYMote IT</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="<%= content_for?(:meta_description) ? yield(:meta_description) : "RAYMote IT, le e-learning en langages de programmation pour débutant(e) et avancé(e) : HTML, CSS, Python, JavaScript, Java, Ruby et plus. Cours en ligne et tutoriels faciles et rapides, Gratuit !" %>">

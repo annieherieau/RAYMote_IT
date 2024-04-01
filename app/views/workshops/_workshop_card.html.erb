@@ -10,13 +10,13 @@
         <% end %>
         
         <div class="video-popup-wrapper">
-          <%= link_to workshop do %>
+
             <% photo =  workshop.photo.attached? ? workshop.photo : "assets/course-01.jpg"%>
               <%= image_tag photo, alt: workshop.name %>
               <a class="rbt-btn rounded-player-2 sm-size popup-video position-to-top with-animation" href="<%= workshop_path(workshop)%>">
                   <span class="play-icon"></span>
               </a>
-          <% end %>
+
         </div>
           
     </div>
