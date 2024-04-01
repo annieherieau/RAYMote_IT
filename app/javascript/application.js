@@ -3,6 +3,6 @@
 //= require jquery
 import "@hotwired/turbo-rails"
 import "controllers"
-import "./starsystem.js"
-import "./tags.js"
+import "starsystem.js"
+import "tags.js"
 
