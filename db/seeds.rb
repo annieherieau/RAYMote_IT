@@ -114,7 +114,7 @@ def seed_anonymous
   user = User.create(email: "user01@annieherieau.fr", password: "password",firstname: "Créateur", lastname: "Supprimé", creator: true)
 
   # avatar
-  user.avatar.attach(io: File.open('app/assets/images/raym_team/anonymous.avif'), filename: 'anonymous.avif')
+  user.avatar.attach(io: File.open('app/assets/images/anonymous.avif'), filename: 'anonymous.avif')
   puts "1 Créateur anonyme créé (password : password)"
 end
 
