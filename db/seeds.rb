@@ -185,7 +185,7 @@ end
 # Ajouter les Reviews (Avis)
 def seed_reviews(user, workshop)
   Review.create!(
-    rating: rand(3..5),
+    rating: rand(4..5),
     content: Faker::Lorem.paragraph(sentence_count: rand(2..5)),
     user: user,
     workshop: workshop
@@ -285,7 +285,7 @@ def seed_events
     workshop = Workshop.create!(
         name: video.title,
         description: video.description,
-        price: boolean_ratio ? 0 : rand(1..30), # 50% gratuit
+        price: boolean_ratio(70) ? 0 : rand(1..30), # 70% gratuit
         event: true,
         start_date: start_date,
         duration: 360, # 6h pour les tests
