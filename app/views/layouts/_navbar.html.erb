@@ -3,7 +3,7 @@
 <div class="rbt-header-wrapper header-space-betwween header-sticky">
     <div class="container-fluid">
         <div class="mainbar-row rbt-navigation-center align-items-center justify-content-center" style="padding-left: 15px;"> 
-            <div class="header-left rbt-header-content d-none d-xl-block"> 
+            <div class="header-left rbt-header-content d-none d-lg-block"> 
                 <div class="header-info">
                     <!-- Regular Logo -->
                     <div class="logo d-none d-lg-block">
@@ -21,11 +21,9 @@
             </div>
 
             <!-- Navbar -->
-            <nav class="mainmenu-nav navbar navbar-expand-xl"> 
+            <nav class="mainmenu-nav navbar navbar-expand-lg"> 
                 <!-- Toggle Button -->
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+              
 
                 <!-- Navbar Tabs -->
                 <div class="collapse navbar-collapse" id="navbarNav">
@@ -35,6 +33,7 @@
                         <li class="nav-item">
                             <%= link_to 'Accueil', root_path, class: "nav-link"%>
                         </li>
+
 
                         <!-- Start Categories -->
                         <li class="with-megamenu has-menu-child-item position-static">
@@ -89,9 +88,11 @@
                         </li>
                         <!-- End Workshops -->
 
+                        <!-- Start Contact -->
                         <li class="nav-item">
                             <%= link_to 'Contact', contact_path, class: "nav-link"%>
                         </li>
+                        <!-- End Contact -->
 
                         <!-- Start Admin & User Dropdown Tabs -->
                         <!-- MENU ADMINISTRATEUR -->
@@ -104,6 +105,7 @@
                         <li class="nav-item mt-5 dropdown">
                             <%= render "layouts/user_menu" %>
                         </li>
+                        <!-- End Admin & User Dropdown Tabs -->
                     </ul>
                 </div>
             </nav>
@@ -112,3 +114,4 @@
 </div>
 
 <!-- End Menu-->
+

@@ -9,69 +9,73 @@
                 <%= image_tag("RAYM_favicon.png", alt: "RAYM Small Logo", style: "height: 40px;", class: "logo d-lg-none") %>
             </div>
             </button>
-                <!-- Small Logo for Toggle Menu -->
-
-            <!-- Offcanvas Navbar Content -->
-            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <!-- Navbar Links -->
-                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                        <li class="nav-item">
-                            <%= link_to 'Accueil', root_path, class: "nav-link" %>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Catégories</a>
-                            <!-- Dropdown or Further Navigation -->
-                        </li>
-                        <li class="nav-item">
-                            <%= link_to 'Cours', workshops_path(event: false), class: "nav-link" %>
-                        </li>
-                        <li class="nav-item">
-                            <%= link_to 'Ateliers', workshops_path(event: true), class: "nav-link" %>
-                        </li>
-                        <li class="nav-item">
-                            <%= link_to 'Contact', contact_path, class: "nav-link" %>
-                        </li>
-                        <!-- Conditional Rendering Based on User Authentication -->
-                        <% if admin_signed_in? %>
-                            <li class="nav-item">
-                                <!-- Administrator Menu Items -->
-                            </li>
-                        <% end %>
-                        <li class="nav-item">
-                            <!-- User Menu Items -->
-                            <li class="account-access rbt-user-wrapper ">
-                            <% if user_signed_in? %>
-                            <%= link_to user_path(current_user) do %>
-                              <%= image_tag "user.svg", class: "icon", alt: "icon" %>
-                              <i class="feather-user"></i><strong>
-                              <%= current_user.firstname.present? ? current_user.firstname : "Utilisateur" %>
-                              </strong>
-                              <% end %>
-                            <% else %>
-                            <%= link_to new_user_session_path do %>
-                              <%= image_tag "log-in.svg", class: "icon", alt: "log-in icon" %>
-                              <i class="feather-user"></i><strong>Connexion</strong>
-                              <% end %>
-                            <% end %>
-                        </li>
-                        <% if  admin_signed_in? %>
-                        <li class="account-access rbt-user-wrapper ">
-                            <%= link_to dashboard_path do %>
-                            <img src="/assets/user.svg" class="icon" alt="icon">
-                            <i class="feather-user"></i><strong>Administrateur</strong></a>
-                        <%end%>
-                        </li>
-                        <% end %>
-                    </ul>
-                </div>
-            </div>
-            <!-- End of Offcanvas Navbar Content -->
         </div>
+    </div>
+</header>
+
+<!-- Offcanvas Navbar Content -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <!-- Navbar Links -->
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+                <%= link_to 'Accueil', root_path, class: "nav-link text-black" %>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-black" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Catégories
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <% Category.all.each do |category| %>
+                    <li><a class="dropdown-item" href="<%= category_path(category)%>"><%= category.name %></a></li>
+                    <% end %>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <%= link_to 'Cours', workshops_path(event: false), class: "nav-link text-black" %>
+            </li>
+            <li class="nav-item">
+                <%= link_to 'Ateliers', workshops_path(event: true), class: "nav-link text-black" %>
+            </li>
+            <li class="nav-item">
+                <%= link_to 'Contact', contact_path, class: "nav-link text-black" %>
+            </li>
+            <!-- Conditional Rendering Based on User Authentication -->
+            <% if admin_signed_in? %>
+                <li class="nav-item">
+                    <!-- Administrator Menu Items -->
+                </li>
+            <% end %>
+            <li class="nav-item">
+                <!-- User Menu Items -->
+                <li class="account-access rbt-user-wrapper ">
+                <% if user_signed_in? %>
+                <%= link_to user_path(current_user) do %>
+                  <%= image_tag "user.svg", class: "icon", alt: "icon" %>
+                  <i class="feather-user"></i><strong>
+                  <%= current_user.firstname.present? ? current_user.firstname : "Utilisateur" %>
+                  </strong>
+                  <% end %>
+                <% else %>
+                <%= link_to new_user_session_path do %>
+                  <%= image_tag "log-in.svg", class: "icon", alt: "log-in icon" %>
+                  <i class="feather-user"></i><strong>Connexion</strong>
+                  <% end %>
+                <% end %>
+            </li>
+            <% if  admin_signed_in? %>
+            <li class="account-access rbt-user-wrapper ">
+                <%= link_to dashboard_path do %>
+                <img src="/assets/user.svg" class="icon" alt="icon">
+                <i class="feather-user"></i><strong>Administrateur</strong></a>
+            <%end%>
+            </li>
+            <% end %>
+        </ul>
     </div>
 </div>
 <!-- End of Offcanvas Navbar -->
