@@ -45,7 +45,7 @@ VIDEO_DATA = {
 "Intelligence Artificielle" => ['uxAsuoxEaFw'],
 "Go" => ['LyragMPx77c'],
 "C++" => ['TUiGnN6F0l4', 'KcwAR1eS-1k'],
-"Java" => ['57qtOd9T-R8']
+"Java" => ['57qtOd9T-R8'],
 "Swift" => ['sRiY29xlOA8', 'eWC69pc5RqY', 'tdPlLiAljP4', 'Xv3rRXajFdo'],
 "Kotlin" => ['bxMzOXYWs-M', 'K3kc2OSc7Io', 'iujXLCbKRNU', 'ClLLCXjPOiQ', 'L0hfV8TAcpw']
 }
