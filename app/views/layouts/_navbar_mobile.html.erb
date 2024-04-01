@@ -1,15 +1,13 @@
 <!-- Start of Offcanvas Navbar -->
 <div class="rbt-sticky-placeholder"></div>
 
-<header class="rbt-header-wrapper header-space-between header-sticky">
+<div class="rbt-header-wrapper header-space-between header-sticky">
     <div class="container-fluid">
         <div class="mainbar-row rbt-navigation-center align-items-center">
             <!-- Off-canvas Toggle Button -->
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-            <div class="logo d-lg-none">
-                <%= image_tag("RAYM_favicon.png", alt: "RAYM Small Logo", style: "height: 40px;") %>
-        </div>
-    </div>
+                <%= image_tag("RAYM_favicon.png", alt: "RAYM Small Logo", style: "height: 40px;", class: "logo d-lg-none") %>
+            </div>
             </button>
                 <!-- Small Logo for Toggle Menu -->
 
@@ -75,5 +73,5 @@
             <!-- End of Offcanvas Navbar Content -->
         </div>
     </div>
-</header>
+</div>
 <!-- End of Offcanvas Navbar -->
