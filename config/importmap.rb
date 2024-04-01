@@ -5,5 +5,5 @@ pin "@hotwired/turbo-rails", to: "turbo.min.js", preload: true
 pin "@hotwired/stimulus", to: "stimulus.min.js", preload: true
 pin "@hotwired/stimulus-loading", to: "stimulus-loading.js", preload: true
 pin_all_from "app/javascript/controllers", under: "controllers"
-pin "starsystem", to: "starsystem.js", preload: true
-pin "tags", to: "tags.js", preload: true
+# pin "starsystem", to: "starsystem.js", preload: true
+# pin "tags", to: "tags.js", preload: true
