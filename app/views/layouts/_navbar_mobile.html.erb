@@ -43,15 +43,8 @@
             <li class="nav-item">
                 <%= link_to 'Contact', contact_path, class: "nav-link text-black" %>
             </li>
-            <!-- Conditional Rendering Based on User Authentication -->
-            <% if admin_signed_in? %>
-                <li class="nav-item">
-                    <!-- Administrator Menu Items -->
-                </li>
-            <% end %>
-            <li class="nav-item">
                 <!-- User Menu Items -->
-                <li class="account-access rbt-user-wrapper ">
+                <li class="account-access rbt-user-wrapper nav-item">
                 <% if user_signed_in? %>
                 <%= link_to user_path(current_user) do %>
                   <%= image_tag "user.svg", class: "icon", alt: "icon" %>
@@ -69,8 +62,8 @@
             <% if  admin_signed_in? %>
             <li class="account-access rbt-user-wrapper ">
                 <%= link_to dashboard_path do %>
-                <img src="/assets/user.svg" class="icon" alt="icon">
-                <i class="feather-user"></i><strong>Administrateur</strong></a>
+                    <%= image_tag "user.svg", class: "icon", alt: "icon" %>
+                <i class="feather-user"></i><strong>Administrateur</strong>
             <%end%>
             </li>
             <% end %>
