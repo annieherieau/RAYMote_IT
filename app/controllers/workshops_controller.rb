@@ -14,9 +14,10 @@ class WorkshopsController < ApplicationController
       events = Workshop.order('start_date').where(event: true, validated: true)
       # selection events à venir
       @workshops = events.filter{|event| event.status == 'à venir'}
+      @top_event = events.filter{|event| event.status == 'à venir' || event.status == 'en cours'}.first
       
       # Event en Top banner: en cours ou prochain
-      if @top_event = events.filter{|event| event.status == 'à venir' || event.status == 'en cours'}.first
+      if @top_event
          # user inscrit au top event ?
         if user_signed_in?
           @is_registred = @top_event.users.include?(current_user)

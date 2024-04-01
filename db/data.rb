@@ -37,11 +37,17 @@ AVATARS = [
 VIDEO_DATA = {
 'JavaScript' => ['l0dpwuuh-D0', 'c68_zfYskhU', 'NRxzvpdduvQ', 'CjZnG_X85ww'],
 'Cybersécurité' => ['VLr0mTzYfRE', 'YHBSuVAOp58'],
-'Ruby' => ['KJDbcOh_ITM', 'x2DyrZz2JeQ' ],
+'Ruby' => ['KJDbcOh_ITM', 'x2DyrZz2JeQ', 'XTkPSqSchfA' ],
 'Python' => ['LamjAFnybo0', 'N4M4W7JPOL4'],
 'TypeScript' => ['2LV9qGNpPwQ', 'Lgvt9mN23qM', 'ffCIANfx_-0'],
 'C#' => ['NeKy63suy_w'],
-'PHP' => ['FKdctsQ1v7U','US9JCsnAVTU']
+'PHP' => ['FKdctsQ1v7U','US9JCsnAVTU', 'mnisCzHgN3Y', 'MUd4FNO1roI', 'NQAipbQR3jA'],
+"Intelligence Artificielle" => ['uxAsuoxEaFw'],
+"Go" => ['LyragMPx77c'],
+"C++" => ['TUiGnN6F0l4', 'KcwAR1eS-1k'],
+"Java" => ['57qtOd9T-R8'],
+"Swift" => ['sRiY29xlOA8', 'eWC69pc5RqY', 'tdPlLiAljP4', 'Xv3rRXajFdo'],
+"Kotlin" => ['bxMzOXYWs-M', 'K3kc2OSc7Io', 'iujXLCbKRNU', 'ClLLCXjPOiQ', 'L0hfV8TAcpw']
 }
 
 # [tag names ]

@@ -45,19 +45,20 @@
             </li>
                 <!-- User Menu Items -->
                 <li class="account-access rbt-user-wrapper nav-item">
-                <% if user_signed_in? %>
-                <%= link_to user_path(current_user) do %>
-                  <%= image_tag "user.svg", class: "icon", alt: "icon" %>
-                  <i class="feather-user"></i><strong>
-                  <%= current_user.firstname.present? ? current_user.firstname : "Utilisateur" %>
-                  </strong>
-                  <% end %>
-                <% else %>
-                <%= link_to new_user_session_path do %>
-                  <%= image_tag "log-in.svg", class: "icon", alt: "log-in icon" %>
-                  <i class="feather-user"></i><strong>Connexion</strong>
-                  <% end %>
-                <% end %>
+                    <% if user_signed_in? %>
+                    <%= link_to user_path(current_user) do %>
+                    <%= image_tag "user.svg", class: "icon", alt: "icon" %>
+                    <i class="feather-user"></i><strong>
+                    <%= current_user.firstname.present? ? current_user.firstname : "Utilisateur" %>
+                    </strong>
+                    <% end %>
+                    <% else %>
+                    <%= link_to new_user_session_path do %>
+                    <%= image_tag "log-in.svg", class: "icon", alt: "log-in icon" %>
+                    <i class="feather-user"></i><strong>Connexion</strong>
+                    <% end %>
+                    <% end %>
+                </li>
             </li>
             <% if  admin_signed_in? %>
             <li class="account-access rbt-user-wrapper ">
