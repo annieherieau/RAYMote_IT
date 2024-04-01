@@ -200,7 +200,7 @@ def seed_publish(workshop)
   return false if workshop.brouillon
   
   # statut attente de validation ou validé
-  workshop.update_attribute(:validated, boolean_ratio(70))
+  workshop.update_attribute(:validated, boolean_ratio(80))
 
   # Ajouter les inscription + Avis
   seed_attendances(workshop)
@@ -230,7 +230,7 @@ def seed_courses
         duration: 0,
         creator: User.where(creator: true).sample,
         category: Category.find_by(name: category),
-        brouillon: boolean_ratio(30),
+        brouillon: boolean_ratio(20),
       )
 
       # Lien vers la video
