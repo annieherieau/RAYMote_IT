@@ -23,20 +23,16 @@
                     <!-- Navbar Links -->
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <%= link_to 'Accueil', root_path, class: "nav-link" %>
+                            <%= link_to 'Accueil', root_path, class: "nav-link text-black" %>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Catégories</a>
-                            <!-- Dropdown or Further Navigation -->
+                            <%= link_to 'Cours', workshops_path(event: false), class: "nav-link text-black" %>
                         </li>
                         <li class="nav-item">
-                            <%= link_to 'Cours', workshops_path(event: false), class: "nav-link" %>
+                            <%= link_to 'Ateliers', workshops_path(event: true), class: "nav-link text-black" %>
                         </li>
                         <li class="nav-item">
-                            <%= link_to 'Ateliers', workshops_path(event: true), class: "nav-link" %>
-                        </li>
-                        <li class="nav-item">
-                            <%= link_to 'Contact', contact_path, class: "nav-link" %>
+                            <%= link_to 'Contact', contact_path, class: "nav-link text-black" %>
                         </li>
                         <!-- Conditional Rendering Based on User Authentication -->
                         <% if admin_signed_in? %>
@@ -77,3 +73,6 @@
     </div>
 </header>
 <!-- End of Offcanvas Navbar -->
+
+
+
