@@ -9,7 +9,7 @@ class CourseItemsController < ApplicationController
       @course_item = @workshop.course_items.build(course_item_params)
   
       if @course_item.save
-        redirect_to @workshop, notice: 'Course item was successfully created.'
+        redirect_to @workshop, notice: 'Course item a été créé avec succès.'
       else
         render :new
       end

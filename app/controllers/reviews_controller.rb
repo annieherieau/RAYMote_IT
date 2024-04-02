@@ -32,7 +32,7 @@ class ReviewsController < ApplicationController
 
     respond_to do |format|
       if @review.save
-        format.html { redirect_to @workshop, notice: "Review was successfully created." }
+        format.html { redirect_to @workshop, notice: "Votre avis a été enregistré avec succès" }
         format.json { render :show, status: :created, location: @review }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -47,7 +47,7 @@ class ReviewsController < ApplicationController
     @workshop = @review.workshop
     respond_to do |format|
         if @review.update(review_params)
-          format.html { redirect_to @workshop, notice: "Review was successfully created." }
+          format.html { redirect_to @workshop, notice: "L'avis a été mis à jour avec succès." }
           format.json { render :show, status: :created, location: @review }
         else
           format.html { render :new, status: :unprocessable_entity }
@@ -63,7 +63,7 @@ class ReviewsController < ApplicationController
     @review.destroy!
 
     respond_to do |format|
-      format.html { redirect_to @workshop, notice: "Review was successfully created." }
+      format.html { redirect_to @workshop, notice: "Votre avis a été enregistré avec succès." }
           format.json { render :show, status: :created, location: @review }
     end
   end

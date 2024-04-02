@@ -130,7 +130,7 @@
                    <% if current_user == @workshop.creator %>
                       <%= link_to "Modifier", edit_workshop_path(@workshop), class: "rbt-btn btn-sm btn-gradient mt-5 w-100 text-center" %>
                       <%= button_to @workshop.activate_btn, activate_workshop_path(@workshop), method: :patch, class: "rbt-btn btn-sm btn-gradient mt-2 w-100" %>
-                      <%= button_to "Supprimer", @workshop, method: :delete, data: { confirm: 'Are you sure?' }, class: "rbt-btn btn-sm btn-gradient btn-gradient-2 mt-2 w-100" %>
+                      <%= button_to "Supprimer", @workshop, method: :delete, data: { confirm: 'Êtes-vous sûr ?' }, class: "rbt-btn btn-sm btn-gradient btn-gradient-2 mt-2 w-100" %>
                     <% end %>
                   <%# Liens admin %>
                    <% if admin_signed_in? %>
@@ -250,7 +250,7 @@
                       </td>
                         <td style="text-align: center;">
                          <% if current_user == review.user %>
-                          <%= button_to "Supprimer", review, method: :delete, class: "rbt-btn btn-sm btn-gradient btn-gradient-2", data: { confirm: 'Are you sure?' } %>
+                          <%= button_to "Supprimer", review, method: :delete, class: "rbt-btn btn-sm btn-gradient btn-gradient-2", data: { confirm: 'Êtes-vous sûr ?' } %>
                         <% end %>
                       </td>
                     </tr>

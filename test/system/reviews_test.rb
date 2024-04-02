@@ -18,7 +18,7 @@ class ReviewsTest < ApplicationSystemTestCase
     fill_in "Rating", with: @review.rating
     click_on "Create Review"
 
-    assert_text "Review was successfully created"
+    assert_text "Votre avis a été enregistré avec succès"
     click_on "Back"
   end
 
@@ -30,7 +30,7 @@ class ReviewsTest < ApplicationSystemTestCase
     fill_in "Rating", with: @review.rating
     click_on "Update Review"
 
-    assert_text "Review was successfully updated"
+    assert_text "Votre avis a été mis à jour avec succès"
     click_on "Back"
   end
 

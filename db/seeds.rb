@@ -200,10 +200,10 @@ def seed_publish(workshop)
   return false if workshop.brouillon
   
   # statut attente de validation ou validé
-  workshop.update_attribute(:validated, boolean_ratio(80))
+  workshop.update_attribute(:validated, boolean_ratio(80)) unless workshop.validated
 
   # Ajouter les inscription + Avis
-  seed_attendances(workshop)
+  seed_attendances(workshop) if workshop.validated
 end
 
 # Création des Cours avec Youtube API
