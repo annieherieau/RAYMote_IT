@@ -162,13 +162,13 @@ class WorkshopsController < ApplicationController
     def authorize_creator!
       return if current_admin || (@workshop&.creator == current_user)
   
-      flash[:alert] = "You are not authorized to perform this action."
+      flash[:alert] = "Vous n'êtes pas autorisé à effectuer cette action."
       redirect_to root_path
     end
 
     def check_creator
       unless current_user.creator == true
-        flash[:alert] = "You are not authorized to perform this action."
+        flash[:alert] = "Vous n'êtes pas autorisé à effectuer cette action."
         redirect_to root_path
       end
     end

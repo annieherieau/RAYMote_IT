@@ -22,7 +22,7 @@
                   <%= link_to "Voir", workshop, class: "rbt-btn btn-sm" %>
                   <% if user_signed_in? && current_user == @user %>
                     <%= link_to "Modifier", edit_workshop_path(workshop), class: "rbt-btn btn-sm btn-secondary" %>
-                    <%= button_to "Supprimer", workshop, method: :delete, data: { confirm: 'Are you sure?' }, class: "rbt-btn btn-sm btn-violet mt-2" %>
+                    <%= button_to "Supprimer", workshop, method: :delete, data: { confirm: 'Êtes-vous sûr ?' }, class: "rbt-btn btn-sm btn-violet mt-2" %>
                     <%= button_to "Valider", activate_workshop_path(workshop), method: :patch, class: "rbt-btn btn-sm btn-secondary" %>
                   <% end %>
                 </td>

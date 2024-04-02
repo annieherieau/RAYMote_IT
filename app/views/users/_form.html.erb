@@ -3,7 +3,7 @@
   <%= form_with(model: user, class: "form") do |form| %>
     <% if user.errors.any? %>
       <div class="alert alert-danger">
-        <h2><%= pluralize(user.errors.count, "error") %>Les modifications n'ont pas pu etre sauvegardées:</h2>
+        <h4><%= pluralize(user.errors.count, "error") %>Les modifications n'ont pas pu etre sauvegardées:</h4>
 
         <ul>
           <% user.errors.full_messages.each do |message| %>

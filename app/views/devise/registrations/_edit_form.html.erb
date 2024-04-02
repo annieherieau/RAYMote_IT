@@ -12,7 +12,7 @@
   <% end %>
 
    <div class="col-12">
-    <%= f.label :password, 'Mot de passe' %> <i>(leave blank if you don't want to change it)</i><br>
+    <%= f.label :password, 'Mot de passe' %> <i>(laissez vide si vous ne voulez pas le changer)</i><br>
     <%= f.password_field :password, autocomplete: "new-password" %>
     <% if @minimum_password_length %>
       <br>
