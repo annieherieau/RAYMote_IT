@@ -81,9 +81,9 @@ gem "dockerfile-rails", ">= 1.6", :group => :development
 
 gem 'google-apis-youtube_v3'
 
-gem "open-uri", "~> 0.4.1"
+gem "open-uri", "~> 0.4.1" 
 gem "jquery-rails", "~> 4.6"
 
-gem "cloudinary", "~> 1.29"
+gem "cloudinary", "~> 1.29" # stockage des images en ligne
 
-gem "canonical-rails", "~> 0.2.15"
+gem "canonical-rails", "~> 0.2.15" # gestion des pages canoniques

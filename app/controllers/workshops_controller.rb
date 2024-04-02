@@ -4,7 +4,7 @@ class WorkshopsController < ApplicationController
   before_action :authenticate_admin!, only: %i[ validate refuse]
   before_action :check_creator, only: %i[ new create ]
   
-  # GET /workshops or /workshops.json
+  # GET /workshops 
   def index
     @event_status = params[:event] == 'true' ? true : false
 
