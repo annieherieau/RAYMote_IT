@@ -105,7 +105,7 @@ class WorkshopsController < ApplicationController
     
     respond_to do |format|
       if @workshop.save
-        format.html { redirect_to workshop_url(@workshop), notice: "Workshop was successfully created." }
+        format.html { redirect_to workshop_url(@workshop), notice: "La ressource a été créée avec succès." }
         format.json { render :show, status: :created, location: @workshop }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -135,7 +135,7 @@ class WorkshopsController < ApplicationController
     # Finalement, mettez à jour le workshop avec les autres paramètres
     if @workshop.update(workshop_params)
       @workshop.default_photo unless @workshop.photo.attached?
-      redirect_to workshop_url(@workshop), notice: "Workshop was successfully updated."
+      redirect_to workshop_url(@workshop), notice: "La ressource a été mise à jour avec succès."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -146,7 +146,7 @@ class WorkshopsController < ApplicationController
     @workshop.destroy!
 
     respond_to do |format|
-      format.html { redirect_to workshops_url, notice: "Workshop was successfully destroyed." }
+      format.html { redirect_to workshops_url, notice: "La ressource a été supprimée avec succès." }
       format.json { head :no_content }
     end
   end
