@@ -31,9 +31,10 @@
           <p class='text-center'>Aucun atelier trouvé</p>
       <% end %>
   </div>
-  <% if @workshops.any?  %>
+<% if @workshops.any?  %>
   <% @workshops.each do |workshop| %>
     <script type="application/ld+json">
+    <!-- script d'appel méthode pour le schema.org "course_jsonld" -->
     <%= course_jsonld(workshop) %>
   </script>
   <% end %>

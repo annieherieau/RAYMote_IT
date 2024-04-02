@@ -12,10 +12,12 @@
 
 <% if @workshop.start_date %>
 <script type="application/ld+json">
+<!-- script d'appel méthode pour le schema.org "event_jsonld" -->
       <%= event_jsonld(@workshop) %>
 </script>
 <% else %>
 <script type="application/ld+json">
+<!-- script d'appel méthode pour le schema.org "course_jsonld" -->
       <%= course_jsonld(@workshop) %>
 </script>
 <% end %>
