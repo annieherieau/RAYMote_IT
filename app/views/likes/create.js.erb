@@ -1,4 +1,4 @@
-console.log('Le fichier create.js.erb est exécuté.');
+
 $("#likes-count").html("<%= escape_javascript(@workshop.likes.count.to_s) %>");
 
 $("#like-button").replaceWith("<div id='like-button'><%= escape_javascript(button_to 'Déliker', workshop_like_path(@workshop), method: :delete, remote: true, class: 'rbt-btn btn-sm btn-gradient mt-2 w-100') %></div>");
