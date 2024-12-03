@@ -11,8 +11,7 @@ Débutants cherchant à comprendre les fondamentaux, ou professionnels expérime
 **Notre mentor** : Sacha GUILHAUMOU
 
 ## 2. Démos 
-- Version MVP : https://raymote-it-mvp.fly.dev/
-- Version présentée au jury : https://raymote-it-dev.fly.dev/
+- Version présentée au jury : raymote-it.onrender.com/
 
 ## 3. Parcours utilisateur 
 
