@@ -39,6 +39,7 @@ Débutants cherchant à comprendre les fondamentaux, ou professionnels expérime
 ### 4.1 Stack
 - Ruby 3.2.2
 - Rails 7.1.3.2
+- Base de données : PostgreSQL
 - APIs:
     - Stripe : paiement en ligne sécurisé
     - Mailjet : envoi des emails
@@ -58,6 +59,7 @@ Precompile Assets
 
 ```bash
 bundle exec rake assets:precompile
+bundle exec rake assets:clean;
 ```
 
 Database
@@ -65,10 +67,28 @@ Database
 ```bash
 rails db:create
 rails db:migrate
+rails db:seed
 ```
 
 Launch server
 
 ```bash
 rails server
+```
+### 4.3 Variables d'environnement
+```
+YOUTUBE_KEY=''
+CHANNEL_ID = ''
+
+MAILJET_LOGIN=''
+MAILJET_PWD=''
+MAILJET_DEFAULT_FROM=''
+MAILJET_SENDER_DOMAIN=''
+DEFAULT_ADMIN_EMAIL=''
+
+STRIPE_PUBLISHABLE_KEY=''
+STRIPE_SECRET_KEY=''
+
+DEV_HOST='http://localhost:3000'
+PROD_HOST=''
 ```
