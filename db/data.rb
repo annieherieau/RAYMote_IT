@@ -10,9 +10,9 @@ CATEGORIES = {
   "Kotlin" => 'app/assets/images/categories/kotlin.png',
   "PHP" => 'app/assets/images/categories/php.png',
   "TypeScript" => 'app/assets/images/categories/typescript.png',
-  "Cybersécurité" => 'app/assets/images/categories/cybersecurite.png',
-  "Intelligence Artificielle" => 'app/assets/images/categories/ai.png',
-  "Go" => 'app/assets/images/categories/Golang.png'
+  "Cybersécurité" => 'app/assets/images/categories/cybersecurite.png', #ok
+  "Intelligence Artificielle" => 'app/assets/images/categories/ai.png', #ok
+  "Go" => 'app/assets/images/categories/Golang.png' #ok
 }
 
 # email => [prenom, nom, url avatar]
