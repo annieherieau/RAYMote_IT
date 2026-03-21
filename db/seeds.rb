@@ -219,6 +219,9 @@ def seed_courses
 
       # requête pour une video (snippet)
       video_response = youtube.list_videos('snippet', id: video_id)
+      if(video_response.items.first !==null){
+
+      
       video = video_response.items.first.snippet
 
       # infos extraites du snippet pour créer le workshop
@@ -244,7 +247,7 @@ def seed_courses
 
       # Publication
       seed_publish(workshop)
-
+    }
     end
   end
   puts("#{Workshop.where(event:false).count} COURS créés dont #{Workshop.where(event:false, validated: true).count} publiés")
